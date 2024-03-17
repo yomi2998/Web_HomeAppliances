@@ -1,0 +1,57 @@
+.imgc {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+    margin: 0;
+}
+
+ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 1%;
+    border-radius: 25px;
+    box-shadow: 0 0 10px 1px rgb(233, 233, 233);
+}
+
+li {
+    float: left;
+}
+
+li a:not(.active) {
+    color: rgb(0, 0, 0);
+}
+
+li a .active {
+    color: #ffffff;
+}
+
+li a {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+    color: black; 
+}
+
+li a:hover:not(.active) {
+    background-color: #000000;
+}
+
+
+.active {
+    background-color: #676767;
+}
