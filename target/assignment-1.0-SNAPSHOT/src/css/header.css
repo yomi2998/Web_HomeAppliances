@@ -52,15 +52,13 @@ body {
     -webkit-filter: blur(8px);
 }
 
-.navigation-bar a {
+.navigation-bar a:not(.has-image) {
     color: rgb(255, 255, 255);
     font-size: 2vh;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     text-decoration: none;
     line-height: 6vh;
-    padding: 0;
-    width: 5vw;
-    text-align: center;
+    padding: 0 1vw;
 }
 
 .navigation-bar a {
@@ -90,7 +88,7 @@ body {
     width: 0.2vw;
     height: 7vh;
     background: white;
-    margin: 0.5vw;
+    margin: 0.5vh;
     animation: wave 1s linear infinite;
     border-radius: 1vw;
     transform: scale(0);
