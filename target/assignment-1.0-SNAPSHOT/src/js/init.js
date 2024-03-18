@@ -1,3 +1,17 @@
+var toggles = {
+    "isearch": false,
+    "inoti": false,
+    "icart": false,
+    "iprofile": false,
+    reset() {
+        for (var key in this) {
+            if (typeof this[key] === "boolean") {
+                this[key] = false;
+            }
+        }
+    }
+};
+
 function addCoverScreen() {
   let link;
   if (window.location.href[window.location.href.length - 1] === "#") {
@@ -29,7 +43,52 @@ function addCoverScreen() {
 }
 
 $(document).ready(function () {
-  console.log("hello world!");
+    console.log("hello world!");
+    $("#isearch").on("click", function () {
+        var s = $("#extended-container");
+        if (toggles.isearch) {
+            toggles.reset();
+            s.css("height", "0");
+            return;
+        }
+        s.css("height", "40vh");
+        toggles.isearch = true;
+        //...
+    });
+    $("#inoti").on("click", function () {
+        var s = $("#extended-container");
+        if (toggles.inoti) {
+            toggles.reset();
+            s.css("height", "0");
+            return;
+        }
+        s.css("height", "40vh");
+        toggles.inoti = true;
+        //...
+    });
+    $("#icart").on("click", function () {
+        var s = $("#extended-container");
+        if (toggles.icart) {
+            toggles.reset();
+            s.css("height", "0");
+            return;
+        }
+        s.css("height", "40vh");
+        toggles.icart = true;
+        //...
+    });
+    $("#iprofile").on("click", function () {
+        var s = $("#extended-container");
+        if (toggles.iprofile) {
+            toggles.reset();
+            s.css("height", "0");
+            return;
+        }
+        s.css("height", "40vh");
+        toggles.iprofile = true;
+        //...
+    });
+    
 });
 
 $(window).bind("beforeunload", function () {
