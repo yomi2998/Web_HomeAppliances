@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     opacity: 1;
-    animation: fadeIn 1s;
+    animation: fadeIn 0.25s;
 }
 
 @keyframes fadeIn {
@@ -12,6 +12,16 @@ body {
 
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
     }
 }
 
