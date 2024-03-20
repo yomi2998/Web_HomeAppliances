@@ -9,6 +9,13 @@ var toggles = {
                 this[key] = false;
             }
         }
+    },
+    resetExcept(key) {
+        for (var k in this) {
+            if (k !== key && typeof this[k] === "boolean") {
+                this[k] = false;
+            }
+        }
     }
 };
 
@@ -51,6 +58,7 @@ $(document).ready(function () {
             s.css("height", "0");
             return;
         }
+        toggles.resetExcept("isearch");
         s.css("height", "40vh");
         toggles.isearch = true;
         //...
@@ -62,6 +70,7 @@ $(document).ready(function () {
             s.css("height", "0");
             return;
         }
+        toggles.resetExcept("inoti");
         s.css("height", "40vh");
         toggles.inoti = true;
         //...
@@ -73,6 +82,7 @@ $(document).ready(function () {
             s.css("height", "0");
             return;
         }
+        toggles.resetExcept("icart");
         s.css("height", "40vh");
         toggles.icart = true;
         //...
@@ -84,6 +94,7 @@ $(document).ready(function () {
             s.css("height", "0");
             return;
         }
+        toggles.resetExcept("iprofile");
         s.css("height", "40vh");
         toggles.iprofile = true;
         //...
