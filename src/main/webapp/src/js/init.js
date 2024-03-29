@@ -20,7 +20,7 @@ var toggles = {
 };
 
 function addCoverScreen() {
-  let link;
+  let link = window.location.href;
   if (window.location.href[window.location.href.length - 1] === "#") {
     link = window.location.href.slice(0, -1);
   }
