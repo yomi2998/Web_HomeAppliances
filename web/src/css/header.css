@@ -44,26 +44,19 @@ body {
 }
 
 #navigation-container {
-    height: 6vh;
-    width: 90%;
-    margin: 1% auto;
-}
-
-#extended-container {
-    height: 0;
-    background-color: #222222;
-    width: 100%;
-    margin-top: -4vh;
-    transition: height 0.5s;
-}
-
-.navigation-bar {
-    height: 6vh;
-    width: 90%;
-    margin: 0 auto;
     background-color: #222222;
     border-radius: 5vh;
     z-index: 1000;
+    position: fixed;
+    height: 6vh;
+    width: 95%;
+    margin: 1% auto;
+}
+
+.navigation-bar {
+    justify-content: center;
+    width: 95%;
+    margin: 0 auto;
 }
 
 .navigation-bar:not(.icon) and :not(ul) {
@@ -95,11 +88,20 @@ body {
     transition: opacity 0.1s;
 }
 
+#inelson {
+    margin-left: 2vw;
+}
+
+#iprofile {
+    margin-right: 2vw;
+}
+
 .load-cover {
-    height: 90vh;
+    height: 120vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(0, 0, 0);
     z-index: 999;
 }
 
