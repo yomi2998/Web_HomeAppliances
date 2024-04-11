@@ -1,3 +1,24 @@
+var toggles = {
+    "isearch": false,
+    "inoti": false,
+    "icart": false,
+    "iprofile": false,
+    reset() {
+        for (var key in this) {
+            if (typeof this[key] === "boolean") {
+                this[key] = false;
+            }
+        }
+    },
+    resetExcept(key) {
+        for (var k in this) {
+            if (k !== key && typeof this[k] === "boolean") {
+                this[k] = false;
+            }
+        }
+    }
+};
+
 function addCoverScreen() {
   let link = window.location.href;
   if (window.location.href[window.location.href.length - 1] === "#") {
@@ -17,7 +38,7 @@ function addCoverScreen() {
   coverScreen.style.alignItems = "center";
   coverScreen.style.fontSize = "3vw";
   coverScreen.style.color = "white";
-  coverScreen.innerText = "Page is expired. ";
+  coverScreen.innerText = "Stuck in this page? ";
   var anchor = document.createElement("a");
   anchor.href = link;
   anchor.innerText = "[Reload]";
@@ -30,6 +51,18 @@ function addCoverScreen() {
 
 $(document).ready(function () {
     console.log("hello world!");
+    $("#isearch").on("click", function () {
+        var s = $(".search-nelson");
+        if (toggles.isearch) {
+            toggles.reset();
+            s.css("opacity", "0");
+            return;
+        }
+        toggles.resetExcept("isearch");
+        s.css("opacity", "1");
+        toggles.isearch = true;
+        //...
+    });
 });
 
 $(window).bind("beforeunload", function () {

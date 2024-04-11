@@ -96,13 +96,51 @@ body {
     margin-right: 2vw;
 }
 
-.load-cover {
-    height: 120vh;
-    display: flex;
+.search-nelson {
+    width: 100vw;
+    height: 100vh;
+    position:fixed;
+    display:grid;
+    grid-template-rows: 30vh 0vh;
     justify-content: center;
     align-items: center;
     background-color: rgb(0, 0, 0);
     z-index: 999;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    z-index: 1000;
+}
+
+.search-nelson h1 {
+    text-align: center;
+    font-size: 5vh;
+}
+
+.search-container input {
+    width: 50vw;
+    height: 10vh;
+    border-radius: 10vh;
+    border: none;
+    padding: 0 1vw;
+    font-size: 2vh;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+
+}
+
+.load-cover {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    z-index: 998;
 }
 
 .wave {
