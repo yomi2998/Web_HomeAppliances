@@ -100,7 +100,7 @@ body {
     width: 100vw;
     height: 100vh;
     position:fixed;
-    display:grid;
+    display:none;
     grid-template-rows: 30vh 0vh;
     justify-content: center;
     align-items: center;

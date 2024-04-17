@@ -56,10 +56,16 @@ $(document).ready(function () {
         if (toggles.isearch) {
             toggles.reset();
             s.css("opacity", "0");
+            setTimeout(function () {
+                s.css("display", "none");
+            }, 250);
             return;
         }
         toggles.resetExcept("isearch");
-        s.css("opacity", "1");
+        s.css("display", "grid");
+        setTimeout(function () {
+            s.css("opacity", "1");
+        }, 1);
         toggles.isearch = true;
         //...
     });
