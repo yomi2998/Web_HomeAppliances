@@ -1,22 +1,22 @@
 var toggles = {
-    "isearch": false,
-    "inoti": false,
-    "icart": false,
-    "iprofile": false,
-    reset() {
-        for (var key in this) {
-            if (typeof this[key] === "boolean") {
-                this[key] = false;
-            }
-        }
-    },
-    resetExcept(key) {
-        for (var k in this) {
-            if (k !== key && typeof this[k] === "boolean") {
-                this[k] = false;
-            }
-        }
+  isearch: false,
+  inoti: false,
+  icart: false,
+  iprofile: false,
+  reset() {
+    for (var key in this) {
+      if (typeof this[key] === "boolean") {
+        this[key] = false;
+      }
     }
+  },
+  resetExcept(key) {
+    for (var k in this) {
+      if (k && k !== key && typeof this[k] === "boolean") {
+        this[k] = false;
+      }
+    }
+  },
 };
 
 function addCoverScreen() {
@@ -50,28 +50,10 @@ function addCoverScreen() {
 }
 
 $(document).ready(function () {
-    console.log("hello world!");
-    $("#isearch").on("click", function () {
-        var s = $(".search-nelson");
-        if (toggles.isearch) {
-            toggles.reset();
-            s.css("opacity", "0");
-            setTimeout(function () {
-                s.css("display", "none");
-            }, 250);
-            return;
-        }
-        toggles.resetExcept("isearch");
-        s.css("display", "grid");
-        setTimeout(function () {
-            s.css("opacity", "1");
-        }, 1);
-        toggles.isearch = true;
-        //...
-    });
+  console.log("hello world!");
 });
 
-$(window).bind("beforeunload", function () {
+$(window).bind("popstate", function () {
   document.body.style.animation = "fadeOut 0.25s";
   document.body.style.opacity = 0;
 
@@ -79,5 +61,5 @@ $(window).bind("beforeunload", function () {
     addCoverScreen();
     document.body.style.animation = "fadeIn 0.25s";
     document.body.style.opacity = 1;
-  }, 250);
+  }, 100);
 });
