@@ -3,6 +3,12 @@ body {
     padding: 0;
     opacity: 1;
     animation: fadeIn 0.25s;
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 @keyframes fadeIn {
@@ -48,6 +54,24 @@ body {
     display: inline-block;
 }
 
+.noti-dropdown {
+    position: relative;
+    display: inline-block;
+    height: 60px;
+}
+
+.cart-dropdown {
+    position: relative;
+    display: inline-block;
+    height: 60px;
+}
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+    height: 60px;
+}
+
 .dropdown-content {
     margin-top: 60px;
     display: none;
@@ -56,6 +80,10 @@ body {
     min-width: 20px;
     border-radius: 20px;
     z-index: 1;
+}
+
+.dropdown-content-right {
+    right:0;
 }
 
 .dropdown-content a {

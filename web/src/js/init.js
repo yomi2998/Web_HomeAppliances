@@ -51,15 +51,51 @@ function addCoverScreen() {
 
 $(document).ready(function () {
   console.log("hello world!");
+  $(".noti-dropdown").click(function () {
+    if ($(".noti-dropdown .dropdown-content").css("display") === "block") {
+      $(".noti-dropdown .dropdown-content").css("display", "none");
+    } else {
+      $(".noti-dropdown .dropdown-content").css("display", "block");
+    }
+  });
+
+  $(".cart-dropdown").click(function () {
+    if ($(".cart-dropdown .dropdown-content").css("display") === "block") {
+      $(".cart-dropdown .dropdown-content").css("display", "none");
+    } else {
+      $(".cart-dropdown .dropdown-content").css("display", "block");
+    }
+  });
+
+  $(".profile-dropdown").click(function () {
+    if ($(".profile-dropdown .dropdown-content").css("display") === "block") {
+      $(".profile-dropdown .dropdown-content").css("display", "none");
+    } else {
+      $(".profile-dropdown .dropdown-content").css("display", "block");
+    }
+  });
+
+  $(document).click(function (event) {
+    var target = $(event.target);
+    if (!target.closest(".noti-dropdown").length) {
+      $(".noti-dropdown .dropdown-content").css("display", "none");
+    }
+    if (!target.closest(".cart-dropdown").length) {
+      $(".cart-dropdown .dropdown-content").css("display", "none");
+    }
+    if (!target.closest(".profile-dropdown").length) {
+      $(".profile-dropdown .dropdown-content").css("display", "none");
+    }
+  });
 });
 
-$(window).bind("popstate", function () {
-  document.body.style.animation = "fadeOut 0.25s";
-  document.body.style.opacity = 0;
+// $(window).bind("popstate", function () {
+//   document.body.style.animation = "fadeOut 0.25s";
+//   document.body.style.opacity = 0;
 
-  setTimeout(function () {
-    addCoverScreen();
-    document.body.style.animation = "fadeIn 0.25s";
-    document.body.style.opacity = 1;
-  }, 100);
-});
+//   setTimeout(function () {
+//     addCoverScreen();
+//     document.body.style.animation = "fadeIn 0.25s";
+//     document.body.style.opacity = 1;
+//   }, 100);
+// });
