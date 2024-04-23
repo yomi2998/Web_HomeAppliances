@@ -51,7 +51,7 @@ function addCoverScreen() {
 
 $(document).ready(function () {
   console.log("hello world!");
-  $(".noti-dropdown").click(function () {
+  $("#inoti").click(function () {
     if ($(".noti-dropdown .dropdown-content").css("display") === "block") {
       $(".noti-dropdown .dropdown-content").css("display", "none");
     } else {
@@ -59,7 +59,7 @@ $(document).ready(function () {
     }
   });
 
-  $(".cart-dropdown").click(function () {
+  $("#icart").click(function () {
     if ($(".cart-dropdown .dropdown-content").css("display") === "block") {
       $(".cart-dropdown .dropdown-content").css("display", "none");
     } else {
@@ -67,7 +67,7 @@ $(document).ready(function () {
     }
   });
 
-  $(".profile-dropdown").click(function () {
+  $("#iprofile").click(function () {
     if ($(".profile-dropdown .dropdown-content").css("display") === "block") {
       $(".profile-dropdown .dropdown-content").css("display", "none");
     } else {
