@@ -40,10 +40,76 @@
             <div class="right cart-dropdown">
                 <a href="#" class="has-image"><img class="right icon" id="icart" src="src/img/white/shopping-cart.svg"
                         style="height:60%;" alt="My cart"></a>
-                <div class="dropdown-content dropdown-content-right2">
-                    <a href="#">Placeholder1</a>
-                    <a href="#">Placeholder2</a>
-                    <a href="#">Placeholder3</a>
+                <div class="cart-dropdown-content">
+                    <div class="cart-dropdown-content-container">
+                        <div class="cart-dropdown-content-container-header">
+                            <h1>My Cart</h1>
+                            <div>
+                                <button class="right cart-dropdown-content-container-header-clear">Checkout</button>
+                            </div>
+                        </div>
+                        <div class="cart-dropdown-content-container-body">
+                            <div class="cart-q">
+                                <div class="cart-item">
+                                    <img class="cart-item-image" src="src/img/selipar.webp">
+                                    <div class="cart-item-text">
+                                        <h2>Selipar
+                                        </h2>
+                                        <div class="cart-add-remove">
+                                            <button>-</button>
+                                            <input type="text" value="1" class="cart-quantity">
+                                            <button>+</button>
+                                        </div>
+                                        <p class="cart-item-text-price">RM 10.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-q">
+                                <div class="cart-item">
+                                    <img class="cart-item-image" src="src/img/selipar.webp">
+                                    <div class="cart-item-text">
+                                        <h2>Selipar
+                                        </h2>
+                                        <p>On the way to your face</p>
+                                        <p class="cart-item-text-price">RM 10.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-q">
+                                <div class="cart-item">
+                                    <img class="cart-item-image" src="src/img/selipar.webp">
+                                    <div class="cart-item-text">
+                                        <h2>Selipar
+                                        </h2>
+                                        <p>On the way to your face</p>
+                                        <p class="cart-item-text-price">RM 10.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-q">
+                                <div class="cart-item">
+                                    <img class="cart-item-image" src="src/img/selipar.webp">
+                                    <div class="cart-item-text">
+                                        <h2>Selipar
+                                        </h2>
+                                        <p>On the way to your face</p>
+                                        <p class="cart-item-text-price">RM 10.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-q">
+                                <div class="cart-item">
+                                    <img class="cart-item-image" src="src/img/selipar.webp">
+                                    <div class="cart-item-text">
+                                        <h2>Selipar
+                                        </h2>
+                                        <p>On the way to your face</p>
+                                        <p class="cart-item-text">RM 10.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="right noti-dropdown">
@@ -52,8 +118,11 @@
                 <div class="noti-dropdown-content">
                     <div class="noti-dropdown-content-container">
                         <div class="noti-dropdown-content-container-header">
-                            <h1>Notifications</h1>
-                            <button class="right noti-dropdown-content-container-header-clear">Clear</button>
+                            <h1 id="insert-noti-count">Notifications </h1>
+                            <div>
+                                <button class="right noti-dropdown-content-container-header-clear">Clear</button>
+                                <button class="right noti-dropdown-content-container-header-close">Show all</button>
+                            </div>
                         </div>
                         <div class="noti-dropdown-content-container-body">
                             <div class="noti-q">
@@ -62,8 +131,9 @@
                                     <div class="noti-item-text">
                                         <h2>Selipar
                                         </h2>
-                                        <p>On the way to your face. 
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non porttitor tortor, at mollis tortor.</p>
+                                        <p>On the way to your face.
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non
+                                            porttitor tortor, at mollis tortor.</p>
                                         <p class="noti-item-text-time">2 minutes ago</p>
                                     </div>
                                 </div>
