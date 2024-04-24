@@ -70,7 +70,11 @@
                                     <div class="cart-item-text">
                                         <h2>Selipar
                                         </h2>
-                                        <p>On the way to your face</p>
+                                        <div class="cart-add-remove">
+                                            <button>-</button>
+                                            <input type="text" value="1" class="cart-quantity">
+                                            <button>+</button>
+                                        </div>
                                         <p class="cart-item-text-price">RM 10.00</p>
                                     </div>
                                 </div>
@@ -81,7 +85,11 @@
                                     <div class="cart-item-text">
                                         <h2>Selipar
                                         </h2>
-                                        <p>On the way to your face</p>
+                                        <div class="cart-add-remove">
+                                            <button>-</button>
+                                            <input type="text" value="1" class="cart-quantity">
+                                            <button>+</button>
+                                        </div>
                                         <p class="cart-item-text-price">RM 10.00</p>
                                     </div>
                                 </div>
@@ -92,7 +100,11 @@
                                     <div class="cart-item-text">
                                         <h2>Selipar
                                         </h2>
-                                        <p>On the way to your face</p>
+                                        <div class="cart-add-remove">
+                                            <button>-</button>
+                                            <input type="text" value="1" class="cart-quantity">
+                                            <button>+</button>
+                                        </div>
                                         <p class="cart-item-text-price">RM 10.00</p>
                                     </div>
                                 </div>
@@ -103,8 +115,42 @@
                                     <div class="cart-item-text">
                                         <h2>Selipar
                                         </h2>
-                                        <p>On the way to your face</p>
-                                        <p class="cart-item-text">RM 10.00</p>
+                                        <div class="cart-add-remove">
+                                            <button>-</button>
+                                            <input type="text" value="1" class="cart-quantity">
+                                            <button>+</button>
+                                        </div>
+                                        <p class="cart-item-text-price">RM 10.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-q">
+                                <div class="cart-item">
+                                    <img class="cart-item-image" src="src/img/selipar.webp">
+                                    <div class="cart-item-text">
+                                        <h2>Selipar
+                                        </h2>
+                                        <div class="cart-add-remove">
+                                            <button>-</button>
+                                            <input type="text" value="1" class="cart-quantity">
+                                            <button>+</button>
+                                        </div>
+                                        <p class="cart-item-text-price">RM 10.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-q">
+                                <div class="cart-item">
+                                    <img class="cart-item-image" src="src/img/selipar.webp">
+                                    <div class="cart-item-text">
+                                        <h2>Selipar
+                                        </h2>
+                                        <div class="cart-add-remove">
+                                            <button>-</button>
+                                            <input type="text" value="1" class="cart-quantity">
+                                            <button>+</button>
+                                        </div>
+                                        <p class="cart-item-text-price">RM 10.00</p>
                                     </div>
                                 </div>
                             </div>
