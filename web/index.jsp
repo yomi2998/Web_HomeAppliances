@@ -59,6 +59,7 @@
                                             <button>-</button>
                                             <input type="text" value="1" class="cart-quantity">
                                             <button>+</button>
+                                            <button id="cart-rem">Remove</button>
                                         </div>
                                         <p class="cart-item-text-price">RM 10.00</p>
                                     </div>
@@ -74,6 +75,7 @@
                                             <button>-</button>
                                             <input type="text" value="1" class="cart-quantity">
                                             <button>+</button>
+                                            <button id="cart-rem">Remove</button>
                                         </div>
                                         <p class="cart-item-text-price">RM 10.00</p>
                                     </div>
@@ -89,6 +91,7 @@
                                             <button>-</button>
                                             <input type="text" value="1" class="cart-quantity">
                                             <button>+</button>
+                                            <button id="cart-rem">Remove</button>
                                         </div>
                                         <p class="cart-item-text-price">RM 10.00</p>
                                     </div>
@@ -104,6 +107,7 @@
                                             <button>-</button>
                                             <input type="text" value="1" class="cart-quantity">
                                             <button>+</button>
+                                            <button id="cart-rem">Remove</button>
                                         </div>
                                         <p class="cart-item-text-price">RM 10.00</p>
                                     </div>
@@ -119,6 +123,7 @@
                                             <button>-</button>
                                             <input type="text" value="1" class="cart-quantity">
                                             <button>+</button>
+                                            <button id="cart-rem">Remove</button>
                                         </div>
                                         <p class="cart-item-text-price">RM 10.00</p>
                                     </div>
@@ -134,6 +139,7 @@
                                             <button>-</button>
                                             <input type="text" value="1" class="cart-quantity">
                                             <button>+</button>
+                                            <button id="cart-rem">Remove</button>
                                         </div>
                                         <p class="cart-item-text-price">RM 10.00</p>
                                     </div>
@@ -149,6 +155,7 @@
                                             <button>-</button>
                                             <input type="text" value="1" class="cart-quantity">
                                             <button>+</button>
+                                            <button id="cart-rem">Remove</button>
                                         </div>
                                         <p class="cart-item-text-price">RM 10.00</p>
                                     </div>

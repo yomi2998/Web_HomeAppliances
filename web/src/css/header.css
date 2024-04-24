@@ -188,6 +188,11 @@ html::-webkit-scrollbar-thumb {
     border-radius: 20px;
 }
 
+.noti-dropdown-content-container-header button:active {
+    background-color: #222222;
+    border-radius: 20px;
+}
+
 .noti-item-text {
     font-size: 16px;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -272,6 +277,11 @@ html::-webkit-scrollbar-thumb {
     border-radius: 20px;
 }
 
+.cart-dropdown-content-container-header button:active {
+    background-color: #222222;
+    border-radius: 20px;
+}
+
 .cart-item-text {
     font-size: 16px;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -310,16 +320,11 @@ html::-webkit-scrollbar-thumb {
 }
 
 .cart-add-remove button:hover {
-    background-color: #494949;
+    background-color: #191919;
     border-radius: 20px;
 }
 
 .cart-add-remove button:active {
-    background-color: #222222;
-    border-radius: 20px;
-}
-
-.cart-add-remove button:focus {
     background-color: #222222;
     border-radius: 20px;
 }
@@ -613,4 +618,8 @@ input[type="text"] {
     100% {
         transform: scale(0);
     }
+}
+
+#cart-rem {
+    margin-left: 10px
 }
