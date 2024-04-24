@@ -68,10 +68,10 @@ $(document).ready(function () {
   });
 
   $("#iprofile").click(function () {
-    if ($(".profile-dropdown .dropdown-content").css("display") === "block") {
-      $(".profile-dropdown .dropdown-content").css("display", "none");
+    if ($(".profile-dropdown .profile-dropdown-content").css("display") === "block") {
+      $(".profile-dropdown .profile-dropdown-content").css("display", "none");
     } else {
-      $(".profile-dropdown .dropdown-content").css("display", "block");
+      $(".profile-dropdown .profile-dropdown-content").css("display", "block");
     }
   });
 
@@ -84,7 +84,7 @@ $(document).ready(function () {
       $(".cart-dropdown .cart-dropdown-content").css("display", "none");
     }
     if (!target.closest(".profile-dropdown").length) {
-      $(".profile-dropdown .dropdown-content").css("display", "none");
+      $(".profile-dropdown .profile-dropdown-content").css("display", "none");
     }
   });
 

@@ -31,10 +31,26 @@
             <div class="right profile-dropdown">
                 <a href="#" class="has-image"><img class="right icon" id="iprofile" src="src/img/white/user.svg"
                         style="height:60%;" alt="Profile"></a>
-                <div class="dropdown-content dropdown-content-right">
-                    <a href="#">Placeholder1</a>
-                    <a href="#">Placeholder2</a>
-                    <a href="#">Placeholder3</a>
+                <div class="profile-dropdown-content login">
+                    <div class="profile-dropdown-content-container">
+                        <div class="profile-dropdown-content-container-header">
+                            <h1>Login to continue</h1>
+                        </div>
+                        <div class="profile-dropdown-content-container-body">
+                            <form class="login-form
+                                            ">
+                                <input type="text" placeholder="Username" name="uname" required>
+                                <input type="password" placeholder="Password" name="psw" required>
+                                <button type="submit">Login</button>
+                            </form>
+                            <hr>
+                            <div class="profile-dropdown-content-container-body-register">
+                                <p>Don't have an account?</p>
+                                <button>Register</button>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="right cart-dropdown">

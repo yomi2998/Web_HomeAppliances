@@ -11,7 +11,7 @@ body {
     -ms-user-select: none;
 }
 
-html::-webkit-scrollbar, 
+html::-webkit-scrollbar,
 .noti-dropdown-content-container-body::-webkit-scrollbar,
 .cart-dropdown-content-container-body::-webkit-scrollbar {
     width: 16px;
@@ -23,8 +23,8 @@ html::-webkit-scrollbar-track {
 
 html::-webkit-scrollbar-thumb {
     border-radius: 8px;
-  border: 3px solid transparent;
-   background-clip: content-box;
+    border: 3px solid transparent;
+    background-clip: content-box;
     background-color: #000000;
 }
 
@@ -38,8 +38,8 @@ html::-webkit-scrollbar-thumb {
 .noti-dropdown-content-container-body::-webkit-scrollbar-thumb,
 .cart-dropdown-content-container-body::-webkit-scrollbar-thumb {
     border-radius: 8px;
-  border: 3px solid transparent;
-   background-clip: content-box;
+    border: 3px solid transparent;
+    background-clip: content-box;
     background-color: #000000;
 }
 
@@ -116,11 +116,11 @@ html::-webkit-scrollbar-thumb {
 }
 
 .dropdown-content-right {
-    right:0;
+    right: 0;
 }
 
 .noti-dropdown-content {
-    right:-160px;
+    right: -160px;
     margin-top: 65px;
     display: none;
     position: absolute;
@@ -131,7 +131,8 @@ html::-webkit-scrollbar-thumb {
     z-index: 1;
 }
 
-.noti-dropdown-content-container h1, .noti-item {
+.noti-dropdown-content-container h1,
+.noti-item {
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -143,7 +144,7 @@ html::-webkit-scrollbar-thumb {
 }
 
 .noti-dropdown-content-container-body {
-    max-height: 500px;
+    max-height: 60vh;
     overflow-y: auto;
     overflow-x: hidden;
     margin-bottom: 10px;
@@ -155,7 +156,7 @@ html::-webkit-scrollbar-thumb {
     height: 100px;
     border-radius: 10%;
     margin-right: 20px;
-    margin-left:20px;
+    margin-left: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -179,7 +180,7 @@ html::-webkit-scrollbar-thumb {
     padding: 10px 20px;
     border-radius: 20px;
     margin: 20px;
-    margin-left:0;
+    margin-left: 0;
     margin-right: 10px;
 }
 
@@ -209,7 +210,7 @@ html::-webkit-scrollbar-thumb {
 }
 
 .cart-dropdown-content {
-    right:-100px;
+    right: -100px;
     margin-top: 65px;
     display: none;
     position: absolute;
@@ -220,7 +221,8 @@ html::-webkit-scrollbar-thumb {
     z-index: 1;
 }
 
-.cart-dropdown-content-container h1, .cart-item {
+.cart-dropdown-content-container h1,
+.cart-item {
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -232,7 +234,7 @@ html::-webkit-scrollbar-thumb {
 }
 
 .cart-dropdown-content-container-body {
-    max-height: 500px;
+    max-height: 60vh;
     overflow-y: auto;
     overflow-x: hidden;
     margin-bottom: 10px;
@@ -244,7 +246,7 @@ html::-webkit-scrollbar-thumb {
     height: 100px;
     border-radius: 10%;
     margin-right: 20px;
-    margin-left:20px;
+    margin-left: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -268,7 +270,7 @@ html::-webkit-scrollbar-thumb {
     padding: 10px 20px;
     border-radius: 20px;
     margin: 20px;
-    margin-left:0;
+    margin-left: 0;
     margin-right: 10px;
 }
 
@@ -379,7 +381,86 @@ html::-webkit-scrollbar-thumb {
     margin: 0;
 }
 
-hr { 
+.profile-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #1f1f1f;
+    min-width: 400px;
+    max-width: 400px;
+    border-radius: 20px;
+    margin-top: 65px;
+    z-index: 1;
+}
+
+.profile-dropdown-content-container {
+    flex-direction: column;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.profile-dropdown-content-container-body form input {
+    width: calc(360px - 2vw);
+    height: 36px;
+    border-radius: 2vh;
+    border-style: solid;
+    border-color: #494949;
+    background-color: #2e2e2e !important;
+    color: white;
+    padding: 0 1vw;
+    font-size: 2vh;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin-top: 10px;
+}
+
+.profile-dropdown-content-container-body form button {
+    width: 120px;
+    height: 36px;
+    border-radius: 2vh;
+    border-style: solid;
+    border-color: #494949;
+    background-color: #2e2e2e !important;
+    color: white;
+    padding: 0 1vw;
+    font-size: 2vh;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.profile-dropdown-content-container-body form button:hover {
+    background-color: #191919;
+    border-radius: 20px;
+}
+
+.profile-dropdown-content-container-body form button:active {
+    background-color: #222222;
+    border-radius: 20px;
+}
+
+.profile-dropdown-content-container-body-register button {
+    width: 120px;
+    height: 36px;
+    border-radius: 2vh;
+    border-style: solid;
+    border-color: #494949;
+    background-color: #2e2e2e !important;
+    color: white;
+    padding: 0 1vw;
+    font-size: 2vh;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin-bottom: 20px;
+}
+
+.profile-dropdown-content-container-body-register button:hover {
+    background-color: #191919;
+}
+
+.profile-dropdown-content-container-body-register button:active {
+    background-color: #222222;
+}
+
+hr {
     border: 0;
     height: 1px;
     background: #333;
@@ -440,7 +521,7 @@ hr {
     transition: opacity 0.5s;
 }
 
-input[type="text"] {
+.search-container input[type="text"] {
     font-size: 20px;
 }
 
