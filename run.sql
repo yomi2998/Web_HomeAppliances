@@ -29,6 +29,7 @@ CREATE TABLE shipping_details (
 
 CREATE TABLE admin (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
+    username VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
 
@@ -40,7 +41,7 @@ CREATE TABLE admin_session (
     FOREIGN KEY (admin_id) REFERENCES admin(id) ON DELETE CASCADE
 );
 
-INSERT INTO admin (password) VALUES ('$nelson1234');
+INSERT INTO admin (username, password) VALUES ('admin', '$nelson1234');
 
 CREATE TABLE staff (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),

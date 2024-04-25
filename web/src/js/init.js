@@ -76,6 +76,9 @@ $(document).ready(function () {
   });
 
   $(document).click(function (event) {
+    if (window.getSelection().toString().length > 0) {
+      return;
+    }
     var target = $(event.target);
     if (!target.closest(".noti-dropdown").length) {
       $(".noti-dropdown .noti-dropdown-content").css("display", "none");

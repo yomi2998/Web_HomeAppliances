@@ -9,7 +9,10 @@
     <script type="text/javascript" src="src/js/jquery.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script type="text/javascript" src="src/js/init.js"></script>
-    <%@ page import="javax.servlet.http.Cookie" %>
+    <%@ page import="jakarta.servlet.http.Cookie" %>
+        <%@ page import="Java.domain.Customer" %>
+            <%@ page import="java.util.ArrayList" %>
+                <%@ page import="Java.control.CustomerControl" %>
 </head>
 
 <body>
@@ -32,32 +35,61 @@
             <div class="right profile-dropdown">
                 <a href="#" class="has-image"><img class="right icon" id="iprofile" src="src/img/white/user.svg"
                         style="height:60%;" alt="Profile"></a>
-                <%
-                boolean isLogin = false;
-                 if (!isLogin) {
-                %>
-                <div class="profile-dropdown-content login">
-                    <div class="profile-dropdown-content-container">
-                        <div class="profile-dropdown-content-container-header">
-                            <h1>Login to continue</h1>
-                        </div>
-                        <div class="profile-dropdown-content-container-body">
-                            <form class="login-form
-                                            ">
-                                <input type="text" placeholder="Username" name="uname" required>
-                                <input type="password" placeholder="Password" name="psw" required>
-                                <button type="submit">Login</button>
-                            </form>
-                            <hr>
-                            <div class="profile-dropdown-content-container-body-register">
-                                <p>Don't have an account?</p>
-                                <button>Register</button>
+                <% Cookie[] cookies=request.getCookies(); String username="" ; String session_id="" ; String userType=""
+                    ; Customer customer=new Customer(); if (cookies !=null) { for (Cookie cookie : cookies) { if
+                    (cookie.getName().equals("username")) { username=cookie.getValue(); } else if
+                    (cookie.getName().equals("session")) { session_id=cookie.getValue(); } } } boolean isLogin=false; if
+                    (!username.equals("") && !session.equals("")) { CustomerControl cc=new CustomerControl();
+                    customer=cc.verifyLogin(username, session_id); if (customer !=null) { userType="customer" ;
+                    isLogin=true; // ... } } if (!isLogin) { %>
+                    <div class="profile-dropdown-content login">
+                        <div class="profile-dropdown-content-container">
+                            <div class="profile-dropdown-content-container-header center">
+                                <img src="src/img/white/user.svg" alt="Profile">
+                            </div>
+                            <div class="profile-dropdown-content-container-body">
+                                <form class="login-form" action="/Web_HomeAppliances/Login" method="post">
+                                    <input type="text" placeholder="Username" name="username" required
+                                        autocomplete="off">
+                                    <input type="password" placeholder="Password" name="password" required>
+                                    <button type="submit">Login</button>
+                                </form>
+                                <hr>
+                                <div class="profile-dropdown-content-container-body-register">
+                                    <p>Don't have an account?</p>
+                                    <button>Register</button>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <% } %>
+                    <% } else { %>
+                        <div class="profile-dropdown-content <%= userType %>">
+                            <div class="profile-dropdown-content-container">
+                                <div class="profile-dropdown-content-container-header">
+                                    <div class="center">
+                                        <img src="src/img/white/user.svg" alt="Profile"><br>
+                                    </div>
+                                    <div class="center">
+                                        <h1 id="profile-name">
+                                            <%= customer.getName() %>
+                                        </h1>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="profile-dropdown-content-container-body">
+                                    <div class="profile-dropdown-content-container-body-anchor">
+                                        <a href="/Web_HomeAppliances/Profile">Profile</a>
+                                    </div>
+                                    <hr>
+                                    <div class="profile-dropdown-content-container-body-anchor">
+                                        <a href="/Web_HomeAppliances/Logout">Logout</a>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                        <% } %>
             </div>
             <div class="right cart-dropdown">
                 <a href="#" class="has-image"><img class="right icon" id="icart" src="src/img/white/shopping-cart.svg"
