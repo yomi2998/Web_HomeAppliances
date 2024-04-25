@@ -1,8 +1,8 @@
-Sun Apr 21 21:38:30 MYT 2024 : Apache Derby 网络服务器 - 10.14.2.0 - (1828579) 已启动并准备接受端口 1527 上的连接
+Thu Apr 25 14:08:01 MYT 2024 : Apache Derby 网络服务器 - 10.14.2.0 - (1828579) 已启动并准备接受端口 1527 上的连接
 ----------------------------------------------------------------
-Sun Apr 21 22:48:54 MYT 2024:
+Thu Apr 25 14:08:02 MYT 2024:
 正在使用类加载程序 jdk.internal.loader.ClassLoaders$AppClassLoader@277050dc 引导数据库
-目录 /home/superme/GitHub/Web_HomeAppliances/Database/Database/HomeAppliances 中的 Derby 版本 The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579) 实例 a816c00e-018f-00e1-35bb-ffffdf5c115f
+目录 /home/superme/GitHub/Web_HomeAppliances/Database/Database/HomeAppliances 中的 Derby 版本 The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579) 实例 a816c00e-018f-13de-38fe-ffffdf5c115f
 已从 file:/home/superme/GitHub/Web_HomeAppliances/Database/db-derby-10.14.2.0-bin/lib/derby.jar 加载
 java.vendor=Oracle Corporation
 java.runtime.version=11.0.23+9

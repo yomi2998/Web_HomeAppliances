@@ -1,22 +1,22 @@
 var toggles = {
-    "isearch": false,
-    "inoti": false,
-    "icart": false,
-    "iprofile": false,
-    reset() {
-        for (var key in this) {
-            if (typeof this[key] === "boolean") {
-                this[key] = false;
-            }
-        }
-    },
-    resetExcept(key) {
-        for (var k in this) {
-            if (k !== key && typeof this[k] === "boolean") {
-                this[k] = false;
-            }
-        }
+  isearch: false,
+  inoti: false,
+  icart: false,
+  iprofile: false,
+  reset() {
+    for (var key in this) {
+      if (typeof this[key] === "boolean") {
+        this[key] = false;
+      }
     }
+  },
+  resetExcept(key) {
+    for (var k in this) {
+      if (k && k !== key && typeof this[k] === "boolean") {
+        this[k] = false;
+      }
+    }
+  },
 };
 
 function addCoverScreen() {
@@ -50,34 +50,78 @@ function addCoverScreen() {
 }
 
 $(document).ready(function () {
-    console.log("hello world!");
-    $("#isearch").on("click", function () {
-        var s = $(".search-nelson");
-        if (toggles.isearch) {
-            toggles.reset();
-            s.css("opacity", "0");
-            setTimeout(function () {
-                s.css("display", "none");
-            }, 250);
-            return;
-        }
-        toggles.resetExcept("isearch");
-        s.css("display", "grid");
-        setTimeout(function () {
-            s.css("opacity", "1");
-        }, 1);
-        toggles.isearch = true;
-        //...
-    });
+  console.log("hello world!");
+  $("#inoti").click(function () {
+    if ($(".noti-dropdown .noti-dropdown-content").css("display") === "block") {
+      $(".noti-dropdown .noti-dropdown-content").css("display", "none");
+    } else {
+      $(".noti-dropdown .noti-dropdown-content").css("display", "block");
+    }
+  });
+
+  $("#icart").click(function () {
+    if ($(".cart-dropdown .cart-dropdown-content").css("display") === "block") {
+      $(".cart-dropdown .cart-dropdown-content").css("display", "none");
+    } else {
+      $(".cart-dropdown .cart-dropdown-content").css("display", "block");
+    }
+  });
+
+  $("#iprofile").click(function () {
+    if ($(".profile-dropdown .profile-dropdown-content").css("display") === "block") {
+      $(".profile-dropdown .profile-dropdown-content").css("display", "none");
+    } else {
+      $(".profile-dropdown .profile-dropdown-content").css("display", "block");
+    }
+  });
+
+  $(document).click(function (event) {
+    var target = $(event.target);
+    if (!target.closest(".noti-dropdown").length) {
+      $(".noti-dropdown .noti-dropdown-content").css("display", "none");
+    }
+    if (!target.closest(".cart-dropdown").length) {
+      $(".cart-dropdown .cart-dropdown-content").css("display", "none");
+    }
+    if (!target.closest(".profile-dropdown").length) {
+      $(".profile-dropdown .profile-dropdown-content").css("display", "none");
+    }
+  });
+
+  $(document).bind("scroll", function (e) {
+    var nav = $(".navigation-bar");
+    var nav2 = $("#navigation-container");
+    if ($(window).scrollTop() === 0) {
+
+      nav.css("width", "95%");
+      nav.css("border-radius", "50px");
+      nav.css("margin", "1% auto");
+
+      nav2.css("width", "95%");
+      nav2.css("border-radius", "50px");
+      nav2.css("margin", "0 auto");
+    } else {
+      nav.css("width", "100%");
+      nav.css("border-radius", "0");
+      nav.css("margin", "0");
+
+      nav2.css("width", "100%");
+      nav2.css("border-radius", "0");
+      nav2.css("margin", "0");
+    }
+  });
+  $("a[href='#']").click(function (event) {
+    event.preventDefault();
+  });
 });
 
-$(window).bind("beforeunload", function () {
-  document.body.style.animation = "fadeOut 0.25s";
-  document.body.style.opacity = 0;
+// $(window).bind("popstate", function () {
+//   document.body.style.animation = "fadeOut 0.25s";
+//   document.body.style.opacity = 0;
 
-  setTimeout(function () {
-    addCoverScreen();
-    document.body.style.animation = "fadeIn 0.25s";
-    document.body.style.opacity = 1;
-  }, 250);
-});
+//   setTimeout(function () {
+//     addCoverScreen();
+//     document.body.style.animation = "fadeIn 0.25s";
+//     document.body.style.opacity = 1;
+//   }, 100);
+// });

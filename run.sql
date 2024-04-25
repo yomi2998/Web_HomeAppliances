@@ -9,6 +9,14 @@ CREATE TABLE customer (
     join_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE customer_session (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
+    user_id INT NOT NULL,
+    session_id LONG VARCHAR NOT NULL,
+    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE CASCADE
+);
+
 CREATE TABLE shipping_details (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     user_id INT NOT NULL,
@@ -24,6 +32,14 @@ CREATE TABLE admin (
     password VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE admin_session (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
+    admin_id INT NOT NULL,
+    session_id LONG VARCHAR NOT NULL,
+    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (admin_id) REFERENCES admin(id) ON DELETE CASCADE
+);
+
 INSERT INTO admin (password) VALUES ('$nelson1234');
 
 CREATE TABLE staff (
@@ -35,6 +51,14 @@ CREATE TABLE staff (
     birth_date DATE NOT NULL,
     contact_number VARCHAR(20) NOT NULL,
     join_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE staff_session (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
+    staff_id INT NOT NULL,
+    session_id LONG VARCHAR NOT NULL,
+    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (staff_id) REFERENCES staff(id) ON DELETE CASCADE
 );
 
 CREATE TABLE category (

@@ -9,6 +9,7 @@
     <script type="text/javascript" src="src/js/jquery.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script type="text/javascript" src="src/js/init.js"></script>
+    <%@ page import="javax.servlet.http.Cookie" %>
 </head>
 
 <body>
@@ -31,6 +32,10 @@
             <div class="right profile-dropdown">
                 <a href="#" class="has-image"><img class="right icon" id="iprofile" src="src/img/white/user.svg"
                         style="height:60%;" alt="Profile"></a>
+                <%
+                boolean isLogin = false;
+                 if (!isLogin) {
+                %>
                 <div class="profile-dropdown-content login">
                     <div class="profile-dropdown-content-container">
                         <div class="profile-dropdown-content-container-header">
@@ -52,6 +57,7 @@
                         </div>
                     </div>
                 </div>
+                <% } %>
             </div>
             <div class="right cart-dropdown">
                 <a href="#" class="has-image"><img class="right icon" id="icart" src="src/img/white/shopping-cart.svg"
