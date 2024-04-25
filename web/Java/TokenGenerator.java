@@ -1,7 +1,7 @@
 package Java;
 import java.security.SecureRandom;
 public class TokenGenerator {
-    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[{]}|;:',<.>/?";
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_+[{]}:,<.>/?";
 
     public static String generateToken(int length) {
         StringBuilder sb = new StringBuilder(length);

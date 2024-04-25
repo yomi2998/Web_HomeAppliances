@@ -76,6 +76,9 @@ $(document).ready(function () {
   });
 
   $(document).click(function (event) {
+    if (window.getSelection().toString().length > 0) {
+      return;
+    }
     var target = $(event.target);
     if (!target.closest(".noti-dropdown").length) {
       $(".noti-dropdown .noti-dropdown-content").css("display", "none");
@@ -112,6 +115,50 @@ $(document).ready(function () {
   });
   $("a[href='#']").click(function (event) {
     event.preventDefault();
+  });
+
+  $(".login-form").submit(function (event) {
+    event.preventDefault();
+    var username = $("input[name='username']").val();
+    var password = $("input[name='password']").val();
+    $.ajax({
+      url: "/Web_HomeAppliances/Login",
+      type: "POST",
+      data: {
+        username: username,
+        password: password,
+      },
+      success: function (data) {
+        console.log(data);
+        const out = JSON.parse(data);
+        if (out.success) {
+          window.location.reload();
+        } else {
+          //...
+        }
+      },
+    });
+  });
+
+  $("#log-out").click(function (e) {
+    e.preventDefault();
+    const href = $(this).attr("href");
+    var cookies = document.cookie.split(";");
+    var session = cookies.find((cookie) => cookie.includes("session")).split("=\"")[1];
+    session = session.slice(0, -1);
+    cookies.splice(cookies.indexOf(`session="${session}"`), 1);
+    var id = cookies.find((cookie) => cookie.includes("id")).split("id=")[1];
+    $.ajax({
+      url: "/Web_HomeAppliances/Logout",
+      type: "POST",
+      data: {
+        id: id,
+        session: session,
+      },
+      success: function (data) {
+        window.location.reload();
+      },
+    });
   });
 });
 

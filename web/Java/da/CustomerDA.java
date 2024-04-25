@@ -90,15 +90,15 @@ public class CustomerDA {
         return null;
     }
 
-    public Customer verifySession(String session) {
-        String queryStr = "SELECT * FROM " + sessionTableName + " WHERE session_id = ?";
+    public Customer verifySession(int id, String session) {
+        String queryStr = "SELECT * FROM " + sessionTableName + " WHERE session_id = ? AND user_id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, session);
+            stmt.setInt(2, id);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                int id = rs.getInt("user_id");
                 queryStr = "SELECT * FROM " + tableName + " WHERE id = ?";
                 stmt = conn.prepareStatement(queryStr);
                 stmt.setInt(1, id);
@@ -125,6 +125,7 @@ public class CustomerDA {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
+                System.out.println("Login successful for customer " + Integer.toString(rs.getInt("id")));
                 return new Customer(rs.getInt("id"), rs.getString("name"), rs.getString("username"),
                         rs.getString("password"), rs.getString("email"), rs.getDouble("balance"),
                         rs.getDate("birth_date"), rs.getDate("join_date"), createSessionID(rs.getInt("id")));
@@ -145,6 +146,7 @@ public class CustomerDA {
     }
 
     private String createSessionID(int id) {
+        System.out.println("Creating Session ID for customer " + Integer.toString(id));
         while (true) {
             String session = TokenGenerator.generateToken(512);
             String queryStr = "SELECT * FROM " + sessionTableName + " WHERE session_id = ?";
@@ -165,6 +167,20 @@ public class CustomerDA {
 
     private boolean assignSession(int id, String session) {
         String queryStr = "INSERT INTO " + sessionTableName + " (user_id, session_id) VALUES (?, ?)";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, id);
+            stmt.setString(2, session);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean deleteSession(int id, String session) {
+        String queryStr = "DELETE FROM " + sessionTableName + " WHERE user_id = ? AND session_id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setInt(1, id);

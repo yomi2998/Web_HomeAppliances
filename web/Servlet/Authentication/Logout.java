@@ -11,15 +11,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import Java.control.CustomerControl;
-import Java.domain.Customer;
-import com.google.gson.Gson;
 import jakarta.servlet.http.Cookie;
 
 /**
  *
  * @author superme
  */
-public class Login extends HttpServlet {
+public class Logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,21 +32,22 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
             CustomerControl cc = new CustomerControl();
-            Customer customer = cc.verifyLogin(username, password);
-            if (customer == null) {
-                out.print("{\"success\":false}");
-            } else {
-                Cookie sessionCookie = new Cookie("session", customer.getSession());
-                Cookie userIdCookie = new Cookie("id", String.valueOf(customer.getId()));
-                sessionCookie.setMaxAge(31536000);
-                userIdCookie.setMaxAge(31536000);
-                response.addCookie(sessionCookie);
-                response.addCookie(userIdCookie);
-                out.print("{\"success\":true, \"data\":" + new Gson().toJson(customer) + "}");
+            int id = Integer.parseInt(request.getParameter("id"));
+            String session = request.getParameter("session");
+            Cookie[] cookies = request.getCookies();
+
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("session")) {
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                }
+                if (cookie.getName().equals("id")) {
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                }
             }
+            out.print("{\"success\": " + (cc.deleteSession(id, session) ? "true" : "false") + "}");
         }
     }
 

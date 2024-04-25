@@ -35,14 +35,39 @@
             <div class="right profile-dropdown">
                 <a href="#" class="has-image"><img class="right icon" id="iprofile" src="src/img/white/user.svg"
                         style="height:60%;" alt="Profile"></a>
-                <% Cookie[] cookies=request.getCookies(); String username="" ; String session_id="" ; String userType=""
-                    ; Customer customer=new Customer(); if (cookies !=null) { for (Cookie cookie : cookies) { if
-                    (cookie.getName().equals("username")) { username=cookie.getValue(); } else if
-                    (cookie.getName().equals("session")) { session_id=cookie.getValue(); } } } boolean isLogin=false; if
-                    (!username.equals("") && !session.equals("")) { CustomerControl cc=new CustomerControl();
-                    customer=cc.verifyLogin(username, session_id); if (customer !=null) { userType="customer" ;
-                    isLogin=true; // ... } } if (!isLogin) { %>
-                    <div class="profile-dropdown-content login">
+                        <%
+                        Cookie[] cookies = request.getCookies();
+                        int id = -1;
+                        String session_id = "";
+                        String userType = "";
+                        Customer customer = new Customer();
+                        if (cookies != null) {
+                            for (Cookie cookie : cookies) {
+                                System.out.println(cookie.getName());
+                                System.out.println(cookie.getValue());
+                                if (cookie.getName().equals("id")) {
+                                    id = Integer.parseInt(cookie.getValue());
+                                } else if (cookie.getName().equals("session")) {
+                                    session_id = cookie.getValue();
+                                }
+                            }
+                        }
+        
+                        boolean isLogin = false;
+        
+                        if (id != -1  && !session_id.equals("")) {
+                            CustomerControl cc = new CustomerControl();
+                            customer = cc.verifySession(id, session_id);
+                            if (customer != null) {
+                                userType = "customer";
+                                isLogin = true;
+                                // ...
+                            }
+                        }
+        
+                         if (!isLogin) {
+                        %>
+                    <div class="profile-dropdown-content login <%= id %>">
                         <div class="profile-dropdown-content-container">
                             <div class="profile-dropdown-content-container-header center">
                                 <img src="src/img/white/user.svg" alt="Profile">
@@ -78,12 +103,14 @@
                                 </div>
                                 <hr>
                                 <div class="profile-dropdown-content-container-body">
+                                    <% if (userType.equals(customer)) { %>
                                     <div class="profile-dropdown-content-container-body-anchor">
-                                        <a href="/Web_HomeAppliances/Profile">Profile</a>
+                                        <a href="/Web_HomeAppliances/Profile">My profile</a>
                                     </div>
                                     <hr>
+                                    <% } %>
                                     <div class="profile-dropdown-content-container-body-anchor">
-                                        <a href="/Web_HomeAppliances/Logout">Logout</a>
+                                        <a href="/Web_HomeAppliances/Logout" id="log-out">Logout</a>
                                     </div>
                                 </div>
                                 <hr>
@@ -293,47 +320,9 @@
                     </div>
                 </div>
                 <form class="search-container right">
-                    <input type="text" placeholder="Search.." name="search" class="search-nelson" autocomplete="off">
+                    <input type="text" placeholder="Search.." name="search" class="search-nelson" autocomplete="off" required>
                     <button type="submit" class="right search-btn"></button>
                 </form>
-            </div>
-        </div>
-        <div class="page-content">
-            <div class="load-cover">
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-            </div>
-            <div class="load-cover">
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-            </div>
-            <div class="load-cover">
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
             </div>
         </div>
 </body>

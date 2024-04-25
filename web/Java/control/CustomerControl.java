@@ -25,11 +25,15 @@ public class CustomerControl {
         return customerDA.deleteCustomer(id);
     }
 
-    public Customer verifySession(String session) {
-        return customerDA.verifySession(session);
+    public Customer verifySession(int id, String session) {
+        return customerDA.verifySession(id, session);
     }
 
     public Customer verifyLogin(String username, String password) {
         return customerDA.verifyLogin(username, password);
+    }
+
+    public boolean deleteSession(int id, String session) {
+        return customerDA.deleteSession(id, session);
     }
 }

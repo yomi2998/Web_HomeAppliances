@@ -12,7 +12,7 @@ CREATE TABLE customer (
 CREATE TABLE customer_session (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     user_id INT NOT NULL,
-    session_id LONG VARCHAR NOT NULL,
+    session_id VARCHAR(512) NOT NULL,
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE CASCADE
 );
