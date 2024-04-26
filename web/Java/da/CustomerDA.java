@@ -3,6 +3,8 @@ package Java.da;
 import Java.domain.Customer;
 import java.sql.*;
 import Java.TokenGenerator;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -88,6 +90,24 @@ public class CustomerDA {
             return null;
         }
         return null;
+    }
+    
+        public List<Customer> retrieveCustomerALL() {
+        String queryStr = "SELECT * FROM " + tableName;
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            ResultSet rs = stmt.executeQuery();
+            List<Customer> customers = new ArrayList<>();
+            while (rs.next()) {
+                customers.add(new Customer(rs.getInt("id"), rs.getString("name"), rs.getString("username"),
+                        rs.getString("password"), rs.getString("email"), rs.getDouble("balance"),
+                        rs.getDate("birth_date"), rs.getDate("join_date"), null));
+            }
+            return customers;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
     }
 
     public Customer verifySession(int id, String session) {

@@ -62,6 +62,12 @@
                                 userType = "customer";
                                 isLogin = true;
                                 // ...
+                            } else {
+                                // clear cookie
+                                for (Cookie cookie : cookies) {
+                                    cookie.setMaxAge(0);
+                                    response.addCookie(cookie);
+                                }
                             }
                         }
         
@@ -100,15 +106,25 @@
                                             <%= customer.getName() %>
                                         </h1>
                                     </div>
+                                        <h3 class="center" style="margin-top:0;">Balance: RM <%= String.format("%.2f", customer.getBalance()) %></h3>
                                 </div>
                                 <hr>
                                 <div class="profile-dropdown-content-container-body">
-                                    <% if (userType.equals(customer)) { %>
+                                    <% if (!userType.equals("admin")) { %>
                                     <div class="profile-dropdown-content-container-body-anchor">
                                         <a href="/Web_HomeAppliances/Profile">My profile</a>
                                     </div>
                                     <hr>
-                                    <% } %>
+                                    <% if (userType.equals("customer")) {%>
+                                        <div class="profile-dropdown-content-container-body-anchor">
+                                        <a href="/Web_HomeAppliances/topup.jsp">Top up</a>
+                                    </div>
+                                    <hr>
+                                        <div class="profile-dropdown-content-container-body-anchor">
+                                        <a href="/Web_HomeAppliances/order.jsp">My orders</a>
+                                    </div>
+                                    <hr>
+                                    <% }} %>
                                     <div class="profile-dropdown-content-container-body-anchor">
                                         <a href="/Web_HomeAppliances/Logout" id="log-out">Logout</a>
                                     </div>

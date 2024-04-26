@@ -2,6 +2,7 @@ package Java.control;
 
 import Java.domain.Customer;
 import Java.da.CustomerDA;
+import java.util.List;
 public class CustomerControl {
     private CustomerDA customerDA;
 
@@ -15,6 +16,10 @@ public class CustomerControl {
 
     public Customer retrieveCustomer(int id) {
         return customerDA.retrieveCustomer(id);
+    }
+    
+    public List<Customer> retrieveCustomerALL() {
+        return customerDA.retrieveCustomerALL();
     }
 
     public boolean updateCustomer(Customer customer) {
