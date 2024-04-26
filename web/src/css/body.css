@@ -3,3 +3,69 @@ html {
     color:white;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
+h1{
+    color:white;
+}
+
+.test{
+    margin:1% auto;
+    width: 95%;
+}
+
+.about{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    line-height:3vh;
+}
+
+footer {
+  background-color: #26272b;
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.footer-columns {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.footer-column {
+  flex: 1;
+  margin-right: 20px;
+}
+
+h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  margin-bottom: 5px;
+}
+
+ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+  margin-top: 20px;
+}
+
+p {
+  margin: 0;
+}
+
