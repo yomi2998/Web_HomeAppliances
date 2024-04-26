@@ -1,4 +1,6 @@
 /Database/*
+/Database/
+/Database/Database/
 /Database/Database/*
 /dist/*
 /build/*
