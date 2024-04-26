@@ -40,6 +40,7 @@ public class Login extends HttpServlet {
             Customer customer = cc.verifyLogin(username, password);
             if (customer == null) {
                 out.print("{\"success\":false}");
+                // todo
             } else {
                 Cookie sessionCookie = new Cookie("session", customer.getSession());
                 Cookie userIdCookie = new Cookie("id", String.valueOf(customer.getId()));
