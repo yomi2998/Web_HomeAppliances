@@ -10,8 +10,10 @@
         <script type="text/javascript" src="src/js/init.js"></script>
         <%@ page import="jakarta.servlet.http.Cookie" %>
         <%@ page import="Java.domain.Customer" %>
+        <%@ page import="domain.Admin" %>
         <%@ page import="java.util.ArrayList" %>
         <%@ page import="Java.control.CustomerControl" %>
+        <%@ page import="control.AdminControl" %>
     </head>
 
     <body>
@@ -34,15 +36,14 @@
                     <a href="#" class="has-image"><img class="right icon" id="iprofile" src="src/img/white/user.svg"
                                                        style="height:60%;" alt="Profile"></a>
                         <%
+                            Customer customer = new Customer();
+                            Admin admin = new Admin();
                         Cookie[] cookies = request.getCookies();
                         int id = -1;
                         String session_id = "";
                         String userType = "";
-                        Customer customer = new Customer();
                         if (cookies != null) {
                             for (Cookie cookie : cookies) {
-                                System.out.println(cookie.getName());
-                                System.out.println(cookie.getValue());
                                 if (cookie.getName().equals("id")) {
                                     id = Integer.parseInt(cookie.getValue());
                                 } else if (cookie.getName().equals("session")) {
@@ -56,24 +57,44 @@
                         boolean isLogin = false;
         
                         if (id != -1  && !session_id.equals("")) {
+                        switch(userType) {
+                            case "customer":
                             CustomerControl cc = new CustomerControl();
                             customer = cc.verifySession(id, session_id);
+                            cc.destroy();
                             if (customer != null) {
-                                userType = "customer";
                                 isLogin = true;
-                                // ...
                             } else {
-                                // clear cookie
                                 for (Cookie cookie : cookies) {
                                     cookie.setMaxAge(0);
                                     response.addCookie(cookie);
                                 }
                             }
+                            break;
+                            case "admin":
+                            AdminControl ac = new AdminControl();
+                            admin = ac.verifySession(id, session_id);
+                            ac.destroy();
+                            if (admin != null) {
+                                isLogin = true;
+                            } else {
+                                for (Cookie cookie : cookies) {
+                                    cookie.setMaxAge(0);
+                                    response.addCookie(cookie);
+                                }
+                            }
+                            break;
+                            case "staff":
+                            break;
+                            default:
+                            break;
+                            }
+                            
                         }
         
                          if (!isLogin) {
                         %>
-                    <div class="profile-dropdown-content login <%= id %>">
+                    <div class="profile-dropdown-content login">
                         <div class="profile-dropdown-content-container">
                             <div class="profile-dropdown-content-container-header center">
                                 <img src="src/img/white/user.svg" alt="Profile">
@@ -95,7 +116,7 @@
                         </div>
                     </div>
                     <% } else { %>
-                    <div class="profile-dropdown-content <%= userType %>">
+                    <div class="profile-dropdown-content">
                         <div class="profile-dropdown-content-container">
                             <div class="profile-dropdown-content-container-header">
                                 <div class="center">
@@ -103,10 +124,16 @@
                                 </div>
                                 <div class="center">
                                     <h1 id="profile-name">
+                                        <% switch (userType) {
+                                            case "customer": %>
                                         <%= customer.getName() %>
                                     </h1>
                                 </div>
                                 <h3 class="center" style="margin-top:0;">Balance: RM <%= String.format("%.2f", customer.getBalance()) %></h3>
+                                <% break;
+                                case "admin": %>
+                                <%= admin.getName() %>
+                                <% break; case "staff": break; default: break; } %>
                             </div>
                             <hr>
                             <div class="profile-dropdown-content-container-body">

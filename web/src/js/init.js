@@ -142,18 +142,20 @@ $(document).ready(function () {
 
   $("#log-out").click(function (e) {
     e.preventDefault();
-    const href = $(this).attr("href");
     var cookies = document.cookie.split(";");
     var session = cookies.find((cookie) => cookie.includes("session")).split("=\"")[1];
     session = session.slice(0, -1);
     cookies.splice(cookies.indexOf(`session="${session}"`), 1);
     var id = cookies.find((cookie) => cookie.includes("id")).split("id=")[1];
+    cookies.splice(cookies.indexOf(` id=${id}`), 1);
+    var type = cookies.find((cookie) => cookie.includes("type")).split("type=")[1];
     $.ajax({
       url: "/Web_HomeAppliances/Logout",
       type: "POST",
       data: {
         id: id,
         session: session,
+        type: type,
       },
       success: function (data) {
         window.location.reload();

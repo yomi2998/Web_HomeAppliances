@@ -3,7 +3,9 @@ package Java.control;
 import Java.domain.Customer;
 import Java.da.CustomerDA;
 import java.util.List;
+
 public class CustomerControl {
+
     private CustomerDA customerDA;
 
     public CustomerControl() {
@@ -17,7 +19,7 @@ public class CustomerControl {
     public Customer retrieveCustomer(int id) {
         return customerDA.retrieveCustomer(id);
     }
-    
+
     public List<Customer> retrieveCustomerALL() {
         return customerDA.retrieveCustomerALL();
     }
@@ -40,5 +42,9 @@ public class CustomerControl {
 
     public boolean deleteSession(int id, String session) {
         return customerDA.deleteSession(id, session);
+    }
+
+    public void destroy() {
+        customerDA.destroy();
     }
 }

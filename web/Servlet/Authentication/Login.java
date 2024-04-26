@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import Java.control.CustomerControl;
 import Java.domain.Customer;
+import control.AdminControl;
+import domain.Admin;
 import com.google.gson.Gson;
 import jakarta.servlet.http.Cookie;
 
@@ -39,15 +41,35 @@ public class Login extends HttpServlet {
             CustomerControl cc = new CustomerControl();
             Customer customer = cc.verifyLogin(username, password);
             if (customer == null) {
-                out.print("{\"success\":false}");
-                // todo
+                cc.destroy();
+                AdminControl ac = new AdminControl();
+                Admin admin = ac.verifyLogin(username, password);
+                if (admin != null) {
+                    Cookie sessionCookie = new Cookie("session", admin.getSession());
+                    Cookie userIdCookie = new Cookie("id", String.valueOf(admin.getId()));
+                    Cookie userTypeCookie = new Cookie("type", "admin");
+                    sessionCookie.setMaxAge(31536000);
+                    userIdCookie.setMaxAge(31536000);
+                    userTypeCookie.setMaxAge(31536000);
+                    response.addCookie(sessionCookie);
+                    response.addCookie(userIdCookie);
+                    response.addCookie(userTypeCookie);
+                    out.print("{\"success\":true, \"data\":" + new Gson().toJson(admin) + "}");
+                } else {
+                    ac.destroy();
+                    out.print("{\"success\":false}");
+                    // todo
+                }
             } else {
                 Cookie sessionCookie = new Cookie("session", customer.getSession());
                 Cookie userIdCookie = new Cookie("id", String.valueOf(customer.getId()));
+                Cookie userTypeCookie = new Cookie("type", "customer");
                 sessionCookie.setMaxAge(31536000);
                 userIdCookie.setMaxAge(31536000);
+                userTypeCookie.setMaxAge(31536000);
                 response.addCookie(sessionCookie);
                 response.addCookie(userIdCookie);
+                response.addCookie(userTypeCookie);
                 out.print("{\"success\":true, \"data\":" + new Gson().toJson(customer) + "}");
             }
         }

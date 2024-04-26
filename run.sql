@@ -62,7 +62,7 @@ CREATE TABLE staff_session (
     FOREIGN KEY (staff_id) REFERENCES staff(id) ON DELETE CASCADE
 );
 
-CREATE TABLE category (
+CREATE TABLE category ( 
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     name VARCHAR(100) NOT NULL
 );

@@ -40,7 +40,7 @@ public class AdminDA {
                 stmt.setInt(1, id);
                 rs = stmt.executeQuery();
                 if (rs.next()) {
-                    return new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("password"), session);
+                    return new Admin(rs.getInt("id"), rs.getString("username"), rs.getString("password"), session);
                 }
             }
         } catch (SQLException ex) {
@@ -121,6 +121,14 @@ public class AdminDA {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
+        }
+    }
+
+    public void destroy() {
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

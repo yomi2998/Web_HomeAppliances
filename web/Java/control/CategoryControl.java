@@ -3,14 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package control;
+
 import domain.Category;
 import da.CategoryDA;
 import java.util.List;
+
 /**
  *
  * @author superme
  */
 public class CategoryControl {
+
     private CategoryDA categoryDA;
 
     public CategoryControl() {
@@ -31,5 +34,9 @@ public class CategoryControl {
 
     public boolean deleteCategory(int id) {
         return categoryDA.deleteCategory(id);
+    }
+
+    public void destroy() {
+        categoryDA.destroy();
     }
 }

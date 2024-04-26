@@ -30,4 +30,8 @@ public class AdminControl {
     public boolean deleteSession(int id, String session) {
         return adminDA.deleteSession(id, session);
     }
+    
+    public void destroy() {
+        adminDA.destroy();
+    }
 }

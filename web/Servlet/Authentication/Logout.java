@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import Java.control.CustomerControl;
+import control.AdminControl;
 import jakarta.servlet.http.Cookie;
 
 /**
@@ -32,9 +33,9 @@ public class Logout extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            CustomerControl cc = new CustomerControl();
             int id = Integer.parseInt(request.getParameter("id"));
             String session = request.getParameter("session");
+            String type = request.getParameter("type");
             Cookie[] cookies = request.getCookies();
 
             for (Cookie cookie : cookies) {
@@ -46,8 +47,27 @@ public class Logout extends HttpServlet {
                     cookie.setMaxAge(0);
                     response.addCookie(cookie);
                 }
+                if (cookie.getName().equals("type")) {
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                }
             }
-            out.print("{\"success\": " + (cc.deleteSession(id, session) ? "true" : "false") + "}");
+            boolean isSuccess = false;
+            switch (type) {
+                case "customer":
+                    CustomerControl cc = new CustomerControl();
+                    isSuccess = cc.deleteSession(id, session);
+                    break;
+                case "admin":
+                    AdminControl ac = new AdminControl();
+                    isSuccess = ac.deleteSession(id, session);
+                    break;
+                case "staff":
+                    break;
+                default:
+                    break;
+            }
+            out.print("{\"success\": " + (isSuccess ? "true" : "false") + "}");
         }
     }
 

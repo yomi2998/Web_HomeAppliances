@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package da;
+
 import domain.Category;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,11 +12,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author superme
  */
 public class CategoryDA {
+
     private String host = "jdbc:derby://localhost:1527/HomeAppliances";
     private String user = "nbuser";
     private String password = "nbuser";
@@ -73,7 +76,7 @@ public class CategoryDA {
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();
             List<Category> categoryList = new ArrayList<>();
-            while(rs.next()) {
+            while (rs.next()) {
                 categoryList.add(new Category(rs.getInt("id"), rs.getString("name")));
             }
             return categoryList;
@@ -90,4 +93,13 @@ public class CategoryDA {
             System.out.println(ex.getMessage());
         }
     }
+
+    public void destroy() {
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author superme
  */
 public class CustomerDA {
+
     private String host = "jdbc:derby://localhost:1527/HomeAppliances";
     private String user = "nbuser";
     private String password = "nbuser";
@@ -91,8 +92,8 @@ public class CustomerDA {
         }
         return null;
     }
-    
-        public List<Customer> retrieveCustomerALL() {
+
+    public List<Customer> retrieveCustomerALL() {
         String queryStr = "SELECT * FROM " + tableName;
         try {
             stmt = conn.prepareStatement(queryStr);
@@ -174,8 +175,8 @@ public class CustomerDA {
                 stmt = conn.prepareStatement(queryStr);
                 stmt.setString(1, session);
                 ResultSet rs = stmt.executeQuery();
-                if (!rs.next() &&
-                        assignSession(id, session)) {
+                if (!rs.next()
+                        && assignSession(id, session)) {
                     return session;
                 }
             } catch (SQLException ex) {
@@ -210,6 +211,14 @@ public class CustomerDA {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
+        }
+    }
+
+    public void destroy() {
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }
