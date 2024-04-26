@@ -36,7 +36,7 @@ CREATE TABLE admin (
 CREATE TABLE admin_session (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     admin_id INT NOT NULL,
-    session_id LONG VARCHAR NOT NULL,
+    session_id VARCHAR(512) NOT NULL,
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (admin_id) REFERENCES admin(id) ON DELETE CASCADE
 );
@@ -57,7 +57,7 @@ CREATE TABLE staff (
 CREATE TABLE staff_session (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     staff_id INT NOT NULL,
-    session_id LONG VARCHAR NOT NULL,
+    session_id VARCHAR(512) NOT NULL,
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (staff_id) REFERENCES staff(id) ON DELETE CASCADE
 );
