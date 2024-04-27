@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/superme/GitHub/Web_HomeAppliances/web/WEB-INF/web.xml</file>
-            <file>file:/home/superme/GitHub/Web_HomeAppliances/web/Java/domain/Customer.java</file>
-            <file>file:/home/superme/GitHub/Web_HomeAppliances/web/Servlet/Authentication/Login.java</file>
-            <file>file:/home/superme/GitHub/Web_HomeAppliances/web/Java/control/CustomerControl.java</file>
-            <file>file:/home/superme/GitHub/Web_HomeAppliances/web/Java/TokenGenerator.java</file>
-            <file>file:/home/superme/GitHub/Web_HomeAppliances/web/Servlet/Authentication/Logout.java</file>
-            <file>file:/home/superme/GitHub/Web_HomeAppliances/web/index.jsp</file>
-            <file>file:/home/superme/GitHub/Web_HomeAppliances/web/Java/da/CustomerDA.java</file>
+            <file>file:/C:/Users/Phuah/Documents/GitHub/Web_HomeAppliances/web/index.jsp</file>
+            <file>file:/C:/Users/Phuah/Documents/GitHub/Web_HomeAppliances/web/src/css/body.css</file>
+            <file>file:/C:/Users/Phuah/Documents/GitHub/Web_HomeAppliances/web/checkout.jsp</file>
+            <file>file:/C:/Users/Phuah/Documents/GitHub/Web_HomeAppliances/web/src/css/header.css</file>
+            <file>file:/C:/Users/Phuah/Documents/GitHub/Web_HomeAppliances/web/admin.html</file>
         </group>
     </open-files>
 </project-private>
