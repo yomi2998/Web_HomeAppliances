@@ -56,6 +56,8 @@ $(document).ready(function () {
       $(".noti-dropdown .noti-dropdown-content").css("display", "none");
     } else {
       $(".noti-dropdown .noti-dropdown-content").css("display", "block");
+      $(".cart-dropdown .cart-dropdown-content").css("display", "none");
+      $(".profile-dropdown .profile-dropdown-content").css("display", "none");
     }
   });
 
@@ -64,6 +66,8 @@ $(document).ready(function () {
       $(".cart-dropdown .cart-dropdown-content").css("display", "none");
     } else {
       $(".cart-dropdown .cart-dropdown-content").css("display", "block");
+      $(".noti-dropdown .noti-dropdown-content").css("display", "none");
+      $(".profile-dropdown .profile-dropdown-content").css("display", "none");
     }
   });
 
@@ -72,6 +76,8 @@ $(document).ready(function () {
       $(".profile-dropdown .profile-dropdown-content").css("display", "none");
     } else {
       $(".profile-dropdown .profile-dropdown-content").css("display", "block");
+      $(".cart-dropdown .cart-dropdown-content").css("display", "none");
+      $(".noti-dropdown .noti-dropdown-content").css("display", "none");
     }
   });
 
@@ -134,7 +140,7 @@ $(document).ready(function () {
         if (out.success) {
           window.location.reload();
         } else {
-          //...
+          $(".invalid-login").css("display", "block");
         }
       },
     });
@@ -143,11 +149,14 @@ $(document).ready(function () {
   $("#log-out").click(function (e) {
     e.preventDefault();
     var cookies = document.cookie.split(";");
-    var session = cookies.find((cookie) => cookie.includes("session")).split("=\"")[1];
+    var session = cookies.find((cookie) => cookie.includes("session")).split('="')[1];
     session = session.slice(0, -1);
-    cookies.splice(cookies.indexOf(`session="${session}"`), 1);
+    var sessionIndex = cookies.findIndex((cookie) => cookie.includes(`session="${session}"`));
+    if (sessionIndex !== -1) {
+      cookies.splice(sessionIndex, 1);
+    }
     var id = cookies.find((cookie) => cookie.includes("id")).split("id=")[1];
-    cookies.splice(cookies.indexOf(` id=${id}`), 1);
+    cookies.splice(cookies.findIndex((cookie) => cookie.includes(`id=${id}`)), 1);
     var type = cookies.find((cookie) => cookie.includes("type")).split("type=")[1];
     $.ajax({
       url: "/Web_HomeAppliances/Logout",

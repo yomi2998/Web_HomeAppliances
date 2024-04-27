@@ -99,17 +99,19 @@
                             <div class="profile-dropdown-content-container-header center">
                                 <img src="src/img/white/user.svg" alt="Profile">
                             </div>
+                            <h1 style="text-align: center;">Login</h1>
                             <div class="profile-dropdown-content-container-body">
                                 <form class="login-form" action="/Web_HomeAppliances/Login" method="post">
                                     <input type="text" placeholder="Username" name="username" required
                                            autocomplete="off">
                                     <input type="password" placeholder="Password" name="password" required>
+                                    <p class="invalid-login" style="display: none; color: red;">Invalid login credentials.</p>
                                     <button type="submit">Login</button>
                                 </form>
                                 <hr>
                                 <div class="profile-dropdown-content-container-body-register">
                                     <p>Don't have an account?</p>
-                                    <button>Register</button>
+                                    <a id="nomargin" href="/Web_HomeAppliances/register.html"><button>Register</button></a>
 
                                 </div>
                             </div>
@@ -137,7 +139,7 @@
                             </div>
                             <hr>
                             <div class="profile-dropdown-content-container-body">
-                                <% if (!userType.equals("admin")) { %>
+                                <% if (!userType.equals("admin") && !userType.equals("staff")) { %>
                                 <div class="profile-dropdown-content-container-body-anchor">
                                     <a href="/Web_HomeAppliances/Profile">My profile</a>
                                 </div>
@@ -151,7 +153,16 @@
                                     <a href="/Web_HomeAppliances/order.jsp">My orders</a>
                                 </div>
                                 <hr>
-                                <% }} %>
+                                <% }} else { %>
+                                    <div class="profile-dropdown-content-container-body-anchor">
+                                        <a href="/Web_HomeAppliances/dashboard.jsp">Dashboard</a>
+                                    </div>
+                                    <hr>
+                                    <div class="profile-dropdown-content-container-body-anchor">
+                                        <a href="/Web_HomeAppliances/control.jsp">Control Panel</a>
+                                    </div>
+                                    <hr>
+                                    <% } %>
                                 <div class="profile-dropdown-content-container-body-anchor">
                                     <a href="/Web_HomeAppliances/Logout" id="log-out">Logout</a>
                                 </div>
@@ -161,6 +172,7 @@
                     </div>
                     <% } %>
                 </div>
+                <% if (userType.equals("customer")) { %>
                 <div class="right cart-dropdown">
                     <a href="#" class="has-image"><img class="right icon" id="icart" src="src/img/white/shopping-cart.svg"
                                                        style="height:60%;" alt="My cart"></a>
@@ -289,6 +301,7 @@
                         </div>
                     </div>
                 </div>
+                <% } %>
                 <div class="right noti-dropdown">
                     <a href="#" class="has-image"><img class="right icon" id="inoti" src="src/img/white/bell.svg"
                                                        style="height:60%;" alt="Notifications"></a>

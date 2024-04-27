@@ -129,7 +129,7 @@ html::-webkit-scrollbar-thumb {
 }
 
 .noti-dropdown-content {
-    right: -160px;
+    right: 0;
     margin-top: 65px;
     display: none;
     position: absolute;
@@ -219,7 +219,7 @@ html::-webkit-scrollbar-thumb {
 }
 
 .cart-dropdown-content {
-    right: -100px;
+    right: 0;
     margin-top: 65px;
     display: none;
     position: absolute;
@@ -539,7 +539,7 @@ hr {
     transition: all 0.25s;
 }
 
-.navigation-bar a:not(.has-image) {
+.navigation-bar a:not(.has-image):not(#nomargin) {
     color: rgb(255, 255, 255);
     font-size: 20px;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -657,14 +657,6 @@ hr {
 
     .search-nelson {
         width: 100px;
-    }
-
-    .noti-dropdown-content {
-        right: -120px;
-    }
-
-    .cart-dropdown-content {
-        right: -70px;
     }
 }
 
