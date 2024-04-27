@@ -99,3 +99,17 @@ input[type="date"]:focus {
     border-color: #4CAF50;
     box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
 }
+
+button{
+    background-color: #555555;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #707070;
+    transform: scale(1.05);
+}
