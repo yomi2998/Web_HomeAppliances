@@ -16,9 +16,11 @@
         <%@ page import="jakarta.servlet.http.Cookie" %>
         <%@ page import="domain.Customer" %>
         <%@ page import="domain.Admin" %>
+        <%@ page import="domain.Category" %>
         <%@ page import="java.util.ArrayList" %>
         <%@ page import="control.CustomerControl" %>
         <%@ page import="control.AdminControl" %>
+        <%@ page import="control.CategoryControl" %>
     </head>
 
     <body>

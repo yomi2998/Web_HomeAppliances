@@ -24,11 +24,11 @@ public class CategoryControl {
         return categoryDA.insertCategory(category);
     }
 
-    public List<Category> retrieveCustomer() {
+    public List<Category> retrieveCategory() {
         return categoryDA.retrieveCategory();
     }
 
-    public boolean updateCustomer(Category category) {
+    public boolean updateCategory(Category category) {
         return categoryDA.updateCategory(category);
     }
 

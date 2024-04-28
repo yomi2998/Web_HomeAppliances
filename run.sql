@@ -71,6 +71,11 @@ CREATE TABLE category (
     name VARCHAR(100) NOT NULL
 );
 
+INSERT INTO category (name) VALUES ('Kitchen');
+INSERT INTO category (name) VALUES ('Laundry');
+INSERT INTO category (name) VALUES ('Cleaning');
+INSERT INTO category (name) VALUES ('Entertainment');
+
 CREATE TABLE product (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     name VARCHAR(255) NOT NULL,
