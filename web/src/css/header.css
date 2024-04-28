@@ -178,9 +178,16 @@ html::-webkit-scrollbar-thumb {
 .noti-dropdown-content-container-header {
     display: flex;
     justify-content: space-between;
+    margin:0;
 }
 
-.noti-dropdown-content-container-header button {
+.noti-dropdown-content-container-buttons {
+    margin: 0 10px 0 10px;
+    display: block;
+    width: 100%;
+}
+
+.noti-dropdown-content-container-buttons button {
     background-color: #000000;
     border: none;
     color: white;
@@ -193,12 +200,12 @@ html::-webkit-scrollbar-thumb {
     margin-right: 10px;
 }
 
-.noti-dropdown-content-container-header button:hover {
+.noti-dropdown-content-container-buttons button:hover {
     background-color: #191919;
     border-radius: 20px;
 }
 
-.noti-dropdown-content-container-header button:active {
+.noti-dropdown-content-container-buttons button:active {
     background-color: #222222;
     border-radius: 20px;
 }
@@ -537,6 +544,8 @@ hr {
     width: 95%;
     top: 10px;
     margin: auto;
+    z-index: 1000;
+    position: fixed;
     transition: all 0.25s;
 }
 

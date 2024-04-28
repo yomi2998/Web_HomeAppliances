@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     amountButtons.forEach(button => {
         button.addEventListener('click', function() {
             const amount = this.value;
-            selectedAmountDisplay.textContent = `$${amount}`;
+            selectedAmountDisplay.textContent = `RM ${amount}`;
         });
     });
 

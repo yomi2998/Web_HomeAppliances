@@ -36,8 +36,12 @@
                     <a href="#" class="has-image"><img class="right icon" id="iprofile" src="src/img/white/user.svg"
                                                        style="height:60%;" alt="Profile"></a>
                         <%
-                            Customer customer = new Customer();
-                            Admin admin = new Admin();
+                        final boolean ALLOW_ADMIN = true;
+                        final boolean ALLOW_STAFF = true;
+                        final boolean ALLOW_CUSTOMER = true;
+                        final boolean ALLOW_GUEST = true;
+                        Customer customer = new Customer();
+                        Admin admin = new Admin();
                         Cookie[] cookies = request.getCookies();
                         int id = -1;
                         String session_id = "";
@@ -63,6 +67,9 @@
                             customer = cc.verifySession(id, session_id);
                             cc.destroy();
                             if (customer != null) {
+                            if (!ALLOW_CUSTOMER) {
+                        %><script>alert("You are not allowed to view this page."); window.history.back();</script> <%
+                            }
                                 isLogin = true;
                             } else {
                                 for (Cookie cookie : cookies) {
@@ -76,6 +83,9 @@
                             admin = ac.verifySession(id, session_id);
                             ac.destroy();
                             if (admin != null) {
+                            if (!ALLOW_ADMIN) {
+                    %><script>alert("You are not allowed to view this page."); window.history.back();</script> <%
+                            }
                                 isLogin = true;
                             } else {
                                 for (Cookie cookie : cookies) {
@@ -93,7 +103,7 @@
                         }
         
                          if (!isLogin) {
-                        %>
+                    %>
                     <div class="profile-dropdown-content login">
                         <div class="profile-dropdown-content-container">
                             <div class="profile-dropdown-content-container-header center">
@@ -154,15 +164,15 @@
                                 </div>
                                 <hr>
                                 <% }} else { %>
-                                    <div class="profile-dropdown-content-container-body-anchor">
-                                        <a href="/Web_HomeAppliances/dashboard.jsp">Dashboard</a>
-                                    </div>
-                                    <hr>
-                                    <div class="profile-dropdown-content-container-body-anchor">
-                                        <a href="/Web_HomeAppliances/control.jsp">Control Panel</a>
-                                    </div>
-                                    <hr>
-                                    <% } %>
+                                <div class="profile-dropdown-content-container-body-anchor">
+                                    <a href="/Web_HomeAppliances/dashboard.jsp">Dashboard</a>
+                                </div>
+                                <hr>
+                                <div class="profile-dropdown-content-container-body-anchor">
+                                    <a href="/Web_HomeAppliances/control.jsp">Control Panel</a>
+                                </div>
+                                <hr>
+                                <% } %>
                                 <div class="profile-dropdown-content-container-body-anchor">
                                     <a href="/Web_HomeAppliances/Logout" id="log-out">Logout</a>
                                 </div>
@@ -309,10 +319,16 @@
                         <div class="noti-dropdown-content-container">
                             <div class="noti-dropdown-content-container-header">
                                 <h1 id="insert-noti-count">Notifications </h1>
-                                <div>
-                                    <button class="right noti-dropdown-content-container-header-clear">Clear</button>
-                                    <button class="right noti-dropdown-content-container-header-close">Show all</button>
+                            </div>
+                            <div class="noti-dropdown-content-container-header">
+                                <div class="noti-dropdown-content-container-buttons">
+                                    <button class="left" id="noti-order">Order</button>
+                                    <button class="left" id="noti-convo">Conversation</button>
+                                    <button class="right" id="noti-clear">Clear</button>
+                                    <button class="right" id="noti-showall">Show all</button>
                                 </div>
+                            </div>
+                            <div>
                             </div>
                             <div class="noti-dropdown-content-container-body">
                                 <div class="noti-q">
@@ -328,50 +344,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="noti-q">
-                                    <div class="noti-item"> <!-- src/img/selipar.webp -->
-                                        <img class="noti-item-image" src="src/img/selipar.webp">
-                                        <div class="noti-item-text">
-                                            <h2>Selipar
-                                            </h2>
-                                            <p>On the way to your face</p>
-                                            <p class="noti-item-text-time">3 minutes ago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="noti-q">
-                                    <div class="noti-item"> <!-- src/img/selipar.webp -->
-                                        <img class="noti-item-image" src="src/img/selipar.webp">
-                                        <div class="noti-item-text">
-                                            <h2>Selipar
-                                            </h2>
-                                            <p>On the way to your face</p>
-                                            <p class="noti-item-text-time">4 minutes ago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="noti-q">
-                                    <div class="noti-item"> <!-- src/img/selipar.webp -->
-                                        <img class="noti-item-image" src="src/img/selipar.webp">
-                                        <div class="noti-item-text">
-                                            <h2>Selipar
-                                            </h2>
-                                            <p>On the way to your face</p>
-                                            <p class="noti-item-text-time">5 minutes ago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="noti-q">
-                                    <div class="noti-item"> <!-- src/img/selipar.webp -->
-                                        <img class="noti-item-image" src="src/img/selipar.webp">
-                                        <div class="noti-item-text">
-                                            <h2>Selipar
-                                            </h2>
-                                            <p>On the way to your face</p>
-                                            <p class="noti-item-text-time">6 minutes ago</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -381,6 +353,7 @@
                     </form>
                 </div>
             </div>
+        </div>
     </body>
 
 </html>
