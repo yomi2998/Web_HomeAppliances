@@ -1,26 +1,14 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #b3e0ff, #007bff);
-    color: #333;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-}
 
-.container {
+
+.topup-container {
     width: 800px;
-    margin: 20px auto;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #222222;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    color:rgb(255, 255, 255);
 }
 
 header {
@@ -28,95 +16,33 @@ header {
     margin-bottom: 20px;
 }
 
-h1 {
+.topup-title {
     font-size: 32px;
     margin-top: 0;
     color: black;
 }
 
-h2 {
+.topup-prompt-title {
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-.amount-buttons, .method-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+.amount-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     justify-content: center;
-}
-
-.amount-buttons button, .method-buttons button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.amount-buttons button:hover, .method-buttons button:hover {
-    background-color: #0056b3;
-}
-
-button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-.top-up-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-}
-
-.top-up-button:hover {
-    background-color: #0056b3;
 }
 
 .method-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     margin-bottom: 20px;
     justify-content: center;
 }
-
-.method-options .method-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.method-options .method-button:hover {
-    background-color: #0056b3;
-}
-
 .form-group{
     margin-top: 20px;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 footer {

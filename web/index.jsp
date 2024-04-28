@@ -5,9 +5,13 @@
         <title>Home - nelson</title>
         <link rel="shortcut icon" href="src/img/favicon.png">
         <link rel="stylesheet" type="text/css" href="src/css/header.css">
+        <link rel="stylesheet" href="src/css/topup.css">
+        <link rel="stylesheet" href="src/css/register.css">
         <script type="text/javascript" src="src/js/jquery.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="src/js/init.js"></script>
+        <script src="src/js/topup.js"></script>
+        <script src="src/js/register.js"></script>
         <%@ page import="jakarta.servlet.http.Cookie" %>
         <%@ page import="domain.Customer" %>
         <%@ page import="domain.Admin" %>
@@ -116,12 +120,12 @@
                                            autocomplete="off">
                                     <input type="password" placeholder="Password" name="password" required>
                                     <p class="invalid-login" style="display: none; color: red;">Invalid login credentials.</p>
-                                    <button type="submit">Login</button>
+                                    <button type="submit" class="nelson-button nomarginlr">Login</button>
                                 </form>
                                 <hr>
                                 <div class="profile-dropdown-content-container-body-register">
                                     <p>Don't have an account?</p>
-                                    <a id="nomargin" href="/Web_HomeAppliances/register.html"><button>Register</button></a>
+                                    <button class="nelson-button nomarginlr" onclick="register_toggle()">Register</button>
 
                                 </div>
                             </div>
@@ -156,7 +160,7 @@
                                 <hr>
                                 <% if (userType.equals("customer")) {%>
                                 <div class="profile-dropdown-content-container-body-anchor">
-                                    <a href="/Web_HomeAppliances/topup.jsp">Top up</a>
+                                    <a href="#" onclick="topup_toggle()">Top up</a>
                                 </div>
                                 <hr>
                                 <div class="profile-dropdown-content-container-body-anchor">
@@ -191,7 +195,7 @@
                             <div class="cart-dropdown-content-container-header">
                                 <h1>My Cart</h1>
                                 <div>
-                                    <button class="right cart-dropdown-content-container-header-clear">Checkout</button>
+                                    <button class="right cart-dropdown-content-container-header-clear nelson-button">Checkout</button>
                                 </div>
                             </div>
                             <div class="cart-dropdown-content-container-body">
@@ -202,106 +206,10 @@
                                             <h2>Selipar
                                             </h2>
                                             <div class="cart-add-remove">
-                                                <button>-</button>
-                                                <input type="text" value="1" class="cart-quantity">
-                                                <button>+</button>
-                                                <button id="cart-rem">Remove</button>
-                                            </div>
-                                            <p class="cart-item-text-price">RM 10.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cart-q">
-                                    <div class="cart-item">
-                                        <img class="cart-item-image" src="src/img/selipar.webp">
-                                        <div class="cart-item-text">
-                                            <h2>Selipar
-                                            </h2>
-                                            <div class="cart-add-remove">
-                                                <button>-</button>
-                                                <input type="text" value="1" class="cart-quantity">
-                                                <button>+</button>
-                                                <button id="cart-rem">Remove</button>
-                                            </div>
-                                            <p class="cart-item-text-price">RM 10.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cart-q">
-                                    <div class="cart-item">
-                                        <img class="cart-item-image" src="src/img/selipar.webp">
-                                        <div class="cart-item-text">
-                                            <h2>Selipar
-                                            </h2>
-                                            <div class="cart-add-remove">
-                                                <button>-</button>
-                                                <input type="text" value="1" class="cart-quantity">
-                                                <button>+</button>
-                                                <button id="cart-rem">Remove</button>
-                                            </div>
-                                            <p class="cart-item-text-price">RM 10.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cart-q">
-                                    <div class="cart-item">
-                                        <img class="cart-item-image" src="src/img/selipar.webp">
-                                        <div class="cart-item-text">
-                                            <h2>Selipar
-                                            </h2>
-                                            <div class="cart-add-remove">
-                                                <button>-</button>
-                                                <input type="text" value="1" class="cart-quantity">
-                                                <button>+</button>
-                                                <button id="cart-rem">Remove</button>
-                                            </div>
-                                            <p class="cart-item-text-price">RM 10.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cart-q">
-                                    <div class="cart-item">
-                                        <img class="cart-item-image" src="src/img/selipar.webp">
-                                        <div class="cart-item-text">
-                                            <h2>Selipar
-                                            </h2>
-                                            <div class="cart-add-remove">
-                                                <button>-</button>
-                                                <input type="text" value="1" class="cart-quantity">
-                                                <button>+</button>
-                                                <button id="cart-rem">Remove</button>
-                                            </div>
-                                            <p class="cart-item-text-price">RM 10.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cart-q">
-                                    <div class="cart-item">
-                                        <img class="cart-item-image" src="src/img/selipar.webp">
-                                        <div class="cart-item-text">
-                                            <h2>Selipar
-                                            </h2>
-                                            <div class="cart-add-remove">
-                                                <button>-</button>
-                                                <input type="text" value="1" class="cart-quantity">
-                                                <button>+</button>
-                                                <button id="cart-rem">Remove</button>
-                                            </div>
-                                            <p class="cart-item-text-price">RM 10.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cart-q">
-                                    <div class="cart-item">
-                                        <img class="cart-item-image" src="src/img/selipar.webp">
-                                        <div class="cart-item-text">
-                                            <h2>Selipar
-                                            </h2>
-                                            <div class="cart-add-remove">
-                                                <button>-</button>
-                                                <input type="text" value="1" class="cart-quantity">
-                                                <button>+</button>
-                                                <button id="cart-rem">Remove</button>
+                                                <button class="nelson-button">-</button>
+                                                <input type="number" value="1" class="cart-quantity">
+                                                <button class="nelson-button">+</button>
+                                                <button id="cart-rem" class="nelson-button">Remove</button>
                                             </div>
                                             <p class="cart-item-text-price">RM 10.00</p>
                                         </div>
@@ -322,10 +230,10 @@
                             </div>
                             <div class="noti-dropdown-content-container-header">
                                 <div class="noti-dropdown-content-container-buttons">
-                                    <button class="left" id="noti-order">Order</button>
-                                    <button class="left" id="noti-convo">Conversation</button>
-                                    <button class="right" id="noti-clear">Clear</button>
-                                    <button class="right" id="noti-showall">Show all</button>
+                                    <button class="left nelson-button" id="noti-order">Order</button>
+                                    <button class="left nelson-button" id="noti-convo">Conversation</button>
+                                    <button class="right nelson-button" id="noti-clear">Clear</button>
+                                    <button class="right nelson-button" id="noti-showall">Show all</button>
                                 </div>
                             </div>
                             <div>
@@ -349,9 +257,104 @@
                     </div>
                     <form class="search-container right">
                         <input type="text" placeholder="Search.." name="search" class="search-nelson" autocomplete="off" required>
-                        <button type="submit" class="right search-btn"></button>
+                        <button type="submit" class="right search-btn" ></button>
                     </form>
                 </div>
+            </div>
+        </div>
+        <div class="nelson-nav-extension" id="topup-extension">
+            <img src="src/img/white/nelson.png" alt="Nelson Logo" style="margin-top:20px;height: 50px;">
+            <br>
+            <div class="topup-container">
+                <header>
+                    <h1 id="topup-title">Top Up</h1>
+                </header>
+                <div class="balance" id="balance">Current Balance: RM 0</div>
+                <hr>
+                <form>
+                    <h2 id="topup-prompt-title">Top Up Amount</h2>
+                    <div class="amount-buttons">
+                        <button type="button" class="nelson-button" value="10">RM 10</button>
+                        <button type="button" class="nelson-button" value="20">RM 20</button>
+                        <button type="button" class="nelson-button" value="50">RM 50</button>
+                        <button type="button" class="nelson-button" value="100">RM 100</button>
+                        <button type="button" class="nelson-button" value="200">RM 200</button>
+                        <button type="button" class="nelson-button" value="500">RM 500</button>
+                        <button type="button" class="nelson-button" value="1000">RM 1000</button>
+                        <button type="button" class="nelson-button" value="2000">RM 2000</button>
+                    </div>
+                    <div class="selected-amount">
+                        Selected Amount: <span id="displayedAmount">RM 0</span>
+                    </div>
+                    <hr>
+                    <h2>Payment</h2>
+                    <!-- modify later -->
+                    <div id="cardSection" class="form-group">
+                        <label for="cardNumber"><p>Card Number:</p></label>
+                        <input type="text" id="cardNumber" name="cardNumber" class="nelson-input" placeholder="Card number" required>
+                        <label for="cvv"><p>CVV:</p></label>
+                        <input type="text" id="cvv" name="cvv" class="nelson-input" placeholder="CVV" required>
+                        <label for="expiryDate"><p>Expiry date:</p></label>
+                        <input type="text" id="expiryDate" name="expiryDate" class="nelson-input" placeholder="Expiry Date" required>
+                    </div>
+                    <button type="button" class="nelson-button" onclick="topup_toggle()">Cancel</button>
+                    <button type="submit" class="nelson-button">Top Up</button>
+                </form>
+                <hr>
+                <footer>
+                    &copy; 2024 Nelson Home Appliances. All rights reserved.
+                </footer>
+            </div>
+        </div>
+        <div class="nelson-nav-extension" id="register-extension">
+            <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="height: 50px; margin: 20px auto;">
+            <div class="register-container">
+                <h1 class="center">Registration</h1>
+                <form id="registrationForm" action="">
+                    <div class="input-field">
+                        <label for="name" class="label-with-margin">Name:</label><br>
+                        <input autocomplete="off" type="text" id="name" name="name" placeholder="Name" class="nelson-input" required><br>
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="username" class="label-with-margin">Username:</label><br>
+                        <input autocomplete="off" type="text" id="username" name="username" placeholder="Username" class="nelson-input" required><br>
+                        <p id="invalid-username" class="hidden" style="color:red;">Username already taken/illegal username.</p>
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="email" class="label-with-margin">Email:</label><br>
+                        <input autocomplete="off" type="email" id="email" name="email" placeholder="Email" class="nelson-input" required>
+                        <p id="invalid-email" class="hidden" style="color:red;">Invalid email format.</p>
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="password" class="label-with-margin">Password:</label><br>
+                        <input autocomplete="off" type="password" id="password" name="password" placeholder="Password" class="nelson-input" required>
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="cpassword" class="label-with-margin">Confirm password:</label><br>
+                        <input autocomplete="off" type="password" id="cpassword" name="cpassword" placeholder="Confirm password" class="nelson-input" required>
+                        <p id="invalid-password-confirm" class="hidden" style="color:red;">Password mismatch.</p>
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="birthdate" class="label-with-margin">Birthdate:</label><br>
+                        <input autocomplete="off" type="date" id="birthdate" name="birthdate" placeholder="Birthdate" class="nelson-input" required>
+                        <p id="invalid-birth" class="hidden" style="color:red;">Invalid birth date.</p>
+                    </div>
+                    
+                    <div class="input-field">
+                        <label><input autocomplete="off" type="checkbox" name="term" id="term"> I agree that the above information is correct</label>
+                        <p class="hidden" style="color:red;">Please agree to above information.</p>
+                    </div>
+                    
+                    <div class="buttons-field">
+                        <button class="nelson-button" onclick="register_toggle()" type="reset">Cancel</button>
+                        <input type="submit" class="nelson-button" value="Register">
+                    </div>
+                </form>
             </div>
         </div>
     </body>

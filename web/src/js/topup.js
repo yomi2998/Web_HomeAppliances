@@ -1,28 +1,34 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const amountButtons = document.querySelectorAll('.amount-buttons button');
-    const selectedAmountDisplay = document.getElementById('displayedAmount');
-    const bankAccountSection = document.getElementById('bankAccountSection');
-    const cardSection = document.getElementById('cardSection');
-    const paypalSection = document.getElementById('paypalSection');
+$(document).ready(function() {
+    const amountButtons = $('.amount-buttons button');
+    const selectedAmountDisplay = $('#displayedAmount');
+    const bankAccountSection = $('#bankAccountSection');
+    const cardSection = $('#cardSection');
+    const paypalSection = $('#paypalSection');
 
-    amountButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const amount = this.value;
-            selectedAmountDisplay.textContent = `RM ${amount}`;
-        });
-    });
-
-    const methodButtons = document.querySelectorAll('.method-button');
-    methodButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const selectedMethod = button.value;
-            toggleSections(selectedMethod);
-        });
+    amountButtons.on('click', function() {
+        const amount = $(this).val();
+        selectedAmountDisplay.text(`RM ${amount}`);
     });
 
     function toggleSections(selectedMethod) {
-        bankAccountSection.classList.toggle('hidden', selectedMethod !== 'bank');
-        cardSection.classList.toggle('hidden', selectedMethod !== 'card');
-        paypalSection.classList.toggle('hidden', selectedMethod !== 'paypal');
+        bankAccountSection.toggleClass('hidden', selectedMethod !== 'bank');
+        cardSection.toggleClass('hidden', selectedMethod !== 'card');
+        paypalSection.toggleClass('hidden', selectedMethod !== 'paypal');
     }
 });
+
+function topup_toggle() {
+    const topupExtension = $('#topup-extension');
+    if (topupExtension.css('display') === 'none') {
+        topupExtension.css('display', 'flex');
+        topupExtension.css('opacity', '0');
+        setTimeout(function() {
+            topupExtension.css('opacity', '1');
+        }, 1);
+    } else {
+        topupExtension.css('opacity', '0');
+        setTimeout(function() {
+            topupExtension.css('display', 'none');
+        }, 1000);
+    }
+}

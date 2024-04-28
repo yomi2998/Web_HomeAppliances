@@ -256,13 +256,13 @@
                 </div>
             </div>
         </div>                              
-        <div class="container">
+        <div class="topup-container">
             <header>
-                <h1>Top Up</h1>
+                <h1 id="topup-title">Top Up</h1>
             </header>
             <div class="balance" id="balance">Current Balance: RM 0</div>
             <form>
-                <h2>Top Up Amount</h2>
+                <h2 id="topup-prompt-title">Top Up Amount</h2>
                 <div class="amount-buttons">
                     <button type="button" value="10">RM 10</button>
                     <button type="button" value="20">RM 20</button>
