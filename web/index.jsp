@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="src/css/topup.css">
         <link rel="stylesheet" href="src/css/register.css">
         <link rel="stylesheet" href="src/css/category.css">
+        <link rel="stylesheet" href="src/css/feedback.css">
         <script type="text/javascript" src="src/js/jquery.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="src/js/init.js"></script>
@@ -130,7 +131,7 @@
                     </div>
                 </div>
                 <% if (userType.equals("customer")) { %>
-                <a href="#" class="left">Feedback</a>
+                <a href="#" class="left" onclick="extension_toggle('feedback-extension')">Feedback</a>
                 <% } %>
                 <div class="right profile-dropdown">
                     <a href="#" class="has-image"><img class="right icon" id="iprofile" src="src/img/white/user.svg"
@@ -344,42 +345,42 @@
                 <form id="registrationForm" action="">
                     <div class="input-field">
                         <label for="name" class="label-with-margin">Name:</label><br>
-                        <input autocomplete="off" type="text" id="name" name="name" placeholder="Name" class="nelson-input" required><br>
+                        <input autocomplete="off" type="text" name="name" placeholder="Name" class="nelson-input" required><br>
                         <p id="invalid-name" class="hidden" style="color:red;">Username already taken/illegal username.</p>
                     </div>
 
                     <div class="input-field">
                         <label for="username" class="label-with-margin">Username:</label><br>
-                        <input autocomplete="off" type="text" id="username" name="username" placeholder="Username" class="nelson-input" required><br>
+                        <input autocomplete="off" type="text" name="username" placeholder="Username" class="nelson-input" required><br>
                         <p id="invalid-username" class="hidden" style="color:red;">Username already taken/illegal username.</p>
                     </div>
 
                     <div class="input-field">
                         <label for="email" class="label-with-margin">Email:</label><br>
-                        <input autocomplete="off" type="email" id="email" name="email" placeholder="Email" class="nelson-input" required>
+                        <input autocomplete="off" type="email" name="email" placeholder="Email" class="nelson-input" required>
                         <p id="invalid-email" class="hidden" style="color:red;">Invalid email format.</p>
                     </div>
 
                     <div class="input-field">
                         <label for="password" class="label-with-margin">Password:</label><br>
-                        <input autocomplete="off" type="password" id="password" name="password" placeholder="Password" class="nelson-input" required>
+                        <input autocomplete="off" type="password" name="password" placeholder="Password" class="nelson-input" required>
                         <p id="invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
                     </div>
 
                     <div class="input-field">
                         <label for="cpassword" class="label-with-margin">Confirm password:</label><br>
-                        <input autocomplete="off" type="password" id="cpassword" name="cpassword" placeholder="Confirm password" class="nelson-input" required>
+                        <input autocomplete="off" type="password" name="cpassword" placeholder="Confirm password" class="nelson-input" required>
                         <p id="invalid-password-confirm" class="hidden" style="color:red;">Password mismatch.</p>
                     </div>
 
                     <div class="input-field">
                         <label for="birthdate" class="label-with-margin">Birthdate:</label><br>
-                        <input autocomplete="off" type="date" id="birthdate" name="birthdate" placeholder="Birthdate" class="nelson-input" required>
+                        <input autocomplete="off" type="date" name="birthdate" placeholder="Birthdate" class="nelson-input" required>
                         <p id="invalid-birth" class="hidden" style="color:red;">Invalid birth date.</p>
                     </div>
 
                     <div class="input-field">
-                        <label><input autocomplete="off" type="checkbox" name="term" id="term"> I agree that the above information is correct</label>
+                        <label><input autocomplete="off" type="checkbox" name="term"> I agree that the above information is correct</label>
                         <p id="invalid-term" class="hidden" style="color:red;">Please agree to above information.</p>
                     </div>
 
@@ -412,9 +413,25 @@
         </div>
         <div class="nelson-nav-extension" id="feedback-extension">
             <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="height: 50px; margin: 20px auto;">
-            <h1 class="center">Feedback</h1>
             <div class="feedback-container">
-                
+                <h1 class="center">Feedback Form</h1>
+                <hr>
+                <form id="feedbackForm">
+                    <div class="input-field">
+                        <p class="form-p">Title for issue:</p>
+                        <input autocomplete="off" type="text" name="issue_title" placeholder="Eg: Unable to view products" class="nelson-input center" required>
+                    </div>
+
+                    <div class="input-field">
+                        <p class="form-p">Issue description</p>
+                        <textarea autocomplete="off" name="issue_description" placeholder="Please describe the issue you are facing" class="big-nelson-input" rows="10" required></textarea>
+                    </div>
+                    <hr>
+                    <div class="buttons-field">
+                        <button class="nelson-button" onclick="extension_toggle('feedback-extension')" type="reset">Cancel</button>
+                        <input type="submit" class="nelson-button" value="Submit">
+                    </div>
+                </form>
             </div>
         </div>
     </body>

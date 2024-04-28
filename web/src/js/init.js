@@ -19,6 +19,22 @@ var toggles = {
   },
 };
 
+function extension_toggle(extension) {
+  const topupExtension = $(`#${extension}`);
+  if (topupExtension.css("display") === "none") {
+    topupExtension.css("display", "flex");
+    topupExtension.css("opacity", "0");
+    setTimeout(function () {
+      topupExtension.css("opacity", "1");
+    }, 1);
+  } else {
+    topupExtension.css("opacity", "0");
+    setTimeout(function () {
+      topupExtension.css("display", "none");
+    }, 1000);
+  }
+}
+
 function addCoverScreen() {
   let link = window.location.href;
   if (window.location.href[window.location.href.length - 1] === "#") {
@@ -72,7 +88,10 @@ $(document).ready(function () {
   });
 
   $("#iprofile").click(function () {
-    if ($(".profile-dropdown .profile-dropdown-content").css("display") === "block") {
+    if (
+      $(".profile-dropdown .profile-dropdown-content").css("display") ===
+      "block"
+    ) {
       $(".profile-dropdown .profile-dropdown-content").css("display", "none");
     } else {
       $(".profile-dropdown .profile-dropdown-content").css("display", "block");
@@ -101,7 +120,6 @@ $(document).ready(function () {
     var nav = $(".navigation-bar");
     var nav2 = $("#navigation-container");
     if ($(window).scrollTop() === 0) {
-
       nav.css("width", "95%");
       nav.css("border-radius", "50px");
       nav.css("top", "10px");
@@ -149,15 +167,24 @@ $(document).ready(function () {
   $("#log-out").click(function (e) {
     e.preventDefault();
     var cookies = document.cookie.split(";");
-    var session = cookies.find((cookie) => cookie.includes("session")).split('="')[1];
+    var session = cookies
+      .find((cookie) => cookie.includes("session"))
+      .split('="')[1];
     session = session.slice(0, -1);
-    var sessionIndex = cookies.findIndex((cookie) => cookie.includes(`session="${session}"`));
+    var sessionIndex = cookies.findIndex((cookie) =>
+      cookie.includes(`session="${session}"`)
+    );
     if (sessionIndex !== -1) {
       cookies.splice(sessionIndex, 1);
     }
     var id = cookies.find((cookie) => cookie.includes("id")).split("id=")[1];
-    cookies.splice(cookies.findIndex((cookie) => cookie.includes(`id=${id}`)), 1);
-    var type = cookies.find((cookie) => cookie.includes("type")).split("type=")[1];
+    cookies.splice(
+      cookies.findIndex((cookie) => cookie.includes(`id=${id}`)),
+      1
+    );
+    var type = cookies
+      .find((cookie) => cookie.includes("type"))
+      .split("type=")[1];
     $.ajax({
       url: "/Web_HomeAppliances/Logout",
       type: "POST",
@@ -171,23 +198,12 @@ $(document).ready(function () {
       },
     });
   });
-});
 
-function extension_toggle(extension) {
-  const topupExtension = $(`#${extension}`);
-  if (topupExtension.css('display') === 'none') {
-      topupExtension.css('display', 'flex');
-      topupExtension.css('opacity', '0');
-      setTimeout(function() {
-          topupExtension.css('opacity', '1');
-      }, 1);
-  } else {
-      topupExtension.css('opacity', '0');
-      setTimeout(function() {
-          topupExtension.css('display', 'none');
-      }, 1000);
-  }
-}
+  $(".nelson-nav-extension").click(function () {
+    const extension = $(this).attr("id");
+    extension_toggle(extension);
+  });
+});
 
 // $(window).bind("popstate", function () {
 //   document.body.style.animation = "fadeOut 0.25s";
