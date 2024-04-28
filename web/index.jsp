@@ -7,11 +7,13 @@
         <link rel="stylesheet" type="text/css" href="src/css/header.css">
         <link rel="stylesheet" href="src/css/topup.css">
         <link rel="stylesheet" href="src/css/register.css">
+        <link rel="stylesheet" href="src/css/category.css">
         <script type="text/javascript" src="src/js/jquery.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="src/js/init.js"></script>
         <script src="src/js/topup.js"></script>
         <script src="src/js/register.js"></script>
+        <script src="src/js/category.js"></script>
         <%@ page contentType="text/html; charset=UTF-8" %>
         <%@ page import="jakarta.servlet.http.Cookie" %>
         <%@ page import="domain.Customer" %>
@@ -61,7 +63,7 @@
                             }
                             if (categories.size() != categoryCount) {
                         %>
-                            <a href="/Web_HomeAppliances/explore.jsp">More...</a>
+                            <a href="#" onclick="show_more()">More...</a>
                         <%
                             }
                         %>
@@ -294,7 +296,7 @@
             <img src="src/img/white/nelson.png" alt="Nelson Logo" style="margin-top:20px;height: 50px;">
             <br>
             <div class="topup-container">
-                <header>
+                <header class="topup-header">
                     <h1 id="topup-title">Top Up</h1>
                 </header>
                 <div class="balance" id="balance">Current Balance: RM 0</div>
@@ -385,6 +387,26 @@
                         <input type="submit" class="nelson-button" onclick="remove_reg_error()" value="Register">
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class="nelson-nav-extension" id="category-extension">
+            <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="height: 50px; margin: 20px auto;">
+            <div class="category-more-container">
+                <div class="category-more-container-header">
+                    <h1>List of Categories</h1>
+                </div>
+                <hr>
+                <div class="category-more-container-body">
+                    <%
+                        for (Category category : categories) {
+                    %>
+                        <a href="/Web_HomeAppliances/search.jsp?category_id=<%= category.getId() %>"><button class="nelson-button"><%= category.getName() %></button></a>
+                    <%
+                        }
+                    %>
+                </div>
+                <hr>
+                <button class="nelson-button" onclick="show_more()">Back</button>
             </div>
         </div>
     </body>
