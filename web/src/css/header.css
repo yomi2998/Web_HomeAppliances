@@ -528,14 +528,15 @@ hr {
     position: fixed;
     height: 60px;
     width: 95%;
-    margin: 1% auto;
+    top: 10px;
     transition: all 0.25s;
 }
 
 .navigation-bar {
     justify-content: center;
     width: 95%;
-    margin: 0 auto;
+    top: 10px;
+    margin: auto;
     transition: all 0.25s;
 }
 

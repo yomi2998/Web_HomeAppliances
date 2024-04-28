@@ -104,19 +104,19 @@ $(document).ready(function () {
 
       nav.css("width", "95%");
       nav.css("border-radius", "50px");
-      nav.css("margin", "1% auto");
+      nav.css("top", "10px");
 
       nav2.css("width", "95%");
       nav2.css("border-radius", "50px");
-      nav2.css("margin", "0 auto");
+      nav2.css("top", "10px");
     } else {
       nav.css("width", "100%");
       nav.css("border-radius", "0");
-      nav.css("margin", "0");
+      nav.css("top", "0");
 
       nav2.css("width", "100%");
       nav2.css("border-radius", "0");
-      nav2.css("margin", "0");
+      nav2.css("top", "0");
     }
   });
   $("a[href='#']").click(function (event) {
