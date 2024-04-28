@@ -1,8 +1,7 @@
-package Java.da;
+package da;
 
-import domain.Customer;
+import domain.Address;
 import java.sql.*;
-import Java.TokenGenerator;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.Connection;
@@ -12,28 +11,24 @@ import java.sql.PreparedStatement;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author Phuah
  */
 public class AddressDA {
+
     private String host = "jdbc:derby://localhost:1527/HomeAppliances";
     private String user = "nbuser";
     private String password = "nbuser";
     private String tableName = "shipping_details";
     private Connection conn;
     private PreparedStatement stmt;
-    
-    public AddressDA(){
-    createConnection();
-}
 
-        public AddressDA(int iD, String address, String name, int contact) {
-        //TODO Auto-generated constructor stub
+    public AddressDA() {
+        createConnection();
     }
 
-        private void createConnection() {
+    private void createConnection() {
         try {
             conn = DriverManager.getConnection(host, user, password);
         } catch (SQLException ex) {
@@ -41,40 +36,84 @@ public class AddressDA {
         }
     }
 
-    private boolean assignAddress(int ID, String address , String name , int contact){
-    String queryStr = "INSERT INTO " + tableName + "(ID,address,recipient_name,contact_number) VALUES(?,?,?,?)";
-    try{
-        stmt = conn.prepareStatement(queryStr);
-        stmt.setInt(1, ID);
-        stmt.setString(2, address);
-        stmt.setString(3, name);
-        stmt.setInt(4, contact);
-        stmt.executeUpdate();
-        return true;
-    }catch(SQLException ex){
-        System.out.println(ex.getMessage());
-        return false;
-    }
-    }
-    
-
-    public List<Address> getAddresses() {
-        List<Address> addressList = new ArrayList<>();
-        String queryStr = "SELECT * FROM " + tableName;
+    public boolean deleteAddress(int id) {
+        String queryStr = "DELETE FROM " + tableName + " WHERE id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean updateAddress(Address address) {
+        String queryStr = "UPDATE " + tableName + " SET address = ?, address2 = ?, city = ?, state = ?, zip_code = ?, recipient_name = ?, contact_number = ? WHERE id = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1, address.getAddress());
+            stmt.setString(2, address.getAddress_2());
+            stmt.setString(3, address.getCity());
+            stmt.setString(4, address.getState());
+            stmt.setString(5, address.getZip_code());
+            stmt.setString(6, address.getRecipient_name());
+            stmt.setString(7, address.getContact_number());
+            stmt.setInt(8, address.getId());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean insertAddress(Address address) {
+        String queryStr = "INSERT INTO " + tableName + " (user_id, address, address_2, city, state, zip_code, recipient_name, contact_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, address.getUser_id());
+            stmt.setString(2, address.getAddress());
+            stmt.setString(3, address.getAddress_2());
+            stmt.setString(4, address.getCity());
+            stmt.setString(5, address.getState());
+            stmt.setString(6, address.getZip_code());
+            stmt.setString(7, address.getRecipient_name());
+            stmt.setString(8, address.getContact_number());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public List<Address> retrieveAddresses(int user_id) {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE user_id = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, user_id);
             ResultSet rs = stmt.executeQuery();
+            List<Address> addresses = new ArrayList<>();
+
             while (rs.next()) {
-                int ID = rs.getInt("ID");
-                String address = rs.getString("address");
-                String name = rs.getString("recipient_name");
-                int contact = rs.getInt("contact_number");
-                addressList.add(new Address(ID, address, name, contact));
+                addresses.add(new Address(rs.getInt("id"), rs.getInt("user_id"), rs.getString("address"), rs.getString("address_2"),
+                        rs.getString("city"), rs.getString("state"), rs.getString("zip_code"), rs.getString("recipient_name"),
+                        rs.getString("contact_number")));
             }
-            return addressList;
+            return addresses;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return null;
+        }
+    }
+
+    public void destroy() {
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

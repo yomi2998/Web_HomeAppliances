@@ -12,60 +12,115 @@ import java.io.Serializable;
  *
  * @author Phuah
  */
-public class Address implements Serializable{
-    private int  ID;
-    private int User_ID;
-    private String ADDRESS;
-    private String RECEIPIENT_NAME;
-    private String CONTACT_NUMBER;
+public class Address implements Serializable {
 
-    public Address(int ID, int User_ID, String ADDRESS, String RECEIPIENT_NAME, String CONTACT_NUMBER) {
-        this.ID = ID;
-        this.User_ID = User_ID;
-        this.ADDRESS = ADDRESS;
-        this.RECEIPIENT_NAME = RECEIPIENT_NAME;
-        this.CONTACT_NUMBER = CONTACT_NUMBER;
-        
+    private int id;
+    private int user_id;
+    private String address;
+    private String address_2;
+    private String city;
+    private String state;
+    private String zip_code;
+    private String recipient_name;
+    private String contact_number;
+
+    public Address() {
     }
 
-    public int getID() {
-        return ID;
+    ;
+
+    public Address(int user_id, String address, String address_2, String city, String state, String zip_code, String recipient_name, String contact_number) {
+        this.user_id = user_id;
+        this.address = address;
+        this.address_2 = address_2;
+        this.city = city;
+        this.state = state;
+        this.zip_code = zip_code;
+        this.recipient_name = recipient_name;
+        this.contact_number = contact_number;
     }
 
-    public int getUser_ID() {
-        return User_ID;
+    public int getId() {
+        return id;
     }
 
-    public String getADDRESS() {
-        return ADDRESS;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getRECEIPIENT_NAME() {
-        return RECEIPIENT_NAME;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public String getCONTACT_NUMBER() {
-        return CONTACT_NUMBER;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public String getAddress() {
+        return address;
     }
 
-    public void setUser_ID(int User_ID) {
-        this.User_ID = User_ID;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void setADDRESS(String ADDRESS) {
-        this.ADDRESS = ADDRESS;
+    public String getAddress_2() {
+        return address_2;
     }
 
-    public void setRECEIPIENT_NAME(String RECEIPIENT_NAME) {
-        this.RECEIPIENT_NAME = RECEIPIENT_NAME;
+    public void setAddress_2(String address_2) {
+        this.address_2 = address_2;
     }
 
-    public void setCONTACT_NUMBER(String CONTACT_NUMBER) {
-        this.CONTACT_NUMBER = CONTACT_NUMBER;
+    public String getCity() {
+        return city;
     }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip_code() {
+        return zip_code;
+    }
+
+    public void setZip_code(String zip_code) {
+        this.zip_code = zip_code;
+    }
+
+    public String getRecipient_name() {
+        return recipient_name;
+    }
+
+    public void setRecipient_name(String recipient_name) {
+        this.recipient_name = recipient_name;
+    }
+
+    public String getContact_number() {
+        return contact_number;
+    }
+
+    public void setContact_number(String contact_number) {
+        this.contact_number = contact_number;
+    }
+
+    public Address(int id, int user_id, String address, String address_2, String city, String state, String zip_code, String recipient_name, String contact_number) {
+        this.id = id;
+        this.user_id = user_id;
+        this.address = address;
+        this.address_2 = address_2;
+        this.city = city;
+        this.state = state;
+        this.zip_code = zip_code;
+        this.recipient_name = recipient_name;
+        this.contact_number = contact_number;
+    }
 }
