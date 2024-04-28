@@ -12,14 +12,14 @@ import java.io.Serializable;
  *
  * @author Phuah
  */
-public class Payment implements Serializable{
-    private String ID;
-    private String User_ID;
+public class Address implements Serializable{
+    private int  ID;
+    private int User_ID;
     private String ADDRESS;
     private String RECEIPIENT_NAME;
     private String CONTACT_NUMBER;
 
-    public Payment(String ID, String User_ID, String ADDRESS, String RECEIPIENT_NAME, String CONTACT_NUMBER) {
+    public Address(int ID, int User_ID, String ADDRESS, String RECEIPIENT_NAME, String CONTACT_NUMBER) {
         this.ID = ID;
         this.User_ID = User_ID;
         this.ADDRESS = ADDRESS;
@@ -28,11 +28,11 @@ public class Payment implements Serializable{
         
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
-    public String getUser_ID() {
+    public int getUser_ID() {
         return User_ID;
     }
 
@@ -48,11 +48,11 @@ public class Payment implements Serializable{
         return CONTACT_NUMBER;
     }
 
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
-    public void setUser_ID(String User_ID) {
+    public void setUser_ID(int User_ID) {
         this.User_ID = User_ID;
     }
 
