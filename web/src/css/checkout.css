@@ -2,9 +2,15 @@ html {
     background-color: black;
     color:white;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin:1% auto;
+    width: 95%;
 }
 
 .shipping{
     font:white;
     font-size: 20px;
+}
+
+.itemlist{
+    text-align: center;
 }

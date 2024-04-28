@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add Address</title>
+        <link rel="shortcut icon" href="src/img/favicon.png">
+        <link rel="stylesheet" href="src/css/addAddress.css">
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="input-field">Add New Address</div>
+            <form id="registrationForm" action="">
+                <div class="input-field">
+                    <input autocomplete="off" type="text" id="name" name="name" placeholder="Name" required>
+                </div>
+                <div class="input-field">
+                    <input autocomplete="off" type="text" id="phonenumber" name="phonenumber" placeholder="phonenumber" required>
+                </div>
+                <div class="input-field">
+                    <input autocomplete="off" type="text" id="Address" name="Address" placeholder="Address" required>
+                </div>
+                <div class="input-field">
+                    <input autocomplete="off" type="text" id="city" name="city" placeholder="city" required>
+                </div>
+                <div class="input-field">
+                    <input autocomplete="off" type="text" id="state" name="state" placeholder="state" required>
+                </div>
+                <div class="input-field">
+                    <input autocomplete="off" type="text" id="postcode" name="postcode" placeholder="Postcode" required>
+                </div>
+                <div class="input-field">
+                    <button onclick="cancel()">Cancel</button>
+                    <input type="submit" value="Add Address">
+                    <script>
+                        function cancel() {
+                          window.location.href = "checkout.jsp";
+                        }
+                      </script>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

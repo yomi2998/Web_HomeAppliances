@@ -1,4 +1,4 @@
-package Java.da;
+package da;
 
 import Java.domain.Customer;
 import java.sql.*;
