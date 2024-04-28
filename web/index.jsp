@@ -12,6 +12,7 @@
         <script type="text/javascript" src="src/js/init.js"></script>
         <script src="src/js/topup.js"></script>
         <script src="src/js/register.js"></script>
+        <%@ page contentType="text/html; charset=UTF-8" %>
         <%@ page import="jakarta.servlet.http.Cookie" %>
         <%@ page import="domain.Customer" %>
         <%@ page import="domain.Admin" %>
@@ -314,6 +315,7 @@
                     <div class="input-field">
                         <label for="name" class="label-with-margin">Name:</label><br>
                         <input autocomplete="off" type="text" id="name" name="name" placeholder="Name" class="nelson-input" required><br>
+                        <p id="invalid-name" class="hidden" style="color:red;">Username already taken/illegal username.</p>
                     </div>
                     
                     <div class="input-field">
@@ -331,6 +333,7 @@
                     <div class="input-field">
                         <label for="password" class="label-with-margin">Password:</label><br>
                         <input autocomplete="off" type="password" id="password" name="password" placeholder="Password" class="nelson-input" required>
+                        <p id="invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
                     </div>
                     
                     <div class="input-field">
@@ -347,12 +350,12 @@
                     
                     <div class="input-field">
                         <label><input autocomplete="off" type="checkbox" name="term" id="term"> I agree that the above information is correct</label>
-                        <p class="hidden" style="color:red;">Please agree to above information.</p>
+                        <p id="invalid-term" class="hidden" style="color:red;">Please agree to above information.</p>
                     </div>
                     
                     <div class="buttons-field">
-                        <button class="nelson-button" onclick="register_toggle()" type="reset">Cancel</button>
-                        <input type="submit" class="nelson-button" value="Register">
+                        <button class="nelson-button" onclick="register_toggle(); remove_reg_error()" type="reset">Cancel</button>
+                        <input type="submit" class="nelson-button" onclick="remove_reg_error()" value="Register">
                     </div>
                 </form>
             </div>

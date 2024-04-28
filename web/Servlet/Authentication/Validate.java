@@ -18,36 +18,45 @@ import control.CustomerControl;
  *
  * @author superme
  */
-@WebServlet(name = "Validate", urlPatterns = {"/Validate"})
+@WebServlet(name = "Validate", urlPatterns = { "/Validate" })
 public class Validate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            boolean result = false;
             String username = request.getParameter("username");
-            CustomerControl cc = new CustomerControl();
-            out.print("{\"success\": " + cc.validateUsername(username) + "}");
+            switch (request.getParameter("type")) {
+                case "customer":
+                    CustomerControl cc = new CustomerControl();
+                    result = cc.validateUsername(username);
+                    break;
+                default:
+                    break;
+            }
+            out.print("{\"success\":" + !result + "}");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -58,10 +67,10 @@ public class Validate extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
