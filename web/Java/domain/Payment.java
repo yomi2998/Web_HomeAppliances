@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Java.domain;
+package domain;
 
+import domain.*;
 import java.util.Objects;
 import java.io.Serializable;
 
@@ -11,14 +12,14 @@ import java.io.Serializable;
  *
  * @author Phuah
  */
-public class payment implements Serializable{
+public class Payment implements Serializable{
     private String ID;
     private String User_ID;
     private String ADDRESS;
     private String RECEIPIENT_NAME;
     private String CONTACT_NUMBER;
 
-    public payment(String ID, String User_ID, String ADDRESS, String RECEIPIENT_NAME, String CONTACT_NUMBER) {
+    public Payment(String ID, String User_ID, String ADDRESS, String RECEIPIENT_NAME, String CONTACT_NUMBER) {
         this.ID = ID;
         this.User_ID = User_ID;
         this.ADDRESS = ADDRESS;

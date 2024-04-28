@@ -10,7 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import Java.control.CustomerControl;
+import control.CustomerControl;
 import control.AdminControl;
 import jakarta.servlet.http.Cookie;
 

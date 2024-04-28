@@ -12,8 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Date;
-import Java.control.CustomerControl;
-import Java.domain.Customer;
+import control.CustomerControl;
+import domain.Customer;
 import jakarta.servlet.http.Cookie;
 import java.text.SimpleDateFormat;
 

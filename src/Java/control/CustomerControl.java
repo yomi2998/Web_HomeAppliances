@@ -1,7 +1,7 @@
 package Java.control;
 
-import Java.domain.Customer;
-import Java.da.CustomerDA;
+import domain.Customer;
+import da.CustomerDA;
 public class CustomerControl {
     private CustomerDA customerDA;
 

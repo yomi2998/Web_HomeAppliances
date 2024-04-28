@@ -1,7 +1,7 @@
-package Java.control;
+package control;
 
-import Java.domain.Customer;
-import Java.da.CustomerDA;
+import domain.Customer;
+import da.CustomerDA;
 import java.util.List;
 
 public class CustomerControl {

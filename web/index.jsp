@@ -9,10 +9,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="src/js/init.js"></script>
         <%@ page import="jakarta.servlet.http.Cookie" %>
-        <%@ page import="Java.domain.Customer" %>
+        <%@ page import="domain.Customer" %>
         <%@ page import="domain.Admin" %>
         <%@ page import="java.util.ArrayList" %>
-        <%@ page import="Java.control.CustomerControl" %>
+        <%@ page import="control.CustomerControl" %>
         <%@ page import="control.AdminControl" %>
     </head>
 

@@ -1,6 +1,6 @@
 package Java.da;
 
-import Java.domain.Customer;
+import domain.Customer;
 import java.sql.*;
 import Java.TokenGenerator;
 import java.util.List;
