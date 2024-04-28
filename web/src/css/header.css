@@ -115,10 +115,12 @@ html::-webkit-scrollbar-thumb {
 
 .dropdown-content {
     margin-top: 60px;
+    width: auto !important;
     display: none;
     position: absolute;
     background-color: #1f1f1f;
     min-width: 20px;
+    width: auto;
     border-radius: 20px;
     z-index: 1;
 }
@@ -415,8 +417,12 @@ hr {
 .dropdown-content a {
     color: rgb(255, 255, 255);
     padding: 12px 16px;
+    width: calc(100% - 40px);
     text-decoration: none;
     display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
 
 .dropdown-content a:hover {

@@ -49,9 +49,19 @@
                     <a href="#" class="left dropbtn">Category</a>
                     <div class="dropdown-content">
                         <%
+                            int categoryCount = 0;
                             for (Category category : categories) {
+                                categoryCount++;
+                                if (categoryCount > 5) {
+                                    break;
+                                }
                         %>
                             <a href="/Web_HomeAppliances/search.jsp?category_id=<%= category.getId() %>"><%= category.getName() %></a>
+                        <%
+                            }
+                            if (categories.size() != categoryCount) {
+                        %>
+                            <a href="/Web_HomeAppliances/explore.jsp">More...</a>
                         <%
                             }
                         %>

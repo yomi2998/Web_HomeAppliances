@@ -75,6 +75,9 @@ INSERT INTO category (name) VALUES ('Kitchen');
 INSERT INTO category (name) VALUES ('Laundry');
 INSERT INTO category (name) VALUES ('Cleaning');
 INSERT INTO category (name) VALUES ('Entertainment');
+INSERT INTO category (name) VALUES ('Health');
+INSERT INTO category (name) VALUES ('Smart Home');
+INSERT INTO category (name) VALUES ('Climate Control');
 
 CREATE TABLE product (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
