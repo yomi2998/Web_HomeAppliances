@@ -17,14 +17,29 @@
         <%@ page import="domain.Customer" %>
         <%@ page import="domain.Admin" %>
         <%@ page import="domain.Category" %>
-        <%@ page import="java.util.ArrayList" %>
+        <%@ page import="java.util.List" %>
         <%@ page import="control.CustomerControl" %>
         <%@ page import="control.AdminControl" %>
         <%@ page import="control.CategoryControl" %>
+
+        <%
+            //CONFIGURATION
+
+            final boolean ALLOW_ADMIN = true;
+            final boolean ALLOW_STAFF = true;
+            final boolean ALLOW_CUSTOMER = true;
+            final boolean ALLOW_GUEST = true;
+
+            //END OF CONFIGURATION
+        %>
     </head>
 
     <body>
-
+        <%
+            CategoryControl categoryControl = new CategoryControl();
+            List<Category> categories = categoryControl.retrieveCategory();
+            categoryControl.destroy();
+        %>
         <div class="navigation-bar">
             <div id="navigation-container">
                 <a href="/Web_HomeAppliances" class="has-image"><img class="left logo" id="inelson"
@@ -33,9 +48,13 @@
                 <div class="left dropdown">
                     <a href="#" class="left dropbtn">Category</a>
                     <div class="dropdown-content">
-                        <a href="#">Placeholder1</a>
-                        <a href="#">Placeholder2</a>
-                        <a href="#">Placeholder3</a>
+                        <%
+                            for (Category category : categories) {
+                        %>
+                            <a href="/Web_HomeAppliances/search.jsp?category_id=<%= category.getId() %>"><%= category.getName() %></a>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
                 <a href="#" class="left">Feedback</a>
@@ -43,10 +62,6 @@
                     <a href="#" class="has-image"><img class="right icon" id="iprofile" src="src/img/white/user.svg"
                                                        style="height:60%;" alt="Profile"></a>
                         <%
-                        final boolean ALLOW_ADMIN = true;
-                        final boolean ALLOW_STAFF = true;
-                        final boolean ALLOW_CUSTOMER = true;
-                        final boolean ALLOW_GUEST = true;
                         Customer customer = new Customer();
                         Admin admin = new Admin();
                         Cookie[] cookies = request.getCookies();

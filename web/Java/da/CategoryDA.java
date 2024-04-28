@@ -71,7 +71,7 @@ public class CategoryDA {
     }
 
     public List<Category> retrieveCategory() {
-        String queryStr = "SELECT * FROM " + tableName + "SORT BY name";
+        String queryStr = "SELECT * FROM " + tableName + " ORDER BY name";
         try {
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();
