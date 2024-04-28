@@ -198,11 +198,6 @@ $(document).ready(function () {
       },
     });
   });
-
-  $(".nelson-nav-extension").click(function () {
-    const extension = $(this).attr("id");
-    extension_toggle(extension);
-  });
 });
 
 // $(window).bind("popstate", function () {
