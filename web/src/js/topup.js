@@ -16,19 +16,3 @@ $(document).ready(function() {
         paypalSection.toggleClass('hidden', selectedMethod !== 'paypal');
     }
 });
-
-function topup_toggle() {
-    const topupExtension = $('#topup-extension');
-    if (topupExtension.css('display') === 'none') {
-        topupExtension.css('display', 'flex');
-        topupExtension.css('opacity', '0');
-        setTimeout(function() {
-            topupExtension.css('opacity', '1');
-        }, 1);
-    } else {
-        topupExtension.css('opacity', '0');
-        setTimeout(function() {
-            topupExtension.css('display', 'none');
-        }, 1000);
-    }
-}

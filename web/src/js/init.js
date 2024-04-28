@@ -173,6 +173,22 @@ $(document).ready(function () {
   });
 });
 
+function extension_toggle(extension) {
+  const topupExtension = $(`#${extension}`);
+  if (topupExtension.css('display') === 'none') {
+      topupExtension.css('display', 'flex');
+      topupExtension.css('opacity', '0');
+      setTimeout(function() {
+          topupExtension.css('opacity', '1');
+      }, 1);
+  } else {
+      topupExtension.css('opacity', '0');
+      setTimeout(function() {
+          topupExtension.css('display', 'none');
+      }, 1000);
+  }
+}
+
 // $(window).bind("popstate", function () {
 //   document.body.style.animation = "fadeOut 0.25s";
 //   document.body.style.opacity = 0;
