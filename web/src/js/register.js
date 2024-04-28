@@ -2,52 +2,27 @@ $(document).ready(function() {
     const form = $('#registrationForm');
     form.on('submit', function(event) {
         event.preventDefault();
+        var formData = form.serializeArray();
+        console.log(formData);
 
-        // Validate the form
-        if (form[0].checkValidity()) {
-            // Perform additional validation for username
-            const username = $('#username').val();
-            if (username.trim() === '') {
-                // Handle empty username
-                $('#invalid-username').text('Username is required.').removeClass('hidden');
-            } else {
-                // Perform AJAX request to check if username is available
-                $.ajax({
-                    url: '/Web_HomeAppliances/CheckUsername',
-                    type: 'POST',
-                    data: { username: username },
-                    success: function(data) {
-                        const response = JSON.parse(data);
-                        if (response.available) {
-                            // Username is available
-                            $('#invalid-username').addClass('hidden');
-                            // Continue with form submission
-                            $.ajax({
-                                url: '/Web_HomeAppliances/Register',
-                                type: 'POST',
-                                data: form.serialize(),
-                                success: function(data) {
-                                    console.log(data);
-                                    const out = JSON.parse(data);
-                                    if (out.success) {
-                                        alert('Registration successful!');
-                                        window.location.href = '/Web_HomeAppliances/';
-                                    } else {
-                                        alert('Registration failed. Please try again.');
-                                    }
-                                },
-                            });
-                        } else {
-                            // Username is already taken
-                            $('#invalid-username').text('Username is already taken.').removeClass('hidden');
+        formData.forEach(function(item) {
+            switch(item.name) {
+                case username:
+                    case 'username':
+                        var alphanumericRegex = /^[a-zA-Z0-9]+$/;
+                        if (!alphanumericRegex.test(item.value)) {
+                            $('#invalid-username').text("Username must alphanumeric.").removeClass('hidden');
+                            return;
+                        } else if (item.value.length < 3) {
+                            $('#invalid-username').text("Username must be 3 or more characters.").removeClass('hidden');
+                            return;
                         }
-                    },
-                });
+                        
+                        break;
+                    break;
             }
-        } else {
-            // Handle form validation errors
-            form[0].reportValidity();
-        }
+        });
+        return;
 
         $.ajax({
             url: '/Web_HomeAppliances/Register',
@@ -81,4 +56,12 @@ function register_toggle() {
             topupExtension.css('display', 'none');
         }, 1000);
     }
+}
+
+function remove_reg_error() {
+    $('#invalid-username').addClass('hidden');
+    $('#invalid-email').addClass('hidden');
+    $('#invalid-password').addClass('hidden');
+    $('#invalid-password-confirm').addClass('hidden');
+    $('#invalid-birth').addClass('hidden');
 }

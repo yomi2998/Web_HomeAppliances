@@ -214,6 +214,18 @@ public class CustomerDA {
         }
     }
 
+    public boolean validateUsername(String username) {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE username = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1, username);
+            return stmt.executeQuery().next();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
     public void destroy() {
         try {
             conn.close();

@@ -43,6 +43,10 @@ public class CustomerControl {
     public boolean deleteSession(int id, String session) {
         return customerDA.deleteSession(id, session);
     }
+    
+    public boolean validateUsername(String username) {
+        return customerDA.validateUsername(username);
+    }
 
     public void destroy() {
         customerDA.destroy();
