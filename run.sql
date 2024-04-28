@@ -45,7 +45,7 @@ CREATE TABLE admin_session (
     FOREIGN KEY (admin_id) REFERENCES admin(id) ON DELETE CASCADE
 );
 
-INSERT INTO admin (username, password) VALUES ('admin', '$nelson1234');
+INSERT INTO admin (username, password) VALUES ('admin', '123');
 
 CREATE TABLE staff (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
