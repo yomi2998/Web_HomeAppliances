@@ -443,26 +443,28 @@
             <div class="profile-container">
                 <h1 class="left">My Profile</h1>
                 <button class="nelson-button right" onclick="extension_toggle('profile-extension'); $('#profile-alter-pw-reset').click()">Back</button>
+                <div id="edit-panel">
                 <button class="nelson-button right" id="ext-profile-edit-pw" onclick="togglePasswordForm()">Edit password</button>
                 <button class="nelson-button right hidden" id="ext-profile-done" onclick="$('#profile-alter').click()">Done</button>
                 <button class="nelson-button right hidden" id="ext-profile-cancel" onclick="edit_profile()">Cancel</button>
                 <button class="nelson-button right hidden" id="ext-profile-pw-done" onclick="$('#profile-alter-pw').click()">Done</button>
                 <button class="nelson-button right hidden" id="ext-profile-pw-cancel" onclick="togglePasswordForm()">Cancel</button>
                 <button class="nelson-button right" id="ext-profile-edit" onclick="edit_profile()">Edit</button>
+            </div>
                 <hr>
                 <div class="profile-content">
                     <div class="ext-left-profile">
                         <img src="src/img/white/user.svg" alt="Profile" class="center profile-ext-img" style="height: 200px;">
                         <h2>Nelson Lam</h2>
                         <h3><%= userType.equals("") ? "Guest" : (userType.substring(0, 1).toUpperCase() + userType.substring(1)) %></h3>
-                        <p><a href="#" class="ext-profile-select ext-profile-selected">User information</a></p>
+                        <p><a href="#" class="ext-profile-select ext-profile-selected" id="profile-info">User information</a></p>
                         <% if (userType.equals("customer")) { %>
-                        <p><a href="#" class="ext-profile-select">Orders</a></p>
-                        <p><a href="#" class="ext-profile-select">Payment method</a></p>
-                        <p><a href="#" class="ext-profile-select">Shipping address</a></p>
+                        <p><a href="#" class="ext-profile-select" id="profile-orders">Orders</a></p>
+                        <p><a href="#" class="ext-profile-select" id="profile-payment">Payment method</a></p>
+                        <p><a href="#" class="ext-profile-select" id="profile-shipping">Shipping address</a></p>
                         <% } %>
                     </div>
-                    <div>
+                    <div id="ext-profile">
                         <form method="post" id="profileForm">
                             <div class="input-field">
                                 <p class="form-p">Name:</p>
@@ -513,6 +515,17 @@
                             <input type="reset" id="profile-alter-pw-reset" hidden>
                         </form>
                     </div>
+                    <% if (userType.equals("customer")) { %>
+                    <div id="ext-payment" style="display: none">
+                        <p>hello world</p>
+                    </div>
+                    <div id="ext-order" style="display: none">
+                        <p>hello world 3</p>
+                    </div>
+                    <div id="ext-shipping" style="display: none">
+                        <p>hello world 3</p>
+                    </div>
+                    <% } %>
                 </div>
             </div>
         </div>

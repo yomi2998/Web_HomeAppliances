@@ -24,13 +24,13 @@ function edit_profile() {
 }
 
 function togglePasswordForm() {
-    remove_profile_error();
-    $("#profilePasswordForm").toggle();
-    $("#profileForm").toggle();
-    $("#ext-profile-edit").toggle();
-    $("#ext-profile-edit-pw").toggle();
-    $("#ext-profile-pw-done").toggle();
-    $("#ext-profile-pw-cancel").toggle();
+  remove_profile_error();
+  $("#profilePasswordForm").toggle();
+  $("#profileForm").toggle();
+  $("#ext-profile-edit").toggle();
+  $("#ext-profile-edit-pw").toggle();
+  $("#ext-profile-pw-done").toggle();
+  $("#ext-profile-pw-cancel").toggle();
 }
 
 function remove_profile_error() {
@@ -45,6 +45,53 @@ function remove_profile_error() {
 }
 
 $(document).ready(function () {
+  $(".ext-profile-select").click(function () {
+    var id = $(this).attr("id");
+    var selectList = [
+      "profile-info",
+      "profile-orders",
+      "profile-payment",
+      "profile-shipping",
+    ];
+
+    selectList.forEach(function (item) {
+      if (item === id) {
+        $("#" + item).addClass("ext-profile-selected");
+      } else {
+        $("#" + item).removeClass("ext-profile-selected");
+      }
+    });
+    switch (id) {
+      case "profile-info":
+        $("#edit-panel").show();
+        $("#ext-profile").show();
+        $("#ext-order").hide();
+        $("#ext-payment").hide();
+        $("#ext-shipping").hide();
+        break;
+      case "profile-orders":
+        $("#edit-panel").hide();
+        $("#ext-profile").hide();
+        $("#ext-order").show();
+        $("#ext-payment").hide();
+        $("#ext-shipping").hide();
+        break;
+      case "profile-payment":
+        $("#edit-panel").hide();
+        $("#ext-profile").hide();
+        $("#ext-order").hide();
+        $("#ext-payment").show();
+        $("#ext-shipping").hide();
+        break;
+      case "profile-shipping":
+        $("#edit-panel").hide();
+        $("#ext-profile").hide();
+        $("#ext-order").hide();
+        $("#ext-payment").hide();
+        $("#ext-shipping").show();
+        break;
+    }
+  });
   const form = $("#profileForm");
   form.on("submit", function (event) {
     event.preventDefault();
@@ -166,20 +213,20 @@ $(document).ready(function () {
               .removeClass("hidden");
             hasErr = true;
           }
-            password = item.value;
+          password = item.value;
           break;
         case "cpassword":
-            if (item.value !== password) {
-                $("#invalid-password-confirm-ii")
-                .text("Passwords mismatch.")
-                .removeClass("hidden");
-                hasErr = true;
-            }
-            break;
+          if (item.value !== password) {
+            $("#invalid-password-confirm-ii")
+              .text("Passwords mismatch.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          break;
       }
     });
     if (hasErr) {
-        console.log("error")
+      console.log("error");
       return;
     }
 

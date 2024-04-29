@@ -9,14 +9,6 @@ CREATE TABLE customer (
     join_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE customer_pfp (
-    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
-    user_id INT NOT NULL,
-    image_url VARCHAR(512) NOT NULL,
-    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE CASCADE
-);
-
 CREATE TABLE customer_session (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     user_id INT NOT NULL,
@@ -64,14 +56,6 @@ CREATE TABLE staff (
     birth_date DATE NOT NULL,
     contact_number VARCHAR(20) NOT NULL,
     join_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE staff_pfp (
-    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
-    staff_id INT NOT NULL,
-    image_url VARCHAR(512) NOT NULL,
-    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (staff_id) REFERENCES staff(id) ON DELETE CASCADE
 );
 
 CREATE TABLE staff_session (
