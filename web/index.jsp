@@ -447,7 +447,7 @@
                     <div class="ext-left-profile">
                         <img src="src/img/white/user.svg" alt="Profile" class="center profile-ext-img" style="height: 200px;">
                         <h2>Nelson Lam</h2>
-                        <h3><%= userType.substring(0, 1).toUpperCase() + userType.substring(1) %></h3>
+                        <h3><%= userType.equals("") ? "Guest" : (userType.substring(0, 1).toUpperCase() + userType.substring(1)) %></h3>
                         <p><a href="#" class="ext-profile-select ext-profile-selected">User information</a></p>
                         <% if (userType.equals("customer")) { %>
                         <p><a href="#" class="ext-profile-select">Orders</a></p>
