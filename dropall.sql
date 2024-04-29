@@ -22,3 +22,4 @@ DROP TABLE topup;
 DROP TABLE feedback;
 DROP TABLE feedback_message;
 DROP TABLE feedback_message_image;
+DROP TABLE read_message;
