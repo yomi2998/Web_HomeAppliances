@@ -1,9 +1,11 @@
 DROP TABLE customer;
+DROP TABLE customer_pfp;
 DROP TABLE customer_session;
 DROP TABLE shipping_details;
 DROP TABLE admin;
 DROP TABLE admin_session;
 DROP TABLE staff;
+DROP TABLE staff_pfp;
 DROP TABLE staff_session;
 DROP TABLE category;
 DROP TABLE product;
@@ -19,3 +21,4 @@ DROP TABLE order_status;
 DROP TABLE topup;
 DROP TABLE feedback;
 DROP TABLE feedback_message;
+DROP TABLE feedback_message_image;

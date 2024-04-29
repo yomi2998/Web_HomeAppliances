@@ -9,6 +9,14 @@ CREATE TABLE customer (
     join_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE customer_pfp (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
+    user_id INT NOT NULL,
+    image_url VARCHAR(512) NOT NULL,
+    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE CASCADE
+);
+
 CREATE TABLE customer_session (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     user_id INT NOT NULL,
@@ -56,6 +64,14 @@ CREATE TABLE staff (
     birth_date DATE NOT NULL,
     contact_number VARCHAR(20) NOT NULL,
     join_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE staff_pfp (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
+    staff_id INT NOT NULL,
+    image_url VARCHAR(512) NOT NULL,
+    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (staff_id) REFERENCES staff(id) ON DELETE CASCADE
 );
 
 CREATE TABLE staff_session (
@@ -154,12 +170,18 @@ CREATE TABLE discount (
 CREATE TABLE cust_order (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     user_id INT,
-    shipping_details_id INT,
     total_price DECIMAL(10, 2) NOT NULL,
+    total_discount DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+    total_final_price DECIMAL(10, 2) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    address_2 VARCHAR(255) DEFAULT NULL,
+    city VARCHAR(255) NOT NULL,
+    state VARCHAR(255) NOT NULL,
+    zip_code VARCHAR(50) NOT NULL,
+    recipient_name VARCHAR(100) NOT NULL,
+    contact_number VARCHAR(20) NOT NULL,
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    delete_shipping_on_complete BOOLEAN NOT NULL DEFAULT FALSE,
-    FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE NO ACTION,
-    FOREIGN KEY (shipping_details_id) REFERENCES shipping_details(id) ON DELETE NO ACTION
+    FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE NO ACTION
 );
 
 CREATE TABLE order_product ( -- this is where u can get amount of discount applied/total product price
@@ -188,24 +210,32 @@ CREATE TABLE topup (
     amount DECIMAL(10, 2) NOT NULL,
     is_refund BOOLEAN NOT NULL DEFAULT FALSE,
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    card_id INT NOT NULL DEFAULT 0, -- 0 = Not saved
     FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE CASCADE
 );
 
 CREATE TABLE feedback (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     user_id INT NOT NULL,
+    title LONG VARCHAR NOT NULL,
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    is_closed BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE CASCADE
 );
 
 CREATE TABLE feedback_message (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
+    sender_id INT NOT NULL,
+    role VARCHAR(20) NOT NULL,
     feedback_id INT NOT NULL,
     message LONG VARCHAR NOT NULL,
-    is_staff BOOLEAN NOT NULL DEFAULT FALSE,
-    staff_id INT DEFAULT 0, -- 0 = Admin
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (feedback_id) REFERENCES feedback(id) ON DELETE CASCADE,
-    FOREIGN KEY (staff_id) REFERENCES staff(id) ON DELETE SET NULL
+    FOREIGN KEY (feedback_id) REFERENCES feedback(id) ON DELETE CASCADE
+);
+
+CREATE TABLE feedback_message_image (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
+    feedback_message_id INT NOT NULL,
+    image_url VARCHAR(512) NOT NULL,
+    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (feedback_message_id) REFERENCES feedback_message(id) ON DELETE CASCADE
 );
