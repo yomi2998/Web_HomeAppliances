@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="src/css/category.css">
         <link rel="stylesheet" href="src/css/feedback.css">
         <link rel="stylesheet" href="src/css/util.css">
+        <link rel="stylesheet" href="src/css/profile.css">
         <script type="text/javascript" src="src/js/jquery.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="src/js/init.js"></script>
@@ -187,7 +188,7 @@
                             <div class="profile-dropdown-content-container-body">
                                 <% if (!userType.equals("admin") && !userType.equals("staff")) { %>
                                 <div class="profile-dropdown-content-container-body-anchor">
-                                    <a href="/Web_HomeAppliances/Profile">My profile</a>
+                                    <a href="#" onclick="extension_toggle('profile-extension')">My profile</a>
                                 </div>
                                 <hr>
                                 <% if (userType.equals("customer")) {%>
@@ -289,10 +290,10 @@
                     </div>
                 </div>
                 <% } %>
-                    <form class="search-container right" method="get" action="search.jsp">
-                        <input type="text" placeholder="Search.." name="search" class="search-nelson" autocomplete="off" required>
-                        <button type="submit" class="right search-btn" ></button>
-                    </form>
+                <form class="search-container right" method="get" action="search.jsp">
+                    <input type="text" placeholder="Search.." name="search" class="search-nelson" autocomplete="off" required>
+                    <button type="submit" class="right search-btn" ></button>
+                </form>
             </div>
         </div>
         <div class="nelson-nav-extension" id="topup-extension">
@@ -385,7 +386,7 @@
                         <label><input autocomplete="off" type="checkbox" name="term" id="term"> I agree that the above information is correct</label>
                         <p id="invalid-term" class="hidden" style="color:red;">Please agree to above information.</p>
                     </div>
-                    
+
                     <div class="buttons-field">
                         <button class="nelson-button" onclick="extension_toggle('register-extension'); remove_reg_error()" type="reset">Cancel</button>
                         <input type="submit" class="nelson-button" onclick="remove_reg_error()" value="Register">
@@ -434,6 +435,74 @@
                         <input type="submit" class="nelson-button" value="Submit">
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class="nelson-nav-extension" id="profile-extension">
+            <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="height: 50px; margin: 20px auto;">
+            <div class="profile-container">
+                <h1 class="left">My Profile</h1>
+                <button class="nelson-button right" onclick="extension_toggle('profile-extension')">Back</button>
+                <hr>
+                <div class="profile-content">
+                    <div class="ext-left-profile">
+                        <img src="src/img/white/user.svg" alt="Profile" class="center profile-ext-img" style="height: 200px;">
+                        <h2>Nelson Lam</h2>
+                        <h3><%= userType.substring(0, 1).toUpperCase() + userType.substring(1) %></h3>
+                        <p><a href="#" class="ext-profile-select ext-profile-selected">User information</a></p>
+                        <% if (userType.equals("customer")) { %>
+                        <p><a href="#" class="ext-profile-select">Orders</a></p>
+                        <p><a href="#" class="ext-profile-select">Payment method</a></p>
+                        <p><a href="#" class="ext-profile-select">Shipping address</a></p>
+                        <% } %>
+                    </div>
+                    <div>
+                        <form method="post">
+                            <div class="input-field">
+                                <p class="form-p">Name:</p>
+                                <input autocomplete="off" type="text" name="name" placeholder="<%= customer.getName() %>" class="nelson-input" required disabled><br>
+                                <p id="invalid-name" class="hidden" style="color:red;">Username already taken/illegal username.</p>
+                            </div>
+                            <div class="input-field">
+                                <p class="form-p">Username:</p>
+                                <input autocomplete="off" type="text" name="username" placeholder="<%= customer.getUsername() %>" class="nelson-input" required disabled><br>
+                                <p id="invalid-username" class="hidden" style="color:red;">Username already taken/illegal username.</p>
+                            </div>
+                            <div class="input-field">
+                                <p class="form-p">Email:</p>
+                                <input autocomplete="off" type="email" name="email" placeholder="<%= customer.getEmail() %>" class="nelson-input" required disabled>
+                                <p id="invalid-email" class="hidden" style="color:red;">Invalid email format.</p>
+                            </div>
+                            <div class="password-edit" style="display: none;">
+                                <div class="input-field ">
+                                    <p class="form-p">Old password:</p>
+                                    <input autocomplete="off" type="password" name="opassword" placeholder="Enter old password" class="nelson-input" required disabled>
+                                    <p id="invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Password:</p>
+                                    <input autocomplete="off" type="password" name="password" placeholder="Enter new password" class="nelson-input" required disabled>
+                                    <p id="invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Confirm password:</p>
+                                    <input autocomplete="off" type="password" name="cpassword" placeholder="Re-enter new password" class="nelson-input" required disabled>
+                                    <p id="invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
+                                </div>
+                            </div>
+                            <div class="input-field">
+                                <p class="form-p">Password:</p>
+                                <input autocomplete="off" type="password" name="null" placeholder="********" class="nelson-input" disabled>
+                                <p id="invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
+                            </div>
+                            <div class="input-field">
+                                <p class="form-p">Birthdate:</p>
+                                <input autocomplete="off" type="date" name="birthdate" value="<%= customer.getBirthDate() %>" class="nelson-input" required disabled>
+                                <p id="invalid-birth" class="hidden" style="color:red;">Invalid birth date.</p>
+                            </div>
+                            <hr>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="snackbar">
