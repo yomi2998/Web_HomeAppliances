@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="src/css/register.css">
         <link rel="stylesheet" href="src/css/category.css">
         <link rel="stylesheet" href="src/css/feedback.css">
+        <link rel="stylesheet" href="src/css/util.css">
         <script type="text/javascript" src="src/js/jquery.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="src/js/init.js"></script>
@@ -288,7 +289,7 @@
                     </div>
                 </div>
                 <% } %>
-                    <form class="search-container right">
+                    <form class="search-container right" method="get" action="search.jsp">
                         <input type="text" placeholder="Search.." name="search" class="search-nelson" autocomplete="off" required>
                         <button type="submit" class="right search-btn" ></button>
                     </form>
@@ -342,6 +343,7 @@
             <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="height: 50px; margin: 20px auto;">
             <div class="register-container">
                 <h1 class="center">Registration</h1>
+                <hr>
                 <form id="registrationForm" action="">
                     <div class="input-field">
                         <label for="name" class="label-with-margin">Name:</label><br>
@@ -378,12 +380,12 @@
                         <input autocomplete="off" type="date" name="birthdate" placeholder="Birthdate" class="nelson-input" required>
                         <p id="invalid-birth" class="hidden" style="color:red;">Invalid birth date.</p>
                     </div>
-
+                    <hr>
                     <div class="input-field">
-                        <label><input autocomplete="off" type="checkbox" name="term"> I agree that the above information is correct</label>
+                        <label><input autocomplete="off" type="checkbox" name="term" id="term"> I agree that the above information is correct</label>
                         <p id="invalid-term" class="hidden" style="color:red;">Please agree to above information.</p>
                     </div>
-
+                    
                     <div class="buttons-field">
                         <button class="nelson-button" onclick="extension_toggle('register-extension'); remove_reg_error()" type="reset">Cancel</button>
                         <input type="submit" class="nelson-button" onclick="remove_reg_error()" value="Register">
@@ -433,6 +435,10 @@
                     </div>
                 </form>
             </div>
+        </div>
+        <div id="snackbar">
+            <img id="snackbar-img" src="src/img/white/message-square.svg" style="height: 50px;">
+            <div id="snackbar-info"><h2 id="snackbar-title"></h2><p id="snackbar-message">Some text some message..</p></div>
         </div>
     </body>
 

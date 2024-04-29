@@ -134,10 +134,20 @@ $(document).ready(function () {
         console.log(data);
         const out = JSON.parse(data);
         if (out.success) {
-          alert("Registration successful! Reloading page to take effect.");
-          window.location.reload();
+          showSnackbar(
+            "src/img/white/check-circle.svg",
+            "Registration Successful",
+            "You will be redirected to the home page in 5 seconds."
+          );
+          setTimeout(function () {
+            window.location.href = "/Web_HomeAppliances";
+          }, 5000);
         } else {
-          alert("Registration failed. Please try again.");
+          showSnackbar(
+            "src/img/white/alert-circle.svg",
+            "Registration Failed",
+            "Please try again later."
+          );
         }
       },
     });

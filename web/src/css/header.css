@@ -292,7 +292,7 @@ html::-webkit-scrollbar-thumb {
     background: #000000;
     position: absolute;
     margin: 0 auto;
-    z-index: 1000;
+    z-index: 888;
     min-width: 100%;
     min-height: 100%;
     display: none;
