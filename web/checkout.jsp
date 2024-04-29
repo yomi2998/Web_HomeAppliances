@@ -15,9 +15,17 @@
             <a href="/Web_HomeAppliances/addAddress.html"><button>Add Address</button></a>
             <br>
             
-    <hr>    
+    <hr>
+    <h3>Select a payment method:</h3>
+    <select name="pay">
+        <option value="" >Cash</option>
+        <option value="">Visa</option>
+        <option value="">Nelson Pay</option>
+        <option value="">Online Banking</option>
+    </select>
+    <hr>   
     <div class="itemlist">
-        <u><h2>Your Order</h2></u>
+        <u><h3>Your Order</h3></u>
         <table>
             <tr>
                 <th>Product</th>
@@ -43,8 +51,8 @@
         </tr>
     </table>
     <hr>
-    <button>Cancel</button>
-    <button>Pay</button>
+    <button onclick="history.back()">Cancel</button>
+    <a href="/Web_HomeAppliances/pay.html"><button>Checkout</button></a>
 </body>
 
 </html>
