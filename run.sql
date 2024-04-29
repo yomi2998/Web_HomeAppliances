@@ -121,11 +121,13 @@ CREATE TABLE card ( -- for user
     user_id INT NOT NULL,
     name VARCHAR(100) NOT NULL,
     card_number VARCHAR(20) NOT NULL,
-    expiry_date TIMESTAMP NOT NULL,
+    expiry_date VARCHAR(10) NOT NULL,
     cvv VARCHAR(3) NOT NULL,
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE CASCADE
 );
+
+INSERT INTO card (user_id, name, card_number, expiry_date, cvv) VALUES (1, 'John Doe', '1234567890123456', '03/27', '123');
 
 CREATE TABLE cart (
     user_id INT NOT NULL,

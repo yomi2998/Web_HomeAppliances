@@ -56,3 +56,42 @@
 .ext-profile-selected {
     color: rgb(158, 158, 158);
 }
+
+.payment-method-list {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background-color: #161616;
+    border: 1px solid #333333;
+    border-radius: 20px;
+}
+
+.payment-method {
+    display: flex;
+    text-align: left;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.card-info {
+    text-align: left !important;
+}
+
+.card-logo, .pay-extend-img {
+    margin-top: auto;
+    margin-bottom: auto;
+    transition: all 0.3s;
+}
+
+.pay-extend-img {
+    padding: 10px;
+}
+
+.pay-extend-img:hover {
+    cursor: pointer;
+    background-color: #222222;
+    border-radius: 20px;
+}

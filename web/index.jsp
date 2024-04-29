@@ -22,10 +22,12 @@
         <%@ page import="domain.Customer" %>
         <%@ page import="domain.Admin" %>
         <%@ page import="domain.Category" %>
+        <%@ page import="domain.Card" %>
         <%@ page import="java.util.List" %>
         <%@ page import="control.CustomerControl" %>
         <%@ page import="control.AdminControl" %>
         <%@ page import="control.CategoryControl" %>
+        <%@ page import="control.CardControl" %>
 
         <%
             //CONFIGURATION
@@ -517,7 +519,36 @@
                     </div>
                     <% if (userType.equals("customer")) { %>
                     <div id="ext-payment" style="display: none">
-                        <p>hello world</p>
+                        <h2>List of payment methods:</h2>
+                        <div class="payment-method-list">
+                            <div class="payment-method">
+                                <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
+                                <p class="card-info">CardHolder 1234-XXXX-XXXX-XXXX</p>
+                                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
+                            </div>
+                            <hr style="margin:0">
+                            <div class="payment-method">
+                                <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
+                                <p class="card-info">CardHolder 1234-XXXX-XXXX-XXXX</p>
+                                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
+                            </div>
+                            <hr style="margin:0">
+                            <div class="payment-method">
+                                <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
+                                <p class="card-info">CardHolder 1234-XXXX-XXXX-XXXX</p>
+                                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
+                            </div>
+                            <hr style="margin:0">
+                            <div class="payment-method">
+                                <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
+                                <p class="card-info">CardHolder 1234-XXXX-XXXX-XXXX</p>
+                                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
+                            </div>
+                            <hr style="margin:0">
+                            <div class="payment-method">
+                                <p>Add more</p>
+                            </div>
+                        </div>
                     </div>
                     <div id="ext-order" style="display: none">
                         <p>hello world 3</p>
