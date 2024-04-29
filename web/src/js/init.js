@@ -207,14 +207,16 @@ $(document).ready(function () {
 function showSnackbar(img, title, message) {
   var x = $("#snackbar");
   x.addClass("show");
-  var trimmedMessage = message.length > 60 ? message.substring(0, 40) + "..." : message;
+  var trimmedMessage =
+    message.length > 60 ? message.substring(0, 40) + "..." : message;
   $("#snackbar-message").text(trimmedMessage);
   $("#snackbar-img").attr("src", img);
   var trimmedTitle = title.length > 30 ? title.substring(0, 20) + "..." : title;
   $("#snackbar-title").text(trimmedTitle);
-  setTimeout(function(){ x.removeClass("show"); }, 5000);
+  setTimeout(function () {
+    x.removeClass("show");
+  }, 5000);
 }
-
 // $(window).bind("popstate", function () {
 //   document.body.style.animation = "fadeOut 0.25s";
 //   document.body.style.opacity = 0;

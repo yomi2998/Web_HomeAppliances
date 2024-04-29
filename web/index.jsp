@@ -16,6 +16,7 @@
         <script type="text/javascript" src="src/js/init.js"></script>
         <script src="src/js/topup.js"></script>
         <script src="src/js/register.js"></script>
+        <script src="src/js/profile.js"></script>
         <%@ page contentType="text/html; charset=UTF-8" %>
         <%@ page import="jakarta.servlet.http.Cookie" %>
         <%@ page import="domain.Customer" %>
@@ -441,7 +442,13 @@
             <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="height: 50px; margin: 20px auto;">
             <div class="profile-container">
                 <h1 class="left">My Profile</h1>
-                <button class="nelson-button right" onclick="extension_toggle('profile-extension')">Back</button>
+                <button class="nelson-button right" onclick="extension_toggle('profile-extension'); $('#profile-alter-pw-reset').click()">Back</button>
+                <button class="nelson-button right" id="ext-profile-edit-pw" onclick="togglePasswordForm()">Edit password</button>
+                <button class="nelson-button right hidden" id="ext-profile-done" onclick="$('#profile-alter').click()">Done</button>
+                <button class="nelson-button right hidden" id="ext-profile-cancel" onclick="edit_profile()">Cancel</button>
+                <button class="nelson-button right hidden" id="ext-profile-pw-done" onclick="$('#profile-alter-pw').click()">Done</button>
+                <button class="nelson-button right hidden" id="ext-profile-pw-cancel" onclick="togglePasswordForm()">Cancel</button>
+                <button class="nelson-button right" id="ext-profile-edit" onclick="edit_profile()">Edit</button>
                 <hr>
                 <div class="profile-content">
                     <div class="ext-left-profile">
@@ -456,50 +463,54 @@
                         <% } %>
                     </div>
                     <div>
-                        <form method="post">
+                        <form method="post" id="profileForm">
                             <div class="input-field">
                                 <p class="form-p">Name:</p>
-                                <input autocomplete="off" type="text" name="name" placeholder="<%= customer.getName() %>" class="nelson-input" required disabled><br>
-                                <p id="invalid-name" class="hidden" style="color:red;">Username already taken/illegal username.</p>
+                                <input autocomplete="off" type="text" name="name" placeholder="<%= customer.getName() %>" value="<%= customer.getName() %>" class="nelson-input toggle-input" required disabled><br>
+                                <p id="profile-invalid-name" class="hidden" style="color:red;">Username already taken/illegal username.</p>
                             </div>
                             <div class="input-field">
                                 <p class="form-p">Username:</p>
-                                <input autocomplete="off" type="text" name="username" placeholder="<%= customer.getUsername() %>" class="nelson-input" required disabled><br>
-                                <p id="invalid-username" class="hidden" style="color:red;">Username already taken/illegal username.</p>
+                                <input autocomplete="off" id="profile-username" type="text" name="username" placeholder="<%= customer.getUsername() %>" value="<%= customer.getUsername() %>" class="nelson-input toggle-input" required disabled><br>
                             </div>
                             <div class="input-field">
                                 <p class="form-p">Email:</p>
-                                <input autocomplete="off" type="email" name="email" placeholder="<%= customer.getEmail() %>" class="nelson-input" required disabled>
-                                <p id="invalid-email" class="hidden" style="color:red;">Invalid email format.</p>
-                            </div>
-                            <div class="password-edit" style="display: none;">
-                                <div class="input-field ">
-                                    <p class="form-p">Old password:</p>
-                                    <input autocomplete="off" type="password" name="opassword" placeholder="Enter old password" class="nelson-input" required disabled>
-                                    <p id="invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
-                                </div>
-                                <div class="input-field">
-                                    <p class="form-p">Password:</p>
-                                    <input autocomplete="off" type="password" name="password" placeholder="Enter new password" class="nelson-input" required disabled>
-                                    <p id="invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
-                                </div>
-                                <div class="input-field">
-                                    <p class="form-p">Confirm password:</p>
-                                    <input autocomplete="off" type="password" name="cpassword" placeholder="Re-enter new password" class="nelson-input" required disabled>
-                                    <p id="invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
-                                </div>
-                            </div>
-                            <div class="input-field">
-                                <p class="form-p">Password:</p>
-                                <input autocomplete="off" type="password" name="null" placeholder="********" class="nelson-input" disabled>
-                                <p id="invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
+                                <input autocomplete="off" type="email" name="email" placeholder="<%= customer.getEmail() %>" value="<%= customer.getEmail() %>" class="nelson-input toggle-input" required disabled>
+                                <p id="profile-invalid-email" class="hidden" style="color:red;">Invalid email format.</p>
                             </div>
                             <div class="input-field">
                                 <p class="form-p">Birthdate:</p>
-                                <input autocomplete="off" type="date" name="birthdate" value="<%= customer.getBirthDate() %>" class="nelson-input" required disabled>
-                                <p id="invalid-birth" class="hidden" style="color:red;">Invalid birth date.</p>
+                                <input autocomplete="off" type="date" name="birthdate" value="<%= customer.getBirthDate() %>" value="<%= customer.getBirthDate() %>" class="nelson-input toggle-input" required disabled>
+                                <p id="profile-invalid-birth" class="hidden" style="color:red;">Invalid birth date.</p>
+                            </div>
+                            <div class="input-field profile-edit-show hidden">
+                                <p class="form-p">Confirm password:</p>
+                                <input autocomplete="off" type="password" name="password" placeholder="Verify if it is really you" class="nelson-input toggle-input" required disabled>
+                                <p id="profile-invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
                             </div>
                             <hr>
+                            <input type="submit" id="profile-alter" hidden>
+                        </form>
+                        <form method="post" id="profilePasswordForm" hidden>
+                            <div class="profile-edit-show">
+                                <div class="input-field">
+                                    <p class="form-p">Old password:</p>
+                                    <input autocomplete="off" type="password" name="opassword" placeholder="Enter old password" class="nelson-input toggle-input-pw" required>
+                                    <p id="invalid-password-old" class="hidden" style="color:red;">Password mismatch.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">New password:</p>
+                                    <input autocomplete="off" type="password" name="password" placeholder="Enter new password" class="nelson-input toggle-input-pw" required>
+                                    <p id="invalid-password-new" class="hidden" style="color:red;">Password mismatch.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Confirm password:</p>
+                                    <input autocomplete="off" type="password" name="cpassword" placeholder="Re-enter new password" class="nelson-input toggle-input-pw" required>
+                                    <p id="invalid-password-confirm-ii" class="hidden" style="color:red;">Password mismatch.</p>
+                                </div>
+                            </div>
+                            <input type="submit" id="profile-alter-pw" hidden>
+                            <input type="reset" id="profile-alter-pw-reset" hidden>
                         </form>
                     </div>
                 </div>

@@ -34,7 +34,7 @@ $(document).ready(function () {
                 hasErr = true;
             }
             
-            var numericRegex = /^[0-9 ]+$/;
+            var numericRegex = /[0-9]/;
             var symbolRegex = /[!@#$%^&*(),.?":{}|<>]/;
             if (numericRegex.test(item.value)) {
                 $("#invalid-name")

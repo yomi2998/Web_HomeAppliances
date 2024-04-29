@@ -289,7 +289,8 @@ html::-webkit-scrollbar-thumb {
 }
 
 .nelson-nav-extension {
-    background: #000000;
+    background: #0000007e;
+    backdrop-filter: blur(10px) !important;
     position: absolute;
     margin: 0 auto;
     z-index: 888;
