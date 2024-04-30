@@ -87,6 +87,7 @@ $(document).ready(function () {
           balanceValue = parseFloat(balanceValue);
           balanceValue += parseFloat(sendData.amount);
           balance.text(`Balance: RM ${balanceValue.toFixed(2)}`);
+          $("#topup-current-balance").text(`Current Balance: RM ${balanceValue.toFixed(2)}`);
           extension_toggle("topup-extension");
         } else {
           showSnackbar(

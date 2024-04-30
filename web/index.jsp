@@ -308,7 +308,7 @@
                 <header class="topup-header">
                     <h1 id="topup-title">Top Up</h1>
                 </header>
-                <div class="balance" id="balance">Current Balance: RM 0</div>
+                <div class="balance" id="topup-current-balance">Current Balance: RM <%= String.format("%.2f", customer.getBalance()) %></div>
                 <hr>
                 <form id="topup-form">
                     <input type="text" name="amount" id="topup-amount" value="0" hidden>
