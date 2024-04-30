@@ -22,6 +22,7 @@
 #snackbar-info {
     display: block;
     margin-left: 10px;
+    margin-right: 20px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; 
@@ -29,6 +30,7 @@
 
 #snackbar-info h2 {
     margin-top: 10px;
+    margin-right: 20px;
     text-align: left;
 }
 

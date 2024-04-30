@@ -78,6 +78,7 @@
 
 .card-info {
     text-align: left !important;
+    margin-left: 20px;
 }
 
 .card-logo, .pay-extend-img {
@@ -93,5 +94,28 @@
 .pay-extend-img:hover {
     cursor: pointer;
     background-color: #222222;
+    border-radius: 20px;
+}
+
+.card-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #161616;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.card-dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.card-dropdown-content a:hover {
+    background-color: #333333;
     border-radius: 20px;
 }

@@ -51,6 +51,10 @@ public class CustomerControl {
     public boolean validateUsername(String username) {
         return customerDA.validateUsername(username);
     }
+    
+    public boolean confirmPassword(int id, String password) {
+        return customerDA.confirmPassword(id, password);
+    }
 
     public void destroy() {
         customerDA.destroy();
