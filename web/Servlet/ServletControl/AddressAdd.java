@@ -51,14 +51,15 @@ public class AddressAdd extends HttpServlet {
                 out.print("{\"success\":false, \"cause\":\"password\"}");
                 return;
             }
-            String name = request.getParameter("name");
+            String name = request.getParameter("recipient_name");
             String address = request.getParameter("address");
             String address_2 = request.getParameter("address_2");
             String city = request.getParameter("city");
             String state = request.getParameter("state");
             String zip_code = request.getParameter("zip_code");
-            String contact_num = request.getParameter("contact_num");
+            String contact_num = request.getParameter("contact_number");
             Address addr = new Address(-1, user_id, address, address_2, city, state, zip_code, name, contact_num);
+            System.out.println("Contact Number: " + contact_num);
             AddressControl addrControl = new AddressControl();
             out.print("{\"success\":" + addrControl.insertAddress(addr) + ", \"cause\":\"address\", \"address\":" + new Gson().toJson(addrControl.retrieveLatestAddress(user_id)) + "}");
         }

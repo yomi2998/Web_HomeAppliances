@@ -50,7 +50,7 @@ public class AddressDA {
     }
 
     public boolean updateAddress(Address address) {
-        String queryStr = "UPDATE " + tableName + " SET address = ?, address2 = ?, city = ?, state = ?, zip_code = ?, recipient_name = ?, contact_number = ? WHERE id = ?";
+        String queryStr = "UPDATE " + tableName + " SET address = ?, address_2 = ?, city = ?, state = ?, zip_code = ?, recipient_name = ?, contact_number = ? WHERE id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, address.getAddress());
@@ -61,8 +61,7 @@ public class AddressDA {
             stmt.setString(6, address.getRecipient_name());
             stmt.setString(7, address.getContact_number());
             stmt.setInt(8, address.getId());
-            stmt.executeUpdate();
-            return true;
+            return stmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;

@@ -58,6 +58,24 @@ function remove_card_add_error() {
   $("#add-card-invalid-cvv").addClass("hidden");
 }
 
+function remove_address_add_error() {
+  $("#add-address-invalid").addClass("hidden");
+  $("#add-address-two-invalid").addClass("hidden");
+  $("#add-address-invalid-state").addClass("hidden");
+  $("#add-address-invalid-zip").addClass("hidden");
+  $("#add-address-invalid-name").addClass("hidden");
+  $("#add-address-invalid-contact").addClass("hidden");
+}
+
+function remove_address_alter_error() {
+  $("#alter-address-invalid").addClass("hidden");
+  $("#alter-address-two-invalid").addClass("hidden");
+  $("#alter-address-invalid-state").addClass("hidden");
+  $("#alter-address-invalid-zip").addClass("hidden");
+  $("#alter-address-invalid-name").addClass("hidden");
+  $("#alter-address-invalid-contact").addClass("hidden");
+}
+
 $(document).ready(function () {
   var cardAddForm = $("#cardAddForm");
   cardAddForm.on("submit", function (event) {
@@ -170,7 +188,6 @@ $(document).ready(function () {
       type: "POST",
       data: sendData,
       success: function (data) {
-        console.log(data);
         const out = JSON.parse(data);
           if (out.success) {
             showSnackbar(
@@ -246,7 +263,7 @@ $(document).ready(function () {
             "Please reload your page to take effect."
           );
           $(".payment-method" + `#${id}`).remove();
-          $(`hr#${id}`).remove();
+          $(`.payment-method-list hr#${id}`).remove();
         } else {
           switch (out.cause) {
             case "password":
@@ -383,7 +400,6 @@ $(document).ready(function () {
       type: "POST",
       data: sendData,
       success: function (data) {
-        console.log(data);
         const out = JSON.parse(data);
         if (out.success) {
           showSnackbar(
@@ -396,7 +412,7 @@ $(document).ready(function () {
           $("#card-edit-panel").hide();
           $(".card-edit").hide();
           $(".list-div").show();
-          $(".card-info" + `#${id}`).text(
+          $(`#${id}` + ".card-info").text(
             `${sendData.name} ${sendData.card_number}-XXXX-XXXX-XXXX`
           );
         } else {
@@ -474,6 +490,396 @@ $(document).ready(function () {
       },
     });
   });
+
+  //addrbegin
+  var addrAddForm = $("#addressAddForm");
+  addrAddForm.on("submit", function (event) {
+    remove_address_add_error();
+    event.preventDefault();
+    var formData = addrAddForm.serializeArray();
+    var hasErr = false;
+    var sendData = {
+      address: "",
+      address_2: "",
+      city: "",
+      state: "",
+      zip_code: "",
+      recipient_name: "",
+      contact_number: "",
+      password: "",
+    };
+    formData.forEach(function (item) {
+      switch (item.name) {
+        case "address":
+          if (item.value.length < 2) {
+            $("#add-address-invalid")
+              .text("Address too short.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.address = item.value;
+          break;
+        case "address_2":
+          sendData.address_2 = item.value;
+          break;
+        case "city":
+          if (item.value.length < 2) {
+            $("#add-address-two-invalid")
+              .text("City too short.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.city = item.value;
+          break;
+        case "state":
+          if (item.value.length < 2) {
+            $("#add-address-invalid-state")
+              .text("State too short.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.state = item.value;
+          break;
+        case "zip_code":
+          var zipCodeRegex = /^[0-9]{5}$/;
+          if (!zipCodeRegex.test(item.value)) {
+            $("#add-address-invalid-zip")
+              .text("Invalid zip code.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.zip_code = item.value;
+          break;
+        case "name":
+          if (item.value.length < 2) {
+            $("#add-address-invalid-name")
+              .text("Name too short.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.recipient_name = item.value;
+          break;
+        case "contact_number":
+            var contactNumberRegex = /^[0-9]{9,12}$/;
+          if (!contactNumberRegex.test(item.value)) {
+            $("#add-address-invalid-contact")
+              .text("Invalid contact number.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.contact_number = item.value;
+          break;
+      }
+    });
+    if (hasErr) {
+      return;
+    }
+    var password = prompt(
+      "To verify it's you, please enter your password.",
+      ""
+    );
+    if (password === null) {
+      return;
+    }
+    sendData.password = password;
+    $.ajax({
+      url: "/Web_HomeAppliances/AddressAdd",
+      type: "POST",
+      data: sendData,
+      success: function (data) {
+        const out = JSON.parse(data);
+          if (out.success) {
+            showSnackbar(
+              "src/img/white/check-circle.svg",
+              "Address added successfully",
+              "Please reload your page to take effect."
+            );
+            $("#address-add-panel").hide();
+            $(".address-add").hide();
+            $(".list-addr-div").show();
+            var addr = out.address;
+            var addrInfo = `<div class="shipping-address" id="${addr.id}">
+            <p class="addr-info" id="${addr.id}">${addr.recipient_name} ${addr.contact_number} ${addr.address} ${addr.address_2 == null ? "" : addr.address_2} ${addr.city} ${addr.state} ${addr.zip_code}</p>
+            <div class="addr-dropdown" id="${addr.id}">
+                <img src="src/img/white/more-horizontal.svg" alt="more" class="right ship-extend-img" style="height: 30px;">
+                <div class="address-dropdown-content" id="${addr.id}">
+                    <a href="#" class="address-edit-button" id="${addr.id}">Edit</a>
+                    <a href="#" class="address-delete-button" id="${addr.id}">Delete</a>
+                </div>
+            </div>
+        </div>
+        <hr style="margin:0" id="${addr.id}">`;
+            $(".shipping-address-list").prepend(addrInfo);
+            $("#addr-insert-reset").click();
+          } else {
+            switch (out.cause) {
+              case "password":
+                showSnackbar(
+                  "src/img/white/alert-circle.svg",
+                  "Password incorrect",
+                  "Please try again."
+                );
+                break;
+              case "address":
+                showSnackbar(
+                  "src/img/white/alert-circle.svg",
+                  "Address already exists",
+                  "Please try again."
+                );
+                break;
+            }
+          }
+      },
+    });
+  });
+
+  $("#add-address").click(function () {
+    $("#address-add-panel").show();
+    $("#address-edit-panel").hide();
+    $(".address-edit").hide();
+    $(".list-addr-div").hide();
+    $(".address-add").show();
+  });
+  $(document).on("click", ".address-delete-button", function () {
+    var id = $(this).attr("id");
+    var pw = prompt("To verify it's you, please enter your password.", "");
+    if (pw === null) {
+      return;
+    }
+    $.ajax({
+      url: "/Web_HomeAppliances/AddressDelete",
+      type: "POST",
+      data: { password: pw, address_id: id },
+      success: function (data) {
+        const out = JSON.parse(data);
+        if (out.success) {
+          showSnackbar(
+            "src/img/white/check-circle.svg",
+            "Address deleted successfully",
+            "Please reload your page to take effect."
+          );
+          $(".shipping-address" + `#${id}`).remove();
+          $(`.shipping-address-list hr#${id}`).remove();
+        } else {
+          switch (out.cause) {
+            case "password":
+              showSnackbar(
+                "src/img/white/alert-circle.svg",
+                "Password incorrect",
+                "Please try again."
+              );
+              break;
+            case "address":
+              showSnackbar(
+                "src/img/white/alert-circle.svg",
+                "Address not found",
+                "Please try again."
+              );
+              break;
+          }
+        }
+      },
+    });
+  });
+
+  var addrEditForm = $("#addressEditForm");
+  addrEditForm.on("submit", function (event) {
+    remove_address_alter_error();
+    event.preventDefault();
+    var formData = addrEditForm.serializeArray();
+    var id = $("#alter-address-id").val();
+    var hasErr = false;
+    var sendData = {
+      address_id : "",
+      address: "",
+      address_2: "",
+      city: "",
+      state: "",
+      zip_code: "",
+      recipient_name: "",
+      contact_number: "",
+      password: "",
+    };
+    formData.forEach(function (item) {
+      switch (item.name) {
+        case "address":
+          if (item.value.length < 2) {
+            $("#alter-address-invalid")
+              .text("Address too short.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.address = item.value;
+          break;
+        case "address_2":
+          sendData.address_2 = item.value;
+          break;
+        case "city":
+          if (item.value.length < 2) {
+            $("#alter-address-two-invalid")
+              .text("City too short.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.city = item.value;
+          break;
+        case "state":
+          if (item.value.length < 2) {
+            $("#alter-address-invalid-state")
+              .text("State too short.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.state = item.value;
+          break;
+        case "zip_code":
+          var zipCodeRegex = /^[0-9]{5}$/;
+          if (!zipCodeRegex.test(item.value)) {
+            $("#alter-address-invalid-zip")
+              .text("Invalid zip code.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.zip_code = item.value;
+          break;
+        case "name":
+          if (item.value.length < 2) {
+            $("#alter-address-invalid-name")
+              .text("Name too short.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.recipient_name = item.value;
+          break;
+        case "contact_number":
+            var contactNumberRegex = /^[0-9]{9,12}$/;
+          if (!contactNumberRegex.test(item.value)) {
+            $("#alter-address-invalid-contact")
+              .text("Invalid contact number.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.contact_number = item.value;
+          break;
+      }
+    });
+    if (hasErr) {
+      return;
+    }
+    var password = prompt(
+      "To verify it's you, please enter your password.",
+      ""
+    );
+    if (password === null) {
+      return;
+    }
+    sendData.address_id = id;
+    sendData.password = password;
+    $.ajax({
+      url: "/Web_HomeAppliances/AddressAlter",
+      type: "POST",
+      data: sendData,
+      success: function (data) {
+        const out = JSON.parse(data);
+        if (out.success) {
+          showSnackbar(
+            "src/img/white/check-circle.svg",
+            "Address updated successfully",
+            "Please reload your page to take effect."
+          );
+          $("#address-edit-panel").hide();
+          $(".address-edit").hide();
+          $(".list-addr-div").show();
+          console.log(sendData);
+          $( `#${id}` + ".addr-info").text(
+            `${sendData.recipient_name} ${sendData.contact_number} ${sendData.address} ${sendData.address_2 == null ? "" : sendData.address_2} ${sendData.city} ${sendData.state} ${sendData.zip_code}`
+          );
+        } else {
+          switch (out.cause) {
+            case "password":
+              showSnackbar(
+                "src/img/white/alert-circle.svg",
+                "Password incorrect",
+                "Please try again."
+              );
+              break;
+            case "address":
+              showSnackbar(
+                "src/img/white/alert-circle.svg",
+                "Address not found",
+                "Please try again later."
+              );
+              break;
+          }
+        }
+      },
+    });
+  });
+  $("#ext-address-add-cancel").click(function () {
+    $("#address-add-panel").hide();
+    $(".address-add").hide();
+    $(".list-addr-div").show();
+  });
+  $("#ext-address-edit-cancel").click(function () {
+    $("#address-edit-panel").hide();
+    $(".address-edit").hide();
+    $(".list-addr-div").show();
+  });
+  $(document).on("click", ".address-edit-button", function () {
+    var id = $(this).attr("id");
+    var pw = prompt("To verify it's you, please enter your password.", "");
+    if (pw === null) {
+      return;
+    }
+    $.ajax({
+      url: "/Web_HomeAppliances/AddressRetrieveSpecific",
+      type: "POST",
+      data: { password: pw, address_id: id },
+      success: function (data) {
+        const out = JSON.parse(data);
+        if (out.success) {
+          $("#address-edit-panel").show();
+          $("#address-add-panel").hide();
+          $(".address-edit").show();
+          $(".list-addr-div").hide();
+          const addr = out.address;
+          $("#alter-address-id").val(addr.id);
+          $("#alter-address-form").val(addr.address);
+          $("#alter-address-two").val(addr.address_2);
+          $("#alter-city").val(addr.city);
+          $("#alter-state").val(addr.state);
+          $("#alter-zip").val(addr.zip_code);
+          $("#alter-recipient-name").val(addr.recipient_name);
+          $("#alter-recipient-number").val(addr.contact_number);
+        } else {
+          switch (out.cause) {
+            case "password":
+              showSnackbar(
+                "src/img/white/alert-circle.svg",
+                "Password incorrect",
+                "Please try again."
+              );
+              break;
+            case "address":
+              showSnackbar(
+                "src/img/white/alert-circle.svg",
+                "Address not found",
+                "Please try again."
+              );
+              break;
+          }
+        }
+      },
+    });
+  });
+  $(document).on("click", ".addr-dropdown", function () {
+    var id = $(this).attr("id");
+    $("#" + id + ".address-dropdown-content").show();
+    $(".address-dropdown-content")
+      .not($("#" + id + ".address-dropdown-content"))
+      .hide();
+  });
+  //addrend
   //$(".card-dropdown").click(function () {
   $(document).on("click", ".card-dropdown", function () {
     var id = $(this).attr("id");
@@ -487,6 +893,9 @@ $(document).ready(function () {
     var target = $(event.target);
     if (!target.closest(".card-dropdown").length) {
       $(".card-dropdown-content").hide();
+    }
+    if (!target.closest(".addr-dropdown").length) {
+      $(".address-dropdown-content").hide();
     }
   });
   $(".ext-profile-select").click(function () {
@@ -508,6 +917,7 @@ $(document).ready(function () {
     switch (id) {
       case "profile-info":
         $("#card-panel").hide();
+        $("#address-panel").hide();
         $("#edit-panel").show();
         $("#ext-profile").show();
         $("#ext-order").hide();
@@ -516,6 +926,7 @@ $(document).ready(function () {
         break;
       case "profile-orders":
         $("#card-panel").hide();
+        $("#address-panel").hide();
         $("#edit-panel").hide();
         $("#ext-profile").hide();
         $("#ext-order").show();
@@ -524,6 +935,7 @@ $(document).ready(function () {
         break;
       case "profile-payment":
         $("#card-panel").show();
+        $("#address-panel").hide();
         $("#edit-panel").hide();
         $("#ext-profile").hide();
         $("#ext-order").hide();
@@ -532,6 +944,7 @@ $(document).ready(function () {
         break;
       case "profile-shipping":
         $("#card-panel").hide();
+        $("#address-panel").show();
         $("#edit-panel").hide();
         $("#ext-profile").hide();
         $("#ext-order").hide();
@@ -625,7 +1038,6 @@ $(document).ready(function () {
       type: "POST",
       data: form.serialize(),
       success: function (data) {
-        console.log(data);
         const out = JSON.parse(data);
         if (out.success) {
           showSnackbar(
@@ -647,7 +1059,6 @@ $(document).ready(function () {
   const form2 = $("#profilePasswordForm");
   form2.on("submit", function (event) {
     event.preventDefault();
-    console.log("get");
     remove_profile_error();
     var formData = form2.serializeArray();
     var hasErr = false;
@@ -674,7 +1085,6 @@ $(document).ready(function () {
       }
     });
     if (hasErr) {
-      console.log("error");
       return;
     }
 
@@ -683,7 +1093,6 @@ $(document).ready(function () {
       type: "POST",
       data: form2.serialize(),
       success: function (data) {
-        console.log(data);
         const out = JSON.parse(data);
         if (out.success) {
           showSnackbar(

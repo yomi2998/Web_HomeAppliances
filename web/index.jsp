@@ -23,11 +23,13 @@
         <%@ page import="domain.Admin" %>
         <%@ page import="domain.Category" %>
         <%@ page import="domain.Card" %>
+        <%@ page import="domain.Address" %>
         <%@ page import="java.util.List" %>
         <%@ page import="control.CustomerControl" %>
         <%@ page import="control.AdminControl" %>
         <%@ page import="control.CategoryControl" %>
         <%@ page import="control.CardControl" %>
+        <%@ page import="control.AddressControl" %>
 
         <%
             //CONFIGURATION
@@ -463,6 +465,16 @@
                         <button class="nelson-button right" id="ext-card-add-cancel" onclick="$('#card-insert-reset').click()">Cancel</button>
                     </div>
                 </div>
+                <div id="address-panel" hidden>
+                    <div id="address-edit-panel" hidden>
+                        <button class="nelson-button right" id="ext-address-edit-done" onclick="$('#address-alter').click()">Done</button>
+                        <button class="nelson-button right" id="ext-address-edit-cancel">Cancel</button>
+                    </div>
+                    <div id="address-add-panel" hidden>
+                        <button class="nelson-button right" id="ext-address-add-done" onclick="$('#address-insert').click()">Done</button>
+                        <button class="nelson-button right" id="ext-address-add-cancel" onclick="$('#address-insert-reset').click()">Cancel</button>
+                    </div>
+                </div>
                 <hr>
                 <div class="profile-content">
                     <div class="ext-left-profile">
@@ -610,7 +622,111 @@
                         <p>hello world 3</p>
                     </div>
                     <div id="ext-shipping" style="display: none">
-                        <p>hello world 3</p>
+                        <div class="list-addr-div">
+                            <h2>List of shipping address:</h2>
+                            <div class="shipping-address-list">
+                                <% AddressControl addrControl = new AddressControl(); List<Address> addresses = addrControl.retrieveAddresses(customer.getId()); addrControl.destroy(); for (Address c : addresses) { %>
+                                <div class="shipping-address" id="<%= c.getId() %>">
+                                    <p class="addr-info" id="<%= c.getId() %>"><%= c.getRecipient_name() + " " + c.getContact_number() + " " + c.getAddress() + " " + (c.getAddress_2() == null ? "" : c.getAddress_2()) + " " + c.getCity() + " " + c.getState() + " " + c.getZip_code() %></p>
+                                    <div class="addr-dropdown" id="<%= c.getId() %>">
+                                        <img src="src/img/white/more-horizontal.svg" alt="more" class="right ship-extend-img" style="height: 30px;">
+                                        <div class="address-dropdown-content" id="<%= c.getId() %>">
+                                            <a href="#" class="address-edit-button" id="<%= c.getId() %>">Edit</a>
+                                            <a href="#" class="address-delete-button" id="<%= c.getId() %>">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr style="margin:0" id="<%= c.getId() %>">
+                                <% } %>
+                                <div class="shipping-address" id="add-address">
+                                    <p>Add more...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="address-edit" hidden>
+                            <form method="post" id="addressEditForm">
+                                <input type="password" name="password" hidden>
+                                <input type="text" name="id" id="alter-address-id" hidden>
+                                <div class="input-field">
+                                    <p class="form-p">Recipient's Name:</p>
+                                    <input autocomplete="off" id="alter-recipient-name" type="text" name="name" placeholder="Enter recipient's name" class="nelson-input" required><br>
+                                    <p id="alter-recipient-invalid-name" class="hidden" style="color:red;">Invalid recipient's name.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Recipient's Phone Number:</p>
+                                    <input autocomplete="off" id="alter-recipient-number" type="text" name="contact_number" placeholder="Enter recipient's phone number" class="nelson-input" required><br>
+                                    <p id="alter-recipient-invalid-number" class="hidden" style="color:red;">Invalid recipient's phone number.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Address:</p>
+                                    <input autocomplete="off" id="alter-address-form" type="text" name="address" placeholder="Enter expiry date" class="nelson-input" required><br>
+                                    <p id="alter-address-invalid" class="hidden" style="color:red;">Invalid address.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Address Line 2 (Optional):</p>
+                                    <input autocomplete="off" id="alter-address-two" type="text" name="address_2" placeholder="Address line 2 (optional)" class="nelson-input"><br>
+                                    <p id="alter-address-two-invalid" class="hidden" style="color:red;">Invalid address.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">City:</p>
+                                    <input autocomplete="off" id="alter-city" type="text" name="city" placeholder="Enter city" class="nelson-input" required><br>
+                                    <p id="alter-address-invalid-city" class="hidden" style="color:red;">Invalid address.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">State:</p>
+                                    <input autocomplete="off" id="alter-state" type="text" name="state" placeholder="State" class="nelson-input" required><br>
+                                    <p id="alter-address-invalid-state" class="hidden" style="color:red;">Invalid address.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Zip Code:</p>
+                                    <input autocomplete="off" id="alter-zip" type="text" name="zip_code" placeholder="Enter zip code" class="nelson-input" required><br>
+                                    <p id="alter-address-invalid-zip" class="hidden" style="color:red;">Invalid address.</p>
+                                </div>
+                                <input type="submit" id="address-alter" hidden>
+                            </form>
+                        </div>
+                        <div class="address-add" hidden>
+                            <form method="post" id="addressAddForm">
+                                <input type="password" name="password" hidden>
+                                <div class="input-field">
+                                    <p class="form-p">Recipient's Name:</p>
+                                    <input autocomplete="off" id="add-recipient-name" type="text" name="name" placeholder="Enter recipient's name" class="nelson-input" required><br>
+                                    <p id="add-recipient-invalid-name" class="hidden" style="color:red;">Invalid recipient's name.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Recipient's Phone Number:</p>
+                                    <input autocomplete="off" id="add-recipient-number" type="text" name="contact_number" placeholder="Enter recipient's phone number" class="nelson-input" required><br>
+                                    <p id="add-recipient-invalid-number" class="hidden" style="color:red;">Invalid recipient's phone number.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Address:</p>
+                                    <input autocomplete="off" id="add-address-form" type="text" name="address" placeholder="Enter expiry date" class="nelson-input" required><br>
+                                    <p id="add-address-invalid" class="hidden" style="color:red;">Invalid address.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Address Line 2 (Optional):</p>
+                                    <input autocomplete="off" id="add-address-two" type="text" name="address_2" placeholder="Address line 2 (optional)" class="nelson-input"><br>
+                                    <p id="add-address-two-invalid" class="hidden" style="color:red;">Invalid address.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">City:</p>
+                                    <input autocomplete="off" id="add-city" type="text" name="city" placeholder="Enter city" class="nelson-input" required><br>
+                                    <p id="add-address-invalid-city" class="hidden" style="color:red;">Invalid address.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">State:</p>
+                                    <input autocomplete="off" id="add-state" type="text" name="state" placeholder="State" class="nelson-input" required><br>
+                                    <p id="add-address-invalid-state" class="hidden" style="color:red;">Invalid address.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Zip Code:</p>
+                                    <input autocomplete="off" id="add-zip" type="text" name="zip_code" placeholder="Enter zip code" class="nelson-input" required><br>
+                                    <p id="add-address-invalid-zip" class="hidden" style="color:red;">Invalid address.</p>
+                                </div>
+                                <input type="submit" id="address-insert" hidden>
+                                <input type="reset" id="address-insert-reset" hidden>
+                            </form>
+                        </div>
                     </div>
                     <% } %>
                 </div>

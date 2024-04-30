@@ -53,13 +53,13 @@ public class AddressAlter extends HttpServlet {
                 return;
             }
             int address_id = Integer.parseInt(request.getParameter("address_id"));
-            String name = request.getParameter("name");
+            String name = request.getParameter("recipient_name");
             String address = request.getParameter("address");
             String address_2 = request.getParameter("address_2");
             String city = request.getParameter("city");
             String state = request.getParameter("state");
             String zip_code = request.getParameter("zip_code");
-            String contact_num = request.getParameter("contact_num");
+            String contact_num = request.getParameter("contact_number");
             AddressControl addressControl = new AddressControl();
             Address addr = new Address(address_id, user_id, address, address_2, city, state, zip_code, name, contact_num);
             out.print("{\"success\":" + addressControl.updateAddress(addr) + ", \"cause\":\"address\"}");

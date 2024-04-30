@@ -57,7 +57,7 @@
     color: rgb(158, 158, 158);
 }
 
-.payment-method-list {
+.payment-method-list, .shipping-address-list {
     display: block;
     width: 100%;
     margin-top: 20px;
@@ -66,7 +66,7 @@
     border-radius: 20px;
 }
 
-.payment-method {
+.payment-method, .shipping-address {
     display: flex;
     text-align: left;
     justify-content: space-between;
@@ -77,34 +77,34 @@
     transition: all 0.3s;
 }
 
-.payment-method:hover {
+.payment-method:hover, .shipping-address:hover {
     background-color: #333333;
     border-radius: 20px;
     cursor: pointer;
 }
 
-.card-info {
+.card-info, .address-info {
     text-align: left !important;
     margin-left: 20px;
 }
 
-.card-logo, .pay-extend-img {
+.card-logo, .pay-extend-img, .address-info {
     margin-top: auto;
     margin-bottom: auto;
     transition: all 0.3s;
 }
 
-.pay-extend-img {
+.pay-extend-img, .ship-extend-img {
     padding: 10px;
 }
 
-.pay-extend-img:hover {
+.pay-extend-img:hover, .ship-extend-img:hover {
     cursor: pointer;
     background-color: #222222;
     border-radius: 20px;
 }
 
-.card-dropdown-content {
+.card-dropdown-content, .address-dropdown-content {
     display: none;
     position: absolute;
     background-color: #161616;
@@ -115,14 +115,14 @@
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-.card-dropdown-content a {
+.card-dropdown-content a, .address-dropdown-content a {
     color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.card-dropdown-content a:hover {
+.card-dropdown-content a:hover, .address-dropdown-content a:hover {
     background-color: #333333;
     border-radius: 20px;
 }
