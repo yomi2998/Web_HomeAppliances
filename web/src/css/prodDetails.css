@@ -1,0 +1,34 @@
+.details-container{
+    display: flex;
+    gap: 40px;
+    justify-content: start;
+    align-items: start;
+}
+
+.product-image img{
+    width: 100%;
+    flex-shrink: 0;
+    border-radius: 4px;
+    height: 500px;   
+}
+
+.product-info{
+    width: 60%;
+}
+
+.product-info h3{
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 130%;
+}
+.product-info h5{
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 130%;
+    margin: 6px 0;
+}
+
+.product-info p{
+    margin: 15px 0;
+    width: 70%;
+}
