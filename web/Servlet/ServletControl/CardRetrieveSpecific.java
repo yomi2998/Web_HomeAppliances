@@ -4,26 +4,25 @@
  */
 package ServletControl;
 
+import control.CustomerControl;
+import control.CardControl;
+import domain.Card;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Cookie;
-import com.google.gson.Gson;
-
-import domain.Card;
-import control.CardControl;
-import control.CustomerControl;
 
 /**
  *
  * @author superme
  */
-@WebServlet(name = "CardAlter", urlPatterns = {"/CardAlter"})
-public class CardAlter extends HttpServlet {
+@WebServlet(name = "CardRetrieveSpecific", urlPatterns = {"/CardRetrieveSpecific"})
+public class CardRetrieveSpecific extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,28 +37,26 @@ public class CardAlter extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            Cookie cookies[] = request.getCookies();
-            int user_id = 0;
-            for (Cookie c : cookies) {
-                if (c.getName().equals("id")) {
-                    user_id = Integer.parseInt(c.getValue());
+            Cookie ck[] = request.getCookies();
+            String password = request.getParameter("password");
+            int id = 0;
+            for (Cookie cookie : ck) {
+                if (cookie.getName().equals("id")) {
+                    id = Integer.parseInt(cookie.getValue());
                 }
             }
-            String password = request.getParameter("password");
-            System.out.println(user_id);
-            CustomerControl customerControl = new CustomerControl();
-            if (!customerControl.confirmPassword(user_id, password)) {
-                out.print("{\"success\":false, \"cause\":\"password\"}");
+            CustomerControl cc = new CustomerControl();
+            if (!cc.confirmPassword(id, password)) {
+                out.print("{\"success\": false, \"cause\": \"password\"}");
                 return;
             }
-            int card_id = Integer.parseInt(request.getParameter("card_id"));
-            String name = request.getParameter("name");
-            String card_number = request.getParameter("card_number");
-            String expiry_date = request.getParameter("expiry_date");
-            String cvv = request.getParameter("cvv");
-            Card card = new Card(card_id, user_id, name, card_number, expiry_date, cvv);
             CardControl cardControl = new CardControl();
-            out.print("{\"success\":" + cardControl.updateCard(card) + ", \"cause\":\"card\"}");
+            Card card = cardControl.retrieveCard(Integer.parseInt(request.getParameter("card_id")));
+            if (card != null) {
+                out.print("{\"success\": true, \"card\": " + new Gson().toJson(card) + "}");
+            } else {
+                out.print("{\"success\": false, \"cause\": \"card\"}");
+            }
         }
     }
 

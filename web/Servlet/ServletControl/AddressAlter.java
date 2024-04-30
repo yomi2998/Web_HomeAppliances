@@ -14,16 +14,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
 import com.google.gson.Gson;
 
-import domain.Card;
-import control.CardControl;
+import domain.Address;
+import control.AddressControl;
 import control.CustomerControl;
 
 /**
  *
  * @author superme
  */
-@WebServlet(name = "CardAlter", urlPatterns = {"/CardAlter"})
-public class CardAlter extends HttpServlet {
+@WebServlet(name = "AddressAlter", urlPatterns = {"/AddressAlter"})
+public class AddressAlter extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,14 +52,17 @@ public class CardAlter extends HttpServlet {
                 out.print("{\"success\":false, \"cause\":\"password\"}");
                 return;
             }
-            int card_id = Integer.parseInt(request.getParameter("card_id"));
+            int address_id = Integer.parseInt(request.getParameter("address_id"));
             String name = request.getParameter("name");
-            String card_number = request.getParameter("card_number");
-            String expiry_date = request.getParameter("expiry_date");
-            String cvv = request.getParameter("cvv");
-            Card card = new Card(card_id, user_id, name, card_number, expiry_date, cvv);
-            CardControl cardControl = new CardControl();
-            out.print("{\"success\":" + cardControl.updateCard(card) + ", \"cause\":\"card\"}");
+            String address = request.getParameter("address");
+            String address_2 = request.getParameter("address_2");
+            String city = request.getParameter("city");
+            String state = request.getParameter("state");
+            String zip_code = request.getParameter("zip_code");
+            String contact_num = request.getParameter("contact_num");
+            AddressControl addressControl = new AddressControl();
+            Address addr = new Address(address_id, user_id, address, address_2, city, state, zip_code, name, contact_num);
+            out.print("{\"success\":" + addressControl.updateAddress(addr) + ", \"cause\":\"address\"}");
         }
     }
 

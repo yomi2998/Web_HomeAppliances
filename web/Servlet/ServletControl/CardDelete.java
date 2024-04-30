@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
 import com.google.gson.Gson;
+import control.CustomerControl;
 
 import domain.Card;
 import control.CardControl;
@@ -40,13 +41,19 @@ public class CardDelete extends HttpServlet {
             Cookie cookies[] = request.getCookies();
             int user_id = 0;
             for (Cookie c : cookies) {
-                if (c.getName().equals("user_id")) {
+                if (c.getName().equals("id")) {
                     user_id = Integer.parseInt(c.getValue());
                 }
             }
+            String password = request.getParameter("password");
+            CustomerControl customerControl = new CustomerControl();
+            if (!customerControl.confirmPassword(user_id, password)) {
+                out.print("{\"success\":false, \"cause\":\"password\"}");
+                return;
+            }
             int card_id = Integer.parseInt(request.getParameter("card_id"));
             CardControl cardControl = new CardControl();
-            out.print("{\"success\":" + cardControl.deleteCard(card_id) + "}");
+            out.print("{\"success\":" + cardControl.deleteCard(card_id) + ", \"cause\":\"card\"}");
         }
     }
 

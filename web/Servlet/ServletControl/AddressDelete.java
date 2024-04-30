@@ -13,17 +13,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
 import com.google.gson.Gson;
-
-import domain.Card;
-import control.CardControl;
 import control.CustomerControl;
+
+import domain.Address;
+import control.AddressControl;
 
 /**
  *
  * @author superme
  */
-@WebServlet(name = "CardAlter", urlPatterns = {"/CardAlter"})
-public class CardAlter extends HttpServlet {
+@WebServlet(name = "AddressDelete", urlPatterns = {"/AddressDelete"})
+public class AddressDelete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,20 +46,14 @@ public class CardAlter extends HttpServlet {
                 }
             }
             String password = request.getParameter("password");
-            System.out.println(user_id);
             CustomerControl customerControl = new CustomerControl();
             if (!customerControl.confirmPassword(user_id, password)) {
                 out.print("{\"success\":false, \"cause\":\"password\"}");
                 return;
             }
-            int card_id = Integer.parseInt(request.getParameter("card_id"));
-            String name = request.getParameter("name");
-            String card_number = request.getParameter("card_number");
-            String expiry_date = request.getParameter("expiry_date");
-            String cvv = request.getParameter("cvv");
-            Card card = new Card(card_id, user_id, name, card_number, expiry_date, cvv);
-            CardControl cardControl = new CardControl();
-            out.print("{\"success\":" + cardControl.updateCard(card) + ", \"cause\":\"card\"}");
+            int address_id = Integer.parseInt(request.getParameter("address_id"));
+            AddressControl addrControl = new AddressControl();
+            out.print("{\"success\":" + addrControl.deleteAddress(address_id) + ", \"cause\":\"address\"}");
         }
     }
 

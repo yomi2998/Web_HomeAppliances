@@ -28,6 +28,14 @@ public class AddressControl {
         return addressDA.retrieveAddresses(id);
     }
 
+    public Address retrieveAddress(int id) {
+        return addressDA.retrieveAddress(id);
+    }
+
+    public Address retrieveLatestAddress(int user_id) {
+        return addressDA.retrieveLatestAddress(user_id);
+    }
+
     public boolean updateAddress(Address address) {
         return addressDA.updateAddress(address);
     }

@@ -446,13 +446,23 @@
                 <h1 class="left">My Profile</h1>
                 <button class="nelson-button right" onclick="extension_toggle('profile-extension'); $('#profile-alter-pw-reset').click()">Back</button>
                 <div id="edit-panel">
-                <button class="nelson-button right" id="ext-profile-edit-pw" onclick="togglePasswordForm()">Edit password</button>
-                <button class="nelson-button right hidden" id="ext-profile-done" onclick="$('#profile-alter').click()">Done</button>
-                <button class="nelson-button right hidden" id="ext-profile-cancel" onclick="edit_profile()">Cancel</button>
-                <button class="nelson-button right hidden" id="ext-profile-pw-done" onclick="$('#profile-alter-pw').click()">Done</button>
-                <button class="nelson-button right hidden" id="ext-profile-pw-cancel" onclick="togglePasswordForm()">Cancel</button>
-                <button class="nelson-button right" id="ext-profile-edit" onclick="edit_profile()">Edit</button>
-            </div>
+                    <button class="nelson-button right" id="ext-profile-edit-pw" onclick="togglePasswordForm()">Edit password</button>
+                    <button class="nelson-button right hidden" id="ext-profile-done" onclick="$('#profile-alter').click()">Done</button>
+                    <button class="nelson-button right hidden" id="ext-profile-cancel" onclick="edit_profile()">Cancel</button>
+                    <button class="nelson-button right hidden" id="ext-profile-pw-done" onclick="$('#profile-alter-pw').click()">Done</button>
+                    <button class="nelson-button right hidden" id="ext-profile-pw-cancel" onclick="togglePasswordForm()">Cancel</button>
+                    <button class="nelson-button right" id="ext-profile-edit" onclick="edit_profile()">Edit</button>
+                </div>
+                <div id="card-panel" hidden>
+                    <div id="card-edit-panel" hidden>
+                        <button class="nelson-button right" id="ext-card-edit-done" onclick="$('#card-alter').click()">Done</button>
+                        <button class="nelson-button right" id="ext-card-edit-cancel">Cancel</button>
+                    </div>
+                    <div id="card-add-panel" hidden>
+                        <button class="nelson-button right" id="ext-card-add-done" onclick="$('#card-insert').click()">Done</button>
+                        <button class="nelson-button right" id="ext-card-add-cancel" onclick="$('#card-insert-reset').click()">Cancel</button>
+                    </div>
+                </div>
                 <hr>
                 <div class="profile-content">
                     <div class="ext-left-profile">
@@ -462,7 +472,7 @@
                         <p><a href="#" class="ext-profile-select ext-profile-selected" id="profile-info">User information</a></p>
                         <% if (userType.equals("customer")) { %>
                         <p><a href="#" class="ext-profile-select" id="profile-orders">Orders</a></p>
-                        <p><a href="#" class="ext-profile-select" id="profile-payment">Payment method</a></p>
+                        <p><a href="#" class="ext-profile-select" id="profile-payment">Cards</a></p>
                         <p><a href="#" class="ext-profile-select" id="profile-shipping">Shipping address</a></p>
                         <% } %>
                     </div>
@@ -519,35 +529,81 @@
                     </div>
                     <% if (userType.equals("customer")) { %>
                     <div id="ext-payment" style="display: none">
-                        <h2>List of payment methods:</h2>
-                        <div class="payment-method-list">
-                            <div class="payment-method">
-                                <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
-                                <p class="card-info">CardHolder 1234-XXXX-XXXX-XXXX</p>
-                                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
+                        <div class="list-div">
+                            <h2>List of cards:</h2>
+                            <div class="payment-method-list">
+                                <% CardControl cardControl = new CardControl(); List<Card> cards = cardControl.retrieveCards(customer.getId()); cardControl.destroy(); for (Card c : cards) { %>
+                                <div class="payment-method" id="<%= c.getId() %>">
+                                    <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
+                                    <p class="card-info" id="<%= c.getId() %>"><%= c.getName() %> <%= c.getCard_number().substring(0, 4) %>-XXXX-XXXX-XXXX</p>
+                                    <div class="card-dropdown" id="<%= c.getId() %>">
+                                        <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
+                                        <div class="card-dropdown-content" id="<%= c.getId() %>">
+                                            <a href="#" class="card-edit-button" id="<%= c.getId() %>">Edit</a>
+                                            <a href="#" class="card-delete-button" id="<%= c.getId() %>">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr style="margin:0" id="<%= c.getId() %>">
+                                <% } %>
+                                <div class="payment-method" id="add-card">
+                                    <p>Add more...</p>
+                                </div>
                             </div>
-                            <hr style="margin:0">
-                            <div class="payment-method">
-                                <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
-                                <p class="card-info">CardHolder 1234-XXXX-XXXX-XXXX</p>
-                                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
-                            </div>
-                            <hr style="margin:0">
-                            <div class="payment-method">
-                                <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
-                                <p class="card-info">CardHolder 1234-XXXX-XXXX-XXXX</p>
-                                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
-                            </div>
-                            <hr style="margin:0">
-                            <div class="payment-method">
-                                <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
-                                <p class="card-info">CardHolder 1234-XXXX-XXXX-XXXX</p>
-                                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
-                            </div>
-                            <hr style="margin:0">
-                            <div class="payment-method">
-                                <p>Add more</p>
-                            </div>
+                        </div>
+                        <div class="card-edit" hidden>
+                            <form method="post" id="cardEditForm">
+                                <input type="password" name="password" hidden>
+                                <input type="text" name="card_id" id="alter-card-id" hidden>
+                                <div class="input-field">
+                                    <p class="form-p">Cardholder's Name:</p>
+                                    <input autocomplete="off" id="alter-card-name" type="text" name="name" placeholder="Enter cardholder's name" class="nelson-input" required><br>
+                                    <p id="alter-card-invalid-name" class="hidden" style="color:red;">Invalid card name.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Card Number:</p>
+                                    <input autocomplete="off" id="alter-card-number" type="text" name="card_number" placeholder="Enter card number" class="nelson-input" required><br>
+                                    <p id="alter-card-invalid-number" class="hidden" style="color:red;">Invalid card number.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">ExpiryDate (MM/YY):</p>
+                                    <input autocomplete="off" id="alter-card-expiry-date" type="text" name="expiry_date" placeholder="Enter expiry date" class="nelson-input" required><br>
+                                    <p id="alter-card-invalid-expiry" class="hidden" style="color:red;">Invalid expiry date.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">CVV:</p>
+                                    <input autocomplete="off" id="alter-card-cvv" type="text" name="cvv" placeholder="Enter CVV" class="nelson-input" required><br>
+                                    <p id="alter-card-invalid-cvv" class="hidden" style="color:red;">Invalid cvv.</p>
+                                </div>
+                                <input type="submit" id="card-alter" hidden>
+                            </form>
+                        </div>
+                        <div class="card-add" hidden>
+                            <form method="post" id="cardAddForm">
+                                <input type="password" name="password" hidden>
+                                <div class="input-field">
+                                    <p class="form-p">Cardholder's Name:</p>
+                                    <input autocomplete="off" id="add-card-name" type="text" name="name" placeholder="Enter cardholder's name" class="nelson-input" required><br>
+                                    <p id="add-card-invalid-name" class="hidden" style="color:red;">Invalid card name.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Card Number:</p>
+                                    <input autocomplete="off" id="add-card-number" type="text" name="card_number" placeholder="Enter card number" class="nelson-input" required><br>
+                                    <p id="add-card-invalid-number" class="hidden" style="color:red;">Invalid card number.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">ExpiryDate (MM/YY):</p>
+                                    <input autocomplete="off" id="add-card-expiry-date" type="text" name="expiry_date" placeholder="Enter expiry date" class="nelson-input" required><br>
+                                    <p id="add-card-invalid-expiry" class="hidden" style="color:red;">Invalid expiry date.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">CVV:</p>
+                                    <input autocomplete="off" id="add-card-cvv" type="text" name="cvv" placeholder="CVV" class="nelson-input" required><br>
+                                    <p id="add-card-invalid-cvv" class="hidden" style="color:red;">Invalid cvv.</p>
+                                </div>
+                                <input type="submit" id="card-insert" hidden>
+                                <input type="reset" id="card-insert-reset" hidden>
+                            </form>
                         </div>
                     </div>
                     <div id="ext-order" style="display: none">

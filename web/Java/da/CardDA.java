@@ -31,8 +31,8 @@ public class CardDA {
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setInt(1, id);
-            stmt.executeUpdate();
-            return true;
+            
+            return stmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
@@ -55,11 +55,11 @@ public class CardDA {
         }
     }
 
-    public boolean insertCard(Card card, int user_id) {
+    public boolean insertCard(Card card) {
         String queryStr = "INSERT INTO " + tableName + " (user_id, name, card_number, expiry_date, cvv) VALUES (?, ?, ?, ?, ?)";
         try {
             stmt = conn.prepareStatement(queryStr);
-            stmt.setInt(1, user_id);
+            stmt.setInt(1, card.getUser_id());
             stmt.setString(2, card.getName());
             stmt.setString(3, card.getCard_number());
             stmt.setString(4, card.getExpiry_date());
@@ -83,6 +83,38 @@ public class CardDA {
                 cards.add(new Card(rs.getInt("id"), rs.getInt("user_id"), rs.getString("name"), rs.getString("card_number"), rs.getString("expiry_date"), rs.getString("cvv")));
             }
             return cards;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+    
+    public Card retrieveCard(int id) {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE id = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Card(rs.getInt("id"), rs.getInt("user_id"), rs.getString("name"), rs.getString("card_number"), rs.getString("expiry_date"), rs.getString("cvv"));
+            }
+            return null;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    public Card retrieveLatestCard(int user_id) {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE user_id = ? ORDER BY create_date DESC FETCH FIRST ROW ONLY";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, user_id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Card(rs.getInt("id"), rs.getInt("user_id"), rs.getString("name"), rs.getString("card_number"), rs.getString("expiry_date"), rs.getString("cvv"));
+            }
+            return null;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return null;

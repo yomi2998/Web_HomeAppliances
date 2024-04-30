@@ -15,6 +15,8 @@ import jakarta.servlet.http.Cookie;
 
 import domain.Card;
 import control.CardControl;
+import control.CustomerControl;
+import com.google.gson.Gson;
 
 /**
  *
@@ -39,9 +41,15 @@ public class CardAdd extends HttpServlet {
             Cookie cookies[] = request.getCookies();
             int user_id = 0;
             for (Cookie c : cookies) {
-                if (c.getName().equals("user_id")) {
+                if (c.getName().equals("id")) {
                     user_id = Integer.parseInt(c.getValue());
                 }
+            }
+            String password = request.getParameter("password");
+            CustomerControl customerControl = new CustomerControl();
+            if (!customerControl.confirmPassword(user_id, password)) {
+                out.print("{\"success\":false, \"cause\":\"password\"}");
+                return;
             }
             String name = request.getParameter("name");
             String card_number = request.getParameter("card_number");
@@ -49,7 +57,7 @@ public class CardAdd extends HttpServlet {
             String cvv = request.getParameter("cvv");
             Card card = new Card(-1, user_id, name, card_number, expiry_date, cvv);
             CardControl cardControl = new CardControl();
-            out.print("{\"success\":" + cardControl.insertCard(card, user_id) + "}");
+            out.print("{\"success\":" + cardControl.insertCard(card) + ", \"cause\":\"card\", \"card\":" + new Gson().toJson(cardControl.retrieveLatestCard(user_id)) + "}");
         }
     }
 

@@ -187,6 +187,20 @@ public class CustomerDA {
         }
         return null;
     }
+    
+    public boolean confirmPassword(int id, String password) {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE id = ? AND password = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, id);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
 
     private void createConnection() {
         try {
