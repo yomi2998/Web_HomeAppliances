@@ -10,20 +10,24 @@
         <link rel="stylesheet" href="src/css/category.css">
         <link rel="stylesheet" href="src/css/feedback.css">
         <link rel="stylesheet" href="src/css/util.css">
+        <link rel="stylesheet" href="src/css/profile.css">
         <script type="text/javascript" src="src/js/jquery.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="src/js/init.js"></script>
         <script src="src/js/topup.js"></script>
         <script src="src/js/register.js"></script>
+        <script src="src/js/profile.js"></script>
         <%@ page contentType="text/html; charset=UTF-8" %>
         <%@ page import="jakarta.servlet.http.Cookie" %>
         <%@ page import="domain.Customer" %>
         <%@ page import="domain.Admin" %>
         <%@ page import="domain.Category" %>
+        <%@ page import="domain.Card" %>
         <%@ page import="java.util.List" %>
         <%@ page import="control.CustomerControl" %>
         <%@ page import="control.AdminControl" %>
         <%@ page import="control.CategoryControl" %>
+        <%@ page import="control.CardControl" %>
 
         <%
             //CONFIGURATION
@@ -187,7 +191,7 @@
                             <div class="profile-dropdown-content-container-body">
                                 <% if (!userType.equals("admin") && !userType.equals("staff")) { %>
                                 <div class="profile-dropdown-content-container-body-anchor">
-                                    <a href="/Web_HomeAppliances/Profile">My profile</a>
+                                    <a href="#" onclick="extension_toggle('profile-extension')">My profile</a>
                                 </div>
                                 <hr>
                                 <% if (userType.equals("customer")) {%>
@@ -289,10 +293,10 @@
                     </div>
                 </div>
                 <% } %>
-                    <form class="search-container right" method="get" action="search.jsp">
-                        <input type="text" placeholder="Search.." name="search" class="search-nelson" autocomplete="off" required>
-                        <button type="submit" class="right search-btn" ></button>
-                    </form>
+                <form class="search-container right" method="get" action="search.jsp">
+                    <input type="text" placeholder="Search.." name="search" class="search-nelson" autocomplete="off" required>
+                    <button type="submit" class="right search-btn" ></button>
+                </form>
             </div>
         </div>
         <div class="nelson-nav-extension" id="topup-extension">
@@ -385,7 +389,7 @@
                         <label><input autocomplete="off" type="checkbox" name="term" id="term"> I agree that the above information is correct</label>
                         <p id="invalid-term" class="hidden" style="color:red;">Please agree to above information.</p>
                     </div>
-                    
+
                     <div class="buttons-field">
                         <button class="nelson-button" onclick="extension_toggle('register-extension'); remove_reg_error()" type="reset">Cancel</button>
                         <input type="submit" class="nelson-button" onclick="remove_reg_error()" value="Register">
@@ -434,6 +438,126 @@
                         <input type="submit" class="nelson-button" value="Submit">
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class="nelson-nav-extension" id="profile-extension">
+            <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="height: 50px; margin: 20px auto;">
+            <div class="profile-container">
+                <h1 class="left">My Profile</h1>
+                <button class="nelson-button right" onclick="extension_toggle('profile-extension'); $('#profile-alter-pw-reset').click()">Back</button>
+                <div id="edit-panel">
+                <button class="nelson-button right" id="ext-profile-edit-pw" onclick="togglePasswordForm()">Edit password</button>
+                <button class="nelson-button right hidden" id="ext-profile-done" onclick="$('#profile-alter').click()">Done</button>
+                <button class="nelson-button right hidden" id="ext-profile-cancel" onclick="edit_profile()">Cancel</button>
+                <button class="nelson-button right hidden" id="ext-profile-pw-done" onclick="$('#profile-alter-pw').click()">Done</button>
+                <button class="nelson-button right hidden" id="ext-profile-pw-cancel" onclick="togglePasswordForm()">Cancel</button>
+                <button class="nelson-button right" id="ext-profile-edit" onclick="edit_profile()">Edit</button>
+            </div>
+                <hr>
+                <div class="profile-content">
+                    <div class="ext-left-profile">
+                        <img src="src/img/white/user.svg" alt="Profile" class="center profile-ext-img" style="height: 200px;">
+                        <h2>Nelson Lam</h2>
+                        <h3><%= userType.equals("") ? "Guest" : (userType.substring(0, 1).toUpperCase() + userType.substring(1)) %></h3>
+                        <p><a href="#" class="ext-profile-select ext-profile-selected" id="profile-info">User information</a></p>
+                        <% if (userType.equals("customer")) { %>
+                        <p><a href="#" class="ext-profile-select" id="profile-orders">Orders</a></p>
+                        <p><a href="#" class="ext-profile-select" id="profile-payment">Payment method</a></p>
+                        <p><a href="#" class="ext-profile-select" id="profile-shipping">Shipping address</a></p>
+                        <% } %>
+                    </div>
+                    <div id="ext-profile">
+                        <form method="post" id="profileForm">
+                            <div class="input-field">
+                                <p class="form-p">Name:</p>
+                                <input autocomplete="off" type="text" name="name" placeholder="<%= customer.getName() %>" value="<%= customer.getName() %>" class="nelson-input toggle-input" required disabled><br>
+                                <p id="profile-invalid-name" class="hidden" style="color:red;">Username already taken/illegal username.</p>
+                            </div>
+                            <div class="input-field">
+                                <p class="form-p">Username:</p>
+                                <input autocomplete="off" id="profile-username" type="text" name="username" placeholder="<%= customer.getUsername() %>" value="<%= customer.getUsername() %>" class="nelson-input toggle-input" required disabled><br>
+                            </div>
+                            <div class="input-field">
+                                <p class="form-p">Email:</p>
+                                <input autocomplete="off" type="email" name="email" placeholder="<%= customer.getEmail() %>" value="<%= customer.getEmail() %>" class="nelson-input toggle-input" required disabled>
+                                <p id="profile-invalid-email" class="hidden" style="color:red;">Invalid email format.</p>
+                            </div>
+                            <div class="input-field">
+                                <p class="form-p">Birthdate:</p>
+                                <input autocomplete="off" type="date" name="birthdate" value="<%= customer.getBirthDate() %>" value="<%= customer.getBirthDate() %>" class="nelson-input toggle-input" required disabled>
+                                <p id="profile-invalid-birth" class="hidden" style="color:red;">Invalid birth date.</p>
+                            </div>
+                            <div class="input-field profile-edit-show hidden">
+                                <p class="form-p">Confirm password:</p>
+                                <input autocomplete="off" type="password" name="password" placeholder="Verify if it is really you" class="nelson-input toggle-input" required disabled>
+                                <p id="profile-invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
+                            </div>
+                            <hr>
+                            <input type="submit" id="profile-alter" hidden>
+                        </form>
+                        <form method="post" id="profilePasswordForm" hidden>
+                            <div class="profile-edit-show">
+                                <div class="input-field">
+                                    <p class="form-p">Old password:</p>
+                                    <input autocomplete="off" type="password" name="opassword" placeholder="Enter old password" class="nelson-input toggle-input-pw" required>
+                                    <p id="invalid-password-old" class="hidden" style="color:red;">Password mismatch.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">New password:</p>
+                                    <input autocomplete="off" type="password" name="password" placeholder="Enter new password" class="nelson-input toggle-input-pw" required>
+                                    <p id="invalid-password-new" class="hidden" style="color:red;">Password mismatch.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Confirm password:</p>
+                                    <input autocomplete="off" type="password" name="cpassword" placeholder="Re-enter new password" class="nelson-input toggle-input-pw" required>
+                                    <p id="invalid-password-confirm-ii" class="hidden" style="color:red;">Password mismatch.</p>
+                                </div>
+                            </div>
+                            <input type="submit" id="profile-alter-pw" hidden>
+                            <input type="reset" id="profile-alter-pw-reset" hidden>
+                        </form>
+                    </div>
+                    <% if (userType.equals("customer")) { %>
+                    <div id="ext-payment" style="display: none">
+                        <h2>List of payment methods:</h2>
+                        <div class="payment-method-list">
+                            <div class="payment-method">
+                                <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
+                                <p class="card-info">CardHolder 1234-XXXX-XXXX-XXXX</p>
+                                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
+                            </div>
+                            <hr style="margin:0">
+                            <div class="payment-method">
+                                <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
+                                <p class="card-info">CardHolder 1234-XXXX-XXXX-XXXX</p>
+                                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
+                            </div>
+                            <hr style="margin:0">
+                            <div class="payment-method">
+                                <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
+                                <p class="card-info">CardHolder 1234-XXXX-XXXX-XXXX</p>
+                                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
+                            </div>
+                            <hr style="margin:0">
+                            <div class="payment-method">
+                                <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
+                                <p class="card-info">CardHolder 1234-XXXX-XXXX-XXXX</p>
+                                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
+                            </div>
+                            <hr style="margin:0">
+                            <div class="payment-method">
+                                <p>Add more</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ext-order" style="display: none">
+                        <p>hello world 3</p>
+                    </div>
+                    <div id="ext-shipping" style="display: none">
+                        <p>hello world 3</p>
+                    </div>
+                    <% } %>
+                </div>
             </div>
         </div>
         <div id="snackbar">

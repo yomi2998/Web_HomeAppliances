@@ -38,6 +38,36 @@ public class CustomerDA {
     }
 
     public boolean updateCustomer(Customer customer) {
+        String queryStr = "UPDATE " + tableName + " SET name = ?, email = ?, birth_date = ? WHERE id = ? AND password = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1, customer.getName());
+            stmt.setString(2, customer.getEmail());
+            stmt.setDate(3, new java.sql.Date(customer.getBirthDate().getTime()));
+            stmt.setInt(4, customer.getId());
+            stmt.setString(5, customer.getPassword());
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean updateCustomerPassword(int id, String oldPass, String newPass) {
+        String queryStr = "UPDATE " + tableName + " SET password = ? WHERE id = ? AND password = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1, newPass);
+            stmt.setInt(2, id);
+            stmt.setString(3, oldPass);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean updateCustomerPrivileged(Customer customer) {
         String queryStr = "UPDATE " + tableName + " SET name = ?, username = ?, password = ?, email = ?, balance = ?, birth_date = ? WHERE id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);

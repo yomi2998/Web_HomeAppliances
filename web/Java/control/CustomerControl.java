@@ -27,6 +27,10 @@ public class CustomerControl {
     public boolean updateCustomer(Customer customer) {
         return customerDA.updateCustomer(customer);
     }
+    
+    public boolean updateCustomerPassword(int id, String old, String newPass) {
+        return customerDA.updateCustomerPassword(id, old, newPass);
+    }
 
     public boolean deleteCustomer(int id) {
         return customerDA.deleteCustomer(id);

@@ -1,0 +1,26 @@
+<html>
+<header>
+    <title>Pay Page</title>
+    <link rel="stylesheet" href="src/css/pay.css">
+</header>
+
+<body>
+    <div class="payment-method">
+        <h1>Payment</h1>
+        <img src="src\img\visa.jpeg" style="width: 20%; height: 8%;">
+        <input type="radio" id="payment" name="payment" value="visa">
+        <br><br>
+        <img src="src\img\cash.png" style="width: 20%; height: 8%;">
+        <input type="radio" id="payment" name="payment" value="cash">
+        <br><br>
+        <img src="src\img\nelsonpay.png" style="width: 20%; height: 8%;">
+        <input type="radio" id="payment" name="payment" value="card">
+        <br><br>
+        <br><br>
+        
+    <button onclick="history.back()">Cancel</button>
+    <button onclick="submitPayment()">Confirm Payment</button>
+    </div>
+</body>
+
+</html>

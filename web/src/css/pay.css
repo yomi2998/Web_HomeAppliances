@@ -1,0 +1,20 @@
+html {
+    background-color: black;
+    color:white;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin:1% auto;
+    width: 95%;
+}
+
+.payment-method{
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: rgba(81, 81, 81, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-top:8%;
+}
+

@@ -1,0 +1,97 @@
+
+
+.profile-container {
+    width: 800px;
+    min-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #222222;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    color:rgb(255, 255, 255);
+}
+
+.profile-container h1 {
+    text-align: center;
+}
+
+.profile-content {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    grid-gap: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.profile-ext-img {
+    border-radius: 50%;
+    border: 10px solid white;
+}
+
+.ext-left-profile h2 {
+    margin-bottom: 0;
+}
+
+.ext-left-profile h3 {
+    margin-top: 5px;
+    margin-bottom: 50px;
+}
+
+.profile-container .nelson-button {
+    margin-top: 20px;
+}
+
+.ext-profile-select {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    transition: all 0.3s;
+}
+
+.ext-profile-select:hover {
+    color: rgb(158, 158, 158);
+}
+
+.ext-profile-selected {
+    color: rgb(158, 158, 158);
+}
+
+.payment-method-list {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background-color: #161616;
+    border: 1px solid #333333;
+    border-radius: 20px;
+}
+
+.payment-method {
+    display: flex;
+    text-align: left;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.card-info {
+    text-align: left !important;
+}
+
+.card-logo, .pay-extend-img {
+    margin-top: auto;
+    margin-bottom: auto;
+    transition: all 0.3s;
+}
+
+.pay-extend-img {
+    padding: 10px;
+}
+
+.pay-extend-img:hover {
+    cursor: pointer;
+    background-color: #222222;
+    border-radius: 20px;
+}
