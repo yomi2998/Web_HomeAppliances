@@ -67,6 +67,12 @@ function addCoverScreen() {
 
 $(document).ready(function () {
   console.log("hello world!");
+  setTimeout(function () {
+    $(".nelson-greeter").css("opacity", "0");
+    setTimeout(function () {
+      $(".nelson-greeter").css("display", "none");
+    }, 300);
+  }, 1500);
   $("#inoti").click(function () {
     if ($(".noti-dropdown .noti-dropdown-content").css("display") === "block") {
       $(".noti-dropdown .noti-dropdown-content").css("display", "none");

@@ -288,6 +288,26 @@ html::-webkit-scrollbar-thumb {
     margin-top: 10px;
 }
 
+.nelson-greeter {
+    background: #000000;
+    position: absolute;
+    margin: 0 auto;
+    z-index: 888;
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: all 0.2s;
+}
+
+.nelson-greeter img {
+    max-width: 60%;
+    height: auto;
+    margin-top: 20px;
+}
+
 .nelson-nav-extension {
     background: #0000007e;
     backdrop-filter: blur(10px) !important;

@@ -44,6 +44,9 @@
     </head>
 
     <body>
+        <div class="nelson-greeter">
+            <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="width: 40%; margin: auto;">
+        </div>
         <%
         Customer customer = new Customer();
         Admin admin = new Admin();
@@ -73,7 +76,8 @@
             cc.destroy();
             if (customer != null) {
             if (!ALLOW_CUSTOMER) {
-        %><script>alert("You are not allowed to view this page."); window.location.href = "/Web_HomeAppliances";</script> <%
+        %><script>alert("You are not allowed to view this page.");</script> <%
+                return;
             }
                 isLogin = true;
             } else {
@@ -89,7 +93,8 @@
             ac.destroy();
             if (admin != null) {
             if (!ALLOW_ADMIN) {
-        %><script>alert("You are not allowed to view this page."); window.location.href = "/Web_HomeAppliances";</script> <%
+        %><script>alert("You are not allowed to view this page.");</script> <%
+                return;
             }
                 isLogin = true;
             } else {
