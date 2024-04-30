@@ -51,8 +51,183 @@ function remove_card_alter_error() {
   $("#alter-card-invalid-cvv").addClass("hidden");
 }
 
+function remove_card_add_error() {
+  $("#add-card-invalid-number").addClass("hidden");
+  $("#add-card-invalid-name").addClass("hidden");
+  $("#add-card-invalid-expiry-date").addClass("hidden");
+  $("#add-card-invalid-cvv").addClass("hidden");
+}
+
 $(document).ready(function () {
-  $(".card-delete-button").click(function () {
+  var cardAddForm = $("#cardAddForm");
+  cardAddForm.on("submit", function (event) {
+    remove_card_add_error();
+    event.preventDefault();
+    var formData = cardAddForm.serializeArray();
+    var hasErr = false;
+    var sendData = {
+      card_number: "",
+      name: "",
+      expiry_date: "",
+      cvv: "",
+      password: "",
+    };
+    formData.forEach(function (item) {
+      switch (item.name) {
+        case "card_number":
+          var cardNumberRegex = /^[0-9]{16}$/;
+          if (!cardNumberRegex.test(item.value)) {
+            $("#add-card-invalid-number")
+              .text("Card number must be 16 digits.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.card_number = item.value;
+          break;
+        case "name":
+          if (item.value.length < 2) {
+            $("#add-card-invalid-name")
+              .text("Name must be 2 or more characters.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+
+          var nameWords = item.value.split(" ");
+          var isCapitalized = true;
+          nameWords.forEach(function (word) {
+            if (
+              word.length > 0 &&
+              !word[0].match(
+                /[A-Z\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7AF]/
+              )
+            ) {
+              // The regex now includes the Unicode ranges for CJK characters:
+              // Chinese: \u4E00-\u9FFF
+              // Japanese Hiragana and Katakana: \u3040-\u309F, \u30A0-\u30FF
+              // Korean Hangul: \uAC00-\uD7AF
+              isCapitalized = false;
+            }
+          });
+
+          if (!isCapitalized) {
+            $("#add-card-invalid-name")
+              .text("First character must be uppercase.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+
+          var numericRegex = /[0-9]/;
+          var symbolRegex = /[!@#$%^&*(),.?":{}|<>]/;
+          if (numericRegex.test(item.value)) {
+            $("#add-card-invalid-name")
+              .text("Name must not contain numbers.")
+              .removeClass("hidden");
+            hasErr = true;
+          } else if (symbolRegex.test(item.value)) {
+            $("#add-card-invalid-name")
+              .text("Name must not contain symbols.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.name = item.value;
+          break;
+        case "expiry_date":
+          // eg: 03/29
+          var expiryDateRegex = /^(0[1-9]|1[0-2])\/[0-9]{2}$/;
+          if (!expiryDateRegex.test(item.value)) {
+            $("#add-card-invalid-expiry")
+              .text("Expiry date must be in MM/YY format.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.expiry_date = item.value;
+          break;
+        case "cvv":
+          var cvvRegex = /^[0-9]{3}$/;
+          if (!cvvRegex.test(item.value)) {
+            $("#add-card-invalid-cvv")
+              .text("CVV must be numeric, 3 digits.")
+              .removeClass("hidden");
+            hasErr = true;
+          }
+          sendData.cvv = item.value;
+          break;
+      }
+    });
+    if (hasErr) {
+      return;
+    }
+    var password = prompt(
+      "To verify it's you, please enter your password.",
+      ""
+    );
+    if (password === null) {
+      return;
+    }
+    sendData.password = password;
+    $.ajax({
+      url: "/Web_HomeAppliances/CardAdd",
+      type: "POST",
+      data: sendData,
+      success: function (data) {
+        console.log(data);
+        const out = JSON.parse(data);
+          if (out.success) {
+            showSnackbar(
+              "src/img/white/check-circle.svg",
+              "Card added successfully",
+              "Please reload your page to take effect."
+            );
+            $("#card-add-panel").hide();
+            $(".card-add").hide();
+            $(".list-div").show();
+            var card = out.card;
+            var cardn = card.card_number;
+            var cardInfo = `<div class="payment-method" id="${card.id}">
+            <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
+            <p class="card-info" id="${card.id}">${card.name} ${cardn.substring(0, 4)}-XXXX-XXXX-XXXX</p>
+            <div class="card-dropdown" id="${card.id}">
+                <img src="src/img/white/more-horizontal.svg" alt="more" class="right pay-extend-img" style="height: 30px;">
+                <div class="card-dropdown-content" id="${card.id}">
+                    <a href="#" class="card-edit-button" id="${card.id}">Edit</a>
+                    <a href="#" class="card-delete-button" id="${card.id}">Delete</a>
+                </div>
+            </div>
+        </div>
+        <hr style="margin:0" id="${card.id}">`;
+            $(".payment-method-list").prepend(cardInfo);
+            $("#card-insert-reset").click();
+          } else {
+            switch (out.cause) {
+              case "password":
+                showSnackbar(
+                  "src/img/white/alert-circle.svg",
+                  "Password incorrect",
+                  "Please try again."
+                );
+                break;
+              case "card":
+                showSnackbar(
+                  "src/img/white/alert-circle.svg",
+                  "Card already exists",
+                  "Please try again."
+                );
+                break;
+            }
+          }
+      },
+    });
+  });
+
+  $("#add-card").click(function () {
+    $("#card-add-panel").show();
+    $("#card-edit-panel").hide();
+    $(".card-edit").hide();
+    $(".list-div").hide();
+    $(".card-add").show();
+  });
+  // $(".card-delete-button").click(function () {
+  $(document).on("click", ".card-delete-button", function () {
     var id = $(this).attr("id");
     var pw = prompt("To verify it's you, please enter your password.", "");
     if (pw === null) {
@@ -73,7 +248,7 @@ $(document).ready(function () {
           $(".payment-method" + `#${id}`).remove();
           $(`hr#${id}`).remove();
         } else {
-          switch(out.cause) {
+          switch (out.cause) {
             case "password":
               showSnackbar(
                 "src/img/white/alert-circle.svg",
@@ -88,7 +263,6 @@ $(document).ready(function () {
                 "Please try again."
               );
               break;
-          
           }
         }
       },
@@ -191,12 +365,14 @@ $(document).ready(function () {
           sendData.cvv = item.value;
           break;
       }
-    }
-    );
+    });
     if (hasErr) {
       return;
     }
-    var password = prompt("To verify it's you, please enter your password.", "");
+    var password = prompt(
+      "To verify it's you, please enter your password.",
+      ""
+    );
     if (password === null) {
       return;
     }
@@ -218,11 +394,13 @@ $(document).ready(function () {
           // note that out variable does not contain the updated card information
           // so we use the form data to update the card info
           $("#card-edit-panel").hide();
-          $(".card-edit").toggle();
-          $(".list-div").toggle();
-          $(".card-info" + `#${id}`).text(`${sendData.name} ${sendData.card_number}-XXXX-XXXX-XXXX`);
+          $(".card-edit").hide();
+          $(".list-div").show();
+          $(".card-info" + `#${id}`).text(
+            `${sendData.name} ${sendData.card_number}-XXXX-XXXX-XXXX`
+          );
         } else {
-          switch(out.cause) {
+          switch (out.cause) {
             case "password":
               showSnackbar(
                 "src/img/white/alert-circle.svg",
@@ -242,13 +420,18 @@ $(document).ready(function () {
       },
     });
   });
+  $("#ext-card-add-cancel").click(function () {
+    $("#card-add-panel").hide();
+    $(".card-add").hide();
+    $(".list-div").show();
+  });
   $("#ext-card-edit-cancel").click(function () {
     $("#card-edit-panel").hide();
-    $("#card-add-panel").show();
-    $(".card-edit").toggle();
-    $(".list-div").toggle();
+    $(".card-edit").hide();
+    $(".list-div").show();
   });
-  $(".card-edit-button").click(function () {
+  //$(".card-edit-button").click(function () {
+  $(document).on("click", ".card-edit-button", function () {
     var id = $(this).attr("id");
     var pw = prompt("To verify it's you, please enter your password.", "");
     if (pw === null) {
@@ -263,15 +446,15 @@ $(document).ready(function () {
         if (out.success) {
           $("#card-edit-panel").show();
           $("#card-add-panel").hide();
-          $(".card-edit").toggle();
-          $(".list-div").toggle();
+          $(".card-edit").show();
+          $(".list-div").hide();
           const card = out.card;
           $("#alter-card-id").val(card.id);
           $("#alter-card-number").val(card.card_number);
           $("#alter-card-name").val(card.name);
           $("#alter-card-expiry-date").val(card.expiry_date);
         } else {
-          switch(out.cause) {
+          switch (out.cause) {
             case "password":
               showSnackbar(
                 "src/img/white/alert-circle.svg",
@@ -286,13 +469,13 @@ $(document).ready(function () {
                 "Please try again."
               );
               break;
-          
           }
         }
       },
     });
   });
-  $(".card-dropdown").click(function () {
+  //$(".card-dropdown").click(function () {
+  $(document).on("click", ".card-dropdown", function () {
     var id = $(this).attr("id");
     // card-dropdown-content is the class of the dropdown content
     $("#" + id + ".card-dropdown-content").show();

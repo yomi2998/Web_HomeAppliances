@@ -105,6 +105,22 @@ public class CardDA {
         }
     }
 
+    public Card retrieveLatestCard(int user_id) {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE user_id = ? ORDER BY create_date DESC FETCH FIRST ROW ONLY";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, user_id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Card(rs.getInt("id"), rs.getInt("user_id"), rs.getString("name"), rs.getString("card_number"), rs.getString("expiry_date"), rs.getString("cvv"));
+            }
+            return null;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
     private void createConnection() {
         try {
             conn = DriverManager.getConnection(host, user, password);

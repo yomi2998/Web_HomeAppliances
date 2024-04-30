@@ -32,6 +32,10 @@ public class CardControl {
         return cardDA.retrieveCard(id);
     }
 
+    public Card retrieveLatestCard(int user_id) {
+        return cardDA.retrieveLatestCard(user_id);
+    }
+
     public boolean updateCard(Card card) {
         return cardDA.updateCard(card);
     }

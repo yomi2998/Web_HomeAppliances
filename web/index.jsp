@@ -460,7 +460,7 @@
                     </div>
                     <div id="card-add-panel" hidden>
                         <button class="nelson-button right" id="ext-card-add-done" onclick="$('#card-insert').click()">Done</button>
-                        <button class="nelson-button right" id="ext-card-add-cancel" onclick="toggleCardForm()">Cancel</button>
+                        <button class="nelson-button right" id="ext-card-add-cancel" onclick="$('#card-insert-reset').click()">Cancel</button>
                     </div>
                 </div>
                 <hr>
@@ -546,7 +546,7 @@
                                 </div>
                                 <hr style="margin:0" id="<%= c.getId() %>">
                                 <% } %>
-                                <div class="payment-method">
+                                <div class="payment-method" id="add-card">
                                     <p>Add more...</p>
                                 </div>
                             </div>
@@ -556,26 +556,53 @@
                                 <input type="password" name="password" hidden>
                                 <input type="text" name="card_id" id="alter-card-id" hidden>
                                 <div class="input-field">
-                                    <p class="form-p">Card Name:</p>
-                                    <input autocomplete="off" id="alter-card-name" type="text" name="name" placeholder="Card Name" class="nelson-input" required><br>
+                                    <p class="form-p">Cardholder's Name:</p>
+                                    <input autocomplete="off" id="alter-card-name" type="text" name="name" placeholder="Enter cardholder's name" class="nelson-input" required><br>
                                     <p id="alter-card-invalid-name" class="hidden" style="color:red;">Invalid card name.</p>
                                 </div>
                                 <div class="input-field">
                                     <p class="form-p">Card Number:</p>
-                                    <input autocomplete="off" id="alter-card-number" type="text" name="card_number" placeholder="Card Number" class="nelson-input" required><br>
+                                    <input autocomplete="off" id="alter-card-number" type="text" name="card_number" placeholder="Enter card number" class="nelson-input" required><br>
                                     <p id="alter-card-invalid-number" class="hidden" style="color:red;">Invalid card number.</p>
                                 </div>
                                 <div class="input-field">
                                     <p class="form-p">ExpiryDate (MM/YY):</p>
-                                    <input autocomplete="off" id="alter-card-expiry-date" type="text" name="expiry_date" placeholder="Expiry Date" class="nelson-input" required><br>
+                                    <input autocomplete="off" id="alter-card-expiry-date" type="text" name="expiry_date" placeholder="Enter expiry date" class="nelson-input" required><br>
                                     <p id="alter-card-invalid-expiry" class="hidden" style="color:red;">Invalid expiry date.</p>
                                 </div>
                                 <div class="input-field">
                                     <p class="form-p">CVV:</p>
-                                    <input autocomplete="off" id="alter-card-cvv" type="text" name="cvv" placeholder="CVV" class="nelson-input" required><br>
+                                    <input autocomplete="off" id="alter-card-cvv" type="text" name="cvv" placeholder="Enter CVV" class="nelson-input" required><br>
                                     <p id="alter-card-invalid-cvv" class="hidden" style="color:red;">Invalid cvv.</p>
                                 </div>
                                 <input type="submit" id="card-alter" hidden>
+                            </form>
+                        </div>
+                        <div class="card-add" hidden>
+                            <form method="post" id="cardAddForm">
+                                <input type="password" name="password" hidden>
+                                <div class="input-field">
+                                    <p class="form-p">Cardholder's Name:</p>
+                                    <input autocomplete="off" id="add-card-name" type="text" name="name" placeholder="Enter cardholder's name" class="nelson-input" required><br>
+                                    <p id="add-card-invalid-name" class="hidden" style="color:red;">Invalid card name.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">Card Number:</p>
+                                    <input autocomplete="off" id="add-card-number" type="text" name="card_number" placeholder="Enter card number" class="nelson-input" required><br>
+                                    <p id="add-card-invalid-number" class="hidden" style="color:red;">Invalid card number.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">ExpiryDate (MM/YY):</p>
+                                    <input autocomplete="off" id="add-card-expiry-date" type="text" name="expiry_date" placeholder="Enter expiry date" class="nelson-input" required><br>
+                                    <p id="add-card-invalid-expiry" class="hidden" style="color:red;">Invalid expiry date.</p>
+                                </div>
+                                <div class="input-field">
+                                    <p class="form-p">CVV:</p>
+                                    <input autocomplete="off" id="add-card-cvv" type="text" name="cvv" placeholder="CVV" class="nelson-input" required><br>
+                                    <p id="add-card-invalid-cvv" class="hidden" style="color:red;">Invalid cvv.</p>
+                                </div>
+                                <input type="submit" id="card-insert" hidden>
+                                <input type="reset" id="card-insert-reset" hidden>
                             </form>
                         </div>
                     </div>
