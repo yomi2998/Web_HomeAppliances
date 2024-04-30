@@ -306,6 +306,9 @@
                 </form>
             </div>
         </div>
+        <% if (userType.equals("admin") || userType.equals("staff")) { %>
+        </div>
+        <% } %>
         <div class="nelson-nav-extension" id="topup-extension">
             <img src="src/img/white/nelson.png" alt="Nelson Logo" style="margin-top:20px;height: 50px;">
             <br>
