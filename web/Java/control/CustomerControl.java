@@ -55,6 +55,10 @@ public class CustomerControl {
     public boolean confirmPassword(int id, String password) {
         return customerDA.confirmPassword(id, password);
     }
+    
+    public boolean topUp(int id, int card_id, String password, double amt) {
+        return customerDA.topUp(id, card_id, password, amt);
+    }
 
     public void destroy() {
         customerDA.destroy();

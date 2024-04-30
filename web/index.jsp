@@ -183,7 +183,7 @@
                                         <%= customer.getName() %>
                                     </h1>
                                 </div>
-                                <h3 class="center" style="margin-top:0;">Balance: RM <%= String.format("%.2f", customer.getBalance()) %></h3>
+                                <h3 class="center" style="margin-top:0;" id="my-balance">Balance: RM <%= String.format("%.2f", customer.getBalance()) %></h3>
                                 <% break;
                                 case "admin": %>
                                 <%= admin.getName() %>
@@ -310,7 +310,8 @@
                 </header>
                 <div class="balance" id="balance">Current Balance: RM 0</div>
                 <hr>
-                <form>
+                <form id="topup-form">
+                    <input type="text" name="amount" id="topup-amount" value="0" hidden>
                     <h2 id="topup-prompt-title">Top Up Amount</h2>
                     <div class="amount-buttons">
                         <button type="button" class="nelson-button" value="10">RM 10</button>
@@ -325,18 +326,30 @@
                     <div class="selected-amount">
                         Selected Amount: <span id="displayedAmount">RM 0</span>
                     </div>
+                    <p id="topup-invalid-amount" style="color: red;" hidden>Invalid</p>
                     <hr>
                     <h2>Payment</h2>
-                    <!-- modify later -->
-                    <div id="cardSection" class="form-group">
-                        <label for="cardNumber"><p>Card Number:</p></label>
-                        <input type="text" id="cardNumber" name="cardNumber" class="nelson-input" placeholder="Card number" required>
-                        <label for="cvv"><p>CVV:</p></label>
-                        <input type="text" id="cvv" name="cvv" class="nelson-input" placeholder="CVV" required>
-                        <label for="expiryDate"><p>Expiry date:</p></label>
-                        <input type="text" id="expiryDate" name="expiryDate" class="nelson-input" placeholder="Expiry Date" required>
+                    <div class="input-field">
+                        <p class="form-p">Select card:</p>
+                        <select class="nelson-select" name="card_id" id="topup-card-select">
+                            <option value="0">Select card</option>
+                            <%
+                                CardControl cardControl = new CardControl();
+                                List<Card> cards = cardControl.retrieveCards(customer.getId());
+                                cardControl.destroy();
+                                for (Card c : cards) {
+                            %>
+                            <option value="<%= c.getId() %>"><%= c.getName() %> <%= c.getCard_number().substring(0, 4) %>-XXXX-XXXX-XXXX</option>
+                            <%
+                                }
+                            %>
+                        </select>
+                        <button type="button" class="nelson-button" onclick="extension_toggle('profile-extension'); $('#profile-payment').click(); $('#add-card').click();">Add card</button>
+                        <button type="button" class="nelson-button" id="topup-card-refresh">Refresh</button>
                     </div>
-                    <button type="button" class="nelson-button" onclick="extension_toggle('topup-extension')">Cancel</button>
+                    <p id="topup-invalid-card" style="color: red;" hidden>Invalid</p>
+                    <hr>
+                    <button type="reset" class="nelson-button" onclick="extension_toggle('topup-extension'); $('#displayedAmount').text(`RM 0`);">Cancel</button>
                     <button type="submit" class="nelson-button">Top Up</button>
                 </form>
                 <hr>
@@ -544,7 +557,7 @@
                         <div class="list-div">
                             <h2>List of cards:</h2>
                             <div class="payment-method-list">
-                                <% CardControl cardControl = new CardControl(); List<Card> cards = cardControl.retrieveCards(customer.getId()); cardControl.destroy(); for (Card c : cards) { %>
+                                <% for (Card c : cards) { %>
                                 <div class="payment-method" id="<%= c.getId() %>">
                                     <img src="src/img/white/credit-card.svg" alt="card" class="left card-logo" style="height: 30px;">
                                     <p class="card-info" id="<%= c.getId() %>"><%= c.getName() %> <%= c.getCard_number().substring(0, 4) %>-XXXX-XXXX-XXXX</p>

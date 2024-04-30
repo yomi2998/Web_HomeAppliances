@@ -196,7 +196,10 @@ CREATE TABLE topup (
     amount DECIMAL(10, 2) NOT NULL,
     is_refund BOOLEAN NOT NULL DEFAULT FALSE,
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    card_id INT NOT NULL DEFAULT 0, -- 0 = Not saved
+    card_holder VARCHAR(100) NOT NULL,
+    card_number VARCHAR(20) NOT NULL,
+    expiry_date VARCHAR(10) NOT NULL,
+    cvv VARCHAR(3) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE CASCADE
 );
 

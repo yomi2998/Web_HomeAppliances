@@ -1,6 +1,7 @@
 package da;
 
 import domain.Customer;
+import domain.Card;
 import java.sql.*;
 import Java.TokenGenerator;
 import java.util.List;
@@ -16,6 +17,8 @@ public class CustomerDA {
     private String user = "nbuser";
     private String password = "nbuser";
     private String tableName = "customer";
+    private String cardTableName = "card";
+    private String topUpTableName = "topup";
     private String sessionTableName = "customer_session";
     private Connection conn;
     private PreparedStatement stmt;
@@ -196,6 +199,49 @@ public class CustomerDA {
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
             return rs.next();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean topUp(int id, int card_id, String password, double amt) {
+        String queryStr = "UPDATE " + tableName + " SET balance = balance + ? WHERE id = ? AND password = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setDouble(1, amt);
+            stmt.setInt(2, id);
+            stmt.setString(3, password);
+            return stmt.executeUpdate() > 0 && commitTopUpTransaction(card_id, amt);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean commitTopUpTransaction(int id, double amt) {
+        // first we get the card based on id
+        // we get card_number, expiry_date, cvv, name
+        // then we insert into topup table
+        
+        String queryStr = "SELECT * FROM " + cardTableName + " WHERE id = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Card card = new Card(rs.getInt("id"), rs.getInt("user_id"), rs.getString("name"), rs.getString("card_number"), rs.getString("expiry_date"), rs.getString("cvv"));
+                queryStr = "INSERT INTO " + topUpTableName + " (user_id, amount, card_number, expiry_date, cvv, card_holder) VALUES (?, ?, ?, ?, ?, ?)";
+                stmt = conn.prepareStatement(queryStr);
+                stmt.setInt(1, card.getUser_id());
+                stmt.setDouble(2, amt);
+                stmt.setString(3, card.getCard_number());
+                stmt.setString(4, card.getExpiry_date());
+                stmt.setString(5, card.getCvv());
+                stmt.setString(6, card.getName());
+                return stmt.executeUpdate() > 0;
+            }
+            return false;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;

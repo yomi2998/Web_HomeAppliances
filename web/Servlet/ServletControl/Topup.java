@@ -12,17 +12,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
-import com.google.gson.Gson;
 
-import domain.Card;
-import control.CardControl;
+import control.CustomerControl;
 
 /**
  *
  * @author superme
  */
-@WebServlet(name = "CardRetrieve", urlPatterns = {"/CardRetrieve"})
-public class CardRetrieve extends HttpServlet {
+@WebServlet(name = "Topup", urlPatterns = {"/Topup"})
+public class Topup extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,16 +35,18 @@ public class CardRetrieve extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            Cookie cookies[] = request.getCookies();
-            int user_id = 0;
-            for (Cookie c : cookies) {
-                if (c.getName().equals("id")) {
-                    user_id = Integer.parseInt(c.getValue());
+            double amount = Double.parseDouble(request.getParameter("amount"));
+            String password = request.getParameter("password");
+            int card_id = Integer.parseInt(request.getParameter("card_id"));
+            int id = 0;
+            Cookie[] cookies = request.getCookies();
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id")) {
+                    id = Integer.parseInt(cookie.getValue());
                 }
             }
-            CardControl cardControl = new CardControl();
-            Gson gson = new Gson();
-            out.print(gson.toJson(cardControl.retrieveCards(user_id)));
+            CustomerControl cc = new CustomerControl();
+            out.print("{\"success\":" + cc.topUp(id, card_id, password, amount) + "}");
         }
     }
 
