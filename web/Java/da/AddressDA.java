@@ -109,6 +109,42 @@ public class AddressDA {
         }
     }
 
+    public Address retrieveAddress(int id) {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE id = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Address(rs.getInt("id"), rs.getInt("user_id"), rs.getString("address"), rs.getString("address_2"),
+                        rs.getString("city"), rs.getString("state"), rs.getString("zip_code"), rs.getString("recipient_name"),
+                        rs.getString("contact_number"));
+            }
+            return null;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    public Address retrieveLatestAddress(int user_id) {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE user_id = ? ORDER BY create_date DESC FETCH FIRST ROW ONLY";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, user_id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Address(rs.getInt("id"), rs.getInt("user_id"), rs.getString("address"), rs.getString("address_2"),
+                        rs.getString("city"), rs.getString("state"), rs.getString("zip_code"), rs.getString("recipient_name"),
+                        rs.getString("contact_number"));
+            }
+            return null;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
     public void destroy() {
         try {
             conn.close();

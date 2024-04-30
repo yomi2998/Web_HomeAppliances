@@ -13,8 +13,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
 
-import domain.Card;
-import control.CardControl;
+import domain.Address;
+import control.AddressControl;
 import control.CustomerControl;
 import com.google.gson.Gson;
 
@@ -22,8 +22,8 @@ import com.google.gson.Gson;
  *
  * @author superme
  */
-@WebServlet(name = "CardAdd", urlPatterns = {"/CardAdd"})
-public class CardAdd extends HttpServlet {
+@WebServlet(name = "AddressAdd", urlPatterns = {"/AddressAdd"})
+public class AddressAdd extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,12 +52,15 @@ public class CardAdd extends HttpServlet {
                 return;
             }
             String name = request.getParameter("name");
-            String card_number = request.getParameter("card_number");
-            String expiry_date = request.getParameter("expiry_date");
-            String cvv = request.getParameter("cvv");
-            Card card = new Card(-1, user_id, name, card_number, expiry_date, cvv);
-            CardControl cardControl = new CardControl();
-            out.print("{\"success\":" + cardControl.insertCard(card) + ", \"cause\":\"card\", \"card\":" + new Gson().toJson(cardControl.retrieveLatestCard(user_id)) + "}");
+            String address = request.getParameter("address");
+            String address_2 = request.getParameter("address_2");
+            String city = request.getParameter("city");
+            String state = request.getParameter("state");
+            String zip_code = request.getParameter("zip_code");
+            String contact_num = request.getParameter("contact_num");
+            Address addr = new Address(-1, user_id, address, address_2, city, state, zip_code, name, contact_num);
+            AddressControl addrControl = new AddressControl();
+            out.print("{\"success\":" + addrControl.insertAddress(addr) + ", \"cause\":\"address\", \"address\":" + new Gson().toJson(addrControl.retrieveLatestAddress(user_id)) + "}");
         }
     }
 

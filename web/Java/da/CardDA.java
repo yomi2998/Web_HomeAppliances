@@ -55,11 +55,11 @@ public class CardDA {
         }
     }
 
-    public boolean insertCard(Card card, int user_id) {
+    public boolean insertCard(Card card) {
         String queryStr = "INSERT INTO " + tableName + " (user_id, name, card_number, expiry_date, cvv) VALUES (?, ?, ?, ?, ?)";
         try {
             stmt = conn.prepareStatement(queryStr);
-            stmt.setInt(1, user_id);
+            stmt.setInt(1, card.getUser_id());
             stmt.setString(2, card.getName());
             stmt.setString(3, card.getCard_number());
             stmt.setString(4, card.getExpiry_date());

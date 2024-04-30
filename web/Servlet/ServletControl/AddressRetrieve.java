@@ -12,18 +12,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
-
-import domain.Card;
-import control.CardControl;
-import control.CustomerControl;
 import com.google.gson.Gson;
+
+import domain.Address;
+import control.AddressControl;
 
 /**
  *
  * @author superme
  */
-@WebServlet(name = "CardAdd", urlPatterns = {"/CardAdd"})
-public class CardAdd extends HttpServlet {
+@WebServlet(name = "AddressRetrieve", urlPatterns = {"/AddressRetrieve"})
+public class AddressRetrieve extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,23 +40,13 @@ public class CardAdd extends HttpServlet {
             Cookie cookies[] = request.getCookies();
             int user_id = 0;
             for (Cookie c : cookies) {
-                if (c.getName().equals("id")) {
+                if (c.getName().equals("user_id")) {
                     user_id = Integer.parseInt(c.getValue());
                 }
             }
-            String password = request.getParameter("password");
-            CustomerControl customerControl = new CustomerControl();
-            if (!customerControl.confirmPassword(user_id, password)) {
-                out.print("{\"success\":false, \"cause\":\"password\"}");
-                return;
-            }
-            String name = request.getParameter("name");
-            String card_number = request.getParameter("card_number");
-            String expiry_date = request.getParameter("expiry_date");
-            String cvv = request.getParameter("cvv");
-            Card card = new Card(-1, user_id, name, card_number, expiry_date, cvv);
-            CardControl cardControl = new CardControl();
-            out.print("{\"success\":" + cardControl.insertCard(card) + ", \"cause\":\"card\", \"card\":" + new Gson().toJson(cardControl.retrieveLatestCard(user_id)) + "}");
+            AddressControl addressControl = new AddressControl();
+            Gson gson = new Gson();
+            out.print(gson.toJson(addressControl.retrieveAddresses(user_id)));
         }
     }
 

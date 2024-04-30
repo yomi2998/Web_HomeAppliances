@@ -20,8 +20,8 @@ public class CardControl {
         cardDA = new CardDA();
     }
 
-    public boolean insertCard(Card card, int user_id) {
-        return cardDA.insertCard(card, user_id);
+    public boolean insertCard(Card card) {
+        return cardDA.insertCard(card);
     }
 
     public List<Card> retrieveCards(int user_id) {
