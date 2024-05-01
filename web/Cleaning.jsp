@@ -43,62 +43,71 @@
 
         <div class="grid-container">
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 1">
+                <img src="src/img/Product/Cleaning & Laundry/AirPurifier.png" alt="Product Image 1">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <h2>COWAY LOMBOK 3rdGen Air Purifier</h2>
+                    <p>0-Pressure Touch Panel</p><br>
+                    <p>3-stage Speed Control</p><br>
+                    <p>Child Lock System</p><br>
+                    <p>Price: RM 2999.00</p>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
 
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 2">
+                <img src="src/img/Product/Cleaning & Laundry/DishWasher.avif" alt="Product Image 2">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <h2>IKEA LAGAN Integrated dishwasher</h2>
+                    <p>Muffled sound signal indicates when program finished</p><br>
+                    <p>Delayed start function of up to 3 hours</p><br>
+                    <p>Height of upper basket is Adjustable</p><br>
+                    <p>Price: RM 1999.00</p>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
 
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 3">
+                <img src="src/img/Product/Cleaning & Laundry/IronSystem.avif" alt="Product Image 3">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <h2>Laurastar SMART I Ironing System</h2>
+                    <p>Hygenic Steam - Kills 99.999% of bacteria, dust mites and fungi in your textiles</p><br>
+                    <p>3 in 1 iron - steam, iron and purify your textiles with the Laurastar performance</p><br>
+                    <p>Price: RM 9900.00</p>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
 
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 4">
+                <img src="src/img/Product/Cleaning & Laundry/Iron.avif" alt="Product Image 4">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <h2>Morphy Richards Crystal Clear Steam Iron</h2>
+                    <p>30g Per Min Constant Steam allows you to glide from item to item with ease</p><br>
+                    <p>100g Steam Boost can be triggered with the touch of a button</p><br>
+                    <p>Easy Store Cable Clip may able you to wrap the cable around the base of the iron and secure in place</p><br>
+                    <p>Price: RM 189.00</p>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
 
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 5">
+                <img src="src/img/Product/Cleaning & Laundry/RobotCleaner.jpeg" alt="Product Image 5">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <h2>Sweeping Household Robot Vacuum Cleaner</h2>
+                    <p>Multi function vacuuming, sweeping, mop.</p><br>
+                    <p>This robot vacuum cleaner can recognize the barrier and avoids collision</p><br>
+                    <p>Suitable for cement floors, ceramic tiles, wooden floors, short-haired carpets</p><br>
+                    <p>Price: RM 29.00</p>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
 
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 6">
+                <img src="src/img/Product/Cleaning & Laundry/" alt="Product Image 6">
                 <div class="description">
-                    <h2>Description</h2>
+                    <h2>LG Front Load Washer</h2>
                     <p>Sample Product Page.</p>
                     <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
         </div>

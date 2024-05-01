@@ -42,61 +42,46 @@
         
         <div class="grid-container">
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 1">
+                <img src="src/img/Product/Kitchen/SmartRefrigerator.avif" alt="Product Image 1">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <h2>LG 601L French Door Fridge</h2>
+                    <p>Knock twice to see inside with Black Glass Instaview</p><br>
+                    <p>Remotely control the fridge and enjoy a smarter life with LG ThinQ</p><br>
+                    <p>Price: RM 3299.00</p>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
 
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 2">
+                <img src="src/img/Product/Kitchen/MultiCooking.webp" alt="Product Image 2">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <h2>Ninja Foodi 8-in-1 6L Multi Cooker</h2>
+                    <p>Replaces Pressure Cooker, Air Fryer, Slow Cooker and etc</p><br>
+                    <p>Can grill, steam, bake, roast, pressure cook, air fry, slow cook, all in one compact kitchen machine</p><br>
+                    <p>Price: RM 1499.00</p>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
 
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 3">
+                <img src="src/img/Product/Kitchen/SmartOven.avif" alt="Product Image 3">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <h2>IKEA SMAKSAK Microware</h2>
+                    <p>Quick start function for fast warming up at full power</p><br>
+                    <p>Combination of forced air and microwaves reduces both cooking time</p><br>
+                    <p>Top and bottom heating is ideal for cooking dishes with a crispy finish and for slow cooking of casseroles</p><br>
+                    <p>Price: RM 3999.00</p>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
 
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 4">
+                <img src="src/img/Product/Kitchen/SmartScales.jpg" alt="Product Image 4">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 5">
-                <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 6">
-                <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
+                    <h2>Etekcity Food Kitchen Digital Scale</h2>
+                    <p>Can measure liquids easily with waterproof design</p><br>
+                    <p>can measure item with 5 units: grams, ounces, pounds, ounces mililiters abd fluid ounces</p><br>
+                    <p>Price: RM 89.00</p>
                     <button>Add to Cart</button>
                 </div>
             </div>

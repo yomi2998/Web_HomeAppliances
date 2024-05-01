@@ -43,62 +43,48 @@
         
         <div class="grid-container">
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 1">
+                <img src="src/img/Product/Entertainment/TV.avif" alt="Product Image 1">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <h2>Samsung 98-Inch Neo QLED 4K AI TV</h2>
+                    <p>NQ4 AI Gen2 Processor - Feel the full power of AI in 4K</p>
+                    <p>Quantum Matrix Technology - Catch every details enabled in accurate ultra fine light control</p><br>
+                    <p>Supersize Picture Enhancer - AI Powered image enhancements tailored to super large screen</p><br>
+                    <p>Price: RM 48399.00</p>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
 
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 2">
+                <img src="src/img/Product/Entertainment/Nintendo.avif" alt="Product Image 2">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <h2>Nintendo Switch with Gray Joy-Con</h2>
+                    <p>You can play the games you want, wherever you are, however you like</p><br>
+                    <p>Three modes in one - TV mode, Tabletop mode and Handheld mode</p><br>
+                    <p>Price: RM 1288.00</p>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
 
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 3">
+                <img src="src/img/Product/Entertainment/Projector.avif" alt="Product Image 3">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <h2>Hisense Laser Cinema + TV Projector Screen</h2>
+                    <p>90"-130" Projection size - projects colourful and bright 4k images up to 130" inches super large size</p><br>
+                    <p>Filmmaker mode technique will retain the original settings to display the most authentic scenes from movies</p><br>
+                    <p>Price: RM 18999.00</p>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
 
             <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 4">
+                <img src="src/img/Product/Entertainment/Speakers.avif" alt="Product Image 4">
                 <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 5">
-                <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <img src="product-image.jpg" alt="Product Image 6">
-                <div class="description">
-                    <h2>Description</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
-                    <button>Add to Cart</button>
+                    <h2>Sony GTK-PG10 Outdoor Wireless Speaker</h2>
+                    <p>GTK-PG10 is ideal for enjoying musiv outside whether it's a party, picnic or camping trip</p><br>
+                    <p>The built-in rechargeable battery powers your party for up to 13 hours</p><br>
+                    <p>You can pair your smartphone with GTK-PG10 using short-range wireless Bluetooth connection</p><br>
+                    <p>Price: RM 999.00</p>
+                    <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
         </div>
