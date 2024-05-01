@@ -1,28 +1,9 @@
-var toggles = {
-  isearch: false,
-  inoti: false,
-  icart: false,
-  iprofile: false,
-  reset() {
-    for (var key in this) {
-      if (typeof this[key] === "boolean") {
-        this[key] = false;
-      }
-    }
-  },
-  resetExcept(key) {
-    for (var k in this) {
-      if (k && k !== key && typeof this[k] === "boolean") {
-        this[k] = false;
-      }
-    }
-  },
-};
-
+var toggleCnt = 0;
 function extension_toggle(extension) {
   const topupExtension = $(`#${extension}`);
   if (topupExtension.css("display") === "none") {
-    $(".container").css("margin-top", "0");
+    ++toggleCnt;
+    // $(".container").css("margin-top", "0");
     topupExtension.css("display", "flex");
     topupExtension.css("opacity", "0");
     $(".container").css("position", "fixed");
@@ -30,9 +11,12 @@ function extension_toggle(extension) {
       topupExtension.css("opacity", "1");
     }, 1);
   } else {
-    $(".container").css("margin-top", "60px");
+    // $(".container").css("margin-top", "60px");
+    --toggleCnt;
+    if (toggleCnt === 0) {
+      $(".container").css("position", "relative");
+    }
     topupExtension.css("opacity", "0");
-    $(".container").css("position", "relative");
     setTimeout(function () {
       topupExtension.css("display", "none");
     }, 500);
