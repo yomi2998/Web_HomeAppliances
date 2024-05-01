@@ -899,7 +899,9 @@
             <div class="content">
                 <a>User Total: <%= customerControl.countTotalCustomer() %></a>
             </div>
+            <div>
             <button class="nelson-button" onclick="extension_toggle('register-extension')">Register</button>
+            <button class="nelson-button">View all</button></div>
         </div>
         <% customerControl.destroy(); %>
         <% StaffControl staffControl = new StaffControl(); %>
@@ -908,9 +910,11 @@
             <div class="content">
                 <a>Staff Total: <%= staffControl.countTotalStaff() %></a>
             </div>
+            <div>
             <% if (userType.equals("admin")) { %>
             <button class="nelson-button" onclick="extension_toggle('staff-register-extension')">Register</button>
             <% } %>
+            <button class="nelson-button">View all</button></div>
         </div>
         <% staffControl.destroy(); %>
         <% ProductControl productControl = new ProductControl(); %>
@@ -919,12 +923,14 @@
             <div class="content">
                 <a>Total Sold: <%= productControl.countTotalSales() %></a>
             </div>
+            <button class="nelson-button">Manage products</button>
         </div>
         <div class="card">
             <div class="dashboard-icon"><ion-icon name="cash-outline"></ion-icon></div>
             <div class="content">
                 <a>Total Earned: RM <%= String.format("%.2f", productControl.countTotalEarned()) %></a>
             </div>
+            <button class="nelson-button">View top 10 sales list</button>
         </div>
         <% productControl.destroy(); %>
     </div>
