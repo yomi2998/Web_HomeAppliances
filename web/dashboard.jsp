@@ -908,7 +908,9 @@
             <div class="content">
                 <a>Staff Total: <%= staffControl.countTotalStaff() %></a>
             </div>
+            <% if (userType.equals("admin")) { %>
             <button class="nelson-button" onclick="extension_toggle('staff-register-extension')">Register</button>
+            <% } %>
         </div>
         <% staffControl.destroy(); %>
         <% ProductControl productControl = new ProductControl(); %>
