@@ -86,6 +86,7 @@ CREATE TABLE product (
     description LONG VARCHAR NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     stock INT NOT NULL,
+    sold INT NOT NULL,
     category_id INT,
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL
