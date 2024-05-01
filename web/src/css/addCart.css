@@ -96,7 +96,6 @@ button:hover {
 .cart-and-suggestions{
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
 }
 
 .suggestions-container{

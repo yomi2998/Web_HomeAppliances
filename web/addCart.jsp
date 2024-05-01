@@ -51,16 +51,7 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
-                <form action="checkout.jsp">
-                    <div class="buttons-wrapper">
-                        <div class="checkout">
-                            <button onclick="checkOutBtn()" class="nelson-button" id="checkoutBtn">Checkout All</button>
-                            <a href="#"><button class="nelson-button" id="continueShoppingBtn">Continue Shopping</button></a>
-                            <button class="nelson-button" id="clearCartBtn" onclick="clearCart()">Delete Cart</button>
-                        </div>
-                    </div>
-                </form>
+                </table>  
             </div>
             <div class="suggestions-container">
                 <h2>Suggested Items</h2>
@@ -70,9 +61,19 @@
                     <li><img src="https://via.placeholder.com/100" alt="Suggested Item 3">Item 3</li>
                 </ul>
             </div>
-            
         </div>
     </div>
+    
+    <div class="buttons-wrapper">
+        <div class="checkout">
+            <form action="checkout.jsp">
+                <button onclick="checkOutBtn()" class="nelson-button" id="checkoutBtn">Checkout All</button>
+            </form>
+            <a href="#"><button class="nelson-button" id="continueShoppingBtn">Continue Shopping</button></a>
+            <button class="nelson-button" id="clearCartBtn" onclick="clearCart()">Delete Cart</button>
+        </div>
+    </div>
+    
 
 </body>
 </html>
