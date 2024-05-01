@@ -22,16 +22,20 @@ var toggles = {
 function extension_toggle(extension) {
   const topupExtension = $(`#${extension}`);
   if (topupExtension.css("display") === "none") {
+    $(".container").css("margin-top", "0");
+    $("body").css("overflow", "hidden");
     topupExtension.css("display", "flex");
     topupExtension.css("opacity", "0");
     setTimeout(function () {
       topupExtension.css("opacity", "1");
     }, 1);
   } else {
+    $(".container").css("margin-top", "60px");
+    $("body").css("overflow", "auto");
     topupExtension.css("opacity", "0");
     setTimeout(function () {
       topupExtension.css("display", "none");
-    }, 1000);
+    }, 500);
   }
 }
 

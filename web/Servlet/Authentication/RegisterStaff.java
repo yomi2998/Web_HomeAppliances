@@ -12,8 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Date;
-import control.CustomerControl;
-import domain.Customer;
+import control.StaffControl;
+import domain.Staff;
 import jakarta.servlet.http.Cookie;
 import java.text.SimpleDateFormat;
 
@@ -21,8 +21,8 @@ import java.text.SimpleDateFormat;
  *
  * @author superme
  */
-@WebServlet(name = "Register", urlPatterns = { "/Register" })
-public class Register extends HttpServlet {
+@WebServlet(name = "RegisterStaff", urlPatterns = { "/RegisterStaff" })
+public class RegisterStaff extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,6 +42,7 @@ public class Register extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             String birthdateStr = request.getParameter("birthdate");
+            String contact = request.getParameter("contact_number");
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date dob = new Date();
             try {
@@ -49,9 +50,9 @@ public class Register extends HttpServlet {
             } catch (Exception e) {
                 
             }
-            Customer customer = new Customer(-1, name, username, password, email, 0, dob, null, null);
-            CustomerControl cc = new CustomerControl();
-            out.print("{\"success\":" + cc.insertCustomer(customer) + "}");
+            Staff staff = new Staff(-1, name, username, email, password, dob, contact, null, null);
+            StaffControl cc = new StaffControl();
+            out.print("{\"success\":" + cc.insertStaff(staff) + "}");
         }
     }
 

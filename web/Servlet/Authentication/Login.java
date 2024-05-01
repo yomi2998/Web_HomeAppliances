@@ -14,6 +14,8 @@ import control.CustomerControl;
 import domain.Customer;
 import control.AdminControl;
 import domain.Admin;
+import control.StaffControl;
+import domain.Staff;
 import com.google.gson.Gson;
 import jakarta.servlet.http.Cookie;
 
@@ -57,8 +59,22 @@ public class Login extends HttpServlet {
                     out.print("{\"success\":true, \"data\":" + new Gson().toJson(admin) + "}");
                 } else {
                     ac.destroy();
-                    out.print("{\"success\":false}");
-                    // todo
+                    StaffControl sc = new StaffControl();
+                    Staff staff = sc.verifyLogin(username, password);
+                    if (staff != null) {
+                        Cookie sessionCookie = new Cookie("session", staff.getSession());
+                        Cookie userIdCookie = new Cookie("id", String.valueOf(staff.getId()));
+                        Cookie userTypeCookie = new Cookie("type", "staff");
+                        sessionCookie.setMaxAge(31536000);
+                        userIdCookie.setMaxAge(31536000);
+                        userTypeCookie.setMaxAge(31536000);
+                        response.addCookie(sessionCookie);
+                        response.addCookie(userIdCookie);
+                        response.addCookie(userTypeCookie);
+                        out.print("{\"success\":true, \"data\":" + new Gson().toJson(staff) + "}");
+                    } else {
+                        out.print("{\"success\":false}");
+                    }
                 }
             } else {
                 Cookie sessionCookie = new Cookie("session", customer.getSession());

@@ -55,6 +55,7 @@
         <%
         Customer customer = new Customer();
         Admin admin = new Admin();
+        Staff staff = new Staff();
         Cookie[] cookies = request.getCookies();
         int id = -1;
         String session_id = "";
@@ -71,8 +72,7 @@
             }
         }
 
-        boolean isLogin = false;
-
+        boolean isLogin = false; 
         if (id != -1  && !session_id.equals("")) {
         switch(userType) {
             case "customer":
@@ -118,6 +118,25 @@
             }
             break;
             case "staff":
+            StaffControl sc = new StaffControl();
+            staff = sc.verifySession(id, session_id);
+            sc.destroy();
+            if (staff != null) {
+            if (!ALLOW_STAFF) {
+        %><script>alert("You are not allowed to view this page.");</script> <%
+                return;
+            }
+                isLogin = true;
+            } else {
+                for (Cookie cookie : cookies) {
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                }
+                if (!ALLOW_GUEST) {
+        %><script>alert("You are not allowed to view this page.");</script> <%
+                    return;
+                }
+            }
             break;
             default:
             break;
@@ -210,7 +229,9 @@
                                 <% break;
                                 case "admin": %>
                                 <%= admin.getName() %>
-                                <% break; case "staff": break; default: break; } %>
+                                <% break; case "staff":%>
+                                <%= staff.getName() %>
+                                <% break; default: break; } %>
                             </div>
                             <hr>
                             <div class="profile-dropdown-content-container-body">
@@ -228,7 +249,14 @@
                                     <a href="/Web_HomeAppliances/order.jsp">My orders</a>
                                 </div>
                                 <hr>
-                                <% }} else { %>
+                                <% }} else {
+                                    if (userType.equals("staff")) { %>
+
+                                <div class="profile-dropdown-content-container-body-anchor">
+                                    <a href="#" onclick="extension_toggle('profile-extension')">My profile</a>
+                                </div>
+                                <hr>
+                                <% } %>
                                 <div class="profile-dropdown-content-container-body-anchor">
                                     <a href="/Web_HomeAppliances/dashboard.jsp">Dashboard</a>
                                 </div>
@@ -432,12 +460,60 @@
                 </div>
 
                 <div class="buttons-field">
-                    <button class="nelson-button" onclick="extension_toggle('register-extension'); remove_reg_error()" type="reset">Cancel</button>
+                    <button id="customer-cancel" class="nelson-button" onclick="extension_toggle('register-extension'); remove_reg_error()" type="reset">Cancel</button>
                     <input type="submit" class="nelson-button" onclick="remove_reg_error()" value="Register">
                 </div>
             </form>
         </div>
     </div>
+    <% if (userType.equals("admin")) { %>
+    <div class="nelson-nav-extension" id="staff-register-extension">
+        <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="height: 50px; margin: 20px auto;">
+        <div class="register-container">
+            <h1 class="center">Staff Registration</h1>
+            <hr>
+            <form id="staffRegistrationForm" action="">
+                <input type="password" value="$taff123" name="password" hidden>
+                <div class="input-field">
+                    <label for="name" class="label-with-margin">Name:</label><br>
+                    <input autocomplete="off" type="text" name="name" placeholder="Name" class="nelson-input" required><br>
+                    <p id="staff-invalid-name" class="hidden" style="color:red;">Username already taken/illegal username.</p>
+                </div>
+
+                <div class="input-field">
+                    <label for="username" class="label-with-margin">Username:</label><br>
+                    <input autocomplete="off" type="text" name="username" placeholder="Username" class="nelson-input" required><br>
+                    <p id="staff-invalid-username" class="hidden" style="color:red;">Username already taken/illegal username.</p>
+                </div>
+
+                <div class="input-field">
+                    <label for="email" class="label-with-margin">Email:</label><br>
+                    <input autocomplete="off" type="email" name="email" placeholder="Email" class="nelson-input" required>
+                    <p id="staff-invalid-email" class="hidden" style="color:red;">Invalid email format.</p>
+                </div>
+
+                <div class="input-field">
+                    <label for="phone" class="label-with-margin">Phone number:</label><br>
+                    <input autocomplete="off" type="tel" name="contact_number" placeholder="Phone number" class="nelson-input" required>
+                    <p id="staff-invalid-phone" class="hidden" style="color:red;">Invalid phone format.</p>
+                </div>
+
+                <div class="input-field">
+                    <label for="birthdate" class="label-with-margin">Birthdate:</label><br>
+                    <input autocomplete="off" type="date" name="birthdate" placeholder="Birthdate" class="nelson-input" required>
+                    <p id="staff-invalid-birth" class="hidden" style="color:red;">Invalid birth date.</p>
+                </div>
+                <hr>
+
+                <div class="buttons-field">
+                    <button id="staff-cancel" class="nelson-button" onclick="extension_toggle('staff-register-extension'); remove_staff_error()" type="reset">Cancel</button>
+                    <input type="reset" id="staff-reg-reset" hidden>
+                    <input type="submit" class="nelson-button" onclick="remove_staff_error()" value="Register">
+                </div>
+            </form>
+        </div>
+    </div>
+    <% } %>
     <div class="nelson-nav-extension" id="category-extension">
         <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="height: 50px; margin: 20px auto;">
         <div class="category-more-container">
@@ -455,6 +531,7 @@
                     %>
             </div>
             <hr>
+            <button class="nelson-button">Manage</button>
             <button class="nelson-button" onclick="extension_toggle('category-extension')">Back</button>
         </div>
     </div>
@@ -518,7 +595,7 @@
             <div class="profile-content">
                 <div class="ext-left-profile">
                     <img src="src/img/white/user.svg" alt="Profile" class="center profile-ext-img" style="height: 200px;">
-                    <h2>Nelson Lam</h2>
+                    <h2><%= userType.equals("customer") ? customer.getName() :  staff.getName() %></h2>
                     <h3><%= userType.equals("") ? "Guest" : (userType.substring(0, 1).toUpperCase() + userType.substring(1)) %></h3>
                     <p><a href="#" class="ext-profile-select ext-profile-selected" id="profile-info">User information</a></p>
                     <% if (userType.equals("customer")) { %>
@@ -528,10 +605,12 @@
                     <% } %>
                 </div>
                 <div id="ext-profile">
-                    <form method="post" id="profileForm">
+                        <% switch(userType) {
+                            case "customer": %>
+                            <form method="post" id="profileForm">
                         <div class="input-field">
                             <p class="form-p">Name:</p>
-                            <input autocomplete="off" type="text" name="name" placeholder="<%= customer.getName() %>" value="<%= customer.getName() %>" class="nelson-input toggle-input" required disabled><br>
+                            <input id="cust-profile-name" autocomplete="off" type="text" name="name" placeholder="<%= customer.getName() %>" value="<%= customer.getName() %>" class="nelson-input toggle-input" required disabled><br>
                             <p id="profile-invalid-name" class="hidden" style="color:red;">Username already taken/illegal username.</p>
                         </div>
                         <div class="input-field">
@@ -540,12 +619,12 @@
                         </div>
                         <div class="input-field">
                             <p class="form-p">Email:</p>
-                            <input autocomplete="off" type="email" name="email" placeholder="<%= customer.getEmail() %>" value="<%= customer.getEmail() %>" class="nelson-input toggle-input" required disabled>
+                            <input id="cust-profile-email" autocomplete="off" type="email" name="email" placeholder="<%= customer.getEmail() %>" value="<%= customer.getEmail() %>" class="nelson-input toggle-input" required disabled>
                             <p id="profile-invalid-email" class="hidden" style="color:red;">Invalid email format.</p>
                         </div>
                         <div class="input-field">
                             <p class="form-p">Birthdate:</p>
-                            <input autocomplete="off" type="date" name="birthdate" value="<%= customer.getBirthDate() %>" value="<%= customer.getBirthDate() %>" class="nelson-input toggle-input" required disabled>
+                            <input id="cust-profile-birth" autocomplete="off" type="date" name="birthdate" value="<%= customer.getBirthDate() %>" value="<%= customer.getBirthDate() %>" class="nelson-input toggle-input" required disabled>
                             <p id="profile-invalid-birth" class="hidden" style="color:red;">Invalid birth date.</p>
                         </div>
                         <div class="input-field profile-edit-show hidden">
@@ -554,9 +633,47 @@
                             <p id="profile-invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
                         </div>
                         <hr>
-                        <input type="submit" id="profile-alter" hidden>
-                    </form>
+                        <% break;
+                            case "staff": %>
+                        <form method="post" id="staffProfileForm">
+                            <div class="input-field">
+                                <p class="form-p">Name:</p>
+                                <input id="staff-profile-name" autocomplete="off" type="text" name="name" placeholder="<%= staff.getName() %>" value="<%= staff.getName() %>" class="nelson-input toggle-input" required disabled><br>
+                                <p id="profile-invalid-name" class="hidden" style="color:red;">Username already taken/illegal username.</p>
+                            </div>
+                            <div class="input-field">
+                                <p class="form-p">Username:</p>
+                                <input id="staff-profile-username" autocomplete="off" id="profile-username" type="text" name="username" placeholder="<%= staff.getUsername() %>" value="<%= staff.getUsername() %>" class="nelson-input toggle-input" required disabled><br>
+                            </div>
+                            <div class="input-field">
+                                <p class="form-p">Email:</p>
+                                <input id="staff-profile-email" autocomplete="off" type="email" name="email" placeholder="<%= staff.getEmail() %>" value="<%= staff.getEmail() %>" class="nelson-input toggle-input" required disabled>
+                                <p id="profile-invalid-email" class="hidden" style="color:red;">Invalid email format.</p>
+                            </div>
+                            <div class="input-field">
+                                <p class="form-p">Contact:</p>
+                                <input id="staff-profile-phone" autocomplete="off" type="tel" name="contact_number" placeholder="<%= staff.getContact_number() %>" value="<%= staff.getContact_number() %>" class="nelson-input toggle-input" required disabled>
+                                <p id="profile-invalid-phone" class="hidden" style="color:red;">Invalid email format.</p>
+                            </div>
+                            <div class="input-field">
+                                <p class="form-p">Birthdate:</p>
+                                <input id="staff-profile-birth" autocomplete="off" type="date" name="birthdate" value="<%= staff.getBirth_date() %>" value="<%= staff.getBirth_date() %>" class="nelson-input toggle-input" required disabled>
+                                <p id="profile-invalid-birth" class="hidden" style="color:red;">Invalid birth date.</p>
+                            </div>
+                            <div class="input-field profile-edit-show hidden">
+                                <p class="form-p">Confirm password:</p>
+                                <input autocomplete="off" type="password" name="password" placeholder="Verify if it is really you" class="nelson-input toggle-input" required disabled>
+                                <p id="profile-invalid-password" class="hidden" style="color:red;">Password mismatch.</p>
+                            </div>
+                            <hr>
+                            <% break; } %>
+                            <input type="submit" id="profile-alter" hidden>
+                        </form>
+                    <% if (userType.equals("customer")) { %>
                     <form method="post" id="profilePasswordForm" hidden>
+                        <% } else { %>
+                    <form method="post" id="staffProfilePasswordForm" hidden>
+                        <% } %>
                         <div class="profile-edit-show">
                             <div class="input-field">
                                 <p class="form-p">Old password:</p>
@@ -782,6 +899,7 @@
             <div class="content">
                 <a>User Total: <%= customerControl.countTotalCustomer() %></a>
             </div>
+            <button class="nelson-button" onclick="extension_toggle('register-extension')">Register</button>
         </div>
         <% customerControl.destroy(); %>
         <% StaffControl staffControl = new StaffControl(); %>
@@ -790,6 +908,7 @@
             <div class="content">
                 <a>Staff Total: <%= staffControl.countTotalStaff() %></a>
             </div>
+            <button class="nelson-button" onclick="extension_toggle('staff-register-extension')">Register</button>
         </div>
         <% staffControl.destroy(); %>
         <% ProductControl productControl = new ProductControl(); %>

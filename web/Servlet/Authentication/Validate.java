@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import domain.Customer;
 import control.CustomerControl;
+import domain.Staff;
+import control.StaffControl;
 
 /**
  *
@@ -40,6 +42,10 @@ public class Validate extends HttpServlet {
                 case "customer":
                     CustomerControl cc = new CustomerControl();
                     result = cc.validateUsername(username);
+                    break;
+                case "staff":
+                    StaffControl sc = new StaffControl();
+                    result = sc.validateUsername(username);
                     break;
                 default:
                     break;
