@@ -22,7 +22,7 @@ var toggles = {
 function extension_toggle(extension) {
   const topupExtension = $(`#${extension}`);
   if (topupExtension.css("display") === "none") {
-    $("`.container`").css("margin-top", "0");
+    $(".container").css("margin-top", "0");
     topupExtension.css("display", "flex");
     topupExtension.css("opacity", "0");
     $(".container").css("position", "fixed");

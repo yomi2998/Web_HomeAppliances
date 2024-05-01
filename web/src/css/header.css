@@ -467,6 +467,7 @@ hr {
     width: 95%;
     top: 10px;
     transition: all 0.2s;
+    box-shadow: 0 0 10px 0 rgba(71, 71, 71, 0.507);
 }
 
 .navigation-bar {
@@ -536,7 +537,7 @@ hr {
     margin-right: 15px;
     padding: 7px 20px;
     border-radius: 20px;
-    border: 2px solid #494949;
+    border: 2px solid #494949 !important;
     background-color: #2e2e2e;
     transition: all 0.3s;
     font-size: 16px;
@@ -544,12 +545,10 @@ hr {
 
 .nelson-input {
     width: 90%;
-    height: 36px;
     border-radius: 20px;
-    border-style: solid;
-    border-color: #494949;
+    border: 2px solid #494949;
     background-color: #2e2e2e !important;
-    padding: 0 16px;
+    padding: 10px 20px;
     font-size: 16px;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     text-align: left !important;
@@ -571,13 +570,13 @@ hr {
 }
 
 .big-nelson-input {
-    width: 90%;
+    width: calc(100% - 40px);
     height: 180px;
     border-radius: 20px;
     border: 2px solid #494949;
     background-color: #2e2e2e !important;
     color: white;
-    padding: 10px 16px;
+    padding: 10px 20px;
     font-size: 16px;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     text-align: left !important;
