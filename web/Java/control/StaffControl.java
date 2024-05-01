@@ -56,6 +56,10 @@ public class StaffControl {
         return staffDA.confirmPassword(id, password);
     }
 
+    public int countTotalStaff() {
+        return staffDA.countTotalStaff();
+    }
+
     public void destroy() {
         staffDA.destroy();
     }

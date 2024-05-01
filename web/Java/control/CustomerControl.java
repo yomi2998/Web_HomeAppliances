@@ -60,6 +60,10 @@ public class CustomerControl {
         return customerDA.topUp(id, card_id, password, amt);
     }
 
+    public int countTotalCustomer() {
+        return customerDA.countTotalCustomer();
+    }
+
     public void destroy() {
         customerDA.destroy();
     }

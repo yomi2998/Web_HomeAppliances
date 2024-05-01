@@ -1,26 +1,10 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Ubuntu', sans-serif;
-}
-h1{
-    color: white;
-}
-
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #0a000e;
-}
-.container{
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     padding: 40px;
+    margin-top: 60px;
 }
 .card{
     position: relative;
@@ -57,14 +41,14 @@ body{
 .card:nth-child(4){
     background: linear-gradient(to bottom, #114860, #46456e);
 }
-.icon{
+.dashboard-icon{
     position: relative;
     width: 140px;
     height: 120px;
     background: #0a000e;
     border-bottom-left-radius: 100px;
     border-bottom-right-radius: 100px;
-    z-index: 1000;
+    z-index: 222;
     display: flex;
     justify-content: center;
 }
@@ -83,7 +67,7 @@ body{
     padding: 10px;
     color: white;
 }
-.icon ion-icon{
+.dashboard-icon ion-icon{
     color: #fff;
     position: relative;
     font-size: 5em
