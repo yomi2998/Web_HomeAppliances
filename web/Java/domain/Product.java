@@ -5,9 +5,8 @@
 package domain;
 
 import domain.*;
-import java.util.Objects;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 
 /**
  *
@@ -17,7 +16,8 @@ public class Product implements Serializable {
 
     private int id;
     private String name;
-    private String display_image_url;
+    private String display_image;
+    List<String> sub_images;
     private String description;
     private double price;
     private int stock;
@@ -26,6 +26,27 @@ public class Product implements Serializable {
     private Date create_date;
 
     public Product() {
+    }
+
+    public List<String> getSub_images() {
+        return sub_images;
+    }
+
+    public void setSub_images(List<String> sub_images) {
+        this.sub_images = sub_images;
+    }
+
+    public Product(int id, String name, String display_image, List<String> sub_images, String description, double price, int stock, int sold, int category_id, Date create_date) {
+        this.id = id;
+        this.name = name;
+        this.display_image = display_image;
+        this.sub_images = sub_images;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.sold = sold;
+        this.category_id = category_id;
+        this.create_date = create_date;
     }
 
     public int getId() {
@@ -52,12 +73,12 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public String getDisplay_image_url() {
-        return display_image_url;
+    public String getDisplay_image() {
+        return display_image;
     }
 
-    public void setDisplay_image_url(String display_image_url) {
-        this.display_image_url = display_image_url;
+    public void setDisplay_image(String display_image) {
+        this.display_image = display_image;
     }
 
     public String getDescription() {
@@ -97,18 +118,6 @@ public class Product implements Serializable {
     }
 
     public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
-    }
-
-    public Product(int id, String name, String display_image_url, String description, double price, int stock, int sold, int category_id, Date create_date) {
-        this.id = id;
-        this.name = name;
-        this.display_image_url = display_image_url;
-        this.description = description;
-        this.price = price;
-        this.stock = stock;
-        this.sold = sold;
-        this.category_id = category_id;
         this.create_date = create_date;
     }
 }
