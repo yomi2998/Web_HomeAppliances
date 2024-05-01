@@ -488,6 +488,45 @@ hr {
     padding: 0 20px;
 }
 
+.nelson-table {
+    width: 800px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 2px solid #494949;
+}
+
+.nelson-table-ii {
+    width: 99%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 2px solid #494949;
+}
+
+.nelson-table th, .nelson-table-ii th {
+    background-color: #222222;
+    color: white;
+    font-size: 20px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-align: left;
+    padding: 10px;
+}
+
+.nelson-table td, .nelson-table-ii td {
+    background-color: #2e2e2e;
+    border-bottom: 1px solid #333333;
+    font-size: 16px;
+    max-width: 20%;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-align: left;
+    padding: 10px;
+}
+
+.nelson-table tr:hover, .nelson-table-ii tr:hover {
+    background-color: #1d1d1d !important;
+}
+
 .nelson-select {
     color: rgb(255, 255, 255);
     font-size: 20px;
@@ -505,6 +544,20 @@ hr {
 
 .nelson-input {
     width: 90%;
+    height: 36px;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #494949;
+    background-color: #2e2e2e !important;
+    padding: 0 16px;
+    font-size: 16px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-align: left !important;
+    transition: background-color 0.2s;
+}
+
+.nelson-input-ii {
+    width: 700px;
     height: 36px;
     border-radius: 20px;
     border-style: solid;

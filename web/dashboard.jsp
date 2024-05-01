@@ -892,6 +892,54 @@
         <img id="snackbar-img" src="src/img/white/message-square.svg" style="height: 50px;">
         <div id="snackbar-info"><h2 id="snackbar-title"></h2><p id="snackbar-message">Some text some message..</p></div>
     </div>
+    <% if (userType.equals("admin") || userType.equals("staff")) { %>
+        <div class="nelson-nav-extension" id="view-all-customer">
+            <table class="nelson-table">
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Birthdate</th>
+                    <th>Balance</th>
+                </tr>
+                <% CustomerControl customerControl = new CustomerControl(); List<Customer> customers = customerControl.retrieveCustomerALL(); customerControl.destroy(); for (Customer c : customers) { %>
+                <tr>
+                    <td><%= c.getId() %></td>
+                    <td><%= c.getName() %></td>
+                    <td><%= c.getUsername() %></td>
+                    <td><%= c.getEmail() %></td>
+                    <td><%= c.getBirthDate() %></td>
+                    <td>RM <%= String.format("%.2f", c.getBalance()) %></td>
+                </tr>
+                <% } %>
+            </table>
+            <button class="nelson-button" onclick="extension_toggle('view-all-customer')">Back</button>
+        </div>
+        <div class="nelson-nav-extension" id="view-all-staff">
+            <table class="nelson-table">
+                <tr>
+                    <th>Staff ID</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Birthdate</th>
+                </tr>
+                <% StaffControl staffControl = new StaffControl(); List<Staff> staffs = staffControl.retrieveStaffALL(); staffControl.destroy(); for (Staff s : staffs) { %>
+                <tr>
+                    <td><%= s.getId() %></td>
+                    <td><%= s.getName() %></td>
+                    <td><%= s.getUsername() %></td>
+                    <td><%= s.getEmail() %></td>
+                    <td><%= s.getContact_number() %></td>
+                    <td><%= s.getBirth_date() %></td>
+                </tr>
+                <% } %>
+            </table>
+            <button class="nelson-button" onclick="extension_toggle('view-all-staff')">Back</button>
+        </div>
+    <% } %>
     <div class="container" style="display: none;">
         <% CustomerControl customerControl = new CustomerControl(); %>
         <div class="card">
@@ -901,7 +949,7 @@
             </div>
             <div>
             <button class="nelson-button" onclick="extension_toggle('register-extension')">Register</button>
-            <button class="nelson-button">View all</button></div>
+            <button class="nelson-button" onclick="extension_toggle('view-all-customer')">View all</button></div>
         </div>
         <% customerControl.destroy(); %>
         <% StaffControl staffControl = new StaffControl(); %>
@@ -914,7 +962,7 @@
             <% if (userType.equals("admin")) { %>
             <button class="nelson-button" onclick="extension_toggle('staff-register-extension')">Register</button>
             <% } %>
-            <button class="nelson-button">View all</button></div>
+            <button class="nelson-button" onclick="extension_toggle('view-all-staff')">View all</button></div>
         </div>
         <% staffControl.destroy(); %>
         <% ProductControl productControl = new ProductControl(); %>
@@ -923,7 +971,7 @@
             <div class="content">
                 <a>Total Sold: <%= productControl.countTotalSales() %></a>
             </div>
-            <button class="nelson-button">Manage products</button>
+            <a href="productmgmt.jsp"><button class="nelson-button">Manage products</button></a>
         </div>
         <div class="card">
             <div class="dashboard-icon"><ion-icon name="cash-outline"></ion-icon></div>

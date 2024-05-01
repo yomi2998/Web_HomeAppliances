@@ -22,17 +22,17 @@ var toggles = {
 function extension_toggle(extension) {
   const topupExtension = $(`#${extension}`);
   if (topupExtension.css("display") === "none") {
-    $(".container").css("margin-top", "0");
-    $("body").css("overflow", "hidden");
+    $("`.container`").css("margin-top", "0");
     topupExtension.css("display", "flex");
     topupExtension.css("opacity", "0");
+    $(".container").css("position", "fixed");
     setTimeout(function () {
       topupExtension.css("opacity", "1");
     }, 1);
   } else {
     $(".container").css("margin-top", "60px");
-    $("body").css("overflow", "auto");
     topupExtension.css("opacity", "0");
+    $(".container").css("position", "relative");
     setTimeout(function () {
       topupExtension.css("display", "none");
     }, 500);
