@@ -82,7 +82,7 @@ INSERT INTO category (name) VALUES ('Climate Control');
 CREATE TABLE product (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     name VARCHAR(255) NOT NULL,
-    display_image_url VARCHAR(255) NOT NULL,
+    display_img BLOB(16M) NOT NULL,
     description LONG VARCHAR NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     stock INT NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE product (
 CREATE TABLE product_image (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     product_id INT NOT NULL,
-    image_url VARCHAR(255) NOT NULL,
+    image BLOB(16M) NOT NULL,
     FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
 );
 
@@ -113,7 +113,7 @@ CREATE TABLE product_rating (
 CREATE TABLE product_rating_image (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     product_rating_id INT NOT NULL,
-    image_url VARCHAR(255) NOT NULL,
+    image BLOB(16M) NOT NULL,
     FOREIGN KEY (product_rating_id) REFERENCES product_rating(id) ON DELETE CASCADE
 );
 
@@ -127,8 +127,6 @@ CREATE TABLE card ( -- for user
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE CASCADE
 );
-
-INSERT INTO card (user_id, name, card_number, expiry_date, cvv) VALUES (1, 'John Doe', '1234567890123456', '03/27', '123');
 
 CREATE TABLE cart (
     user_id INT NOT NULL,
@@ -221,14 +219,6 @@ CREATE TABLE feedback_message (
     message LONG VARCHAR NOT NULL,
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (feedback_id) REFERENCES feedback(id) ON DELETE CASCADE
-);
-
-CREATE TABLE feedback_message_image (
-    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
-    feedback_message_id INT NOT NULL,
-    image_url VARCHAR(512) NOT NULL,
-    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (feedback_message_id) REFERENCES feedback_message(id) ON DELETE CASCADE
 );
 
 CREATE TABLE read_message (

@@ -20,7 +20,7 @@ public class CategoryControl {
         categoryDA = new CategoryDA();
     }
 
-    public boolean insertCategory(Category category) {
+    public int insertCategory(Category category) {
         return categoryDA.insertCategory(category);
     }
 

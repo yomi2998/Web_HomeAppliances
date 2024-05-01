@@ -49,24 +49,32 @@ public class CategoryDA {
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, category.getName());
             stmt.setInt(2, category.getId());
-            stmt.executeUpdate();
-            return true;
+            return stmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
         }
     }
 
-    public boolean insertCategory(Category category) {
+    public int insertCategory(Category category) {
         String queryStr = "INSERT INTO " + tableName + " (name) VALUES (?)";
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, category.getName());
             stmt.executeUpdate();
-            return true;
+            // Get the id of the inserted category
+            queryStr = "SELECT * FROM " + tableName + " WHERE name = ?";
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1, category.getName());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
+            } else {
+                return -1;
+            }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            return false;
+            return -1;
         }
     }
 

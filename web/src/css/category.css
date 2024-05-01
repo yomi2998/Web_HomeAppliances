@@ -26,3 +26,81 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
+
+.catergory-list {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background-color: #161616;
+    border: 1px solid #333333;
+    border-radius: 20px;
+}
+
+.category-item {
+    display: flex;
+    text-align: left;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: all 0.3s;
+}
+
+.category-item:hover {
+    background-color: #333333;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.category-info {
+    text-align: left !important;
+    margin-left: 20px;
+}
+
+.category-extend-img {
+    margin-top: auto;
+    margin-bottom: auto;
+    transition: all 0.3s;
+    padding: 10px;
+}
+
+.category-extend-img:hover {
+    cursor: pointer;
+    background-color: #222222;
+    border-radius: 20px;
+}
+
+.category-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #161616;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.category-dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.category-dropdown-content a:hover {
+    background-color: #333333;
+    border-radius: 20px;
+}
+
+.category-more-container {
+    width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #222222;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color:rgb(255, 255, 255);
+}

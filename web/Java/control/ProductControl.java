@@ -23,8 +23,12 @@ public class ProductControl {
         return productDA.insertProduct(product);
     }
     
-    public List<Product> retrieveProduct(int prodId) {
+    public Product retrieveProduct(int prodId) {
         return productDA.retrieveProduct(prodId);
+    }
+    
+    public List<Product> retrieveProductALL() {
+        return productDA.retrieveProductALL();
     }
     
     public boolean updateProduct(Product product) {

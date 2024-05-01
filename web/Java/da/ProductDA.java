@@ -36,11 +36,11 @@ public class ProductDA {
         }
     }
     
-    public boolean deleteProduct(int prodId) {
+    public boolean deleteProduct(int id) {
         String queryStr = "DELETE FROM " + tableName + " WHERE id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
-            stmt.setInt(1,  prodId);
+            stmt.setInt(1,  id);
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -50,16 +50,16 @@ public class ProductDA {
     }
     
     public boolean updateProduct(Product product){
-        String queryStr = "UPDATE " + tableName + " SET prodName = ?, display_image_url = ?, description = ?, price = ?, stock = ?, category_id = ?, create_date = ?";
+        String queryStr = "UPDATE " + tableName + " SET name = ?, display_image_url = ?, description = ?, price = ?, stock = ?, category_id = ?, create_date = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
-            stmt.setString(1, product.getProdName());
-            stmt.setString(2,  product.getImgUrl());
+            stmt.setString(1, product.getName());
+            stmt.setString(2,  product.getDisplay_image_url());
             stmt.setString(3,  product.getDescription());
             stmt.setDouble(4, product.getPrice());
             stmt.setInt(5, product.getStock());
-            stmt.setInt(6, product.getCategoryId());
-            stmt.setDate(7, (Date) product.getCreateDate());
+            stmt.setInt(6, product.getCategory_id());
+            stmt.setDate(7, (Date) product.getCreate_date());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -72,14 +72,14 @@ public class ProductDA {
         String queryStr = "INSERT INTO " + tableName + " (id, name, display_image_url, description, price, stock, category_id, create_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             stmt = conn.prepareStatement(queryStr);
-            stmt.setInt(1, product.getProdId());
-            stmt.setString(2, product.getProdName());
-            stmt.setString(3,  product.getImgUrl());
+            stmt.setInt(1, product.getId());
+            stmt.setString(2, product.getName());
+            stmt.setString(3,  product.getDisplay_image_url());
             stmt.setString(4,  product.getDescription());
             stmt.setDouble(5, product.getPrice());
             stmt.setInt(6, product.getStock());
-            stmt.setInt(7, product.getCategoryId());
-            stmt.setDate(8, (Date) product.getCreateDate());
+            stmt.setInt(7, product.getCategory_id());
+            stmt.setDate(8, (Date) product.getCreate_date());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -88,11 +88,36 @@ public class ProductDA {
         }
     }
     
-    public List<Product> retrieveProduct (int prodId) {
+    public Product retrieveProduct (int id) {
         String queryStr = "SELECT * FROM " + tableName + " WHERE id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
-            stmt.setInt(1, prodId);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("display_image_url"),
+                        rs.getString("description"),
+                        rs.getDouble("price"),
+                        rs.getInt("stock"),
+                        rs.getInt("sold"),
+                        rs.getInt("category_id"),
+                        rs.getDate("create_date"));
+            }
+            return null;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+    
+    public List<Product> retrieveProductALL () {
+        String queryStr = "SELECT * FROM " + tableName;
+        try {
+            stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();
             List<Product> product = new ArrayList<>();
             
@@ -104,6 +129,7 @@ public class ProductDA {
                         rs.getString("description"),
                         rs.getDouble("price"),
                         rs.getInt("stock"),
+                        rs.getInt("sold"),
                         rs.getInt("category_id"),
                         rs.getDate("create_date")));
             } return product;

@@ -13,53 +13,51 @@ import java.util.Date;
  *
  * @author Nelson
  */
-public class Product implements Serializable{
-    
-   private int prodId;
-   private String prodName;
-   private String imgUrl;
-   private String description;
-   private double price;
-   private int stock;
-   private int categoryId;
-   private Date createDate;
-   
-   public Product() {
-   };
+public class Product implements Serializable {
 
-    public Product(int prodId, String prodName, String imgUrl, String description, double price, int stock, int categoryId, Date createDate) {
-        this.prodId = prodId;
-        this.prodName = prodName;
-        this.imgUrl = imgUrl;
-        this.description = description;
-        this.price = price;
-        this.stock = stock;
-        this.categoryId = categoryId;
-        this.createDate = createDate;
+    private int id;
+    private String name;
+    private String display_image_url;
+    private String description;
+    private double price;
+    private int stock;
+    private int sold;
+    private int category_id;
+    private Date create_date;
+
+    public Product() {
     }
 
-    public int getProdId() {
-        return prodId;
+    public int getId() {
+        return id;
     }
 
-    public void setProdId(int prodId) {
-        this.prodId = prodId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getProdName() {
-        return prodName;
+    public int getSold() {
+        return sold;
     }
 
-    public void setProdName(String prodName) {
-        this.prodName = prodName;
+    public void setSold(int sold) {
+        this.sold = sold;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getName() {
+        return name;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDisplay_image_url() {
+        return display_image_url;
+    }
+
+    public void setDisplay_image_url(String display_image_url) {
+        this.display_image_url = display_image_url;
     }
 
     public String getDescription() {
@@ -86,19 +84,31 @@ public class Product implements Serializable{
         this.stock = stock;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public int getCategory_id() {
+        return category_id;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreate_date() {
+        return create_date;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
+    }
+
+    public Product(int id, String name, String display_image_url, String description, double price, int stock, int sold, int category_id, Date create_date) {
+        this.id = id;
+        this.name = name;
+        this.display_image_url = display_image_url;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.sold = sold;
+        this.category_id = category_id;
+        this.create_date = create_date;
     }
 }
