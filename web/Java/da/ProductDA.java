@@ -244,7 +244,7 @@ public class ProductDA {
         }
     }
 
-    public Blob convertBase64ToBlob(String base64String) {
+    private Blob convertBase64ToBlob(String base64String) {
         try {
             byte[] decodedBytes = Base64.getDecoder().decode(base64String);
             return new javax.sql.rowset.serial.SerialBlob(decodedBytes);
