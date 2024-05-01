@@ -26,6 +26,6 @@ function totalClick(click){
 }
 
 function clearCart() {
-    var productList = document.querySelector(".productList");
-    productList.style.display = "none";
+    var tableContainer = document.querySelector(".table-container");
+    tableContainer.style.display = "none";
 }

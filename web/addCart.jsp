@@ -64,6 +64,7 @@
         </div>
     </div>
     
+    
     <div class="buttons-wrapper">
         <div class="checkout">
             <form action="checkout.jsp">
