@@ -36,7 +36,7 @@ public class ProductDA {
     }
     
     public boolean deleteProduct(int prodId) {
-        String queryStr = "DELETE FROM " + tableName + " WHERE prodId = ?";
+        String queryStr = "DELETE FROM " + tableName + " WHERE id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setInt(1,  prodId);
@@ -49,7 +49,7 @@ public class ProductDA {
     }
     
     public boolean updateProduct(Product product){
-        String queryStr = "UPDATE " + tableName + " SET prodName = ?, imgUrl = ?, description = ?, price = ?, stock = ?, categoryId = ?, createDate = ?";
+        String queryStr = "UPDATE " + tableName + " SET prodName = ?, display_image_url = ?, description = ?, price = ?, stock = ?, category_id = ?, create_date = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, product.getProdName());
@@ -68,7 +68,7 @@ public class ProductDA {
     }
     
     public boolean insertProduct(Product product) {
-        String queryStr = "INSERT INTO " + tableName + " (prodId, prodName, imgUrl, description, price, stock, categoryId, createDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String queryStr = "INSERT INTO " + tableName + " (id, name, display_image_url, description, price, stock, category_id, create_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setInt(1, product.getProdId());
@@ -88,7 +88,7 @@ public class ProductDA {
     }
     
     public List<Product> retrieveProduct (int prodId) {
-        String queryStr = "SELECT * FROM " + tableName + " WHERE prodId = ?";
+        String queryStr = "SELECT * FROM " + tableName + " WHERE id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setInt(1, prodId);
@@ -97,14 +97,14 @@ public class ProductDA {
             
             while (rs.next()) {
                 product.add(new Product(
-                        rs.getInt("prodId"),
-                        rs.getString("prodName"),
-                        rs.getString("imgUrl"),
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("display_image_url"),
                         rs.getString("description"),
                         rs.getDouble("price"),
                         rs.getInt("stock"),
-                        rs.getInt("categoryId"),
-                        rs.getDate("createDate")));
+                        rs.getInt("category_id"),
+                        rs.getDate("create_date")));
             } return product;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
