@@ -25,21 +25,6 @@ function totalClick(click){
     event.target.parentNode.querySelector(".totalClicks").innerText = sum;
 }
 
-function checkOutBtn() {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(function(checkbox){
-        checkbox.checked = true;
-    });
-    var confirmation = confirm("Do you want to check out all selected item");
-    if(confirmation) {
-        window.location.href = "checkout.jsp";
-    } else{
-        checkboxes.forEach(function(checkbox){
-            checkbox.checked = false;
-        });
-    }
-}
-
 function clearCart() {
     var productList = document.querySelector(".productList");
     productList.style.display = "none";

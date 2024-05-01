@@ -17,7 +17,7 @@
                 <table>
                     <tbody>
                         <tr>
-                            <td><input type="checkbox" id="checkbox" name="checkbox1"></td>
+                            <td><input type="checkbox" name="checkbox1"></td>
                             <td><img src="https://via.placeholder.com/150x150" alt="Product 1"></td>
                             <td>Product 1</td>
                             <td>
@@ -34,7 +34,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" id="checkbox" name="checkbox1"></td>
+                            <td><input type="checkbox" name="checkbox2"></td>
                             <td><img src="https://via.placeholder.com/150x150" alt="Product 2"></td>
                             <td>Product 2</td>
                             <td>
@@ -67,13 +67,11 @@
     <div class="buttons-wrapper">
         <div class="checkout">
             <form action="checkout.jsp">
-                <button onclick="checkOutBtn()" class="nelson-button" id="checkoutBtn">Checkout All</button>
+                <input type="button" value="Checkout" class="nelson-button" onclick="checkOutBtn()">
             </form>
             <a href="#"><button class="nelson-button" id="continueShoppingBtn">Continue Shopping</button></a>
             <button class="nelson-button" id="clearCartBtn" onclick="clearCart()">Delete Cart</button>
         </div>
     </div>
-    
-
 </body>
 </html>
