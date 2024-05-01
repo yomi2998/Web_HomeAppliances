@@ -69,6 +69,8 @@ $(document).ready(function () {
   console.log("hello world!");
   setTimeout(function () {
     $(".nelson-greeter").css("opacity", "0");
+    $("body").css("overflow", "auto");
+    $(".container").show();
     setTimeout(function () {
       $(".nelson-greeter").css("display", "none");
     }, 300);

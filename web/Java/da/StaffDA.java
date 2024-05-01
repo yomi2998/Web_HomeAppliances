@@ -271,6 +271,20 @@ public class StaffDA {
         }
     }
 
+    public int countTotalStaff() {
+        String queryStr = "SELECT COUNT(*) FROM " + tableName;
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+
     public void destroy() {
         try {
             conn.close();

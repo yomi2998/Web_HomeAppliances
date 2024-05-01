@@ -12,6 +12,7 @@ body {
     -webkit-user-select: none;
     -ms-user-select: none;
     color-scheme: dark;
+    overflow: hidden;
 }
 
 html::-webkit-scrollbar,
@@ -290,16 +291,16 @@ html::-webkit-scrollbar-thumb {
 
 .nelson-greeter {
     background: #000000;
-    position: absolute;
+    position: fixed;
     margin: 0 auto;
     z-index: 888;
-    min-width: 100%;
-    min-height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     transition: all 0.2s;
+    width: 100%;
+    height: 100vh;
 }
 
 .nelson-greeter img {

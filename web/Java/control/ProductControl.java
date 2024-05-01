@@ -34,6 +34,14 @@ public class ProductControl {
     public boolean deleteProduct(int prodId) {
         return productDA.deleteProduct(prodId);
     }
+
+    public int countTotalSales() {
+        return productDA.countTotalSales();
+    }
+
+    public double countTotalEarned() {
+        return productDA.countTotalEarned();
+    }
     
     public void destroy() {
         productDA.destroy();
