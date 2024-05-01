@@ -26,10 +26,18 @@ function totalClick(click){
 }
 
 function checkOutBtn() {
-    var checkbox1 = document.getElementById('checkbox1');
-    var checkbox2 = document.getElementById('checkbox2');
-    checkbox1.checked = true;
-    checkbox2.checked = true;
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox){
+        checkbox.checked = true;
+    });
+    var confirmation = confirm("Do you want to check out all selected item");
+    if(confirmation) {
+        window.location.href = "checkout.jsp";
+    } else{
+        checkboxes.forEach(function(checkbox){
+            checkbox.checked = false;
+        });
+    }
 }
 
 function clearCart() {

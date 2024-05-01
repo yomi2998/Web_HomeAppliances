@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/css/addCart.css">
-    <link rel="stylesheet" href="src/css/header.css">
+    <link rel="stylesheet" type="text/css" href="src/css/header.css">
+    <link rel="stylesheet" type="text/css" href="src/css/body.css">
     <script src="src/js/addCart.js"></script>
     <title>Add To Cart</title>
 </head>
@@ -16,7 +17,7 @@
                 <table>
                     <tbody>
                         <tr>
-                            <td><input type="checkbox" id="checkbox1"></td>
+                            <td><input type="checkbox" id="checkbox"></td>
                             <td><img src="https://via.placeholder.com/150x150" alt="Product 1"></td>
                             <td>Product 1</td>
                             <td>
@@ -33,7 +34,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" id="checkbox2"></td>
+                            <td><input type="checkbox" id="checkbox"></td>
                             <td><img src="https://via.placeholder.com/150x150" alt="Product 2"></td>
                             <td>Product 2</td>
                             <td>
@@ -51,13 +52,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="buttons-wrapper">
-                    <div class="checkout">
-                        <button onclick="checkOutBtn()" class="nelson-button" id="checkoutBtn">Checkout</button>
-                        <a href="#"><button class="nelson-button" id="continueShoppingBtn">Continue Shopping</button></a>
-                        <button class="nelson-button" id="clearCartBtn" onclick="clearCart()">Clear Cart</button>
+                <form action="checkout.jsp">
+                    <div class="buttons-wrapper">
+                        <div class="checkout">
+                            <button onclick="checkOutBtn()" class="nelson-button" id="checkoutBtn">Checkout All</button>
+                            <a href="#"><button class="nelson-button" id="continueShoppingBtn">Continue Shopping</button></a>
+                            <button class="nelson-button" id="clearCartBtn" onclick="clearCart()">Delete Cart</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="suggestions-container">
                 <h2>Suggested Items</h2>
