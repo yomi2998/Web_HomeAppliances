@@ -102,11 +102,25 @@
             </div>
 
             <div class="grid-item">
-                <img src="src/img/Product/Cleaning & Laundry/" alt="Product Image 6">
+                <img src="src/img/Product/Cleaning & Laundry/washingMachine.avif" alt="Product Image 6">
                 <div class="description">
                     <h2>LG Front Load Washer</h2>
-                    <p>Sample Product Page.</p>
-                    <p>Price: RM XX.XX</p>
+                    <p>Reduce Allergens</p><br>
+                    <p>Outstanding wash</p><br>
+                    <p>AI Inverter Direct Drive</p><br>
+                    <p>Price: RM 5220.00</p>
+                    <button class="nelson-button">Add to Cart</button>
+                </div>
+            </div>
+            <div class="grid-item">
+                <img src="src/img/Product/Cleaning & Laundry/washingMachine.avif" alt="Product Image 6">
+                <div class="description">
+                    <h2>Philips PowerPro Compact Bagless Vacuum Cleaner</h2>
+                    <p>1800W durable motor for high suction power</p><br>
+                    <p>PowerCyclone 5 maintains high performance for longer</p><br>
+                    <p>MultiClean nozzle for through cleaning on all floors</p><br>
+                    <p>Price: RM 559.00
+                    </p>
                     <button class="nelson-button">Add to Cart</button>
                 </div>
             </div>
