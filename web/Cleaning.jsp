@@ -113,7 +113,7 @@
                 </div>
             </div>
             <div class="grid-item">
-                <img src="src/img/Product/Cleaning & Laundry/washingMachine.avif" alt="Product Image 6">
+                <img src="src/img/Product/Cleaning & Laundry/vacuum.jpg" alt="Product Image 6">
                 <div class="description">
                     <h2>Philips PowerPro Compact Bagless Vacuum Cleaner</h2>
                     <p>1800W durable motor for high suction power</p><br>
