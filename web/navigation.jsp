@@ -477,7 +477,9 @@
                     %>
             </div>
             <hr>
+            <% if (userType.equals("admin") || userType.equals("staff")) { %>
             <button class="nelson-button" onclick="extension_toggle('manage-category-extension')">Manage</button>
+            <% } %>
             <button class="nelson-button" onclick="extension_toggle('category-extension')">Back</button>
         </div>
     </div>
@@ -498,7 +500,7 @@
                 </div>
                 <hr>
                 <div class="buttons-field">
-                    <button class="nelson-button" onclick="extension_toggle('feedback-extension')" type="reset">Cancel</button>
+                    <button class="nelson-button" id="feedbackCancel" onclick="extension_toggle('feedback-extension')" type="reset">Cancel</button>
                     <input type="submit" class="nelson-button" value="Submit">
                 </div>
             </form>

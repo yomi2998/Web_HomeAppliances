@@ -208,26 +208,9 @@ CREATE TABLE feedback (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     user_id INT NOT NULL,
     title LONG VARCHAR NOT NULL,
+    description LONG VARCHAR NOT NULL,
+    comment LONG VARCHAR DEFAULT NULL,
     is_resolved BOOLEAN NOT NULL DEFAULT FALSE,
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE CASCADE
-);
-
-CREATE TABLE feedback_message (
-    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
-    sender_id INT NOT NULL,
-    role VARCHAR(20) NOT NULL,
-    feedback_id INT NOT NULL,
-    message LONG VARCHAR NOT NULL,
-    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (feedback_id) REFERENCES feedback(id) ON DELETE CASCADE
-);
-
-CREATE TABLE read_message (
-    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
-    reader_id INT NOT NULL,
-    role VARCHAR(20) NOT NULL,
-    message_id INT NOT NULL,
-    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (message_id) REFERENCES feedback_message(id) ON DELETE CASCADE
 );
