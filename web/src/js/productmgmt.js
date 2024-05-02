@@ -5,12 +5,14 @@ $(document).ready(function () {
     $("#view-tab").removeClass("focus");
     $("#add-tab").addClass("focus");
     $("#product-tab").hide();
+    $("#edit-product-tab").hide();
     $("#add-product-tab").show();
   });
 
   $("#view-tab").click(function () {
     $("#add-tab").removeClass("focus");
     $("#view-tab").addClass("focus");
+    $("#edit-product-tab").hide();
     $("#add-product-tab").hide();
     $("#product-tab").show();
   });
@@ -18,9 +20,16 @@ $(document).ready(function () {
   $("#view-tab").click(function () {
     $("#add-tab").removeClass("focus");
     $("#view-tab").addClass("focus");
+    $("#edit-product-tab").hide();
     $("#add-product-tab").hide();
     $("#product-tab").show();
   });
+  
+  $("#edit-product-cancel").click(function () {
+    $("#edit-product-reset").click();
+    $("#edit-product-tab").hide();
+    $("#product-tab").show();
+  })
 
   $("#prod-category-refresh").click(function () {
     $.ajax({
@@ -36,6 +45,39 @@ $(document).ready(function () {
         for (var i = 0; i < category.length; i++) {
           $("#option-category").append(
             `<option value="${category[i].id}">${category[i].name}</option>`
+          );
+        }
+      },
+    });
+  });
+
+  $(".delete-prod").click(function () {
+    var id = $(this).attr("id");
+    id = id.substring(12);
+    var confirm = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+    if (!confirm) {
+      return;
+    }
+
+    $.ajax({
+      type: "POST",
+      url: "/Web_HomeAppliances/ProductDelete",
+      data: { id: id },
+      success: function (data) {
+        var out = JSON.parse(data);
+        if (out.success) {
+          showSnackbar(
+            "src/img/white/check-circle.svg",
+            "Product deleted successfully",
+            "Please refresh the page to see the changes."
+          );
+        } else {
+          showSnackbar(
+            "src/img/white/alert-circle.svg",
+            "Delete product.",
+            "Product delete failed."
           );
         }
       },

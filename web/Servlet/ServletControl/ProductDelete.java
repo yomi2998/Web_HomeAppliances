@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import control.StaffControl;
 import control.AdminControl;
+import control.ProductControl;
 import java.util.*;
 
 /**
@@ -72,6 +73,9 @@ public class ProductDelete extends HttpServlet {
                     out.print("{\"success\": false}");
                     break;
             }
+            ProductControl productControl = new ProductControl();
+            id = Integer.parseInt(request.getParameter("id"));
+            out.print("{\"success\": " + productControl.deleteProduct(id) + "}");
         }
     }
 
