@@ -10,7 +10,10 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import control.StaffControl;
+import domain.Product;
 import control.AdminControl;
+import control.ProductControl;
+
 import java.util.*;
 
 /**
@@ -72,6 +75,27 @@ public class ProductUpdate extends HttpServlet {
                     out.print("{\"success\": false}");
                     break;
             }
+            id = Integer.parseInt(request.getParameter("id"));
+            String name = request.getParameter("name");
+            Double price = Double.parseDouble(request.getParameter("price"));
+            int stock = Integer.parseInt(request.getParameter("stock"));
+            String description = request.getParameter("description");
+            int category_id = Integer.parseInt(request.getParameter("category_id"));
+            boolean hasDisplayImage = Boolean.parseBoolean(request.getParameter("hasDisplayImage"));
+            boolean hasSubImages = Boolean.parseBoolean(request.getParameter("hasSubImages"));
+            ArrayList<String> sub_images = new ArrayList<>();
+            String display_image = "";
+            if (hasSubImages) {
+                sub_images = new ArrayList<>(Arrays.asList(request.getParameter("sub_images").split("\",\"")));
+                sub_images.set(0, sub_images.get(0).substring(2));
+                sub_images.set(sub_images.size() - 1, sub_images.get(sub_images.size() - 1).substring(0, sub_images.get(sub_images.size() - 1).length() - 2));
+            }
+            if (hasDisplayImage) {
+                display_image = request.getParameter("display_image");
+            }
+            ProductControl productControl = new ProductControl();
+            Product product = new Product(id, name, display_image, sub_images, description, price, stock, 0, category_id, null);
+            out.print("{\"success\": " + productControl.updateProduct(product) + "}");
         }
     }
 

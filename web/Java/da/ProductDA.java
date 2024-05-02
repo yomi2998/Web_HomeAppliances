@@ -26,6 +26,7 @@ public class ProductDA {
     private PreparedStatement stmt;
 
     private class ImagePair {
+
         public Blob image;
         public String extension;
 
@@ -61,26 +62,45 @@ public class ProductDA {
     }
 
     public boolean updateProduct(Product product) {
-        String queryStr = "UPDATE " + tableName + " SET name = ?, display_image = ?, extension = ?, description = ?, price = ?, stock = ?, category_id = ?";
+        String queryStr = "UPDATE " + tableName + " SET name = ?, display_image = ?, extension = ?, description = ?, price = ?, stock = ?, category_id = ? WHERE id = ?";
+        String queryStrAlt = "UPDATE " + tableName + " SET name = ?, description = ?, price = ?, stock = ?, category_id = ? WHERE id = ?";
         String queryStr2 = "DELETE FROM " + imageTableName + " WHERE product_id = ?";
         String queryStr3 = "INSERT INTO " + imageTableName + " (product_id, extension, image) VALUES (?, ?, ?)";
         try {
-            ImagePair display_image = convertBase64ToBlob(product.getDisplay_image());
-            stmt = conn.prepareStatement(queryStr);
-            stmt.setString(1, product.getName());
-            stmt.setBlob(2, display_image.image);
-            stmt.setString(3, display_image.extension);
-            stmt.setString(4, product.getDescription());
-            stmt.setDouble(5, product.getPrice());
-            stmt.setInt(6, product.getStock());
-            stmt.setInt(7, product.getCategory_id());
-            if (stmt.executeUpdate() == 0) {
-                return false;
+            if (product.getDisplay_image().equals("")) {
+                stmt = conn.prepareStatement(queryStrAlt);
+                stmt.setString(1, product.getName());
+                stmt.setString(2, product.getDescription());
+                stmt.setDouble(3, product.getPrice());
+                stmt.setInt(4, product.getStock());
+                stmt.setInt(5, product.getCategory_id());
+                stmt.setInt(6, product.getId());
+                if (stmt.executeUpdate() == 0) {
+                    return false;
+                }
+            } else {
+                ImagePair display_image = convertBase64ToBlob(product.getDisplay_image());
+                stmt = conn.prepareStatement(queryStr);
+                stmt.setString(1, product.getName());
+                stmt.setBlob(2, display_image.image);
+                stmt.setString(3, display_image.extension);
+                stmt.setString(4, product.getDescription());
+                stmt.setDouble(5, product.getPrice());
+                stmt.setInt(6, product.getStock());
+                stmt.setInt(7, product.getCategory_id());
+                stmt.setInt(8, product.getId());
+                if (stmt.executeUpdate() == 0) {
+                    return false;
+                }
+            }
+
+            if (product.getSub_images().isEmpty()) {
+                return true;
             }
 
             stmt = conn.prepareStatement(queryStr2);
             stmt.setInt(1, product.getId());
-            
+
             if (stmt.executeUpdate() == 0) {
                 return false;
             }
@@ -116,7 +136,7 @@ public class ProductDA {
             stmt.setDouble(5, product.getPrice());
             stmt.setInt(6, product.getStock());
             stmt.setInt(7, product.getCategory_id());
-            
+
             if (stmt.executeUpdate() == 0) {
                 return false;
             }
@@ -204,7 +224,7 @@ public class ProductDA {
                 while (rs2.next()) {
                     sub_images.add(convertBlobToBase64(rs2.getBlob("image"), rs2.getString("extension")));
                 }
-                
+
                 product.add(new Product(
                         rs.getInt("id"),
                         rs.getString("name"),

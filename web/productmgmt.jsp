@@ -985,14 +985,14 @@
                                             <td id="ProdDate"><%= product.getCreate_date() %></td>
                                             <td hidden id="prodDesc"><%= product.getDescription() %></td>
                                             <td hidden id="prodCat"><%= product.getCategory_id() %></td>
-                                            <td hidden id="prodSub">
+                                            <td hidden id="prodSubImg">
                                                 <% for (String sub : product.getSub_images()) { %>
                                                     <img src="<%= sub %>" alt="<%= product.getName() %>" style="height: 100px;">
                                                 <% } %>
                                             </td>
                                             <td>
-                                                <button class="nelson-button" id="prod-edit-<%= product.getId() %>">Edit</button>
-                                                <button class="nelson-button" id="prod-edit-<%= product.getId() %>">Delete</button>
+                                                <button class="nelson-button edit-prod" id="prod-edit-<%= product.getId() %>">Edit</button>
+                                                <button class="nelson-button delete-prod" id="prod-delete-<%= product.getId() %>">Delete</button>
                                             </td>
                                         </tr>
                                         <% } %>
@@ -1053,6 +1053,67 @@
                                             <button class="nelson-button" type="reset" id="add-product-reset">Reset</button>
                                             <input type="submit" class="nelson-button" value="Add">
                                         </div>
+                                    </form>
+                                </div>
+                                <div id="edit-product-tab" hidden>
+                                    <form method="post" id="editProductForm">
+                                        <input type="text" name="id" id="alter-product-id" hidden>
+                                    <div class="input-field">
+                                        <label for="name" class="label-with-margin">Name:</label><br>
+                                        <input id="edit-product-name" autocomplete="off" type="text" name="name" placeholder="Name" class="nelson-input" required><br>
+                                        <p id="edit-product-invalid-name" class="hidden" style="color:red;">Invalid name.</p>
+                                    </div>
+                                    <div class="input-field">
+                                        <label for="price" class="label-with-margin">Price (RM):</label><br>
+                                        <input id="edit-product-price" autocomplete="off" name="price" placeholder="Price" class="nelson-input" min="0" value="10.00" pattern="^\d*(\.\d{0,2})?$" required><br>
+                                        <p id="edit-product-invalid-price" class="hidden" style="color:red;">Invalid price.</p>
+                                    </div>
+                                    <div class="input-field">
+                                        <label for="stock" class="label-with-margin">Stock:</label><br>
+                                        <input id="edit-product-stock" autocomplete="off" type="number" name="stock" placeholder="Stock" class="nelson-input" min="0" required><br>
+                                        <p id="edit-product-invalid-stock" class="hidden" style="color:red;">Invalid stock.</p>
+                                    </div>
+                                    <div class="input-field">
+                                        <label for="description" class="label-with-margin">Description:</label><br>
+                                        <textarea id="edit-product-description" autocomplete="off" name="description" placeholder="Description" class="big-nelson-input" rows="10" required></textarea>
+                                        <p id="edit-product-invalid-description" class="hidden" style="color:red;">Invalid description.</p>
+                                    </div>
+                                    <div class="input-field">
+                                        <label for="category" class="label-with-margin">Category:</label><br>
+                                        <div>
+                                        <select name="category_id" class="nelson-select" id="edit-option-category" required>
+                                            <option value="" disabled selected>Select category</option>
+                                            <% for (Category category : categories) { %>
+                                            <option value="<%= category.getId() %>"><%= category.getName() %></option>
+                                            <% } %>
+                                        </select>
+                                        <a href="#" onclick="extension_toggle('manage-category-extension')"><button class="nelson-button">Manage</button></a>
+                                        <a href="#" id="edit-prod-category-refresh"><button class="nelson-button">Refresh</button></a>
+                                    </div>
+                                        <p id="edit-invalid-category" class="hidden" style="color:red;">Invalid category.</p>
+                                    </div>
+                                    <div class="input-field">
+                                        <label for="sub_images" class="label-with-margin">Images:</label><br>
+                                        <input id="edit-product-images" autocomplete="off" type="file" name="sub_images" class="nelson-input" accept="image/png, image/jpg, image/jpeg, image/webp" multiple><br>
+                                        <p id="edit-product-invalid-image" class="hidden" style="color:red;">Invalid image.</p>
+                                        <div id="edit-images-preview">
+                                        </div>
+                                    </div>
+                                    <div class="input-field">
+                                        <label for="display_image" class="label-with-margin">Display Image:</label><br>
+                                        <input id="edit-display-image" autocomplete="off" type="file" name="display_image" class="nelson-input" accept="image/png, image/jpg, image/jpeg, image/webp"><br>
+                                        <p id="edit-product-invalid-display_image" class="hidden" style="color:red;">Invalid display image.</p>
+                                        <div id="edit-display-image-preview">
+                                            </div>
+                                    </div>
+                                    <hr>
+                                    <div class="buttons-field">
+                                        <button class="nelson-button" id="edit-product-cancel">Cancel</button>
+                                        <button class="nelson-button" type="reset" id="edit-product-reset">Reset</button>
+                                        <input type="submit" class="nelson-button" value="Update">
+                                    </div>
+                                    </form>
+                                </div>
                                 </div>
                             </div>
                             </body>
