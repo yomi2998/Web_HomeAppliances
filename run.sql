@@ -82,11 +82,12 @@ INSERT INTO category (name) VALUES ('Climate Control');
 CREATE TABLE product (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     name VARCHAR(255) NOT NULL,
-    display_img BLOB(16M) NOT NULL,
+    display_image BLOB(16M) NOT NULL,
+    extension VARCHAR(64) NOT NULL,
     description LONG VARCHAR NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     stock INT NOT NULL,
-    sold INT NOT NULL,
+    sold INT NOT NULL DEFAULT 0,
     category_id INT,
     create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL
@@ -96,6 +97,7 @@ CREATE TABLE product_image (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     product_id INT NOT NULL,
     image BLOB(16M) NOT NULL,
+    extension VARCHAR(64) NOT NULL,
     FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE
 );
 

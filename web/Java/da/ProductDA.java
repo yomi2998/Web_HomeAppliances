@@ -9,7 +9,6 @@ import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.io.*;
 
 /**
  *
@@ -25,6 +24,16 @@ public class ProductDA {
     private String salesTableName = "order_product";
     private Connection conn;
     private PreparedStatement stmt;
+
+    private class ImagePair {
+        public Blob image;
+        public String extension;
+
+        ImagePair(Blob image, String extension) {
+            this.image = image;
+            this.extension = extension;
+        }
+    }
 
     public ProductDA() {
         createConnection();
@@ -52,18 +61,19 @@ public class ProductDA {
     }
 
     public boolean updateProduct(Product product) {
-        String queryStr = "UPDATE " + tableName + " SET name = ?, display_image = ?, description = ?, price = ?, stock = ?, category_id = ?, create_date = ?";
+        String queryStr = "UPDATE " + tableName + " SET name = ?, display_image = ?, extension = ?, description = ?, price = ?, stock = ?, category_id = ?";
         String queryStr2 = "DELETE FROM " + imageTableName + " WHERE product_id = ?";
-        String queryStr3 = "INSERT INTO " + imageTableName + " (product_id, image) VALUES (?, ?)";
+        String queryStr3 = "INSERT INTO " + imageTableName + " (product_id, extension, image) VALUES (?, ?, ?)";
         try {
+            ImagePair display_image = convertBase64ToBlob(product.getDisplay_image());
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, product.getName());
-            stmt.setBlob(2, convertBase64ToBlob(product.getDisplay_image()));
-            stmt.setString(3, product.getDescription());
-            stmt.setDouble(4, product.getPrice());
-            stmt.setInt(5, product.getStock());
-            stmt.setInt(6, product.getCategory_id());
-            stmt.setDate(7, (Date) product.getCreate_date());
+            stmt.setBlob(2, display_image.image);
+            stmt.setString(3, display_image.extension);
+            stmt.setString(4, product.getDescription());
+            stmt.setDouble(5, product.getPrice());
+            stmt.setInt(6, product.getStock());
+            stmt.setInt(7, product.getCategory_id());
             if (stmt.executeUpdate() == 0) {
                 return false;
             }
@@ -76,9 +86,11 @@ public class ProductDA {
             }
 
             for (String img : product.getSub_images()) {
+                ImagePair image = convertBase64ToBlob(img);
                 stmt = conn.prepareStatement(queryStr3);
                 stmt.setInt(1, product.getId());
-                stmt.setBlob(2, convertBase64ToBlob(img));
+                stmt.setString(2, image.extension);
+                stmt.setBlob(3, image.image);
                 if (stmt.executeUpdate() == 0) {
                     return false;
                 }
@@ -92,27 +104,41 @@ public class ProductDA {
     }
 
     public boolean insertProduct(Product product) {
-        String queryStr = "INSERT INTO " + tableName + " (id, name, display_image, description, price, stock, category_id, create_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        String queryStr2 = "INSERT INTO " + imageTableName + " (product_id, image) VALUES (?, ?)";
+        String queryStr = "INSERT INTO " + tableName + " (name, display_image, extension, description, price, stock, category_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String queryStr2 = "INSERT INTO " + imageTableName + " (product_id, extension, image) VALUES (?, ?, ?)";
         try {
+            ImagePair display_image = convertBase64ToBlob(product.getDisplay_image());
             stmt = conn.prepareStatement(queryStr);
-            stmt.setInt(1, product.getId());
-            stmt.setString(2, product.getName());
-            stmt.setBlob(3, convertBase64ToBlob(product.getDisplay_image()));
+            stmt.setString(1, product.getName());
+            stmt.setBlob(2, display_image.image);
+            stmt.setString(3, display_image.extension);
             stmt.setString(4, product.getDescription());
             stmt.setDouble(5, product.getPrice());
             stmt.setInt(6, product.getStock());
             stmt.setInt(7, product.getCategory_id());
-            stmt.setDate(8, (Date) product.getCreate_date());
             
             if (stmt.executeUpdate() == 0) {
                 return false;
             }
 
+            int id = 0;
+            String queryStr3 = "SELECT MAX(id) FROM " + tableName;
+            stmt = conn.prepareStatement(queryStr3);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+
+            if (id == 0) {
+                return false;
+            }
+
             for (String img : product.getSub_images()) {
                 stmt = conn.prepareStatement(queryStr2);
-                stmt.setInt(1, product.getId());
-                stmt.setBlob(2, convertBase64ToBlob(img));
+                stmt.setInt(1, id);
+                ImagePair image = convertBase64ToBlob(img);
+                stmt.setString(2, image.extension);
+                stmt.setBlob(3, image.image);
                 if (stmt.executeUpdate() == 0) {
                     return false;
                 }
@@ -134,18 +160,18 @@ public class ProductDA {
 
             if (rs.next()) {
                 List<String> sub_images = new ArrayList<>();
+                String image = convertBlobToBase64(rs.getBlob("display_image"), rs.getString("extension"));
                 String queryStr2 = "SELECT * FROM " + imageTableName + " WHERE product_id = ?";
                 stmt = conn.prepareStatement(queryStr2);
                 stmt.setInt(1, id);
                 ResultSet rs2 = stmt.executeQuery();
                 while (rs2.next()) {
-                    sub_images.add(convertBlobToBase64(rs2.getBlob("image")));
+                    sub_images.add(convertBlobToBase64(rs2.getBlob("image"), rs2.getString("extension")));
                 }
-
                 return new Product(
                         rs.getInt("id"),
                         rs.getString("name"),
-                        convertBlobToBase64(rs.getBlob("display_image")),
+                        image,
                         sub_images,
                         rs.getString("description"),
                         rs.getDouble("price"),
@@ -171,17 +197,18 @@ public class ProductDA {
             while (rs.next()) {
                 List<String> sub_images = new ArrayList<>();
                 String queryStr2 = "SELECT * FROM " + imageTableName + " WHERE product_id = ?";
+                String image = convertBlobToBase64(rs.getBlob("display_image"), rs.getString("extension"));
                 stmt = conn.prepareStatement(queryStr2);
                 stmt.setInt(1, rs.getInt("id"));
                 ResultSet rs2 = stmt.executeQuery();
                 while (rs2.next()) {
-                    sub_images.add(convertBlobToBase64(rs2.getBlob("image")));
+                    sub_images.add(convertBlobToBase64(rs2.getBlob("image"), rs2.getString("extension")));
                 }
-
+                
                 product.add(new Product(
                         rs.getInt("id"),
                         rs.getString("name"),
-                        convertBlobToBase64(rs.getBlob("display_image")),
+                        image,
                         sub_images,
                         rs.getString("description"),
                         rs.getDouble("price"),
@@ -231,23 +258,24 @@ public class ProductDA {
         }
     }
 
-    private String convertBlobToBase64(Blob data) {
+    private String convertBlobToBase64(Blob blob, String extension) {
         try {
-            // Convert the BLOB data to byte array
-            byte[] bytes = data.getBytes(1, (int) data.length());
-
-            // Encode the byte array to Base64
-            return Base64.getEncoder().encodeToString(bytes);
+            byte[] bytes = blob.getBinaryStream().readAllBytes();
+            String base64String = Base64.getEncoder().encodeToString(bytes);
+            return extension + "," + base64String;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             return null;
         }
     }
 
-    private Blob convertBase64ToBlob(String base64String) {
+    private ImagePair convertBase64ToBlob(String base64String) {
+        String[] split = base64String.split(",");
+        String rmStr = split[1];
         try {
-            byte[] decodedBytes = Base64.getDecoder().decode(base64String);
-            return new javax.sql.rowset.serial.SerialBlob(decodedBytes);
+            byte[] decodedBytes = Base64.getMimeDecoder().decode(rmStr);
+            Blob blob = new javax.sql.rowset.serial.SerialBlob(decodedBytes);
+            return new ImagePair(blob, split[0]);
         } catch (SQLException ex) {
             System.out.println("Error converting Base64 to BLOB: " + ex.getMessage());
             return null;
