@@ -224,6 +224,44 @@ public class ProductDA {
         }
     }
 
+    public List<Product> searchProducts(String keyword) {
+        // match partial key
+        String queryStr = "SELECT * FROM " + tableName + " WHERE name LIKE ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1, "%" + keyword + "%");
+            ResultSet rs = stmt.executeQuery();
+            List<Product> product = new ArrayList<>();
+
+            while (rs.next()) {
+                List<String> sub_images = new ArrayList<>();
+                String queryStr2 = "SELECT * FROM " + imageTableName + " WHERE product_id = ?";
+                String image = convertBlobToBase64(rs.getBlob("display_image"), rs.getString("extension"));
+                stmt = conn.prepareStatement(queryStr2);
+                stmt.setInt(1, rs.getInt("id"));
+                ResultSet rs2 = stmt.executeQuery();
+                while (rs2.next()) {
+                    sub_images.add(convertBlobToBase64(rs2.getBlob("image"), rs2.getString("extension")));
+                }
+                product.add(new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        image,
+                        sub_images,
+                        rs.getString("description"),
+                        rs.getDouble("price"),
+                        rs.getInt("stock"),
+                        rs.getInt("sold"),
+                        rs.getInt("category_id"),
+                        rs.getDate("create_date")));
+            }
+            return product;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
     public int countTotalSales() {
         String queryStr = "SELECT SUM(quantity) FROM " + salesTableName;
         try {

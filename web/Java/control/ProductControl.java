@@ -50,4 +50,8 @@ public class ProductControl {
     public void destroy() {
         productDA.destroy();
     }
+
+    public List<Product> searchProducts(String search) {
+        return productDA.searchProducts(search);
+    }
 }

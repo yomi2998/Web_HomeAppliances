@@ -950,7 +950,10 @@
                                 <div id="snackbar-info"><h2 id="snackbar-title"></h2><p id="snackbar-message">Some text some message..</p></div>
                             </div>
                             <div class="container" style="display: none;">
-                                <% ProductControl productControl = new ProductControl(); List<Product> products = productControl.retrieveProductALL(); productControl.destroy(); %>
+                                <% ProductControl productControl = new ProductControl();
+                                String searchStr = request.getParameter("search");
+                                List<Product> products = searchStr == null || searchStr.equals("") ? productControl.retrieveProductALL() : productControl.searchProducts(searchStr);
+                                    productControl.destroy(); %>
                                 <div>
                                     <h1>Product</h1>
                                     <p class="tab focus" id="view-tab">View</p>
@@ -982,7 +985,7 @@
                                             <td><button class="nelson-button" id="1">Edit</button><button class="nelson-button" id="1">Delete</button></td>
                                         </tr> -->
                                         <% for (Product product : products) { %>
-                                        <tr>
+                                        <tr id="prod-<%= product.getId() %>">
                                             <td><img src="<%= product.getDisplay_image() %>" alt="<%= product.getName() %>" style="height: 100px;"></td>
                                             <td><%= product.getName() %></td>
                                             <td>RM <%= String.format("%.2f", product.getPrice()) %></td>

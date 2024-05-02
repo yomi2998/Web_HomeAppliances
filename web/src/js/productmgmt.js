@@ -231,8 +231,6 @@ $(document).ready(function () {
                 "Add product.",
                 "Product added successfully."
               );
-              $("#images-preview").empty();
-              $("#display-image-preview").empty();
               $("#add-product-reset").click();
             } else {
               showSnackbar(
@@ -247,5 +245,10 @@ $(document).ready(function () {
       .catch((error) => {
         console.error("Error reading files:", error);
       });
+  });
+
+  $("#add-product-reset").click(function () {
+    $("#images-preview").empty();
+    $("#display-image-preview").empty();
   });
 });
