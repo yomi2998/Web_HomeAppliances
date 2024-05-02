@@ -527,7 +527,7 @@
                 <%
                     for (Category category : categories) {
                 %>
-                <a href="/Web_HomeAppliances/search.jsp?category_id=<%= category.getId() %>"><button class="nelson-button"><%= category.getName() %></button></a>
+                <a href="/Web_HomeAppliances/search.jsp?category_id=<%= category.getId() %>" id="cat-<%= category.getId() %>"><button class="nelson-button"><%= category.getName() %></button></a>
                     <%
                         }
                     %>
@@ -975,24 +975,25 @@
                                             <th>Date created</th>
                                             <th>Action</th>
                                         </tr>
-                                        <!-- <tr>
-                                            <td><img src="src/img/selipar.webp" alt="Selipar" style="height: 100px;"></td>
-                                            <td>Selipar</td>
-                                            <td>RM 10.00</td>
-                                            <td>24</td>
-                                            <td>100</td>
-                                            <td>2021-08-01</td>
-                                            <td><button class="nelson-button" id="1">Edit</button><button class="nelson-button" id="1">Delete</button></td>
-                                        </tr> -->
                                         <% for (Product product : products) { %>
                                         <tr id="prod-<%= product.getId() %>">
-                                            <td><img src="<%= product.getDisplay_image() %>" alt="<%= product.getName() %>" style="height: 100px;"></td>
-                                            <td><%= product.getName() %></td>
-                                            <td>RM <%= String.format("%.2f", product.getPrice()) %></td>
-                                            <td><%= product.getStock() %></td>
+                                            <td id="prodDisp"><img src="<%= product.getDisplay_image() %>" alt="<%= product.getName() %>" style="height: 100px;"></td>
+                                            <td id="prodName"><%= product.getName() %></td>
+                                            <td id="prodPrice">RM <%= String.format("%.2f", product.getPrice()) %></td>
+                                            <td id="prodStock"><%= product.getStock() %></td>
                                             <td><%= product.getSold() %></td>
-                                            <td><%= product.getCreate_date() %></td>
-                                            <td><button class="nelson-button" id="<%= product.getId() %>">Edit</button><button class="nelson-button" id="<%= product.getId() %>">Delete</button></td>
+                                            <td id="ProdDate"><%= product.getCreate_date() %></td>
+                                            <td hidden id="prodDesc"><%= product.getDescription() %></td>
+                                            <td hidden id="prodCat"><%= product.getCategory_id() %></td>
+                                            <td hidden id="prodSub">
+                                                <% for (String sub : product.getSub_images()) { %>
+                                                    <img src="<%= sub %>" alt="<%= product.getName() %>" style="height: 100px;">
+                                                <% } %>
+                                            </td>
+                                            <td>
+                                                <button class="nelson-button" id="prod-edit-<%= product.getId() %>">Edit</button>
+                                                <button class="nelson-button" id="prod-edit-<%= product.getId() %>">Delete</button>
+                                            </td>
                                         </tr>
                                         <% } %>
                                     </table>

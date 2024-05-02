@@ -14,6 +14,8 @@ $(document).ready(function () {
             "Rename successful",
             "Category renamed successfully."
           );
+          $("#cat-" + id + " button").text($("#alter-category-name").val());
+          $(".category-list-tab").show();
           $("#" + id + ".category-info").text($("#alter-category-name").val());
           $(".rename-category").hide();
           $(".category-list").show();
@@ -55,6 +57,9 @@ $(document).ready(function () {
                 </div>
                 <hr style="margin:0" id="${out.id}">`
           );
+          $(".category-more-container-body").append(
+            `<a href="/Web_HomeAppliances/search.jsp?category_id=${out.id}" id="cat-${out.id}">
+            <button class="nelson-button">${$("#add-category-name").val()}</button></a>`);
           $(".category-add-cancel-button").click();
           $(".add-category").hide();
           $(".category-list-tab").show();
@@ -113,6 +118,7 @@ $(document).on("click", ".category-delete-button", function () {
           "Category deleted successfully."
         );
         $("#" + id + ".category-item").remove();
+        $("#cat-" + id).remove();
         setTimeout(function () {
             $("hr#" + id).remove();
         }, 1);

@@ -228,8 +228,8 @@ $(document).ready(function () {
             if (out.success) {
               showSnackbar(
                 "src/img/white/check-circle.svg",
-                "Add product.",
-                "Product added successfully."
+                "Add Product added successfully",
+                "Please refresh the page to see the changes."
               );
               $("#add-product-reset").click();
             } else {
