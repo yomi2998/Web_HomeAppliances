@@ -16,40 +16,26 @@
             <div class="table-container">
                 <table>
                     <tbody>
-                        <tr>
-                            <td><input type="checkbox" name="checkbox1"></td>
-                            <td><img src="https://via.placeholder.com/150x150" alt="Product 1"></td>
-                            <td>Product 1</td>
-                            <td>
-                                <div class="quantity-control">
-                                    <button onclick="totalClick(-1)" class="nelson-button">-</button>
-                                    <span class="totalClicks">1</span>
-                                    <button onclick="totalClick(1)" class="nelson-button">+</button>
-                                    <button onclick="totalClick(0)" class="nelson-button">Reset</button>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="nelson-button">Pay</button>
-                                <button class="nelson-button">Remove</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="checkbox2"></td>
-                            <td><img src="https://via.placeholder.com/150x150" alt="Product 2"></td>
-                            <td>Product 2</td>
-                            <td>
-                                <div class="quantity-control">
-                                    <button onclick="totalClick(-1)" class="nelson-button">-</button>
-                                    <span class="totalClicks">1</span>
-                                    <button onclick="totalClick(1)" class="nelson-button">+</button>
-                                    <button onclick="totalClick(0)" class="nelson-button">Reset</button>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="nelson-button">Pay</button>
-                                <button class="nelson-button">Remove</button>
-                            </td>
-                        </tr>
+                        <c:forEach items="${products}" var="item">
+                            <tr>
+                                <td>${product.id}</td>
+                                <td>${product.name}</td>
+                                <td>${product.description}</td>
+                                <td>${product.price}</td>
+                                <td>
+                                    <div class="quantity-control">
+                                        <button onclick="totalClick(-1)" class="nelson-button">-</button>
+                                        <span class="totalClicks">1</span>
+                                        <button onclick="totalClick(1)" class="nelson-button">+</button>
+                                        <button onclick="totalClick(0)" class="nelson-button">Reset</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="nelson-button">Pay</button>
+                                    <button class="nelson-button">Remove</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>  
             </div>
