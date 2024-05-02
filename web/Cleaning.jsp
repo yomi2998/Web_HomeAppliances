@@ -50,7 +50,7 @@
                     <p>3-stage Speed Control</p><br>
                     <p>Child Lock System</p><br>
                     <p>Price: RM 2999.00</p>
-                    <button class="nelson-button">Add to Cart</button>
+                    <input type="submit" value="Add to Cart" class="nelson-button">
                 </div>
             </div>
 
@@ -62,7 +62,7 @@
                     <p>Delayed start function of up to 3 hours</p><br>
                     <p>Height of upper basket is Adjustable</p><br>
                     <p>Price: RM 1999.00</p>
-                    <button class="nelson-button">Add to Cart</button>
+                    <input type="submit" value="Add to Cart" class="nelson-button">
                 </div>
             </div>
 
@@ -73,7 +73,7 @@
                     <p>Hygenic Steam - Kills 99.999% of bacteria, dust mites and fungi in your textiles</p><br>
                     <p>3 in 1 iron - steam, iron and purify your textiles with the Laurastar performance</p><br>
                     <p>Price: RM 9900.00</p>
-                    <button class="nelson-button">Add to Cart</button>
+                    <input type="submit" value="Add to Cart" class="nelson-button">
                 </div>
             </div>
 
@@ -85,7 +85,7 @@
                     <p>100g Steam Boost can be triggered with the touch of a button</p><br>
                     <p>Easy Store Cable Clip may able you to wrap the cable around the base of the iron and secure in place</p><br>
                     <p>Price: RM 189.00</p>
-                    <button class="nelson-button">Add to Cart</button>
+                    <input type="submit" value="Add to Cart" class="nelson-button">
                 </div>
             </div>
 
@@ -97,7 +97,7 @@
                     <p>This robot vacuum cleaner can recognize the barrier and avoids collision</p><br>
                     <p>Suitable for cement floors, ceramic tiles, wooden floors, short-haired carpets</p><br>
                     <p>Price: RM 29.00</p>
-                    <button class="nelson-button">Add to Cart</button>
+                    <input type="submit" value="Add to Cart" class="nelson-button">
                 </div>
             </div>
 
@@ -109,7 +109,7 @@
                     <p>Outstanding wash</p><br>
                     <p>AI Inverter Direct Drive</p><br>
                     <p>Price: RM 5220.00</p>
-                    <button class="nelson-button">Add to Cart</button>
+                    <input type="submit" value="Add to Cart" class="nelson-button">
                 </div>
             </div>
             <div class="grid-item">
@@ -121,7 +121,7 @@
                     <p>MultiClean nozzle for through cleaning on all floors</p><br>
                     <p>Price: RM 559.00
                     </p>
-                    <button class="nelson-button">Add to Cart</button>
+                    <input type="submit" value="Add to Cart" class="nelson-button">
                 </div>
             </div>
         </div>
