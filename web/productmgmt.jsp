@@ -985,7 +985,7 @@
                                         <tr>
                                             <td><img src="<%= product.getDisplay_image() %>" alt="<%= product.getName() %>" style="height: 100px;"></td>
                                             <td><%= product.getName() %></td>
-                                            <td>RM <%= product.getPrice() %></td>
+                                            <td>RM <%= String.format("%.2f", product.getPrice()) %></td>
                                             <td><%= product.getStock() %></td>
                                             <td><%= product.getSold() %></td>
                                             <td><%= product.getCreate_date() %></td>
@@ -1003,7 +1003,7 @@
                                         </div>
                                         <div class="input-field">
                                             <label for="price" class="label-with-margin">Price (RM):</label><br>
-                                            <input autocomplete="off" type="number" name="price" placeholder="Price" class="nelson-input" min="0" value="10.00" required><br>
+                                            <input autocomplete="off" name="price" placeholder="Price" class="nelson-input" min="0" value="10.00" pattern="^\d*(\.\d{0,2})?$" required><br>
                                             <p id="product-invalid-price" class="hidden" style="color:red;">Invalid price.</p>
                                         </div>
                                         <div class="input-field">

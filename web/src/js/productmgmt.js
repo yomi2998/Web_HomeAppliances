@@ -231,7 +231,8 @@ $(document).ready(function () {
                 "Add product.",
                 "Product added successfully."
               );
-              $("#image-preview").empty();
+              $("#images-preview").empty();
+              $("#display-image-preview").empty();
               $("#add-product-reset").click();
             } else {
               showSnackbar(
