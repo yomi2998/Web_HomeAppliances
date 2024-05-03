@@ -72,6 +72,9 @@
         %><script>alert("You are not allowed to view this page.");</script> <%
                 return;
             }
+            if (staff.getPassword().equals("$taff123")) {
+        %><script>alert("Your password is a default password, please change it as soon as possible.");</script> <%
+            }
                 isLogin = true;
             } else {
                 for (Cookie cookie : cookies) {
