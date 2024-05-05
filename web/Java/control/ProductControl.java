@@ -51,7 +51,7 @@ public class ProductControl {
         productDA.destroy();
     }
 
-    public List<Product> searchProducts(String search) {
-        return productDA.searchProducts(search);
+    public List<Product> searchProducts(String search, int category) {
+        return productDA.searchProducts(search, category);
     }
 }

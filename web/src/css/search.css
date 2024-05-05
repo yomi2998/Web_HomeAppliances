@@ -22,6 +22,7 @@
 .search-item-section {
     display: grid;
     grid-template-columns: 0.3fr 1fr;
+    grid-gap: 40px;
 }
 
 .search-item-list {

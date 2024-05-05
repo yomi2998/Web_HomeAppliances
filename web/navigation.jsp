@@ -1,11 +1,11 @@
 
 <link rel="stylesheet" type="text/css" href="src/css/header.css">
+<script type="text/javascript" src="src/js/jquery.js"></script>
 <link rel="stylesheet" href="src/css/topup.css">
 <link rel="stylesheet" href="src/css/register.css">
 <link rel="stylesheet" href="src/css/category.css">
 <link rel="stylesheet" href="src/css/snackbar.css">
 <link rel="stylesheet" href="src/css/profile.css">
-<script type="text/javascript" src="src/js/jquery.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="src/js/init.js"></script>
 <script src="src/js/topup.js"></script>
@@ -158,7 +158,7 @@
                             break;
                         }
                 %>
-                <a href="/Web_HomeAppliances/search.jsp?category_id=<%= category.getId() %>"><%= category.getName() %></a>
+                <a href="/Web_HomeAppliances/search.jsp?category=<%= category.getId() %>"><%= category.getName() %></a>
                 <%
                     }
                     if (categories.size() != categoryCount) {
@@ -473,7 +473,7 @@
             <%
                 for (Category category : categories) {
             %>
-            <a href="/Web_HomeAppliances/search.jsp?category_id=<%= category.getId() %>" id="cat-<%= category.getId() %>"><button class="nelson-button"><%= category.getName() %></button></a>
+            <a href="/Web_HomeAppliances/search.jsp?category=<%= category.getId() %>" id="cat-<%= category.getId() %>"><button class="nelson-button"><%= category.getName() %></button></a>
                 <%
                     }
                 %>

@@ -8,8 +8,8 @@
         <link rel="stylesheet" type="text/css" href="src/css/header.css">
         <link rel="stylesheet" type="text/css" href="src/css/body.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script type="text/javascript" src="src/js/init.js"></script>
         <script type="text/javascript" src="src/js/jquery.js"></script>
+        <script type="text/javascript" src="src/js/init.js"></script>
     </head>
     <body>
         <header>

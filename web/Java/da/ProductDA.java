@@ -246,12 +246,19 @@ public class ProductDA {
         }
     }
 
-    public List<Product> searchProducts(String keyword) {
+    public List<Product> searchProducts(String keyword, int cateogry_id) {
         // match partial key
-        String queryStr = "SELECT * FROM " + tableName + " WHERE name LIKE ?";
+        String queryStr = "SELECT * FROM " + tableName + " WHERE UPPER(name) LIKE UPPER(?)";
+        String categoryStr = " AND category_id = ?";
         try {
+            if (cateogry_id != 0) {
+                queryStr += categoryStr;
+            }
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, "%" + keyword + "%");
+            if (cateogry_id != 0) {
+                stmt.setInt(2, cateogry_id);
+            }
             ResultSet rs = stmt.executeQuery();
             List<Product> product = new ArrayList<>();
 

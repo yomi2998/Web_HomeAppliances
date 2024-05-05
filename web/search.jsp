@@ -28,26 +28,28 @@
                 if (search == null) {
                     search = "";
                 }
-                List<Product> products = pc.searchProducts(search);
+                String category_id = request.getParameter("category");
+                List<Product> products = pc.searchProducts(search, category_id == null ? 0 : Integer.parseInt(category_id));
             %>
-            <h1>Search results for "<%= search %>"</h1>
             <div class="search-item-section">
                 <div>
+                    <h1>Filters</h1>
                     <form action="search.jsp" method="get" id="product-search-form">
                         <input autocomplete="off" type="text" class="search-nelson" name="search" value="<%= search %>" placeholder="Search">
                         <button type="submit" class="search-btn-ii" value="Search"></button>
                     </form>
                     <hr>
-                    <p>Hello world</p>
-                    <p>Hello world</p>
-                    <p>Hello world</p>
-                    <p>Hello world</p>
-                    <p>Hello world</p>
-                    <p>Hello world</p>
-                    <p>Hello world</p>
-                    <p>Hello world</p>
-                    <p>Hello world</p>
+                    <h3>Categories</h3>
+                    <div class="category-list">
+                        <%
+                            for (Category category : categories) {
+                        %>
+                        <a href="search.jsp?category=<%= category.getId() %>"><button class="nelson-button"><%= category.getName() %></button></a>
+                        <% } %>
+                    </div>
                 </div>
+                <div>
+                    <h1>Search results for "<%= search %>"</h1>
                 <div class="search-item-list">
                 <%
                     for (Product product : products) {
@@ -58,17 +60,18 @@
                     <p style="font-weight: bold;"><%= product.getName().length() > 20 ? product.getName().substring(0, 20) + "..." : product.getName() %></h2>
                     <p><%= String.format("RM %.2f", product.getPrice()) %></p>
                     <div class="star-rating">
-                        &nbsp;<%= product.getRating() %> | <%= product.getSold() %> sold
-                        <% for (int i = 5; i > (int)product.getRating(); i--) { %>
-                            <span class="fa fa-star unchecked"></span>
-                        <% } %>
                         <% for (int i = 0; i < (int)product.getRating(); i++) { %>
                             <span class="fa fa-star checked"></span>
                         <% } %>
+                        <% for (int i = 5; i > (int)product.getRating(); i--) { %>
+                            <span class="fa fa-star unchecked"></span>
+                        <% } %>
                     </div>
+                    <p><%= product.getRating() %> | <%= product.getSold() %> sold</p>
                 </div>
                 </div>
                 <% } %>
+            </div>
             </div>
             </div>
         </div>
