@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,7 +41,6 @@
                 <button type="submit" class="right search-btn"></button>
             </form>
         </header>
-
         <div class="grid-container">
             <div class="grid-item">
                 <img src="src/img/Product/Cleaning & Laundry/AirPurifier.png" alt="Product Image 1">

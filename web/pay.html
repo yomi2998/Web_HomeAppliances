@@ -8,7 +8,7 @@
     <div class="payment-method">
         <h1>Payment</h1>
         <img src="src\img\visa.jpeg" style="width: 20%; height: 8%;">
-        <input type="radio" id="payment" name="payment" value="visa">
+        <button type="submit" class="btn" onclick="addcard()">Add</button><br>
         <br><br>
         <img src="src\img\nelsonpay.png" style="width: 20%; height: 8%;">
         <input type="radio" id="payment" name="payment" value="nelsonpay">
@@ -18,31 +18,6 @@
     <button onclick="history.back()">Cancel</button>
     <button onclick="submitPayment()">Confirm Payment</button>
     </div>
-
-    <form>
-        <form>
-            <p>Enter card number</p>
-            <input type="text" id="card-number" name="card-number" required placeholder="Card Number">
-            <input type="text" id="cvv" name="cvv" required placeholder="cvv">
-            <input type="text" id="expiryDate" name="expiryDate" required placeholder="expiryDate">
-            <button>Cancel</button>
-            <button>Done</button>
-        </form>
-        <br><br>
-        <button onclick="history.back()">Cancel</button>
-        <button onclick="confirmAccount()">Done</button>
-    </form>
-
-    <form>
-        <h3>Nelson Pay</h3>
-        <p>Current Balances : RM</p>
-        <p>Top up</p>
-    </form>
-
-
-
-
-
 
 </body>
 
