@@ -25,15 +25,14 @@
         <%@ include file="navigation.jsp" %>
         <div class="container" style="display: none;">
             <% String search = request.getParameter("search");
-                if (search == null) {
-                    search = "";
-                }
                 String category_id = request.getParameter("category");
-                List<Product> products = pc.searchProducts(search, category_id == null ? 0 : Integer.parseInt(category_id));
+                List<Product> products = pc.searchProducts(search == null ? "" : search, category_id == null ? 0 : Integer.parseInt(category_id));
             %>
             <div class="search-item-section">
                 <div>
                     <h1>Filters</h1>
+                    <hr>
+                    <h3>Search</h3>
                     <form action="search.jsp" method="get" id="product-search-form">
                         <input autocomplete="off" type="text" class="search-nelson" name="search" value="<%= search %>" placeholder="Search">
                         <button type="submit" class="search-btn-ii" value="Search"></button>
@@ -49,11 +48,13 @@
                     </div>
                 </div>
                 <div>
-                    <h1>Search results for "<%= search %>"</h1>
+                    <h1>Search results <%= search == null ? "" : "for \"" + search + "\"" %></h1>
+                    <hr>
                 <div class="search-item-list">
                 <%
                     for (Product product : products) {
                 %>
+                <a class="nodeco" href="ProdDetails.jsp?product_id=<%= product.getId() %>">
                 <div class="search-item">
                     <div>
                     <img src="<%= product.getDisplay_image() %>" alt="<%= product.getName() %>" style="width: 10vw; height: 10vw;">
@@ -70,6 +71,7 @@
                     <p><%= product.getRating() %> | <%= product.getSold() %> sold</p>
                 </div>
                 </div>
+                </a>
                 <% } %>
             </div>
             </div>

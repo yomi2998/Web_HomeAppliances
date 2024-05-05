@@ -11,6 +11,11 @@
     text-align: left;
 }
 
+.nodeco {
+    text-decoration: none;
+    color: white;
+}
+
 .search-item div {
     margin: 20px;
 }
