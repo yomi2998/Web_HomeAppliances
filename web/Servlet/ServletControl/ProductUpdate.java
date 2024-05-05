@@ -94,7 +94,7 @@ public class ProductUpdate extends HttpServlet {
                 display_image = request.getParameter("display_image");
             }
             ProductControl productControl = new ProductControl();
-            Product product = new Product(id, name, display_image, sub_images, description, price, stock, 0, category_id, null);
+            Product product = new Product(id, name, display_image, sub_images, description, price, stock, 0, category_id, 0, null);
             out.print("{\"success\": " + productControl.updateProduct(product) + "}");
         }
     }

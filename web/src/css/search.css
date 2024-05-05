@@ -1,0 +1,39 @@
+.container {
+    margin: 100px 60px;
+}
+
+.search-item {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #111111;
+    color: white;
+    text-align: left;
+}
+
+.search-item div {
+    margin: 20px;
+}
+
+.search-item:hover {
+    background-color: #222222;
+}
+
+.search-item-section {
+    display: grid;
+    grid-template-columns: 0.3fr 1fr;
+}
+
+.search-item-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.search-item img {
+    background-color: white;
+    border-radius: 10px;
+}
+
+#product-search-form {
+    display: flex;
+}

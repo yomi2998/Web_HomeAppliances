@@ -20,7 +20,7 @@
 
     <body>
         <div class="nelson-greeter">
-            <p style="font-size: 10vw;">dashboard</p>
+            <p style="font-size: 10vw;">Dashboard</p>
         </div>
         <%@ include file="navigation.jsp" %>
         <% if (userType.equals("admin") || userType.equals("staff")) { %>

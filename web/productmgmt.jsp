@@ -19,7 +19,7 @@
 
     <body>
         <div class="nelson-greeter">
-            <p style="font-size: 10vw;">product</p>
+            <p style="font-size: 10vw;">Product</p>
         </div>
         <%@ include file="navigation.jsp" %>
         <div class="container" style="display: none;">

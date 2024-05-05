@@ -23,6 +23,7 @@ public class Product implements Serializable {
     private int stock;
     private int sold;
     private int category_id;
+    private double rating;
     private Date create_date;
 
     public Product() {
@@ -36,7 +37,15 @@ public class Product implements Serializable {
         this.sub_images = sub_images;
     }
 
-    public Product(int id, String name, String display_image, List<String> sub_images, String description, double price, int stock, int sold, int category_id, Date create_date) {
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public Product(int id, String name, String display_image, List<String> sub_images, String description, double price, int stock, int sold, int category_id, double rating, Date create_date) {
         this.id = id;
         this.name = name;
         this.display_image = display_image;
@@ -46,6 +55,7 @@ public class Product implements Serializable {
         this.stock = stock;
         this.sold = sold;
         this.category_id = category_id;
+        this.rating = rating;
         this.create_date = create_date;
     }
 

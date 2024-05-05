@@ -198,6 +198,7 @@ public class ProductDA {
                         rs.getInt("stock"),
                         rs.getInt("sold"),
                         rs.getInt("category_id"),
+                        rs.getDouble("rating"),
                         rs.getDate("create_date"));
             }
             return null;
@@ -235,6 +236,7 @@ public class ProductDA {
                         rs.getInt("stock"),
                         rs.getInt("sold"),
                         rs.getInt("category_id"),
+                        rs.getDouble("rating"),
                         rs.getDate("create_date")));
             }
             return product;
@@ -273,6 +275,7 @@ public class ProductDA {
                         rs.getInt("stock"),
                         rs.getInt("sold"),
                         rs.getInt("category_id"),
+                        rs.getDouble("rating"),
                         rs.getDate("create_date")));
             }
             return product;

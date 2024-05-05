@@ -86,7 +86,7 @@ public class ProductAdd extends HttpServlet {
             sub_images.set(sub_images.size() - 1, sub_images.get(sub_images.size() - 1).substring(0, sub_images.get(sub_images.size() - 1).length() - 2));
             String display_image = request.getParameter("display_image");
             ProductControl productControl = new ProductControl();
-            Product product = new Product(0, name, display_image, sub_images, description, price, stock, 0, category_id, null);
+            Product product = new Product(0, name, display_image, sub_images, description, price, stock, 0, category_id, 0, null);
             if (productControl.insertProduct(product)) {
                 out.print("{\"success\": true}");
             } else {
