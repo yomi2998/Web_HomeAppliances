@@ -27,7 +27,6 @@
                     </div>
                 </div>
                 <a href="#" class="left">About</a>
-                <a href="#" class="left">Feedback</a>
                 <div class="right profile-dropdown">
                     <a href="#" class="has-image"><img class="right icon" id="iprofile" src="src/img/white/user.svg"
                                                        style="height:60%;" alt="Profile"></a>

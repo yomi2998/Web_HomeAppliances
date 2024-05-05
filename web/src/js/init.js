@@ -55,33 +55,6 @@ function addCoverScreen() {
 
 $(document).ready(function () {
   console.log("hello world!");
-  $("#feedbackForm").submit(function (event) {
-    event.preventDefault();
-    var formData = new FormData(this);
-    $.ajax({
-      url: "/Web_HomeAppliances/CustomerFeedback",
-      type: "POST",
-      data: {issue_title: formData.get("issue_title"), issue_description: formData.get("issue_description")},
-      success: function (data) {
-        console.log(data);
-        const out = JSON.parse(data);
-        if (out.success) {
-          showSnackbar(
-            "/Web_HomeAppliances/images/success.png",
-            "Feedback Sent",
-            "Thank you for your feedback!"
-          );
-          $("#feedbackCancel").click();
-        } else {
-          showSnackbar(
-            "/Web_HomeAppliances/images/error.png",
-            "Feedback Failed",
-            "Please try again later."
-          );
-        }
-      },
-    });
-  });
   setTimeout(function () {
     $(".nelson-greeter").css("opacity", "0");
     $("body").css("overflow", "auto");

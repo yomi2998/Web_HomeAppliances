@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="src/css/topup.css">
 <link rel="stylesheet" href="src/css/register.css">
 <link rel="stylesheet" href="src/css/category.css">
-<link rel="stylesheet" href="src/css/feedback.css">
 <link rel="stylesheet" href="src/css/snackbar.css">
 <link rel="stylesheet" href="src/css/profile.css">
 <script type="text/javascript" src="src/js/jquery.js"></script>
@@ -170,9 +169,6 @@
                 %>
             </div>
         </div>
-        <% if (userType.equals("customer")) { %>
-        <a href="#" class="left" onclick="extension_toggle('feedback-extension')">Feedback</a>
-        <% } %>
         <div class="right profile-dropdown">
             <a href="#" class="has-image"><img class="right icon" id="iprofile" src="src/img/white/user.svg"
                                                style="height:60%;" alt="Profile"></a>
@@ -524,29 +520,6 @@
         <button class="nelson-button" onclick="extension_toggle('manage-category-extension')">Manage</button>
         <% } %>
         <button class="nelson-button" onclick="extension_toggle('category-extension')">Back</button>
-    </div>
-</div>
-<div class="nelson-nav-extension" id="feedback-extension">
-    <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="height: 50px; margin: 20px auto;">
-    <div class="feedback-container">
-        <h1 class="center">Feedback Form</h1>
-        <hr>
-        <form id="feedbackForm">
-            <div class="input-field">
-                <p class="form-p">Title for issue:</p>
-                <input autocomplete="off" type="text" name="issue_title" placeholder="Eg: Unable to view products" class="nelson-input center" required>
-            </div>
-
-            <div class="input-field">
-                <p class="form-p">Issue description</p>
-                <textarea autocomplete="off" name="issue_description" placeholder="Please describe the issue you are facing" class="big-nelson-input" rows="10" required></textarea>
-            </div>
-            <hr>
-            <div class="buttons-field">
-                <button class="nelson-button" id="feedbackCancel" onclick="extension_toggle('feedback-extension')" type="reset">Cancel</button>
-                <input type="submit" class="nelson-button" value="Submit">
-            </div>
-        </form>
     </div>
 </div>
 <div class="nelson-nav-extension" id="profile-extension">

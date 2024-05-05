@@ -203,14 +203,3 @@ CREATE TABLE topup (
     cvv VARCHAR(3) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE CASCADE
 );
-
-CREATE TABLE feedback (
-    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
-    user_id INT NOT NULL,
-    title LONG VARCHAR NOT NULL,
-    description LONG VARCHAR NOT NULL,
-    comment LONG VARCHAR DEFAULT NULL,
-    is_resolved BOOLEAN NOT NULL DEFAULT FALSE,
-    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE CASCADE
-);

@@ -19,7 +19,4 @@ DROP TABLE cust_order;
 DROP TABLE order_product;
 DROP TABLE order_status;
 DROP TABLE topup;
-DROP TABLE feedback;
-DROP TABLE feedback_message;
-DROP TABLE feedback_message_image;
 DROP TABLE read_message;
