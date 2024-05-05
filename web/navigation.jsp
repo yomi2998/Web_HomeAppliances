@@ -295,43 +295,6 @@
                 </div>
             </div>
         </div>
-        <% } if (isLogin) { %>
-        <div class="right noti-dropdown">
-            <a href="#" class="has-image"><img class="right icon" id="inoti" src="src/img/white/bell.svg"
-                                               style="height:60%;" alt="Notifications"></a>
-            <div class="noti-dropdown-content">
-                <div class="noti-dropdown-content-container">
-                    <div class="noti-dropdown-content-container-header">
-                        <h1 id="insert-noti-count">Notifications </h1>
-                    </div>
-                    <div class="noti-dropdown-content-container-header">
-                        <div class="noti-dropdown-content-container-buttons">
-                            <button class="left nelson-button" id="noti-order">Order</button>
-                            <button class="left nelson-button" id="noti-convo">Conversation</button>
-                            <button class="right nelson-button" id="noti-clear">Clear</button>
-                            <button class="right nelson-button" id="noti-showall">Show all</button>
-                        </div>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="noti-dropdown-content-container-body">
-                        <div class="noti-q">
-                            <div class="noti-item"> <!-- src/img/selipar.webp -->
-                                <img class="noti-item-image" src="src/img/selipar.webp">
-                                <div class="noti-item-text">
-                                    <h2>Selipar
-                                    </h2>
-                                    <p>On the way to your face.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non
-                                        porttitor tortor, at mollis tortor.</p>
-                                    <p class="noti-item-text-time">2 minutes ago</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <% } %>
         <form class="search-container right" method="get" action="search.jsp">
             <input type="text" placeholder="Search.." name="search" class="search-nelson" autocomplete="off" required>

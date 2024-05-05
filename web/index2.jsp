@@ -45,15 +45,6 @@
                         <a href="#">Placeholder3</a>
                     </div>
                 </div>
-                <div class="right noti-dropdown">
-                    <a href="#" class="has-image"><img class="right icon" id="inoti" src="src/img/white/bell.svg"
-                                                       style="height:60%;" alt="Notifications"></a>
-                    <div class="dropdown-content">
-                        <a href="#">Placeholder1</a>
-                        <a href="#">Placeholder2</a>
-                        <a href="#">Placeholder3</a>
-                    </div>
-                </div>
                 <form class="search-container right">
                     <input type="text" placeholder="Search.." name="search" class="search-nelson" autocomplete="off">
                     <button type="submit" class="right search-btn"></button>

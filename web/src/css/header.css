@@ -16,7 +16,6 @@ body {
 }
 
 html::-webkit-scrollbar,
-.noti-dropdown-content-container-body::-webkit-scrollbar,
 .cart-dropdown-content-container-body::-webkit-scrollbar {
     width: 16px;
 }
@@ -32,25 +31,17 @@ html::-webkit-scrollbar-thumb {
     background-color: #000000;
 }
 
-.noti-dropdown-content-container-body::-webkit-scrollbar-track,
 .cart-dropdown-content-container-body::-webkit-scrollbar-track {
     border-radius: 8px;
     background-color: #1f1f1f;
     border: 1px solid #1f1f1f;
 }
 
-.noti-dropdown-content-container-body::-webkit-scrollbar-thumb,
 .cart-dropdown-content-container-body::-webkit-scrollbar-thumb {
     border-radius: 8px;
     border: 3px solid transparent;
     background-clip: content-box;
     background-color: #000000;
-}
-
-.noti-item-text-time {
-    font-size: 12px;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    color: #a0a0a0;
 }
 
 
@@ -97,12 +88,6 @@ html::-webkit-scrollbar-thumb {
     display: inline-block;
 }
 
-.noti-dropdown {
-    position: relative;
-    display: inline-block;
-    height: 60px;
-}
-
 .cart-dropdown {
     position: relative;
     display: inline-block;
@@ -129,80 +114,6 @@ html::-webkit-scrollbar-thumb {
 
 .dropdown-content-right {
     right: 0;
-}
-
-.noti-dropdown-content {
-    right: 0;
-    margin-top: 65px;
-    display: none;
-    position: absolute;
-    background-color: #1f1f1f;
-    min-width: 600px;
-    max-width: 600px;
-    border-radius: 20px;
-    z-index: 1;
-}
-
-.noti-dropdown-content-container h1,
-.noti-item {
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.noti-item {
-    display: flex;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.noti-dropdown-content-container-body {
-    max-height: 60vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-    margin-bottom: 10px;
-    overscroll-behavior: auto none;
-}
-
-.noti-item-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 10%;
-    margin-right: 20px;
-    margin-left: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.noti-item:hover {
-    background-color: #494949;
-    border-radius: 20px;
-}
-
-.noti-dropdown-content-container-header {
-    display: flex;
-    justify-content: space-between;
-    margin:0;
-}
-
-.noti-dropdown-content-container-buttons {
-    margin: 0 10px 0 10px;
-    display: block;
-    width: 100%;
-}
-
-.noti-item-text {
-    font-size: 16px;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    color: white;
-}
-
-.noti-item-text h2 {
-    margin: 10px 0;
-    display: flex;
-}
-
-.noti-item-text p {
-    margin-right: 10px;
 }
 
 .cart-dropdown-content {

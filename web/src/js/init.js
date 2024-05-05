@@ -63,22 +63,12 @@ $(document).ready(function () {
       $(".nelson-greeter").css("display", "none");
     }, 300);
   }, 1500);
-  $("#inoti").click(function () {
-    if ($(".noti-dropdown .noti-dropdown-content").css("display") === "block") {
-      $(".noti-dropdown .noti-dropdown-content").css("display", "none");
-    } else {
-      $(".noti-dropdown .noti-dropdown-content").css("display", "block");
-      $(".cart-dropdown .cart-dropdown-content").css("display", "none");
-      $(".profile-dropdown .profile-dropdown-content").css("display", "none");
-    }
-  });
 
   $("#icart").click(function () {
     if ($(".cart-dropdown .cart-dropdown-content").css("display") === "block") {
       $(".cart-dropdown .cart-dropdown-content").css("display", "none");
     } else {
       $(".cart-dropdown .cart-dropdown-content").css("display", "block");
-      $(".noti-dropdown .noti-dropdown-content").css("display", "none");
       $(".profile-dropdown .profile-dropdown-content").css("display", "none");
     }
   });
@@ -92,7 +82,6 @@ $(document).ready(function () {
     } else {
       $(".profile-dropdown .profile-dropdown-content").css("display", "block");
       $(".cart-dropdown .cart-dropdown-content").css("display", "none");
-      $(".noti-dropdown .noti-dropdown-content").css("display", "none");
     }
   });
 
@@ -101,9 +90,6 @@ $(document).ready(function () {
       return;
     }
     var target = $(event.target);
-    if (!target.closest(".noti-dropdown").length) {
-      $(".noti-dropdown .noti-dropdown-content").css("display", "none");
-    }
     if (!target.closest(".cart-dropdown").length) {
       $(".cart-dropdown .cart-dropdown-content").css("display", "none");
     }
