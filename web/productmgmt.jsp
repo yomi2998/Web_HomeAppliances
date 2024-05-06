@@ -24,7 +24,7 @@
         <%@ include file="navigation.jsp" %>
         <div class="container" style="display: none;">
             <% String searchStr = request.getParameter("search");
-            List<Product> products = searchStr == null || searchStr.equals("") ? pc.retrieveProductALL() : pc.searchProducts(searchStr, 0); %>
+            List<Product> products = searchStr == null || searchStr.equals("") ?  : pc.searchProducts(searchStr, 0); %>
             <div>
                 <h1>Product</h1>
                 <p class="tab focus" id="view-tab">View</p>
@@ -47,6 +47,7 @@
                         <th>Action</th>
                     </tr>
                     <% for (Product product : products) { %>
+
                     <tr id="prod-<%= product.getId() %>">
                         <td id="prodDisp"><img src="<%= product.getDisplay_image() %>" alt="<%= product.getName() %>" style="height: 100px;"></td>
                         <td id="prodName"><%= product.getName() %></td>

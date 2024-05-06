@@ -21,7 +21,7 @@ public class ProductDA {
     private String password = "nbuser";
     private String tableName = "product";
     private String imageTableName = "product_image";
-    private String salesTableName = "order_product";
+   private String salesTableName = "order_product";
     private Connection conn;
     private PreparedStatement stmt;
 
@@ -292,31 +292,31 @@ public class ProductDA {
         }
     }
 
-    public int countTotalSales() {
-        String queryStr = "SELECT SUM(quantity) FROM " + salesTableName;
-        try {
-            stmt = conn.prepareStatement(queryStr);
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            return rs.getInt(1);
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            return 0;
-        }
-    }
+   public int countTotalSales() {
+       String queryStr = "SELECT SUM(quantity) FROM " + salesTableName;
+       try {
+           stmt = conn.prepareStatement(queryStr);
+           ResultSet rs = stmt.executeQuery();
+           rs.next();
+           return rs.getInt(1);
+       } catch (SQLException ex) {
+           System.out.println(ex.getMessage());
+           return 0;
+       }
+   }
 
-    public double countTotalEarned() {
-        String queryStr = "SELECT SUM(price) FROM " + salesTableName;
-        try {
-            stmt = conn.prepareStatement(queryStr);
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
-            return rs.getDouble(1);
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            return 0;
-        }
-    }
+   public double countTotalEarned() {
+       String queryStr = "SELECT SUM(price) FROM " + salesTableName;
+       try {
+           stmt = conn.prepareStatement(queryStr);
+           ResultSet rs = stmt.executeQuery();
+           rs.next();
+           return rs.getDouble(1);
+       } catch (SQLException ex) {
+           System.out.println(ex.getMessage());
+           return 0;
+       }
+   }
 
     public void destroy() {
         try {

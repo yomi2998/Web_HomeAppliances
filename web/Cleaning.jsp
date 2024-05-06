@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ page import="control.ProductControl" %>
+<%@ page import="domain.Product" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,6 +43,25 @@
                 <button type="submit" class="right search-btn"></button>
             </form>
         </header>
+        <% String category = "Cleaning & Laundry"; %>
+        <% List<Product> products =  ProductControl.retrieveProductALL(); %>
+        <h1><%=category%></h1>
+
+        <hr> 
+        
+        <table>
+            <% Product product = new Product(); %>
+                <tr>
+                    <td><%= product.getName() %></td>
+                    <td>RM <%= String.format("%.2f", product.getPrice()) %></td>
+                    <td><%= product.getStock() %></td>
+                    <td><%= product.getDescription() %></td>
+                </tr>
+        </table>
+        
+        
+
+    
         <div class="grid-container">
             <div class="grid-item">
                 <img src="src/img/Product/Cleaning & Laundry/AirPurifier.png" alt="Product Image 1">
