@@ -74,6 +74,8 @@
                 </a>
                 <% } %>
             </div>
+            <hr>
+            <h3>End of search results</h3>
             </div>
             </div>
         </div>
