@@ -27,6 +27,10 @@ public class CategoryControl {
     public List<Category> retrieveCategory() {
         return categoryDA.retrieveCategory();
     }
+    
+    public String getCategoryById(int id) {
+        return categoryDA.getCategoryById(id);
+    }
 
     public boolean updateCategory(Category category) {
         return categoryDA.updateCategory(category);

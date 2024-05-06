@@ -34,7 +34,7 @@
                     <hr>
                     <h3>Search</h3>
                     <form action="search.jsp" method="get" id="product-search-form">
-                        <input autocomplete="off" type="text" class="search-nelson" name="search" value="<%= search %>" placeholder="Search">
+                        <input autocomplete="off" type="text" class="search-nelson" name="search" value="<%= search == null ? "" : search %>" placeholder="Search">
                         <button type="submit" class="search-btn-ii" value="Search"></button>
                     </form>
                     <hr>
@@ -54,7 +54,7 @@
                 <%
                     for (Product product : products) {
                 %>
-                <a class="nodeco" href="ProdDetails.jsp?product_id=<%= product.getId() %>">
+                <a class="nodeco" href="product.jsp?product_id=<%= product.getId() %>">
                 <div class="search-item">
                     <div>
                     <img src="<%= product.getDisplay_image() %>" alt="<%= product.getName() %>" style="width: 10vw; height: 10vw;">

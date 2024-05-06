@@ -267,6 +267,7 @@ html::-webkit-scrollbar-thumb {
 .profile-dropdown-content-container-body {
     max-height: calc(40vh - 85px);
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .profile-dropdown-content-container-body-anchor {
@@ -312,15 +313,15 @@ html::-webkit-scrollbar-thumb {
 }
 
 .profile-dropdown-content-container-body form input {
-    width: calc(360px - 2vw);
+    width: calc(350px - 2vw);
     height: 36px;
-    border-radius: 2vh;
+    border-radius: 16px;
     border-style: solid;
     border-color: #494949;
     background-color: #2e2e2e !important;
     color: white;
     padding: 0 1vw;
-    font-size: 2vh;
+    font-size: 16px;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     margin-top: 10px;
 }
@@ -447,6 +448,21 @@ hr {
 
 .nelson-table tr:hover, .nelson-table-ii tr:hover {
     background-color: #1d1d1d !important;
+}
+
+.nelson-number {
+    width: 50px;
+    height: 32px;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #494949;
+    background-color: #2e2e2e !important;
+    color: white;
+    padding: 0 2px;
+    font-size: 16px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-align: center;
+    transition: background-color 0.2s;
 }
 
 .nelson-select {

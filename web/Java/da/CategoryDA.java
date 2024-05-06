@@ -78,6 +78,22 @@ public class CategoryDA {
             return -1;
         }
     }
+    
+    public String getCategoryById(int id) {
+        String queryStr = "SELECT name FROM " + tableName + " WHERE ID = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("name");
+            }
+            return null;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
 
     public List<Category> retrieveCategory() {
         String queryStr = "SELECT * FROM " + tableName + " ORDER BY name";
