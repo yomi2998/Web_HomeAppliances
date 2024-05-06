@@ -78,9 +78,11 @@
                     <% if (userType.equals("customer") && product.getStock() > 0) { %>
                     <form id="quantityForm">
                         <div>
-                        <a href="#"><button class="nelson-button nomarginleft" id="plus">+</button></a>
+                        <input type="text" name="product_id" value="<%= product.getId() %>" hidden>
+                        <input type="text" name="user_id" value="<%= customer.getId() %>" hidden>
+                        <a href="#"><button class="nelson-button nomarginleft" id="minus">-</button></a>
                         <input type="number" class="nelson-number" name="quantity" value="1" min="1" max="<%= product.getStock() %>">
-                        <a href="#"><button class="nelson-button" id="minus">-</button></a>
+                        <a href="#"><button class="nelson-button" id="plus">+</button></a>
                         </div>
                         <button type="submit" class="nelson-button nomarginleft">Add to cart</button>
                         <button type="button" class="nelson-button">Buy now</button>

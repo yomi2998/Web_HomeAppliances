@@ -27,8 +27,14 @@
 
 #product-subimage-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
     margin: 0 auto;
+}
+
+.product-subimage:hover {
+    opacity: 0.5;
+    cursor: pointer;
 }
 
 #product-subimage-container img {

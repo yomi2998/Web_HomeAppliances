@@ -159,6 +159,7 @@ html::-webkit-scrollbar-thumb {
     margin-left: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
+    background-color: white;
 }
 
 .cart-item:hover {
@@ -727,7 +728,7 @@ hr {
     }
 }
 
-#cart-rem {
+.cart-rem-button {
     margin-left: 10px
 }
 

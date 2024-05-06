@@ -24,6 +24,8 @@
 <jsp:useBean id="pc" class="control.ProductControl" scope="page"/>
 <jsp:useBean id="carc" class="control.CardControl" scope="page"/>
 <jsp:useBean id="adc" class="control.AddressControl" scope="page"/>
+<jsp:useBean id="cartc" class="control.CartControl" scope="page"/>
+<script src="src/js/cart.js"></script>
 <script>
     var force_password = false;
     var go_home = false;
@@ -275,22 +277,32 @@
                         </div>
                     </div>
                     <div class="cart-dropdown-content-container-body">
-                        <div class="cart-q">
+                        <% List<Cart> carts = cartc.retrieveCartALL(customer.getId());
+                            for (Cart cart : carts) {
+                                Product cartProd = pc.retrieveProduct(cart.getProduct_id());
+                                int quantity = cart.getQuantity() > cartProd.getStock() ? cartProd.getStock() : cart.getQuantity();
+                        %>
+                        <div class="cart-q" id="cart-q-<%= cart.getProduct_id() %>">
                             <div class="cart-item">
-                                <img class="cart-item-image" src="src/img/selipar.webp">
+                                <img class="cart-item-image" src="<%= cartProd.getDisplay_image() %>">
                                 <div class="cart-item-text">
-                                    <h2>Selipar
+                                    <h2><%= cartProd.getName() %>
                                     </h2>
-                                    <div class="cart-add-remove">
-                                        <button class="nelson-button">-</button>
-                                        <input type="number" value="1" class="cart-quantity">
-                                        <button class="nelson-button">+</button>
-                                        <button id="cart-rem" class="nelson-button">Remove</button>
+                                    <div class="cart-add-remove" id="cart-item-<%= cart.getProduct_id() %>">
+                                        <button class="nelson-button cart-minus-button" id="<%= cart.getProduct_id() %>">-</button>
+                                        <input type="number" min="cartProd.getStock() == 0 ? 0 : 1" max="<%= cartProd.getStock() %>" id="<%= cart.getProduct_id() %>" value="<%= quantity %>" class="cart-quantity">
+                                        <button class="nelson-button cart-plus-button" id="<%= cart.getProduct_id() %>">+</button>
+                                        <button class="nelson-button cart-rem-button" id="<%= cart.getProduct_id() %>">Remove</button>
                                     </div>
-                                    <p class="cart-item-text-price">RM 10.00</p>
+                                    <p class="cart-item-text-price"><%= String.format("RM %.2f each", cartProd.getPrice()) %></p>
+                                    <p class="cart-item-text-price-total"><%= String.format("RM %.2f total", cartProd.getPrice() * quantity) %></p>
+                                    <% if (cartProd.getStock() == 0) { %>
+                                    <p class="cart-item-text-price" style="color: red;">Out of stock</p>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>
+                        <% } %>
                     </div>
                 </div>
             </div>
