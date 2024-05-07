@@ -1,17 +1,28 @@
-html {
-    background-color: black;
-    color:white;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    margin:1% auto;
-    width: 95%;
+.container {
+    margin-top: 100px;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
-.shipping{
-    font:white;
-    font-size: 20px;
+.divide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 40px;
 }
 
-.itemlist{
-    text-align: center;
+.payment-method-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
 }
 
+.cart-summary, .shipping-section {
+    background-color: #222222;
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+#address-details p {
+    margin: 0;
+}

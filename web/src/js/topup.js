@@ -8,13 +8,13 @@ $(document).ready(function () {
     $("#topup-amount").val(amount);
   });
 
-  $("#topup-card-refresh").click(function () {
+  $(".topup-card-refresh").click(function () {
     $.ajax({
       url: "/Web_HomeAppliances/CardRetrieve",
       type: "GET",
       success: function (data) {
         const cards = JSON.parse(data);
-        const select = $("#topup-card-select");
+        const select = $(".topup-card-select");
         select.empty();
         select.append('<option value="0">Select card</option>');
         cards.forEach((card) => {
@@ -80,14 +80,11 @@ $(document).ready(function () {
           showSnackbar(
             "src/img/white/check-circle.svg",
             "Top up successful.",
-            "Top up successful, your account has been updated."
+            "Top up successful, reloading page to take effect."
           );
-          var balance = $("#my-balance"); // String is "Balance: RM 0.00"
-          var balanceValue = balance.text().split(" ")[2];
-          balanceValue = parseFloat(balanceValue);
-          balanceValue += parseFloat(sendData.amount);
-          balance.text(`Balance: RM ${balanceValue.toFixed(2)}`);
-          $("#topup-current-balance").text(`Current Balance: RM ${balanceValue.toFixed(2)}`);
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
           extension_toggle("topup-extension");
         } else {
           showSnackbar(

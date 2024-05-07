@@ -412,6 +412,10 @@ hr {
     padding: 0 20px;
 }
 
+.nomarginleft {
+    margin-left: 0 !important;
+}
+
 .nelson-table {
     width: 800px;
     border-collapse: collapse;
@@ -479,6 +483,12 @@ hr {
     background-color: #2e2e2e;
     transition: all 0.3s;
     font-size: 16px;
+}
+
+.nelson-check {
+    width: 20px;
+    height: 20px;
+    margin: auto;
 }
 
 .nelson-input {
@@ -734,6 +744,14 @@ hr {
 
 .nomarginlr {
     margin: 10px 0;
+}
+
+.nomargintop {
+    margin-top: 0;
+}
+
+.nomarginbottom {
+    margin-bottom: 0;
 }
 
 .center { 

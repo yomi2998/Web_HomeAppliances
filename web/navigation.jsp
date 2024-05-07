@@ -17,6 +17,7 @@
 <%@ page import="jakarta.servlet.http.Cookie" %>
 <%@ page import="domain.*" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <jsp:useBean id="cc" class="control.CustomerControl" scope="page"/>
 <jsp:useBean id="ac" class="control.AdminControl" scope="page"/>
 <jsp:useBean id="sc" class="control.StaffControl" scope="page"/>
@@ -273,10 +274,11 @@
                     <div class="cart-dropdown-content-container-header">
                         <h1>My Cart</h1>
                         <div>
-                            <button class="right cart-dropdown-content-container-header-clear nelson-button">Checkout</button>
+                            <button class="right cart-dropdown-content-container-header-clear nelson-button" id="cart-checkout">Checkout</button>
                         </div>
                     </div>
                     <div class="cart-dropdown-content-container-body">
+                        <form action="ProdDetails.jsp" method="get" id="checkoutForm">
                         <% List<Cart> carts = cartc.retrieveCartALL(customer.getId());
                             for (Cart cart : carts) {
                                 Product cartProd = pc.retrieveProduct(cart.getProduct_id());
@@ -289,10 +291,12 @@
                                     <h2><%= cartProd.getName() %>
                                     </h2>
                                     <div class="cart-add-remove" id="cart-item-<%= cart.getProduct_id() %>">
-                                        <button class="nelson-button cart-minus-button" id="<%= cart.getProduct_id() %>">-</button>
-                                        <input type="number" min="cartProd.getStock() == 0 ? 0 : 1" max="<%= cartProd.getStock() %>" id="<%= cart.getProduct_id() %>" value="<%= quantity %>" class="cart-quantity">
-                                        <button class="nelson-button cart-plus-button" id="<%= cart.getProduct_id() %>">+</button>
-                                        <button class="nelson-button cart-rem-button" id="<%= cart.getProduct_id() %>">Remove</button>
+                                        <input type="text" class="kw1" id="cart-product-<%= cart.getProduct_id() %>" value="<%= cart.getProduct_id() %>" hidden>
+                                        <input type="checkbox" class="kw2" class="nelson-check" id="cart-check-<%= cart.getProduct_id() %>">
+                                        <button class="nelson-button cart-minus-button noaction" id="<%= cart.getProduct_id() %>">-</button>
+                                        <input type="number" class="kw3" min="cartProd.getStock() == 0 ? 0 : 1" max="<%= cartProd.getStock() %>" id="cart-quantity-<%= cart.getProduct_id() %>" value="<%= quantity %>" class="cart-quantity">
+                                        <button class="nelson-button cart-plus-button noaction" id="<%= cart.getProduct_id() %>">+</button>
+                                        <button class="nelson-button cart-rem-button noaction" id="<%= cart.getProduct_id() %>">Remove</button>
                                     </div>
                                     <p class="cart-item-text-price"><%= String.format("RM %.2f each", cartProd.getPrice()) %></p>
                                     <p class="cart-item-text-price-total"><%= String.format("RM %.2f total", cartProd.getPrice() * quantity) %></p>
@@ -302,7 +306,9 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="submit" id="checkout-submit" hidden>
                         <% } %>
+                    </form>
                     </div>
                 </div>
             </div>
@@ -347,7 +353,7 @@
             <h2>Payment</h2>
             <div class="input-field">
                 <p class="form-p">Select card:</p>
-                <select class="nelson-select" name="card_id" id="topup-card-select">
+                <select class="nelson-select topup-card-select" name="card_id">
                     <option value="0">Select card</option>
                     <%
                         List<Card> cards = carc.retrieveCards(customer.getId());
@@ -359,7 +365,7 @@
                     %>
                 </select>
                 <button type="button" class="nelson-button" onclick="extension_toggle('profile-extension'); $('#profile-payment').click(); $('#add-card').click();">Add card</button>
-                <button type="button" class="nelson-button" id="topup-card-refresh">Refresh</button>
+                <button type="button" class="nelson-button topup-card-refresh">Refresh</button>
             </div>
             <p id="topup-invalid-card" style="color: red;" hidden>Invalid</p>
             <hr>

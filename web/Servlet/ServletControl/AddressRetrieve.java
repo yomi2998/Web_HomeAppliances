@@ -40,12 +40,13 @@ public class AddressRetrieve extends HttpServlet {
             Cookie cookies[] = request.getCookies();
             int user_id = 0;
             for (Cookie c : cookies) {
-                if (c.getName().equals("user_id")) {
+                if (c.getName().equals("id")) {
                     user_id = Integer.parseInt(c.getValue());
                 }
             }
             AddressControl addressControl = new AddressControl();
             Gson gson = new Gson();
+                System.out.println(user_id);
             out.print(gson.toJson(addressControl.retrieveAddresses(user_id)));
         }
     }

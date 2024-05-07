@@ -85,7 +85,7 @@
                         <a href="#"><button class="nelson-button" id="plus">+</button></a>
                         </div>
                         <button type="submit" class="nelson-button nomarginleft">Add to cart</button>
-                        <button type="button" class="nelson-button">Buy now</button>
+                        <button type="button" class="nelson-button" id="buynow">Buy now</button>
                     </form>
                     <% } else if (!userType.equals("customer")) { %>
                         <p style="color:red">Please register/use a valid customer account to buy/add to cart.</p>
