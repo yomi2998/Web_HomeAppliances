@@ -27,12 +27,13 @@
         <% String[] quantities = request.getParameter("qty").split(","); %>
         <%
             List<Product> checkoutProducts = new ArrayList<>();
-                double price = 0;
+            double price = 0;
             for (int i = 0; i < product_ids.length; i++) {
                 Product product = pc.retrieveProduct(Integer.parseInt(product_ids[i]));
                 price += product.getPrice() * Integer.parseInt(quantities[i]);
                 checkoutProducts.add(product);
             }
+            double price_with_shipping_and_tax = price + (price >= 1000 ? 0 : 25) + (price * 0.08);
         %>
         <div class="container" style="display: none;">
             <form id="paymentForm">
@@ -42,9 +43,9 @@
                         <div class="payment-method-section">
                             <div>
                                 <h3>Select payment method:</h3>
-                                <input type="radio" class="payment-method-radio" id="nelson-wallet" name="payment" value="nelson-wallet">
+                                <input type="radio" class="payment-method-radio" id="nelson-wallet" name="payment" value="nelson-wallet" required>
                                 <label for="nelson-wallet">nelson wallet (<%= String.format("RM %.2f", customer.getBalance()) %>)</label><br>
-                                <input type="radio" class="payment-method-radio" id="credit-card" name="payment" value="card">
+                                <input type="radio" class="payment-method-radio" id="credit-card" name="payment" value="card" required>
                                 <label for="credit-card">Card</label>
                             </div>
                             <div class="card-select" hidden>
@@ -63,7 +64,7 @@
                             <div class="nelson-wallet-info" hidden>
                                 <h3>Payment method: nelson wallet</h3>
                                 <p>Current balance: <%= String.format("RM %.2f", customer.getBalance()) %></p>
-                                <% if (customer.getBalance() - price < 0) { %>
+                                <% if (customer.getBalance() - price_with_shipping_and_tax < 0) { %>
                                     <p style="color: red;">Insufficient balance. Please top up your wallet.</p>
                                 <% } %>
                                 <a href="#"><button class="nelson-button nomarginleft" onclick="extension_toggle('topup-extension')">Top up</button></a>
@@ -84,10 +85,10 @@
                                 <input type="text" id="ship-zip-<%= c.getId() %>" value="<%= c.getZip_code() %>" hidden>
                             </div>
                             <% } %>
-                            <select class="nelson-select" id="ship-select" style="min-width: 210px">
+                            <select class="nelson-select" id="ship-select" style="min-width: 210px" required>
                                 <option value="0" selected disabled>Select address</option>
                                 <% for (Address c : adc.retrieveAddresses(customer.getId())) { %>
-                                    <option value="<%= c.getId() %>"><%= c.getRecipient_name() + " " + c.getContact_number() + " " + c.getAddress() + " " + (c.getAddress_2() == null ? "" : c.getAddress_2()) + " " + c.getCity() + " " + c.getState() + " " + c.getZip_code() %></option>
+                                    <option value="<%= c.getId() %>"><%= c.getAddress() %></option>
                                 <% } %>
                             </select>
                             <a href="#"><button class="nelson-button nomarginleft" onclick="extension_toggle('profile-extension'); $('#profile-shipping').click();">Manage</button></a>
@@ -106,6 +107,10 @@
                                 <p id="address-zip"></p>
                             </div>
                         </div>
+                        <hr>
+                        <div class="cart-purchase">
+                            <button class="nelson-button nomarginleft" type="submit">Purchase</button>
+                        </div>
                     </div>
                     <div class="cart-summary">
                         <h1>Cart summary</h1>
@@ -113,7 +118,7 @@
                         <% for (Product product : checkoutProducts) { %>
                         <div class="cart-item">
                             <div class="cart-item-image">
-                                <img src="<%= product.getSub_images().get(0) %>" alt="<%= product.getName() %>" style="width: 100px; height: 100px;">
+                                <img src="<%= product.getDisplay_image() %>" alt="<%= product.getName() %>" style="width: 100px; height: 100px;">
                             </div>
                             <div class="cart-item-details">
                                 <h3><%= product.getName() %></h3>
@@ -122,6 +127,14 @@
                             </div>
                         </div>
                         <% } %>
+                        <hr>
+                        <div class="cart-total">
+                            <h3>Subtotal: <%= String.format("RM %.2f", price) %></h3>
+                            <h3>Shipping: <%= price >= 1000 ? "Free" : "RM 25.00" %></h3>
+                            <h3>Tax (8%): <%= String.format("RM %.2f", price * 0.08) %></h3>
+                            <h3>Total: <%= String.format("RM %.2f", price_with_shipping_and_tax) %></h3>
+                            <input type="text" id="hidden-price-total" value="<%= price_with_shipping_and_tax %>" hidden>
+                        </div>
                     </div>
                 </div>
             </form>

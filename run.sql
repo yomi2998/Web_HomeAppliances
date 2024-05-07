@@ -158,9 +158,20 @@ CREATE TABLE discount (
 CREATE TABLE cust_order (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     user_id INT,
-    total_price DECIMAL(10, 2) NOT NULL,
-    total_discount DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
-    total_final_price DECIMAL(10, 2) NOT NULL,
+    payment_method VARCHAR(100) NOT NULL,
+    card_id INT,
+    price DECIMAL(10, 2) NOT NULL,
+    shipping_fee DECIMAL(10, 2) NOT NULL,
+    tax DECIMAL(10, 2) NOT NULL,
+    discount DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+    final_price DECIMAL(10, 2) NOT NULL,
+    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE NO ACTION
+);
+
+CREATE TABLE cust_order_address {
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
+    order_id INT NOT NULL,
     address VARCHAR(255) NOT NULL,
     address_2 VARCHAR(255) DEFAULT NULL,
     city VARCHAR(255) NOT NULL,
@@ -168,9 +179,8 @@ CREATE TABLE cust_order (
     zip_code VARCHAR(50) NOT NULL,
     recipient_name VARCHAR(100) NOT NULL,
     contact_number VARCHAR(20) NOT NULL,
-    create_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE NO ACTION
-);
+    FOREIGN KEY (order_id) REFERENCES cust_order(id) ON DELETE CASCADE
+};
 
 CREATE TABLE order_product ( -- this is where u can get amount of discount applied/total product price
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),

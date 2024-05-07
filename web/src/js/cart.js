@@ -116,6 +116,69 @@ $(document).ready(function () {
     $("#checkout-submit").click();
   });
 
+  $("#paymentForm").submit(function (e) {
+    e.preventDefault();
+    var sendData = {
+      payment_method: "",
+      card_id: "",
+      product_id: [],
+      product_quantity: [],
+      shipping_id: "",
+      estimated_price: "",
+    };
+    sendData.payment_method = $("input[name='payment']:checked").val();
+    if (sendData.payment_method == "card") {
+      sendData.card_id = $(".topup-card-select").val();
+      if (sendData.card_id == 0 || sendData.card_id == null) {
+        showSnackbar(
+          "src/img/white/alert-circle.svg",
+          "Payment method",
+          "Please select a card."
+        );
+        return;
+      }
+    }
+    sendData.shipping_id = $("#ship-select").val();
+    if (sendData.shipping_id == 0 || sendData.shipping_id == null) {
+      showSnackbar(
+        "src/img/white/alert-circle.svg",
+        "Shipping address",
+        "Please select a shipping address."
+      );
+      return;
+    }
+    //checkout.jsp?id=1,2,3&qty=1,2,3
+    var id = window.location.search.split("id=")[1].split("&")[0].split(",");
+    var qty = window.location.search.split("qty=")[1].split(",");
+    sendData.product_id = id;
+    sendData.product_quantity = qty;
+    sendData.estimated_price = $("#hidden-price-total").val();
+    $.ajax({
+      type: "POST",
+      url: "/Web_HomeAppliances/Checkout",
+      data: sendData,
+      success: function (data) {
+        const response = JSON.parse(data);
+        if (response.success) {
+          showSnackbar(
+            "src/img/white/check-circle.svg",
+            "Checkout",
+            "Checkout successful."
+          );
+          setTimeout(() => {
+            window.location.href = "/Web_HomeAppliances/order.jsp";
+          });
+        } else {
+          showSnackbar(
+            "src/img/white/alert-circle.svg",
+            "Checkout",
+            response.cause
+          );
+        }
+      },
+    });
+  });
+
   $("#checkoutForm").submit(function (e) {
     e.preventDefault();
     const prod_id = $(".cart-q div div div input.kw1");
