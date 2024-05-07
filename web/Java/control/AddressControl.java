@@ -35,6 +35,10 @@ public class AddressControl {
     public Address retrieveLatestAddress(int user_id) {
         return addressDA.retrieveLatestAddress(user_id);
     }
+    
+    public Address retrieveAddressFromOrder(int order_id) {
+        return addressDA.retrieveAddressFromOrder(order_id);
+    }
 
     public boolean updateAddress(Address address) {
         return addressDA.updateAddress(address);

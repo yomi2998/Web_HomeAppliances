@@ -21,6 +21,7 @@ public class AddressDA {
     private String user = "nbuser";
     private String password = "nbuser";
     private String tableName = "shipping_details";
+    private String addrOrderTableName = "cust_order_address";
     private Connection conn;
     private PreparedStatement stmt;
 
@@ -134,6 +135,24 @@ public class AddressDA {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return new Address(rs.getInt("id"), rs.getInt("user_id"), rs.getString("address"), rs.getString("address_2"),
+                        rs.getString("city"), rs.getString("state"), rs.getString("zip_code"), rs.getString("recipient_name"),
+                        rs.getString("contact_number"));
+            }
+            return null;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+    
+    public Address retrieveAddressFromOrder(int order_id) {
+        String queryStr = "SELECT * FROM " + addrOrderTableName + " WHERE order_id = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, order_id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Address(0, 0, rs.getString("address"), rs.getString("address_2"),
                         rs.getString("city"), rs.getString("state"), rs.getString("zip_code"), rs.getString("recipient_name"),
                         rs.getString("contact_number"));
             }

@@ -7,7 +7,6 @@ package ServletControl;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import Java.control.CardControl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -58,7 +57,10 @@ public class Checkout extends HttpServlet {
                 return;
             }
             ProductControl productControl = new ProductControl();
+            double product_price = 0;
             double actual_price = 0;
+            double shipping_price = 0;
+            double tax_price = 0;
             for (int i = 0; i < productIdStr.length; i++) {
                 int productId = Integer.parseInt(productIdStr[i]);
                 int quantity = Integer.parseInt(quantityStr[i]);
@@ -73,6 +75,11 @@ public class Checkout extends HttpServlet {
                 }
                 actual_price += product.getPrice() * quantity;
             }
+            product_price = actual_price;
+            if (product_price < 1000) {
+                actual_price += shipping_price = 25;
+            }
+            actual_price += tax_price = product_price * 0.08;
             if (actual_price != estimated_price) {
                 out.print("{\"success\":false,\"cause\":\"Estimated price does not match actual price (Possible promotion has expired?)\"}");
                 return;
@@ -93,6 +100,7 @@ public class Checkout extends HttpServlet {
                         out.print("{\"success\":false,\"cause\":\"Insufficient balance\"}");
                         return;
                     }
+                    break;
                 default:
                     out.print("{\"success\":false,\"cause\":\"Invalid payment method\"}");
                     return;

@@ -185,7 +185,6 @@ CREATE TABLE cust_order_address {
 CREATE TABLE order_product ( -- this is where u can get amount of discount applied/total product price
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     order_id INT NOT NULL,
-    discount_id INT NOT NULL DEFAULT 0, -- 0 = No discount
     product_id INT,
     quantity INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
