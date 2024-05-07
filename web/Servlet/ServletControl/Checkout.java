@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import java.util.*;
 
 import control.*;
 import domain.*;
@@ -39,9 +40,14 @@ public class Checkout extends HttpServlet {
             int id = 0;
             String type = "";
             String paymentMethod = request.getParameter("payment_method");
-            int cardId = Integer.parseInt(request.getParameter("card_id"));
+            int cardId = 0;
+            try {
+                cardId = Integer.parseInt(request.getParameter("card_id"));
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
             String[] productIdStr = request.getParameter("product_id").split(",");
-            String[] quantityStr = request.getParameter("quantity").split(",");
+            String[] quantityStr = request.getParameter("product_quantity").split(",");
             int shippingId = Integer.parseInt(request.getParameter("shipping_id"));
             double estimated_price = Double.parseDouble(request.getParameter("estimated_price"));
             for (Cookie cookie : cookies) {
@@ -111,6 +117,18 @@ public class Checkout extends HttpServlet {
                 out.print("{\"success\":false,\"cause\":\"Address not found\"}");
                 return;
             }
+            List<OrderProduct> orderProductList = new ArrayList<>();
+            for (int i = 0; i < productIdStr.length; i++) {
+                int productId = Integer.parseInt(productIdStr[i]);
+                int quantity = Integer.parseInt(quantityStr[i]);
+                Product product = productControl.retrieveProduct(productId);
+                OrderProduct orderProduct = new OrderProduct(0, 0, productId, quantity, product.getPrice());
+                orderProductList.add(orderProduct);
+            }
+            Order order = new Order();
+            order.init(id, paymentMethod, cardId, shippingId, product_price, shipping_price, tax_price, 0, actual_price, orderProductList);
+            OrderControl orderControl = new OrderControl();
+            out.print("{\"success\":" + orderControl.insertOrder(order) + ",\"cause\":\"There is an issue with the server\"}");
         }
     }
 

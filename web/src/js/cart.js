@@ -148,11 +148,12 @@ $(document).ready(function () {
       return;
     }
     //checkout.jsp?id=1,2,3&qty=1,2,3
-    var id = window.location.search.split("id=")[1].split("&")[0].split(",");
-    var qty = window.location.search.split("qty=")[1].split(",");
+    var id = window.location.search.split("id=")[1].split("&")[0];
+    var qty = window.location.search.split("qty=")[1];
     sendData.product_id = id;
     sendData.product_quantity = qty;
     sendData.estimated_price = $("#hidden-price-total").val();
+    console.log(sendData);
     $.ajax({
       type: "POST",
       url: "/Web_HomeAppliances/Checkout",

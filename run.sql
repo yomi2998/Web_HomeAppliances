@@ -169,7 +169,7 @@ CREATE TABLE cust_order (
     FOREIGN KEY (user_id) REFERENCES customer(id) ON DELETE NO ACTION
 );
 
-CREATE TABLE cust_order_address {
+CREATE TABLE cust_order_address (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
     order_id INT NOT NULL,
     address VARCHAR(255) NOT NULL,
@@ -180,7 +180,7 @@ CREATE TABLE cust_order_address {
     recipient_name VARCHAR(100) NOT NULL,
     contact_number VARCHAR(20) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES cust_order(id) ON DELETE CASCADE
-};
+);
 
 CREATE TABLE order_product ( -- this is where u can get amount of discount applied/total product price
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),
@@ -189,8 +189,7 @@ CREATE TABLE order_product ( -- this is where u can get amount of discount appli
     quantity INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES cust_order(id) ON DELETE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE SET NULL,
-    FOREIGN KEY (discount_id) REFERENCES discount(id)
+    FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE SET NULL
 );
 
 CREATE TABLE order_status (

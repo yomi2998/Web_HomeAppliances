@@ -5,6 +5,7 @@
 package da;
 
 import domain.*;
+import control.*;
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -40,10 +41,10 @@ public class OrderDA {
 
     public boolean insertOrder(Order order) {
         String queryStr = "INSERT INTO " + tableName + " (user_id, payment_method, card_id, price, shipping_fee, tax, discount, final_price) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        String queryStr2 = "INSERT INTO " + addressTableName + " (order_id, address, address2, city, state, zip_code, recipient_name, contact_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String queryStr2 = "INSERT INTO " + addressTableName + " (order_id, address, address_2, city, state, zip_code, recipient_name, contact_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         String queryStr3 = "INSERT INTO " + orderProductTableName + " (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
-        String queryStr4 = "UPDATE " + productTableName + " SET stock = stock - ? sold = sold + ? WHERE product_id = ?";
-        String queryStr5 = "UPDATE " + customerTableName + " SET balance = balance - ? WHERE user_id = ?";
+        String queryStr4 = "UPDATE " + productTableName + " SET stock = stock - ?, sold = sold + ? WHERE id = ?";
+        String queryStr5 = "UPDATE " + customerTableName + " SET balance = balance - ? WHERE id = ?";
         try {
             stmt = conn.prepareStatement(queryStr, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, order.getUser_id());
@@ -87,6 +88,9 @@ public class OrderDA {
                 stmt.setInt(2, order.getUser_id());
                 stmt.executeUpdate();
             }
+            OrderStatus orderStatus = new OrderStatus(0, order_id, "Seller is preparing your order...", new Date(System.currentTimeMillis()));
+            OrderStatusControl orderStatusControl = new OrderStatusControl();
+            orderStatusControl.insertStatus(orderStatus);
             return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

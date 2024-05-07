@@ -14,6 +14,7 @@ public class Order {
     private int user_id;
     private String payment_method;
     private int card_id;
+    private int shipping_id;
     private double price;
     private double shipping_fee;
     private double tax;
@@ -24,6 +25,23 @@ public class Order {
     private Address cust_order_address;
     private List<OrderProduct> order_product;
     private List<OrderStatus> order_status;
+
+    public void init(int user_id, String payment_method, int card_id, int shipping_id, double price, double shipping_fee, double tax, double discount, double final_price, List<OrderProduct> orderProductList) {
+        this.user_id = user_id;
+        this.payment_method = payment_method;
+        this.card_id = card_id;
+        this.shipping_id = shipping_id;
+        this.price = price;
+        this.shipping_fee = shipping_fee;
+        this.tax = tax;
+        this.discount = discount;
+        this.final_price = final_price;
+        this.order_product = orderProductList;
+        AddressControl ac = new AddressControl();
+        cust_order_address = ac.retrieveAddress(shipping_id);
+    }
+
+    public Order(){}
 
     public Order(int id, int user_id, String payment_method, int card_id, double price, double shipping_fee, double tax, double discount, double final_price, Date create_date) {
         this.id = id;
