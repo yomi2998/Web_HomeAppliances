@@ -14,6 +14,7 @@ import jakarta.servlet.http.*;
 
 import control.*;
 import domain.*;
+import domain.Address;
 
 /**
  *
@@ -40,8 +41,8 @@ public class Checkout extends HttpServlet {
             String type = "";
             String paymentMethod = request.getParameter("payment_method");
             int cardId = Integer.parseInt(request.getParameter("card_id"));
-            String[] productIdStr = request.getParameterValues("product_id").split(",");
-            String[] quantityStr = request.getParameterValues("quantity").split(",");
+            String[] productIdStr = request.getParameter("product_id").split(",");
+            String[] quantityStr = request.getParameter("quantity").split(",");
             int shippingId = Integer.parseInt(request.getParameter("shipping_id"));
             double estimated_price = Double.parseDouble(request.getParameter("estimated_price"));
             for (Cookie cookie : cookies) {

@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * @author Phuah
  */
-public class Address implements Serializable {
+public class Address {
 
     private int id;
     private int user_id;
@@ -24,8 +24,6 @@ public class Address implements Serializable {
 
     public Address() {
     }
-
-    ;
 
     public Address(int user_id, String address, String address_2, String city, String state, String zip_code, String recipient_name, String contact_number) {
         this.user_id = user_id;
