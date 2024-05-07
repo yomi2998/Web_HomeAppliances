@@ -161,13 +161,8 @@ $(document).ready(function () {
       success: function (data) {
         const response = JSON.parse(data);
         if (response.success) {
-          showSnackbar(
-            "src/img/white/check-circle.svg",
-            "Checkout",
-            "Checkout successful."
-          );
           setTimeout(() => {
-            window.location.href = "/Web_HomeAppliances/order.jsp";
+            window.location.href = "/Web_HomeAppliances/checkoutSuccess.jsp";
           });
         } else {
           showSnackbar(

@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column; /* Display items vertically */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Set the container to full viewport height */
+}
+
+.container > div {
+    text-align: center; /* Align content in the center horizontally */
+    margin: 10px; /* Add some spacing between elements */
+}
+
+.success {
+    width: 300px; /* Adjust image size if needed */
+    height: 300px;
+}

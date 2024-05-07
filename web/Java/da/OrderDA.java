@@ -81,6 +81,8 @@ public class OrderDA {
                 stmt.setInt(2, orderProduct.getQuantity());
                 stmt.setInt(3, orderProduct.getProduct_id());
                 stmt.executeUpdate();
+                CartControl cartControl = new CartControl();
+                cartControl.deleteCart(order.getUser_id(), orderProduct.getProduct_id());
             }
             if (order.getPayment_method().equals("nelson-wallet")) {
                 stmt = conn.prepareStatement(queryStr5);
