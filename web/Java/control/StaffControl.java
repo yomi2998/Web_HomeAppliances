@@ -31,6 +31,10 @@ public class StaffControl {
     public boolean updateStaffPassword(int id, String old, String newPass) {
         return staffDA.updateStaffPassword(id, old, newPass);
     }
+    
+    public boolean updateStaffPrivileged(Staff staff) {
+        return staffDA.updateStaffPrivileged(staff);
+    }
 
     public boolean deleteStaff(int id) {
         return staffDA.deleteStaff(id);

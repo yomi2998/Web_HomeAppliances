@@ -21,8 +21,8 @@ import jakarta.servlet.http.Cookie;
  *
  * @author superme
  */
-@WebServlet(name = "ForceAlter", urlPatterns = {"/ForceAlter"})
-public class ForceAlter extends HttpServlet {
+@WebServlet(name = "ForceAlterStaff", urlPatterns = {"/ForceAlterStaff"})
+public class ForceAlterStaff extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -69,8 +69,9 @@ public class ForceAlter extends HttpServlet {
         String username = request.getParameter("username");
         String name = request.getParameter("name");
         String email = request.getParameter("email");
-        CustomerControl cc = new CustomerControl();
-        boolean success = cc.updateCustomerPrivileged(new Customer(id, name, username, email, dob));
+        String contact_number = request.getParameter("contact_number");
+        StaffControl sc = new StaffControl();
+        boolean success = sc.updateStaffPrivileged(new Staff(id, name, username, email, dob, contact_number));
         out.print("{\"success\":" + success + "}");
     }
     }

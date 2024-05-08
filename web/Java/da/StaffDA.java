@@ -69,18 +69,16 @@ public class StaffDA {
     }
 
     public boolean updateStaffPrivileged(Staff staff) {
-        String queryStr = "UPDATE " + tableName + " SET name = ?, username = ?, password = ?, email = ?, birth_date = ?, contact_number = ? WHERE id = ?";
+        String queryStr = "UPDATE " + tableName + " SET name = ?, username = ?, email = ?, birth_date = ?, contact_number = ? WHERE id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, staff.getName());
             stmt.setString(2, staff.getUsername());
-            stmt.setString(3, staff.getPassword());
-            stmt.setString(4, staff.getEmail());
-            stmt.setDate(5, new java.sql.Date(staff.getBirth_date().getTime()));
-            stmt.setString(6, staff.getContact_number());
-            stmt.setInt(7, staff.getId());
-            stmt.executeUpdate();
-            return true;
+            stmt.setString(3, staff.getEmail());
+            stmt.setDate(4, new java.sql.Date(staff.getBirth_date().getTime()));
+            stmt.setString(5, staff.getContact_number());
+            stmt.setInt(6, staff.getId());
+            return stmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;

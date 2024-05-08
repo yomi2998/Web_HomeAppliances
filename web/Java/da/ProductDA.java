@@ -5,6 +5,7 @@
 package da;
 
 import domain.Product;
+import domain.Sales;
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class ProductDA {
     private String password = "nbuser";
     private String tableName = "product";
     private String imageTableName = "product_image";
-   private String salesTableName = "order_product";
+    private String salesTableName = "order_product";
     private Connection conn;
     private PreparedStatement stmt;
 
@@ -287,7 +288,7 @@ public class ProductDA {
         // match partial key
         String queryStr = "SELECT * FROM " + tableName + " WHERE UPPER(name) LIKE UPPER(?) ";
         String categoryStr = " AND category_id = ?";
-        String orderByStr=  " ORDER BY sold DESC";
+        String orderByStr = " ORDER BY sold DESC";
         try {
             if (cateogry_id != 0) {
                 queryStr += categoryStr;
@@ -368,31 +369,60 @@ public class ProductDA {
         }
     }
 
-   public int countTotalSales() {
-       String queryStr = "SELECT SUM(quantity) FROM " + salesTableName;
-       try {
-           stmt = conn.prepareStatement(queryStr);
-           ResultSet rs = stmt.executeQuery();
-           rs.next();
-           return rs.getInt(1);
-       } catch (SQLException ex) {
-           System.out.println(ex.getMessage());
-           return 0;
-       }
-   }
+    public int countTotalSales() {
+        String queryStr = "SELECT SUM(quantity) FROM " + salesTableName;
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return rs.getInt(1);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return 0;
+        }
+    }
 
-   public double countTotalEarned() {
-       String queryStr = "SELECT SUM(price) FROM " + salesTableName;
-       try {
-           stmt = conn.prepareStatement(queryStr);
-           ResultSet rs = stmt.executeQuery();
-           rs.next();
-           return rs.getDouble(1);
-       } catch (SQLException ex) {
-           System.out.println(ex.getMessage());
-           return 0;
-       }
-   }
+    public double countTotalEarned() {
+        String queryStr = "SELECT SUM(price * quantity) FROM " + salesTableName;
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return rs.getDouble(1);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return 0;
+        }
+    }
+
+    public List<Sales> generateTop10SalesList(Date from) {
+        String queryStr = "SELECT product_id, SUM(quantity * order_product.price) AS revenue, SUM (quantity) AS sold FROM " + salesTableName + " JOIN cust_order ON order_product.order_id = cust_order.id WHERE cust_order.create_date >= ? GROUP BY product_id ORDER BY revenue DESC FETCH FIRST 10 ROWS ONLY";
+        String queryStr2 = "SELECT name, display_image, extension FROM " + tableName + " WHERE id = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setDate(1, from);
+            ResultSet rs = stmt.executeQuery();
+            List<Sales> top = new ArrayList<>();
+
+            while (rs.next()) {
+                System.out.println("1");
+                stmt = conn.prepareStatement(queryStr2);
+                stmt.setInt(1, rs.getInt("product_id"));
+                ResultSet rs2 = stmt.executeQuery();
+                rs2.next();
+                top.add(new Sales(
+                        rs.getInt("product_id"),
+                        rs2.getString("name"),
+                        convertBlobToBase64(rs2.getBlob("display_image"), rs2.getString("extension")),
+                        rs.getInt("sold"),
+                        rs.getDouble("revenue")));
+            }
+            return top;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
 
     public void destroy() {
         try {

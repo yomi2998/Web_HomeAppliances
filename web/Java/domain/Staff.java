@@ -22,6 +22,8 @@ public class Staff {
     private String session;
     
     public Staff() {}
+    
+    
 
     public int getId() {
         return id;
@@ -114,5 +116,14 @@ public class Staff {
         this.contact_number = contact_number;
         this.dateJoined = dateJoined;
         this.session = session;
+    }
+
+    public Staff(int id, String name, String username, String email, Date birth_date, String contact_number) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.birth_date = birth_date;
+        this.contact_number = contact_number;
     }
 }

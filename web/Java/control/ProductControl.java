@@ -6,7 +6,10 @@ package control;
 
 import da.ProductDA;
 import domain.Product;
+import domain.Sales;
+
 import java.util.List;
+import java.sql.Date;
 /**
  *
  * @author Nelson
@@ -61,5 +64,9 @@ public class ProductControl {
 
     public List<Product> searchProducts(String search, int category) {
         return productDA.searchProducts(search, category);
+    }
+
+    public List<Sales> generateTop10SalesList(Date from) {
+        return productDA.generateTop10SalesList(from);
     }
 }

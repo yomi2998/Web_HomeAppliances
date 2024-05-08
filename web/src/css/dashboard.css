@@ -72,5 +72,23 @@
     position: relative;
     font-size: 5em
 }
+.container2 {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 40px;
+    margin-top: 60px;
+    background-color: #222222;
+    border-radius: 20px;
+}
 
-
+.excontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-top: 0;
+}

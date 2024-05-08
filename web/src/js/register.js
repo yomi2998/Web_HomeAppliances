@@ -69,6 +69,7 @@ $(document).ready(function () {
           $.ajax({
             url: "/Web_HomeAppliances/Validate",
             type: "POST",
+            async: false,
             data: { username: item.value, type: "customer" },
             success: function (data) {
               const out = JSON.parse(data);
@@ -224,6 +225,7 @@ $(document).ready(function () {
           $.ajax({
             url: "/Web_HomeAppliances/Validate",
             type: "POST",
+            async: false,
             data: { username: item.value, type: "staff" },
             success: function (data) {
               const out = JSON.parse(data);

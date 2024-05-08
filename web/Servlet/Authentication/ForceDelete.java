@@ -8,63 +8,75 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import domain.Customer;
-import control.CustomerControl;
-import domain.Staff;
-import control.StaffControl;
+import jakarta.servlet.http.*;
+import domain.*;
+import control.*;
 
 /**
  *
  * @author superme
  */
-@WebServlet(name = "Validate", urlPatterns = { "/Validate" })
-public class Validate extends HttpServlet {
+@WebServlet(name = "ForceDelete", urlPatterns = {"/ForceDelete"})
+public class ForceDelete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            boolean result = false;
-            String username = request.getParameter("username");
-            switch (request.getParameter("type")) {
+            Cookie[] cookies = request.getCookies();
+            String type = "";
+            String session = "";
+            int id = 0;
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("type")) {
+                    type = cookie.getValue();
+                }
+                if (cookie.getName().equals("session")) {
+                    session = cookie.getValue();
+                }
+                if (cookie.getName().equals("id")) {
+                    id = Integer.parseInt(cookie.getValue());
+                }
+            }
+            AdminControl ac = new AdminControl();
+            if (!type.equals("admin") || ac.verifySession(id, session) == null) {
+                out.print("{\"success\":false}");
+                return;
+            }
+            id = Integer.parseInt(request.getParameter("id"));
+            type = request.getParameter("type");
+            switch (type) {
                 case "customer":
                     CustomerControl cc = new CustomerControl();
-                    result = cc.validateUsername(username);
+                    out.print("{\"success\":" + cc.deleteCustomer(id) + "}");
                     break;
                 case "staff":
                     StaffControl sc = new StaffControl();
-                    result = sc.validateUsername(username);
+                    out.print("{\"success\":" + sc.deleteStaff(id) + "}");
                     break;
                 default:
-                    result = true;
                     break;
             }
-            System.out.println(result);
-            out.print("{\"success\":" + !result + "}");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
-    // + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -75,10 +87,10 @@ public class Validate extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

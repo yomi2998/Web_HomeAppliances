@@ -12,7 +12,7 @@
             final boolean ALLOW_ADMIN = true;
             final boolean ALLOW_STAFF = true;
             final boolean ALLOW_CUSTOMER = true;
-            final boolean ALLOW_GUEST = true;
+            final boolean ALLOW_GUEST = false;
 
             //END OF CONFIGURATION
         %>

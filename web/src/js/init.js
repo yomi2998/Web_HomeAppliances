@@ -26,6 +26,14 @@ function extension_toggle(extension) {
   }
 }
 
+function showTable(e) {
+  $("#alltime").hide();
+  $("#lastyear").hide();
+  $("#lastmonth").hide();
+  $("#lastweek").hide();
+  $(`#${e}`).show();
+}
+
 function addCoverScreen() {
   let link = window.location.href;
   if (window.location.href[window.location.href.length - 1] === "#") {

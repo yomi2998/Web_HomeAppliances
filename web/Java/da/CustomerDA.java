@@ -71,18 +71,15 @@ public class CustomerDA {
     }
 
     public boolean updateCustomerPrivileged(Customer customer) {
-        String queryStr = "UPDATE " + tableName + " SET name = ?, username = ?, password = ?, email = ?, balance = ?, birth_date = ? WHERE id = ?";
+        String queryStr = "UPDATE " + tableName + " SET name = ?, username = ?, email = ?, birth_date = ? WHERE id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, customer.getName());
             stmt.setString(2, customer.getUsername());
-            stmt.setString(3, customer.getPassword());
-            stmt.setString(4, customer.getEmail());
-            stmt.setDouble(5, customer.getBalance());
-            stmt.setDate(6, new java.sql.Date(customer.getBirthDate().getTime()));
-            stmt.setInt(7, customer.getId());
-            stmt.executeUpdate();
-            return true;
+            stmt.setString(3, customer.getEmail());
+            stmt.setDate(4, new java.sql.Date(customer.getBirthDate().getTime()));
+            stmt.setInt(5, customer.getId());
+            return stmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
@@ -309,7 +306,8 @@ public class CustomerDA {
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, username);
-            return stmt.executeQuery().next();
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;

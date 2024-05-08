@@ -17,6 +17,14 @@ public class Customer {
 
     }
 
+    public Customer(int id, String name, String username, String email, Date birthDate) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.birthDate = birthDate;
+    }
+
     public Customer(int id, String name, String username, String password, String email, double balance, Date birthDate, Date dateJoined, String session) {
         this.id = id;
         this.name = name;
