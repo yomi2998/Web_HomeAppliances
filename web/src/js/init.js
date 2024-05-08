@@ -122,7 +122,7 @@ $(document).ready(function () {
       nav2.css("top", "0");
     }
   });
-  $("a").click(function (event) {
+  $("a[href='#']").click(function (event) {
     if (lastPos.length === 0) {
       lastPos = [window.scrollX, window.scrollY];
     }
