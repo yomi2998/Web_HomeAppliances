@@ -922,7 +922,6 @@ $(document).ready(function () {
         $("#address-panel").hide();
         $("#edit-panel").show();
         $("#ext-profile").show();
-        $("#ext-order").hide();
         $("#ext-payment").hide();
         $("#ext-shipping").hide();
         break;
@@ -931,7 +930,6 @@ $(document).ready(function () {
         $("#address-panel").hide();
         $("#edit-panel").hide();
         $("#ext-profile").hide();
-        $("#ext-order").show();
         $("#ext-payment").hide();
         $("#ext-shipping").hide();
         break;
@@ -940,7 +938,6 @@ $(document).ready(function () {
         $("#address-panel").hide();
         $("#edit-panel").hide();
         $("#ext-profile").hide();
-        $("#ext-order").hide();
         $("#ext-payment").show();
         $("#ext-shipping").hide();
         break;
@@ -949,7 +946,6 @@ $(document).ready(function () {
         $("#address-panel").show();
         $("#edit-panel").hide();
         $("#ext-profile").hide();
-        $("#ext-order").hide();
         $("#ext-payment").hide();
         $("#ext-shipping").show();
         break;

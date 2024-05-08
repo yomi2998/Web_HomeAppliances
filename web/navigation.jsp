@@ -254,10 +254,6 @@
                             <a href="/Web_HomeAppliances/dashboard.jsp">Dashboard</a>
                         </div>
                         <hr>
-                        <div class="profile-dropdown-content-container-body-anchor">
-                            <a href="/Web_HomeAppliances/control.jsp">Control Panel</a>
-                        </div>
-                        <hr>
                         <% } %>
                         <div class="profile-dropdown-content-container-body-anchor">
                             <a href="/Web_HomeAppliances/Logout" id="log-out">Logout</a>
@@ -547,7 +543,6 @@
                 <h3><%= userType.equals("") ? "Guest" : (userType.substring(0, 1).toUpperCase() + userType.substring(1)) %></h3>
                 <p><a href="#" class="ext-profile-select ext-profile-selected" id="profile-info">User information</a></p>
                 <% if (userType.equals("customer")) { %>
-                <p><a href="#" class="ext-profile-select" id="profile-orders">Orders</a></p>
                 <p><a href="#" class="ext-profile-select" id="profile-payment">Cards</a></p>
                 <p><a href="#" class="ext-profile-select" id="profile-shipping">Shipping address</a></p>
                 <% } %>
@@ -721,9 +716,6 @@
                                     <input type="reset" id="card-insert-reset" hidden>
                                 </form>
                             </div>
-                        </div>
-                        <div id="ext-order" style="display: none">
-                            <p>hello world 3</p>
                         </div>
                         <div id="ext-shipping" style="display: none">
                             <div class="list-addr-div">
