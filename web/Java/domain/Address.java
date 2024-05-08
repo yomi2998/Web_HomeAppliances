@@ -22,6 +22,11 @@ public class Address {
     private String recipient_name;
     private String contact_number;
 
+    @Override
+    public String toString() {
+        return recipient_name + " " + contact_number + " " + address + " " + address_2 + " " + city + " " + state + " " + zip_code;
+    }
+
     public Address() {
     }
 

@@ -51,6 +51,14 @@ public class ProductControl {
         productDA.destroy();
     }
 
+    public List<Product> getTopSellingProducts() {
+        return productDA.getTopSellingProducts();
+    }
+
+    public List<Product> getTopRatedProducts() {
+        return productDA.getTopRatedProducts();
+    }
+
     public List<Product> searchProducts(String search, int category) {
         return productDA.searchProducts(search, category);
     }

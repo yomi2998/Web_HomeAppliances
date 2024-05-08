@@ -50,8 +50,8 @@
                             </div>
                             <div class="card-select" hidden>
                                 <h3>Payment method: card payment</h3>
-                                <select class="nelson-select topup-card-select" style="min-width: 210px">
-                                    <option value="0" selected disabled>Select card</option>
+                                <select class="nelson-select topup-card-select" id="card-payment-select" style="min-width: 210px">
+                                    <option value="0" disabled>Select card</option>
                                     <% for (Card card : carc.retrieveCards(customer.getId())) { %>
                                         <option value="<%= card.getId() %>"><%= card.getName() %> <%= card.getCard_number().substring(0, 4) %>-XXXX-XXXX-XXXX</option>
                                     <% } %>
@@ -86,7 +86,7 @@
                             </div>
                             <% } %>
                             <select class="nelson-select" id="ship-select" style="min-width: 210px" required>
-                                <option value="0" selected disabled>Select address</option>
+                                <option value="0" disabled>Select address</option>
                                 <% for (Address c : adc.retrieveAddresses(customer.getId())) { %>
                                     <option value="<%= c.getId() %>"><%= c.getAddress() %></option>
                                 <% } %>
@@ -139,5 +139,6 @@
                 </div>
             </form>
         </div>
+        <%@ include file="footer.jsp" %>
     </body>
 </html>

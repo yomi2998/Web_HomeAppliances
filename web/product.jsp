@@ -104,5 +104,6 @@
                 <h1>Product reviews</h1>
             </div>
         </div>
+        <%@ include file="footer.jsp" %>
     </body>
 </html>

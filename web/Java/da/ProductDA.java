@@ -246,19 +246,95 @@ public class ProductDA {
         }
     }
 
+    public List<Product> getTopSellingProducts() {
+        String queryStr = "SELECT * FROM " + tableName + " ORDER BY sold DESC FETCH FIRST 5 ROWS ONLY";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            ResultSet rs = stmt.executeQuery();
+            List<Product> product = new ArrayList<>();
+
+            while (rs.next()) {
+                List<String> sub_images = new ArrayList<>();
+                String queryStr2 = "SELECT * FROM " + imageTableName + " WHERE product_id = ?";
+                String image = convertBlobToBase64(rs.getBlob("display_image"), rs.getString("extension"));
+                stmt = conn.prepareStatement(queryStr2);
+                stmt.setInt(1, rs.getInt("id"));
+                ResultSet rs2 = stmt.executeQuery();
+                while (rs2.next()) {
+                    sub_images.add(convertBlobToBase64(rs2.getBlob("image"), rs2.getString("extension")));
+                }
+                product.add(new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        image,
+                        sub_images,
+                        rs.getString("description"),
+                        rs.getDouble("price"),
+                        rs.getInt("stock"),
+                        rs.getInt("sold"),
+                        rs.getInt("category_id"),
+                        rs.getDouble("rating"),
+                        rs.getDate("create_date")));
+            }
+            return product;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
     public List<Product> searchProducts(String keyword, int cateogry_id) {
         // match partial key
-        String queryStr = "SELECT * FROM " + tableName + " WHERE UPPER(name) LIKE UPPER(?)";
+        String queryStr = "SELECT * FROM " + tableName + " WHERE UPPER(name) LIKE UPPER(?) ";
         String categoryStr = " AND category_id = ?";
+        String orderByStr=  " ORDER BY sold DESC";
         try {
             if (cateogry_id != 0) {
                 queryStr += categoryStr;
             }
+            queryStr += orderByStr;
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, "%" + keyword + "%");
             if (cateogry_id != 0) {
                 stmt.setInt(2, cateogry_id);
             }
+            ResultSet rs = stmt.executeQuery();
+            List<Product> product = new ArrayList<>();
+
+            while (rs.next()) {
+                List<String> sub_images = new ArrayList<>();
+                String queryStr2 = "SELECT * FROM " + imageTableName + " WHERE product_id = ?";
+                String image = convertBlobToBase64(rs.getBlob("display_image"), rs.getString("extension"));
+                stmt = conn.prepareStatement(queryStr2);
+                stmt.setInt(1, rs.getInt("id"));
+                ResultSet rs2 = stmt.executeQuery();
+                while (rs2.next()) {
+                    sub_images.add(convertBlobToBase64(rs2.getBlob("image"), rs2.getString("extension")));
+                }
+                product.add(new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        image,
+                        sub_images,
+                        rs.getString("description"),
+                        rs.getDouble("price"),
+                        rs.getInt("stock"),
+                        rs.getInt("sold"),
+                        rs.getInt("category_id"),
+                        rs.getDouble("rating"),
+                        rs.getDate("create_date")));
+            }
+            return product;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    public List<Product> getTopRatedProducts() {
+        String queryStr = "SELECT * FROM " + tableName + " ORDER BY rating DESC FETCH FIRST 5 ROWS ONLY";
+        try {
+            stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();
             List<Product> product = new ArrayList<>();
 

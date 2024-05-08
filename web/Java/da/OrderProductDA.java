@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import domain.Product;
+import control.ProductControl;
 
 
 /**
@@ -54,7 +56,11 @@ public class OrderProductDA {
             ResultSet rs = stmt.executeQuery();
             List<OrderProduct> opList = new ArrayList<>();
             while (rs.next()) {
-                opList.add(new OrderProduct(rs.getInt("id"), order_id, rs.getInt("product_id"), rs.getInt("quantity"), rs.getDouble("price")));
+                ProductControl pc = new ProductControl();
+                Product product = pc.retrieveProduct(rs.getInt("product_id"));
+                OrderProduct op = new OrderProduct(rs.getInt("id"), order_id, rs.getInt("product_id"), rs.getInt("quantity"), rs.getDouble("price"));
+                op.setProduct(product);
+                opList.add(op);
             }
             return opList;
         } catch (SQLException ex) {

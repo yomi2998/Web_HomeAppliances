@@ -4,7 +4,6 @@
     <head>
         <title>Home - nelson</title>
         <link rel="shortcut icon" href="src/img/favicon.png">
-        <link rel="stylesheet" href="src/css/checkoutSuccess.css">
 
         <%
             //CONFIGURATION
@@ -24,14 +23,7 @@
         </div>
         <%@ include file="navigation.jsp" %>
         <div class="container" style="display: none;">
-            <div>
-            <img src="src/img/white/check-circle.svg" alt="Success" class="success">
-            <h1>&nbsp;Checkout Successful</h1>
-            </div>
-            <div>
-                <h3>You can view your orders <a href="order.jsp">here</a></h3>
-            </div>
+
         </div>
-        <%@ include file="footer.jsp" %>
     </body>
 </html>

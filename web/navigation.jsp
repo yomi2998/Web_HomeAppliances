@@ -26,6 +26,7 @@
 <jsp:useBean id="carc" class="control.CardControl" scope="page"/>
 <jsp:useBean id="adc" class="control.AddressControl" scope="page"/>
 <jsp:useBean id="cartc" class="control.CartControl" scope="page"/>
+<jsp:useBean id="oc" class="control.OrderControl" scope="page"/>
 <script src="src/js/cart.js"></script>
 <script>
     var force_password = false;
@@ -149,7 +150,6 @@
     <div id="navigation-container">
         <a href="/Web_HomeAppliances" class="has-image"><img class="left logo" id="inelson"
                                                              src="src/img/white/nelson.png" style="height:60%;"></a>
-        <a href="/Web_HomeAppliances/explore.jsp" class="left">Explore</a>
         <div class="left dropdown">
             <a href="#" class="left dropbtn" onclick="extension_toggle('category-extension')">Category</a>
             <div class="dropdown-content">
@@ -172,6 +172,7 @@
                 %>
             </div>
         </div>
+        <a href="/Web_HomeAppliances/about.jsp" class="left">About</a>
         <div class="right profile-dropdown">
             <a href="#" class="has-image"><img class="right icon" id="iprofile" src="src/img/white/user.svg"
                                                style="height:60%;" alt="Profile"></a>

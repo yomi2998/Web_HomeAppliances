@@ -14,6 +14,15 @@ public class OrderProduct {
     private int product_id;
     private int quantity;
     private double price;
+    private Product product;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public OrderProduct(int id, int order_id, int product_id, int quantity, double price) {
         this.id = id;

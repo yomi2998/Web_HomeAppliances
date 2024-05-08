@@ -100,10 +100,11 @@ public class OrderDA {
         }
     }
 
-    public List<Order> retrieveOrder() {
-        String queryStr = "SELECT * FROM " + tableName;
+    public List<Order> retrieveOrder(int user_id) {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE user_id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, user_id);
             ResultSet rs = stmt.executeQuery();
             List<Order> order = new ArrayList<>();
             while (rs.next()) {
@@ -121,6 +122,33 @@ public class OrderDA {
                 order.add(orderObj);
             }
             return order;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    public Order retrieveOrderById(int order_id) {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE id = ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setInt(1, order_id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Order orderObj = new Order(
+                        rs.getInt("id"),
+                        rs.getInt("user_id"),
+                        rs.getString("payment_method"),
+                        rs.getInt("card_id"),
+                        rs.getDouble("price"),
+                        rs.getDouble("shipping_fee"),
+                        rs.getDouble("tax"),
+                        rs.getDouble("discount"),
+                        rs.getDouble("final_price"),
+                        rs.getDate("create_date"));
+                return orderObj;
+            }
+            return null;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return null;

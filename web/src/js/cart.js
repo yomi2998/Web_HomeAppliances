@@ -128,7 +128,7 @@ $(document).ready(function () {
     };
     sendData.payment_method = $("input[name='payment']:checked").val();
     if (sendData.payment_method == "card") {
-      sendData.card_id = $(".topup-card-select").val();
+      sendData.card_id = $("#card-payment-select").val();
       if (sendData.card_id == 0 || sendData.card_id == null) {
         showSnackbar(
           "src/img/white/alert-circle.svg",
@@ -191,6 +191,14 @@ $(document).ready(function () {
         data.prod_id.push(prod_id[i].value);
         data.prod_quantity.push(prod_quantity[i].value);
       }
+    }
+    if (data.prod_id.length == 0) {
+      showSnackbar(
+        "src/img/white/alert-circle.svg",
+        "Checkout",
+        "Please select at least one product to checkout."
+      );
+      return;
     }
     window.location.href = `/Web_HomeAppliances/checkout.jsp?id=${data.prod_id.join(
       ","

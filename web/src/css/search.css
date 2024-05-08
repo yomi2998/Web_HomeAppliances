@@ -3,12 +3,12 @@
 }
 
 .search-item {
-    margin: 20px;
     padding: 20px;
     border-radius: 10px;
     background-color: #111111;
     color: white;
     text-align: left;
+    margin-bottom: 20px;
 }
 
 .nodeco {
@@ -33,6 +33,7 @@
 .search-item-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
 }
 
 .search-item img {
@@ -42,4 +43,11 @@
 
 #product-search-form {
     display: flex;
+}
+
+.grid-5-section {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    justify-items: center;
 }

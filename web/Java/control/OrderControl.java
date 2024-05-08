@@ -21,7 +21,11 @@ public class OrderControl {
         return orderDA.insertOrder(order);
     }
 
-    public List<Order> retrieveOrder() {
-        return orderDA.retrieveOrder();
+    public List<Order> retrieveOrder(int user_id) {
+        return orderDA.retrieveOrder(user_id);
+    }
+    
+    public Order retrieveOrderById(int order_id) {
+        return orderDA.retrieveOrderById(order_id);
     }
 }
