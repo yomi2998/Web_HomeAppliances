@@ -1,4 +1,5 @@
 var toggleCnt = 0;
+var lastPos = []; // [x, y]
 function extension_toggle(extension) {
   const topupExtension = $(`#${extension}`);
   if (topupExtension.css("display") === "none") {
@@ -20,6 +21,8 @@ function extension_toggle(extension) {
     setTimeout(function () {
       topupExtension.css("display", "none");
     }, 500);
+    window.scrollTo(lastPos[0], lastPos[1]);
+    lastPos = [];
   }
 }
 
@@ -119,7 +122,10 @@ $(document).ready(function () {
       nav2.css("top", "0");
     }
   });
-  $("a[href='#']").click(function (event) {
+  $("a").click(function (event) {
+    if (lastPos.length === 0) {
+      lastPos = [window.scrollX, window.scrollY];
+    }
     event.preventDefault();
   });
 
