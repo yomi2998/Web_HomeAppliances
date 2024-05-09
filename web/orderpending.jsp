@@ -20,7 +20,7 @@
 
     <body>
         <div class="nelson-greeter">
-            <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="width: 40%;">
+            <p style="font-size: 10vw;">Pending orders</p>
         </div>
         <%@ include file="navigation.jsp" %>
         <%
@@ -39,6 +39,7 @@
 
                         String image = "";
                         for (Order order : orders) {
+                            image = "";
                         List<OrderProduct> prods = order.getOrder_product();
                         String order_name = "#" + order.getId() + ": ";
                         for (OrderProduct prod : prods) {

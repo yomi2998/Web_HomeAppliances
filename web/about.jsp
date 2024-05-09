@@ -2,7 +2,7 @@
 <html>
 
     <head>
-        <title>Home - nelson</title>
+        <title>About us - nelson</title>
         <link rel="shortcut icon" href="src/img/favicon.png">
         <link rel="stylesheet" href="src/css/about.css">
 
@@ -20,7 +20,7 @@
 
     <body>
         <div class="nelson-greeter">
-            <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="width: 40%;">
+            <p style="font-size: 10vw;">About us</p>
         </div>
         <%@ include file="navigation.jsp" %>
         <div class="container" style="display: none;">

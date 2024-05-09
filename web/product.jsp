@@ -5,7 +5,6 @@
         <title>Product - nelson</title>
         <link rel="shortcut icon" href="src/img/favicon.png">
         <link rel="stylesheet" href="src/css/product.css">
-        <link rel="stylesheet" href="src/css/rating.css">
         <%
             //CONFIGURATION
 
@@ -19,7 +18,7 @@
     </head>
     <body>
         <div class="nelson-greeter">
-            <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="width: 40%;">
+            <p style="font-size: 10vw;">Product</p>
         </div>
         <%@ include file="navigation.jsp" %>
         <script>
@@ -63,15 +62,7 @@
                 </div>
                 <div class="product-details">
                     <h1><%= product.getName() %></h1>
-                    <div class="star-rating">
-                        <% for (int i = 0; i < (int)product.getRating(); i++) { %>
-                            <span class="fa fa-star checked"></span>
-                        <% } %>
-                        <% for (int i = 5; i > (int)product.getRating(); i--) { %>
-                            <span class="fa fa-star unchecked"></span>
-                        <% } %>
-                    </div>
-                    <p><%= product.getRating() %> | <%= product.getSold() %> sold</p>
+                    <p><%= product.getSold() %> sold</p>
                     <p>Price: <%= String.format("RM %.2f", product.getPrice()) %></p>
                     <p>Category: <a class="nodeco" href="search.jsp?category=<%= product.getCategory_id() %>"><%= cac.getCategoryById(product.getCategory_id()) %></a></p>
                     <p>Stock: <%= product.getStock() %></p>
@@ -98,10 +89,6 @@
             <div class="product-description">
                 <h1>Description</h1>
                 <p><%= product.getDescription() %></p>
-            </div>
-            <hr>
-            <div class="product-reviews">
-                <h1>Product reviews</h1>
             </div>
         </div>
         <%@ include file="footer.jsp" %>

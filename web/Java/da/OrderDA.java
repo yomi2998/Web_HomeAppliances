@@ -102,7 +102,7 @@ public class OrderDA {
     }
 
     public List<Order> retrieveOrder(int user_id) {
-        String queryStr = "SELECT * FROM " + tableName + " WHERE user_id = ?";
+        String queryStr = "SELECT * FROM " + tableName + " WHERE user_id = ? ORDER BY create_date DESC";
         try {
             stmt = conn.prepareStatement(queryStr);
             stmt.setInt(1, user_id);
@@ -185,7 +185,8 @@ public class OrderDA {
 
     public List<Order> getShippedOrders() {
         // exclude "Your order has been delivered to your place."
-        String queryStr = "SELECT * FROM " + tableName + " WHERE id NOT IN (SELECT order_id FROM " + orderStatusTableName + " WHERE CAST(status AS VARCHAR(256)) = 'Your order has been delivered to your place.' GROUP BY order_id HAVING COUNT(order_id) = 1)";
+        // if there is more than 1 status, it means the order has been shipped
+        String queryStr = "SELECT * FROM " + tableName + " WHERE id IN (SELECT order_id FROM " + orderStatusTableName + " WHERE NOT EXISTS (SELECT 1 FROM " + orderStatusTableName + " WHERE order_id = " + tableName + ".id AND CAST(status AS VARCHAR(256)) = 'Your order has been delivered to your place.') GROUP BY order_id HAVING COUNT(order_id) > 1)";
         try {
             stmt = conn.prepareStatement(queryStr);
             ResultSet rs = stmt.executeQuery();

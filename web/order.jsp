@@ -2,15 +2,15 @@
 <html>
 
     <head>
-        <title>Home - nelson</title>
+        <title>My orders - nelson</title>
         <link rel="shortcut icon" href="src/img/favicon.png">
         <link rel="stylesheet" href="src/css/order.css">
 
         <%
             //CONFIGURATION
 
-            final boolean ALLOW_ADMIN = true;
-            final boolean ALLOW_STAFF = true;
+            final boolean ALLOW_ADMIN = false;
+            final boolean ALLOW_STAFF = false;
             final boolean ALLOW_CUSTOMER = true;
             final boolean ALLOW_GUEST = false;
 
@@ -20,7 +20,7 @@
 
     <body>
         <div class="nelson-greeter">
-            <img src="src/img/white/nelson.png" alt="Nelson Logo" class="logo" style="width: 40%;">
+            <p style="font-size: 10vw;">My orders</p>
         </div>
         <%@ include file="navigation.jsp" %>
         <script src="src/js/order.js"></script>
@@ -37,6 +37,7 @@
 
                         String image = "";
                         for (Order order : orders) {
+                        image = "";
                         List<OrderProduct> prods = order.getOrder_product();
                         String order_name = "";
                         for (OrderProduct prod : prods) {

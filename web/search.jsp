@@ -2,7 +2,7 @@
 <html>
 
     <head>
-        <title>Home - nelson</title>
+        <title>Search - nelson</title>
         <link rel="shortcut icon" href="src/img/favicon.png">
         <link rel="stylesheet" href="src/css/search.css">
         <link rel="stylesheet" href="src/css/rating.css">
@@ -60,15 +60,10 @@
                     <img src="<%= product.getDisplay_image() %>" alt="<%= product.getName() %>" style="width: 10vw; height: 10vw;">
                     <p style="font-weight: bold;"><%= product.getName().length() > 20 ? product.getName().substring(0, 20) + "..." : product.getName() %></h2>
                     <p><%= String.format("RM %.2f", product.getPrice()) %></p>
-                    <div class="star-rating">
-                        <% for (int i = 0; i < (int)product.getRating(); i++) { %>
-                            <span class="fa fa-star checked"></span>
-                        <% } %>
-                        <% for (int i = 5; i > (int)product.getRating(); i--) { %>
-                            <span class="fa fa-star unchecked"></span>
-                        <% } %>
-                    </div>
-                    <p><%= product.getRating() %> | <%= product.getSold() %> sold</p>
+                    <p><%= product.getSold() %> sold</p>
+                    <% if (product.getStock() == 0) { %>
+                    <p style="color: red;">Out of stock</p>
+                    <% } %>
                 </div>
                 </div>
                 </a>

@@ -1,6 +1,6 @@
 .product-section {
     display: grid;
-    grid-template-columns: 0.7fr 1fr;
+    grid-template-columns: 1fr 0.7fr;
     grid-gap: 40px;
     margin: 20px;
 }
@@ -13,7 +13,7 @@
     display: grid;
     grid-template-rows: 1fr 0.5fr;
     width: 500px;
-    height: 800px;
+    height: 700px;
     margin: 0 auto;
 }
 
@@ -23,6 +23,7 @@
 
 #product-image-container img {
     background-color: white;
+    border-radius: 20px;
 }
 
 #product-subimage-container {
@@ -30,6 +31,12 @@
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 5px;
     margin: 0 auto;
+}
+
+
+#product-subimage-container img {
+    background-color: white;
+    border-radius: 20px;
 }
 
 .product-subimage:hover {
