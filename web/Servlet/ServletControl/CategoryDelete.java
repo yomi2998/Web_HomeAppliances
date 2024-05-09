@@ -13,8 +13,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
 
-import domain.Category;
-import control.CategoryControl;
+import entity.Category;
+import manager.CategoryManager;
 import control.StaffControl;
 import control.AdminControl;
 
@@ -73,12 +73,9 @@ public class CategoryDelete extends HttpServlet {
                     out.print("{\"success\": false}");
                     break;
             }
-            CategoryControl categoryControl = new CategoryControl();
-            if (categoryControl.deleteCategory(Integer.parseInt(catId))) {
-                out.print("{\"success\": true}");
-            } else {
-                out.print("{\"success\": false}");
-            }
+            id = Integer.parseInt(catId);
+            CategoryManager categoryManager = new CategoryManager();
+            out.print("{\"success\": " + categoryManager.deleteCategory(id) + "}");
         }
     }
 

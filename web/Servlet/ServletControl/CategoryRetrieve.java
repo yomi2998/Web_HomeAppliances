@@ -11,11 +11,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Cookie;
 
 import com.google.gson.Gson;
-import domain.Category;
-import control.CategoryControl;
+
+import entity.Category;
+import manager.CategoryManager;
 
 /**
  *
@@ -33,12 +33,15 @@ public class CategoryRetrieve extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            CategoryControl categoryControl = new CategoryControl();
-            out.print("{\"success\": true, \"category\": " + new Gson().toJson(categoryControl.retrieveCategory()) + "}");
+            CategoryManager categoryManager = new CategoryManager();
+            Gson gson = new Gson();
+            String json = gson.toJson(categoryManager.retrieveCategory());
+            out.print("{\"success\": true, \"category\": " + json + "}");
         }
     }
 

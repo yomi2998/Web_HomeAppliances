@@ -39,7 +39,7 @@
                     </form>
                     <hr>
                     <h3>Categories</h3>
-                    <div class="category-list">
+                    <div class="search-category-list">
                         <%
                             for (Category category : categories) {
                         %>

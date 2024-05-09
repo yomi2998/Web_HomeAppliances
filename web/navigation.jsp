@@ -16,6 +16,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="jakarta.servlet.http.Cookie" %>
 <%@ page import="domain.*" %>
+<%@ page import="entity.*" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.sql.Date" %>
@@ -23,7 +24,7 @@
 <jsp:useBean id="cc" class="control.CustomerControl" scope="page"/>
 <jsp:useBean id="ac" class="control.AdminControl" scope="page"/>
 <jsp:useBean id="sc" class="control.StaffControl" scope="page"/>
-<jsp:useBean id="cac" class="control.CategoryControl" scope="page"/>
+<jsp:useBean id="cac" class="manager.CategoryManager" scope="page"/>
 <jsp:useBean id="pc" class="control.ProductControl" scope="page"/>
 <jsp:useBean id="carc" class="control.CardControl" scope="page"/>
 <jsp:useBean id="adc" class="control.AddressControl" scope="page"/>

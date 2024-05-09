@@ -13,8 +13,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
 
-import domain.Category;
-import control.CategoryControl;
+import entity.Category;
+import manager.CategoryManager;
 import control.StaffControl;
 import control.AdminControl;
 
@@ -74,13 +74,9 @@ public class CategoryAlter extends HttpServlet {
                     out.print("{\"success\": false}");
                     break;
             }
-            CategoryControl categoryControl = new CategoryControl();
-            Category category = new Category(Integer.parseInt(catId), catName);
-            if (categoryControl.updateCategory(category)) {
-                out.print("{\"success\": true}");
-            } else {
-                out.print("{\"success\": false}");
-            }
+            id = Integer.parseInt(catId);
+            CategoryManager categoryManager = new CategoryManager();
+            out.print("{\"success\": " + categoryManager.updateCategory(new Category(id, catName)) + "}");
         }
     }
 

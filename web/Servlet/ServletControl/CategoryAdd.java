@@ -11,10 +11,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import manager.CategoryManager;
 import jakarta.servlet.http.Cookie;
 
-import domain.Category;
-import control.CategoryControl;
+import entity.Category;
 import control.StaffControl;
 import control.AdminControl;
 
@@ -34,6 +34,7 @@ public class CategoryAdd extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -73,14 +74,11 @@ public class CategoryAdd extends HttpServlet {
                     break;
             }
             String catName = request.getParameter("name");
-            CategoryControl categoryControl = new CategoryControl();
             Category category = new Category(catName);
-            int catId = categoryControl.insertCategory(category);
-            if (catId != -1) {
-                out.print("{\"success\": true, \"id\": " + catId + "}");
-            } else {
-                out.print("{\"success\": false}");
-            }
+            int catId = -1;
+            CategoryManager categoryManager = new CategoryManager();
+            catId = categoryManager.createCategory(category);
+            out.print("{\"success\": " + (catId != -1) + ", \"id\": " + catId + "}");
         }
     }
 
