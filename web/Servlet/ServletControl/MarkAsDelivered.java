@@ -9,8 +9,9 @@ import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import domain.*;
+import entity.*;
 import control.*;
+import manager.*;
 
 /**
  *
@@ -68,7 +69,7 @@ public class MarkAsDelivered extends HttpServlet {
             }
             id = Integer.parseInt(request.getParameter("id"));
             OrderStatus os = new OrderStatus(0, id, "Your order has been delivered to your place.", null);
-            OrderStatusControl osc = new OrderStatusControl();
+            OrderStatusManager osc = new OrderStatusManager();
             if (osc.insertStatus(os)) {
                 out.print("{\"success\":true,\"message\":\"Order has been marked as shipped\"}");
             } else {

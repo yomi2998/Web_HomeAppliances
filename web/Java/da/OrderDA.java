@@ -6,6 +6,8 @@ package da;
 
 import domain.*;
 import control.*;
+import entity.*;
+import manager.*;
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -92,7 +94,7 @@ public class OrderDA {
                 stmt.executeUpdate();
             }
             OrderStatus orderStatus = new OrderStatus(0, order_id, "Seller is preparing your order...", new Date(System.currentTimeMillis()));
-            OrderStatusControl orderStatusControl = new OrderStatusControl();
+            OrderStatusManager orderStatusControl = new OrderStatusManager();
             orderStatusControl.insertStatus(orderStatus);
             return true;
         } catch (SQLException ex) {

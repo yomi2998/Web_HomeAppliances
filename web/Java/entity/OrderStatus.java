@@ -2,16 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package domain;
+package entity;
 import java.util.*;
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.*;
 /**
  *
  * @author superme
  */
+@Entity
+@Table(name = "order_status")
+@XmlRootElement
+
+@NamedQueries({
+    @NamedQuery(name = "OrderStatus.findAll", query = "SELECT o FROM OrderStatus o ORDER BY o.create_date DESC"),
+    @NamedQuery(name = "OrderStatus.findById", query = "SELECT o FROM OrderStatus o WHERE o.id = :id")})
 public class OrderStatus {
+    @Id
+    @Basic(optional = false)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "ORDER_ID")
     private int order_id;
+    @Column(name = "STATUS")
     private String status;
+    @Column(name = "CREATE_DATE")
     private Date create_date;
 
     public OrderStatus(int id, int order_id, String status, Date create_date) {

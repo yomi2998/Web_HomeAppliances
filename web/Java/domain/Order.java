@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package domain;
+import entity.*;
+import manager.*;
 import control.*;
 import java.util.*;
 /**
@@ -58,7 +60,7 @@ public class Order {
         cust_order_address = ac.retrieveAddressFromOrder(id);
         OrderProductControl oc = new OrderProductControl();
         order_product = oc.getOrderProduct(id);
-        OrderStatusControl os = new OrderStatusControl();
+        OrderStatusManager os = new OrderStatusManager();
         order_status = os.getOrderStatus(id);
     }
 
