@@ -29,8 +29,8 @@
             <h1>Top selling products</h1>
             <div class="">
                 <div class="grid-5-section">
-                    <% List<Product> products = pc.getTopSellingProducts();
-                    for (Product product : products) { %>
+                    <% List<Product> products = pc.getTopSellingProducts(); int cnt = 0;
+                    for (Product product : products) { ++cnt; %>
                     <a class="nodeco" href="product.jsp?product_id=<%= product.getId() %>">
                         <div class="search-item">
                             <div>
@@ -44,6 +44,8 @@
                             </div>
                         </div>
                     </a>
+                    <% } if (cnt == 0) { %>
+                    <p>No product found.</p>
                     <% } %>
                 </div>
             </div>
@@ -51,8 +53,8 @@
             <h1>Top rated products</h1>
             <div class="">
                 <div class="grid-5-section">
-                    <% products = pc.getTopRatedProducts();
-                    for (Product product : products) { %>
+                    <% cnt = 0; products = pc.getTopRatedProducts();
+                    for (Product product : products) { ++cnt; %>
                     <a class="nodeco" href="product.jsp?product_id=<%= product.getId() %>">
                         <div class="search-item">
                             <div>
@@ -66,6 +68,8 @@
                             </div>
                         </div>
                     </a>
+                    <% } if (cnt == 0) { %>
+                    <p>No product found.</p>
                     <% } %>
                 </div>
             </div>
@@ -73,8 +77,8 @@
             <h1>Browse</h1>
             <div class="">
                 <div class="grid-5-section">
-                    <% products = pc.retrieveProductALL();
-                    for (Product product : products) { %>
+                    <% cnt = 0; products = pc.retrieveProductALL();
+                    for (Product product : products) { ++cnt; %>
                     <a class="nodeco" href="product.jsp?product_id=<%= product.getId() %>">
                         <div class="search-item">
                             <div>
@@ -88,8 +92,11 @@
                             </div>
                         </div>
                     </a>
+                    <% } if (cnt == 0) { %>
+                    <p>No product found.</p>
                     <% } %>
                 </div>
+                <hr>
             </div>
         </div>
         <%@ include file="footer.jsp" %>
