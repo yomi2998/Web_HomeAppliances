@@ -43,9 +43,7 @@ public class OrderStatusManager {
         List<OrderStatus> status = null;
 
         try {
-            status = em.createNamedQuery("OrderStatus.findById")
-                    .setParameter("id", id)
-                    .getResultList();
+            status = em.createNamedQuery("OrderStatus.findByOrderId").setParameter("order_id", id).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }

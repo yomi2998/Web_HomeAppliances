@@ -16,7 +16,7 @@ import jakarta.xml.bind.annotation.*;
 
 @NamedQueries({
     @NamedQuery(name = "OrderStatus.findAll", query = "SELECT o FROM OrderStatus o ORDER BY o.create_date DESC"),
-    @NamedQuery(name = "OrderStatus.findById", query = "SELECT o FROM OrderStatus o WHERE o.id = :id")})
+    @NamedQuery(name = "OrderStatus.findByOrderId", query = "SELECT o FROM OrderStatus o WHERE o.order_id = :order_id ORDER BY o.create_date DESC")})
 public class OrderStatus {
     @Id
     @Basic(optional = false)
@@ -28,7 +28,10 @@ public class OrderStatus {
     @Column(name = "STATUS")
     private String status;
     @Column(name = "CREATE_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date create_date;
+    
+    public OrderStatus() {}
 
     public OrderStatus(int id, int order_id, String status, Date create_date) {
         this.id = id;
@@ -67,5 +70,10 @@ public class OrderStatus {
 
     public void setCreate_date(Date create_date) {
         this.create_date = create_date;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        create_date = new Date();
     }
 }
