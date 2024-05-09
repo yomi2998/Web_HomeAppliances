@@ -755,7 +755,7 @@
                                     </div>
                                     <div class="input-field">
                                         <p class="form-p">Address:</p>
-                                        <input autocomplete="off" id="alter-address-form" type="text" name="address" placeholder="Enter expiry date" class="nelson-input" required><br>
+                                        <input autocomplete="off" id="alter-address-form" type="text" name="address" placeholder="Enter your address" class="nelson-input" required><br>
                                         <p id="alter-address-invalid" class="hidden" style="color:red;">Invalid address.</p>
                                     </div>
                                     <div class="input-field">
