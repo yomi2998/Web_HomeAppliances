@@ -186,7 +186,7 @@ $(document).ready(function () {
             url: "/Web_HomeAppliances/Validate",
             type: "POST",
             async: false,
-            data: { username: item.value, type: "customer" },
+            data: { username: item.value, id: formData[0].value, type: "customer" },
             success: function (data) {
               const out = JSON.parse(data);
               if (!out.success) {
@@ -316,7 +316,7 @@ $(document).ready(function () {
             url: "/Web_HomeAppliances/Validate",
             type: "POST",
             async: false,
-            data: { username: item.value, type: "staff" },
+            data: { username: item.value, id: formData[0].value, type: "staff" },
             success: function (data) {
               const out = JSON.parse(data);
               if (!out.success) {

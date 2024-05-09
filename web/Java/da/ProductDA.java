@@ -285,7 +285,6 @@ public class ProductDA {
     }
 
     public List<Product> searchProducts(String keyword, int cateogry_id) {
-        // match partial key
         String queryStr = "SELECT * FROM " + tableName + " WHERE UPPER(name) LIKE UPPER(?) ";
         String categoryStr = " AND category_id = ?";
         String orderByStr = " ORDER BY sold DESC";

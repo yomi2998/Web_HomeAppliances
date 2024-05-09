@@ -24,6 +24,18 @@ public class OrderControl {
     public List<Order> retrieveOrder(int user_id) {
         return orderDA.retrieveOrder(user_id);
     }
+
+    public List<Order> getPendingOrders() {
+        return orderDA.getPendingOrders();
+    }
+
+    public List<Order> getShippedOrders() {
+        return orderDA.getShippedOrders();
+    }
+
+    public List<Order> getCompletedOrders() {
+        return orderDA.getCompletedOrders();
+    }
     
     public Order retrieveOrderById(int order_id) {
         return orderDA.retrieveOrderById(order_id);

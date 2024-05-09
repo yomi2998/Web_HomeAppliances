@@ -38,14 +38,15 @@ public class Validate extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             boolean result = false;
             String username = request.getParameter("username");
+            String id = request.getParameter("id");
             switch (request.getParameter("type")) {
                 case "customer":
                     CustomerControl cc = new CustomerControl();
-                    result = cc.validateUsername(username);
+                    result = id == null ? cc.validateUsername(username) : cc.validateUsername(username, Integer.parseInt(id));
                     break;
                 case "staff":
                     StaffControl sc = new StaffControl();
-                    result = sc.validateUsername(username);
+                    result = id == null ? sc.validateUsername(username) : sc.validateUsername(username, Integer.parseInt(id));
                     break;
                 default:
                     result = true;

@@ -314,7 +314,12 @@
             </div>
             <hr>
             <div>
-                <a href="ordermgmt.jsp"><button class="nelson-button">Manage Orders</button></a>
+                <h1 style="text-align: center;">Order tracking</h1>
+                <div>
+                    <a href="orderpending.jsp"><button class="nelson-button">Manage pending order</button></a>
+                    <a href="orderstatus.jsp"><button class="nelson-button">Update order status</button></a>
+                    <a href="orderhistory.jsp"><button class="nelson-button">Show completed orders</button></a>
+                </div>
             </div>
         </div>
     </body>

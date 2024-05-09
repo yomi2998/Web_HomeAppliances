@@ -52,6 +52,10 @@ public class CustomerControl {
         return customerDA.deleteSession(id, session);
     }
     
+    public boolean validateUsername(String username, int id) {
+        return customerDA.validateUsername(username, id);
+    }
+
     public boolean validateUsername(String username) {
         return customerDA.validateUsername(username);
     }

@@ -22,6 +22,7 @@ public class OrderDA {
     private String tableName = "cust_order";
     private String addressTableName = "cust_order_address";
     private String orderProductTableName = "order_product";
+    private String orderStatusTableName = "order_status";
     private String productTableName = "product";
     private String customerTableName = "customer";
     private Connection conn;
@@ -149,6 +150,88 @@ public class OrderDA {
                 return orderObj;
             }
             return null;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    public List<Order> getPendingOrders() {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE id IN (SELECT order_id FROM " + orderStatusTableName + " GROUP BY order_id HAVING COUNT(order_id) = 1)";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            ResultSet rs = stmt.executeQuery();
+            List<Order> order = new ArrayList<>();
+            while (rs.next()) {
+                Order orderObj = new Order(
+                        rs.getInt("id"),
+                        rs.getInt("user_id"),
+                        rs.getString("payment_method"),
+                        rs.getInt("card_id"),
+                        rs.getDouble("price"),
+                        rs.getDouble("shipping_fee"),
+                        rs.getDouble("tax"),
+                        rs.getDouble("discount"),
+                        rs.getDouble("final_price"),
+                        rs.getDate("create_date"));
+                order.add(orderObj);
+            }
+            return order;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    public List<Order> getShippedOrders() {
+        // exclude "Your order has been delivered to your place."
+        String queryStr = "SELECT * FROM " + tableName + " WHERE id NOT IN (SELECT order_id FROM " + orderStatusTableName + " WHERE CAST(status AS VARCHAR(256)) = 'Your order has been delivered to your place.' GROUP BY order_id HAVING COUNT(order_id) = 1)";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            ResultSet rs = stmt.executeQuery();
+            List<Order> order = new ArrayList<>();
+            while (rs.next()) {
+                Order orderObj = new Order(
+                        rs.getInt("id"),
+                        rs.getInt("user_id"),
+                        rs.getString("payment_method"),
+                        rs.getInt("card_id"),
+                        rs.getDouble("price"),
+                        rs.getDouble("shipping_fee"),
+                        rs.getDouble("tax"),
+                        rs.getDouble("discount"),
+                        rs.getDouble("final_price"),
+                        rs.getDate("create_date"));
+                order.add(orderObj);
+            }
+            return order;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    public List<Order> getCompletedOrders() {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE id IN (SELECT order_id FROM " + orderStatusTableName + " WHERE CAST(status AS VARCHAR(256)) = 'Your order has been delivered to your place.' GROUP BY order_id HAVING COUNT(order_id) = 1)";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            ResultSet rs = stmt.executeQuery();
+            List<Order> order = new ArrayList<>();
+            while (rs.next()) {
+                Order orderObj = new Order(
+                        rs.getInt("id"),
+                        rs.getInt("user_id"),
+                        rs.getString("payment_method"),
+                        rs.getInt("card_id"),
+                        rs.getDouble("price"),
+                        rs.getDouble("shipping_fee"),
+                        rs.getDouble("tax"),
+                        rs.getDouble("discount"),
+                        rs.getDouble("final_price"),
+                        rs.getDate("create_date"));
+                order.add(orderObj);
+            }
+            return order;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return null;

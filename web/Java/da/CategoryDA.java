@@ -63,7 +63,6 @@ public class CategoryDA {
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, category.getName());
             stmt.executeUpdate();
-            // Get the id of the inserted category
             queryStr = "SELECT * FROM " + tableName + " WHERE name = ?";
             stmt = conn.prepareStatement(queryStr);
             stmt.setString(1, category.getName());

@@ -52,6 +52,10 @@ public class StaffControl {
         return staffDA.deleteSession(id, session);
     }
     
+    public boolean validateUsername(String username, int id) {
+        return staffDA.validateUsername(username, id);
+    }
+    
     public boolean validateUsername(String username) {
         return staffDA.validateUsername(username);
     }

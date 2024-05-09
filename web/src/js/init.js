@@ -166,6 +166,11 @@ $(document).ready(function () {
     var session = cookies
       .find((cookie) => cookie.includes("session"))
       .split('="')[1];
+      if (session === undefined) {
+        session = cookies
+          .find((cookie) => cookie.includes("session"))
+          .split("=")[1];
+      }
     session = session.slice(0, -1);
     var sessionIndex = cookies.findIndex((cookie) =>
       cookie.includes(`session="${session}"`)

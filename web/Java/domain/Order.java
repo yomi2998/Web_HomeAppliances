@@ -14,7 +14,7 @@ public class Order {
     private int user_id;
     private String payment_method;
     private int card_id;
-    private int shipping_id;
+    protected int shipping_id;
     private double price;
     private double shipping_fee;
     private double tax;

@@ -257,6 +257,19 @@ public class StaffDA {
         }
     }
 
+    public boolean validateUsername(String username, int id) {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE username = ? AND id != ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1, username);
+            stmt.setInt(2, id);
+            return stmt.executeQuery().next();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
     public boolean validateUsername(String username) {
         String queryStr = "SELECT * FROM " + tableName + " WHERE username = ?";
         try {

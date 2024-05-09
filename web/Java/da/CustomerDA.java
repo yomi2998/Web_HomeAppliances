@@ -217,10 +217,6 @@ public class CustomerDA {
     }
 
     public boolean commitTopUpTransaction(int id, double amt) {
-        // first we get the card based on id
-        // we get card_number, expiry_date, cvv, name
-        // then we insert into topup table
-        
         String queryStr = "SELECT * FROM " + cardTableName + " WHERE id = ?";
         try {
             stmt = conn.prepareStatement(queryStr);
@@ -295,6 +291,20 @@ public class CustomerDA {
             stmt.setString(2, session);
             stmt.executeUpdate();
             return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean validateUsername(String username, int id) {
+        String queryStr = "SELECT * FROM " + tableName + " WHERE username = ? AND id != ?";
+        try {
+            stmt = conn.prepareStatement(queryStr);
+            stmt.setString(1, username);
+            stmt.setInt(2, id);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
