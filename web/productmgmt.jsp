@@ -49,7 +49,7 @@
                     <% for (Product product : products) { %>
 
                     <tr id="prod-<%= product.getId() %>">
-                        <td id="prodDisp"><img src="<%= product.getDisplay_image() %>" alt="<%= product.getName() %>" style="height: 100px;"></td>
+                        <td id="prodDisp"><img class="list-product-img" src="<%= product.getDisplay_image() %>" alt="<%= product.getName() %>" style="height: 100px;"></td>
                         <td id="prodName"><%= product.getName() %></td>
                         <td id="prodPrice">RM <%= String.format("%.2f", product.getPrice()) %></td>
                         <td id="prodStock"><%= product.getStock() %></td>

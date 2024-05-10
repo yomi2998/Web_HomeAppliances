@@ -96,4 +96,15 @@ public class CategoryManager {
 
         return categories;
     }
+
+    public String getCategoryById(int id) {
+        Category category = null;
+
+        try {
+            category = em.createNamedQuery("Category.findById", Category.class).setParameter("id", id).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return category.getName();
+    }
 }

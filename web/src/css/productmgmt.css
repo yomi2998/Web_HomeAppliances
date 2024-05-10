@@ -40,3 +40,10 @@
 #images-preview {
     margin-top: 10px;
 }
+
+.list-product-img {
+    background-color: white;
+    border-radius: 20px;
+    width: 100px;
+    height: 100px;
+}
