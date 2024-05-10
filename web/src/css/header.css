@@ -151,6 +151,11 @@ html::-webkit-scrollbar-thumb {
     overscroll-behavior: auto none;
 }
 
+.cart-dropdown-content-container-body-ii {
+    margin-bottom: 10px;
+    overscroll-behavior: auto none;
+}
+
 .cart-item-image {
     width: 100px;
     height: 100px;

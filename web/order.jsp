@@ -32,7 +32,7 @@
                         <h1>My orders</h1>
                     </div>
                 </div>
-                <div class="cart-dropdown-content-container-body">
+                <div class="cart-dropdown-content-container-body-ii">
                     <%
 
                         String image = "";

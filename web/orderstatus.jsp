@@ -34,7 +34,7 @@
                         <h1>Update order status</h1>
                     </div>
                 </div>
-                <div class="cart-dropdown-content-container-body">
+                <div class="cart-dropdown-content-container-body-ii">
                     <%
 
                         String image = "";
