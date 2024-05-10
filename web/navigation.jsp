@@ -159,15 +159,19 @@
                 <%
                     int categoryCount = 0;
                     for (Category category : categories) {
-                        categoryCount++;
-                        if (categoryCount > 5) {
+                        if (categoryCount > 4) {
                             break;
                         }
+                        categoryCount++;
                 %>
                 <a href="/Web_HomeAppliances/search.jsp?category=<%= category.getId() %>"><%= category.getName() %></a>
                 <%
                     }
+                    System.out.println("a");
+                    System.out.println(categoryCount);
+                    System.out.println(categories.size());
                     if (categories.size() != categoryCount) {
+                        System.out.println("b");
                 %>
                 <a href="#" onclick="extension_toggle('category-extension')">More...</a>
                 <%
