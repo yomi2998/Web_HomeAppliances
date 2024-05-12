@@ -56,7 +56,7 @@ function remove_card_alter_error() {
 function remove_card_add_error() {
   $("#add-card-invalid-number").addClass("hidden");
   $("#add-card-invalid-name").addClass("hidden");
-  $("#add-card-invalid-expiry-date").addClass("hidden");
+  $("#add-card-invalid-expiry").addClass("hidden");
   $("#add-card-invalid-cvv").addClass("hidden");
 }
 

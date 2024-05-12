@@ -34,7 +34,9 @@
                     <th>Email</th>
                     <th>Birthdate</th>
                     <th>Balance</th>
+                        <% if (userType.equals("admin")) { %>
                     <th>Action</th>
+                        <% } %>
                 </tr>
                 <% List<Customer> customers = cc.retrieveCustomerALL(); for (Customer c : customers) { %>
                 <tr>
@@ -44,12 +46,14 @@
                     <td><%= c.getEmail() %></td>
                     <td><%= c.getBirthDate() %></td>
                     <td>RM <%= String.format("%.2f", c.getBalance()) %></td>
+                    <% if (userType.equals("admin")) { %>
                     <td>
                         <div style="display: flex;">
                             <button class="nelson-button cust-manage" id="cust-edit-<%= c.getId() %>">Edit</button>
                             <button class="nelson-button cust-manage" id="cust-delete-<%= c.getId() %>">Delete</button>
                         </div>
                     </td>
+                    <% } %>
                 </tr>
                 <% } %>
             </table>
@@ -79,7 +83,7 @@
                         <div style="display: flex;">
                             <button class="nelson-button staff-manage" id="staff-edit-<%= s.getId() %>">Edit</button>
                             <button class="nelson-button staff-manage" id="staff-delete-<%= s.getId() %>">Delete</button>
-                    </div>
+                        </div>
                 </tr>
                 <% } %>
             </table>
